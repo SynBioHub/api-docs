@@ -201,7 +201,7 @@
       <script src="javascripts/all-c5541673.js"></script>
   </head>
 
-  <body class="index" data-languages="[&quot;http&quot;,&quot;python&quot;,&quot;javascript&quot;]">
+  <body class="index" data-languages="[&quot;plaintext&quot;,&quot;python&quot;,&quot;javascript&quot;]">
     <a href="#" id="nav-button">
       <span>
         NAV
@@ -211,7 +211,7 @@
     <div class="toc-wrapper">
       <img src="images/logo-28e5f116.png" class="logo" alt="Logo" />
         <div class="lang-selector">
-              <a href="#" data-language-name="http">SPARQL</a>
+              <a href="#" data-language-name="plaintext">SPARQL</a>
               <a href="#" data-language-name="python">Python</a>
               <a href="#" data-language-name="javascript">JavaScript</a>
         </div>
@@ -330,49 +330,49 @@
 <ul>
 <li><a href="http://www.antarctic-design.co.uk/">Antarctic Design</a> </li>
 </ul>
-<h5 id='newcastle-university'>*<a href="http://ncl.ac.uk">Newcastle University</a></h5><h5 id='university-of-utah'>†<a href="https://www.utah.edu/">University of Utah</a></h5><h5 id='turing-ate-my-hamster-ltd'>‡Turing Ate My Hamster Ltd</h5><h5 id='boston-university'>§<a href="http://www.bu.edu/">Boston University</a></h5><h5 id='macquarie-university'>Δ<a href="https://www.mq.edu.au/">Macquarie University</a></h5><h1 id='documentation'>Documentation</h1><h2 id='feature-endpoints'>Feature endpoints</h2><h3 id='get-endpoint-to-count-objects'>GET endpoint to count objects</h3><pre class="highlight http tab-http"><code><span class="err">GET &lt;SynBioHub URL&gt;/&lt;ObjectType&gt;/count
+<h5 id='newcastle-university'>*<a href="http://ncl.ac.uk">Newcastle University</a></h5><h5 id='university-of-utah'>†<a href="https://www.utah.edu/">University of Utah</a></h5><h5 id='turing-ate-my-hamster-ltd'>‡Turing Ate My Hamster Ltd</h5><h5 id='boston-university'>§<a href="http://www.bu.edu/">Boston University</a></h5><h5 id='macquarie-university'>Δ<a href="https://www.mq.edu.au/">Macquarie University</a></h5><h1 id='documentation'>Documentation</h1><h2 id='feature-endpoints'>Feature endpoints</h2><h3 id='get-endpoint-to-count-objects'>GET endpoint to count objects</h3><pre class="highlight plaintext tab-plaintext"><code>GET &lt;SynBioHub URL&gt;/&lt;ObjectType&gt;/count
 
 e.g. curl -X GET https://synbiohub.org/Collection/Count
-</span></code></pre>
+</code></pre>
 <p>Note that you can replace <code>Collection</code> with any object type, such as <code>ComponentDefinition</code>, <code>SequenceAnnotation</code>, etc.</p>
-<h3 id='get-endpoint-that-returns-all-collections-that-are-not-members-of-any-other-collection'>GET endpoint that returns all Collections that are not members of any other Collection</h3><pre class="highlight http tab-http"><code><span class="err">GET &lt;SynBioHub URL&gt;/rootCollections`
+<h3 id='get-endpoint-that-returns-all-collections-that-are-not-members-of-any-other-collection'>GET endpoint that returns all Collections that are not members of any other Collection</h3><pre class="highlight plaintext tab-plaintext"><code>GET &lt;SynBioHub URL&gt;/rootCollections`
 
 e.g. `curl -X GET -H "Accept: text/plain" -H "X-authorization: &lt;token&gt;" https://synbiohub.org/public/igem/igem_collection/1/subCollections
-</span></code></pre>
+</code></pre>
 <p>Note that the X-authorization header is optional, but if provided, it will also return private root collections for the logged in user.</p>
-<h2 id='views-endpoints'>Views endpoints</h2><h2 id='api-endpoints'>API endpoints</h2><h3 id='get-endpoint-that-returns-sbol-for-the-object-with-the-specified-uri'>GET endpoint that returns SBOL for the object with the specified URI</h3><pre class="highlight http tab-http"><code><span class="err">GET &lt;URI&gt;/sbol`
+<h2 id='views-endpoints'>Views endpoints</h2><h2 id='api-endpoints'>API endpoints</h2><h3 id='get-endpoint-that-returns-sbol-for-the-object-with-the-specified-uri'>GET endpoint that returns SBOL for the object with the specified URI</h3><pre class="highlight plaintext tab-plaintext"><code>GET &lt;URI&gt;/sbol`
 
 e.g. `curl -X GET -H "Accept: text/plain" -H "X-authorization: &lt;token&gt;" https://synbiohub.org/public/igem/BBa_F2620/1/sbol
-</span></code></pre>
+</code></pre>
 <p>Note that the X-authorization header is not needed for public objects, but it is required for private objects.</p>
 <h3 id='get-endpoint-to-perform-a-sparql-query'>GET endpoint to perform a SPARQL query</h3>
 <p>Returns the results of the SPARQL query in JSON format. </p>
-<pre class="highlight http tab-http"><code><span class="err">GET &lt;SynBioHub URL&gt;/sparql?query=&lt;SPARQL query&gt; `
+<pre class="highlight plaintext tab-plaintext"><code>GET &lt;SynBioHub URL&gt;/sparql?query=&lt;SPARQL query&gt; `
 
 e.g. `curl -X GET -H "Accept: application/json" 'https://synbiohub.org/sparql?query=select%20%3Fs%20%3Fp%20%3Fo%20where%20%7B%20%3Fs%20%3Fp%20%3Fo%20%7D'
-</span></code></pre>
+</code></pre>
 <p>Returns the results of the SPARQL query in JSON format. </p>
 
 <p>Note that the X-authorization header is optional, but if provided, the SPARQL query will also include private objects for the logged in user.</p>
 <h3 id='get-endpoint-to-perform-a-sparql-admin-query'>GET endpoint to perform a SPARQL admin query</h3>
 <p>Returns the results of the SPARQL admin query in JSON format.</p>
-<pre class="highlight http tab-http"><code><span class="err">GET &lt;SynBioHub URL&gt;/admin/sparql?query=&lt;SPARQL query&gt;`
+<pre class="highlight plaintext tab-plaintext"><code>GET &lt;SynBioHub URL&gt;/admin/sparql?query=&lt;SPARQL query&gt;`
 
 e.g. ` curl -X GET -H "Accept: application/json" 'https://synbiohub.org/admin/sparql?query=select%20%3Fs%20%3Fp%20%3Fo%20where%20%7B%20%3Fs%20%3Fp%20%3Fo%20%7D'
-</span></code></pre>
+</code></pre>
 <p>Note that the X-authorization header is required, and it must include a token for a user with administrator privileges.</p>
-<h2 id='actions-endpoints'>Actions endpoints</h2><h2 id='persistentidentitiy-endpoints'>PersistentIdentitiy endpoints</h2><h2 id='user-only-endpoints'>User only endpoints</h2><h2 id='attachment-endpoints'>Attachment endpoints</h2><h3 id='get-endpoint-that-returns-source-for-an-attachment-with-the-specified-uri'>GET endpoint that returns source for an attachment with the specified URI</h3><pre class="highlight http tab-http"><code><span class="err">GET &lt;URI&gt;/download `
+<h2 id='actions-endpoints'>Actions endpoints</h2><h2 id='persistentidentitiy-endpoints'>PersistentIdentitiy endpoints</h2><h2 id='user-only-endpoints'>User only endpoints</h2><h2 id='attachment-endpoints'>Attachment endpoints</h2><h3 id='get-endpoint-that-returns-source-for-an-attachment-with-the-specified-uri'>GET endpoint that returns source for an attachment with the specified URI</h3><pre class="highlight plaintext tab-plaintext"><code>GET &lt;URI&gt;/download `
 
 e.g. `curl -X GET -H "Accept: text/plain" -H "X-authorization: &lt;token&gt;" https://synbiohub.org/public/test/attachment_00009TGVMsfEoCdMeRzHrU/1/download -O --compressed
-</span></code></pre>
+</code></pre>
 <p>Note that the X-authorization header is not needed for public attachments, but it is required for private attachments.</p>
-<h3 id='post-endpoint-that-attaches-a-file-to-a-specified-uri'>POST endpoint that attaches a file to a specified URI</h3><pre class="highlight http tab-http"><code><span class="err">POST &lt;URI&gt;/attach `
+<h3 id='post-endpoint-that-attaches-a-file-to-a-specified-uri'>POST endpoint that attaches a file to a specified URI</h3><pre class="highlight plaintext tab-plaintext"><code>POST &lt;URI&gt;/attach `
 
 e.g. `curl -X POST -H "Accept: text/plain" -H "X-authorization: &lt;token&gt;" -F 'file=@&lt;filename&gt;' https://synbiohub.org/user/MyUserName/test/test_collection/1/attach
-</span></code></pre><h2 id='download-data-endpoints'>Download Data endpoints</h2><h2 id='update-submission-endpoints'>Update submission endpoints</h2><h2 id='search-endpoints'>Search endpoints</h2><h3 id='get-endpoint-to-perform-a-search-and-return-metadata'>GET endpoint to perform a search and return metadata</h3><pre class="highlight http tab-http"><code><span class="err">GET &lt;SynBioHub URL&gt;/search/&lt;key&gt;=&lt;value&gt;&amp;...&amp;&lt;search string&gt;/?offset=#&amp;limit=# `
+</code></pre><h2 id='download-data-endpoints'>Download Data endpoints</h2><h2 id='update-submission-endpoints'>Update submission endpoints</h2><h2 id='search-endpoints'>Search endpoints</h2><h3 id='get-endpoint-to-perform-a-search-and-return-metadata'>GET endpoint to perform a search and return metadata</h3><pre class="highlight plaintext tab-plaintext"><code>GET &lt;SynBioHub URL&gt;/search/&lt;key&gt;=&lt;value&gt;&amp;...&amp;&lt;search string&gt;/?offset=#&amp;limit=# `
 
 e.g. `curl -X GET -H "Accept: text/plain" -H "X-authorization: &lt;token&gt;" 'https://synbiohub.org/search/objectType%3DComponentDefinition%26role%3D%3Chttp%3A%2F%2Fidentifiers.org%2Fso%2FSO%3A0000316%3E%26GFP/?offset=0&amp;limit=50'
-</span></code></pre>
+</code></pre>
 <p>Note that the X-authorization header is optional, but if provided, the search will also return private objects for the logged in user.</p>
 
 <p>Before URL encoding, the URL is composed of a series of search criteria of the form:</p>
@@ -412,7 +412,7 @@ e.g. `curl -X GET -H "Accept: text/plain" -H "X-authorization: &lt;token&gt;" 'h
 <p>After the key/value pairs, an optional search string can be provided that will be used to search for partial matches in the displayId, name, or description fields.</p>
 
 <p>Finally, the URL can end with an offest and limit parameter.</p>
-<pre class="highlight http tab-http"><code><span class="err">
+<pre class="highlight plaintext tab-plaintext"><code>
 This endpoint returns JSON metadata of the form 
 [
     {
@@ -425,22 +425,22 @@ This endpoint returns JSON metadata of the form
 
     ...
 ]
-</span></code></pre><h3 id='get-endpoint-that-returns-all-collections-that-are-members-of-the-collection-specified-by-its-uri'>GET endpoint that returns all Collections that are members of the Collection specified by its URI</h3><pre class="highlight http tab-http"><code><span class="err">GET &lt;URI&gt;/subCollections`
+</code></pre><h3 id='get-endpoint-that-returns-all-collections-that-are-members-of-the-collection-specified-by-its-uri'>GET endpoint that returns all Collections that are members of the Collection specified by its URI</h3><pre class="highlight plaintext tab-plaintext"><code>GET &lt;URI&gt;/subCollections`
 
 e.g. `curl -X GET -H "Accept: text/plain" -H "X-authorization: &lt;token&gt;" https://synbiohub.org/subcollections`
-</span></code></pre>
+</code></pre>
 <p>Note that the X-authorization header is not needed for public collections, but it is required for private collections.</p>
 <h3 id='get-endpoint-to-perform-a-search-and-return-count-of-search-results'>GET endpoint to perform a search and return count of search results</h3>
 <p>Returns the number of items matching the search result.</p>
-<pre class="highlight http tab-http"><code><span class="err">GET &lt;SynBioHub URL&gt;/searchCount/&lt;key&gt;=&lt;value&gt;&amp;...&amp;&lt;search string&gt;/?offset=#&amp;limit=# `
+<pre class="highlight plaintext tab-plaintext"><code>GET &lt;SynBioHub URL&gt;/searchCount/&lt;key&gt;=&lt;value&gt;&amp;...&amp;&lt;search string&gt;/?offset=#&amp;limit=# `
 
 e.g. `curl -X GET -H "Accept: text/plain" -H "X-authorization: &lt;token&gt;" 'https://synbiohub.org/searchCount/objectType%3DComponentDefinition%26role%3D%3Chttp%3A%2F%2Fidentifiers.org%2Fso%2FSO%3A0000316%3E%26GFP'`
-</span></code></pre>
+</code></pre>
 <p>Note that the X-authorization header is optional, but if provided, the search count will also include private objects for the logged in user.</p>
-<h2 id='visaulization-endpoints'>Visaulization endpoints</h2><h2 id='views-endpoints-2'>Views endpoints</h2><h3 id='post-endpoint-to-create-a-new-collection'>POST endpoint to create a new collection</h3><pre class="highlight http tab-http"><code><span class="err">POST &lt;SynBioHub URL&gt;/submit `
+<h2 id='visaulization-endpoints'>Visaulization endpoints</h2><h2 id='views-endpoints-2'>Views endpoints</h2><h3 id='post-endpoint-to-create-a-new-collection'>POST endpoint to create a new collection</h3><pre class="highlight plaintext tab-plaintext"><code>POST &lt;SynBioHub URL&gt;/submit `
 
 e.g. `curl -X POST -H "Accept: text/plain" -H "X-authorization: &lt;token&gt;" -F id=&lt;id&gt; -F version=&lt;version&gt; -F name=&lt;name&gt; -F description=&lt;description&gt; -F citations=&lt;citations&gt; -F overwrite_merge=&lt;overwrite_merge&gt; -F file=@&lt;filename&gt; https://synbiohub.org/submit
-</span></code></pre>
+</code></pre>
 <p>Query Parameters</p>
 
 <table><thead>
@@ -478,17 +478,17 @@ e.g. `curl -X POST -H "Accept: text/plain" -H "X-authorization: &lt;token&gt;" -
 <td>contents of an SBOL2, SBOL1, GenBank, FASTA, ZIP, or COMBINE Archive file</td>
 </tr>
 </tbody></table>
-<h3 id='post-endpoint-to-add-to-an-existing-collection'>POST endpoint to add to an existing collection</h3><pre class="highlight http tab-http"><code><span class="err">POST &lt;SynBioHub URL&gt;/submit `
+<h3 id='post-endpoint-to-add-to-an-existing-collection'>POST endpoint to add to an existing collection</h3><pre class="highlight plaintext tab-plaintext"><code>POST &lt;SynBioHub URL&gt;/submit `
 
 e.g. `curl -X POST -H "Accept: text/plain" -H "X-authorization: &lt;token&gt;" -F rootCollections=&lt;URI&gt; -F overwrite_merge=&lt;overwrite_merge&gt; -F file=@&lt;filename&gt; https://synbiohub.org/submit
-</span></code></pre><h3 id='post-endpoint-to-request-to-login'>POST endpoint to request to login</h3>
+</code></pre><h3 id='post-endpoint-to-request-to-login'>POST endpoint to request to login</h3>
 <p>Returns a string token to be passed with any call to submit as the <code>user</code> parameter. </p>
 
 <p>This POST request requires email/password and returns a user token needed for viewing private objects and submitting new objects.</p>
-<pre class="highlight http tab-http"><code><span class="err">POST http://synbiohub.org/login `
+<pre class="highlight plaintext tab-plaintext"><code>POST http://synbiohub.org/login `
 
 e.g.`curl -X POST -H "Accept: text/plain" -d "email=&lt;email&gt;&amp;password=&lt;password&gt;" https://synbiohub.org/login
-</span></code></pre><h3 id='query-parameters'>Query Parameters</h3>
+</code></pre><h3 id='query-parameters'>Query Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -634,7 +634,7 @@ e.g.`curl -X POST -H "Accept: text/plain" -d "email=&lt;email&gt;&amp;password=&
       </div>
       <div class="dark-box">
           <div class="lang-selector">
-                <a href="#" data-language-name="http">SPARQL</a>
+                <a href="#" data-language-name="plaintext">SPARQL</a>
                 <a href="#" data-language-name="python">Python</a>
                 <a href="#" data-language-name="javascript">JavaScript</a>
           </div>
