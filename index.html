@@ -423,23 +423,61 @@
 <p>Returns the source for an attachement to the specificified URI</p>
 
 <p><code>GET &lt;URI&gt;/download</code></p>
-<pre class="highlight plaintext tab-plaintext"><code>e.g. `curl -X GET -H "Accept: text/plain" -H "X-authorization: &lt;token&gt;" https://synbiohub.org/public/test/attachment_00009TGVMsfEoCdMeRzHrU/1/download -O --compressed
+<pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+    <span class="s">'https://synbiohub.org/public/test/attachment_00009TGVMsfEoCdMeRzHrU/1/download'</span><span class="p">,</span>
+    <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s">'X-authorization'</span><span class="p">:</span> <span class="s">'token'</span><span class="p">},</span>
+    <span class="n">headers</span><span class="o">=</span><span class="p">{</span><span class="s">'Accept'</span><span class="p">:</span> <span class="s">'text/plain'</span><span class="p">},</span>
+<span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
+
+</code></pre><pre class="highlight plaintext tab-plaintext"><code>e.g. `curl -X GET -H "Accept: text/plain" -H "X-authorization: &lt;token&gt;" https://synbiohub.org/public/test/attachment_00009TGVMsfEoCdMeRzHrU/1/download -O --compressed
 </code></pre><h3 id='attach-file-to-a-specified-uri'>Attach file to a specified URI</h3>
 <p><code>POST &lt;URI&gt;/attach</code></p>
 <pre class="highlight plaintext tab-plaintext"><code>e.g. `curl -X POST -H "Accept: text/plain" -H "X-authorization: &lt;token&gt;" -F 'file=@&lt;filename&gt;' https://synbiohub.org/user/MyUserName/test/test_collection/1/attach
 </code></pre><h2 id='download-data-endpoints'>Download Data endpoints</h2><h2 id='update-submission-endpoints'>Update submission endpoints</h2><h2 id='search-endpoints'>Search endpoints</h2><h3 id='count-objects'>Count objects</h3>
 <p><code>GET &lt;SynBioHub URL&gt;/&lt;ObjectType&gt;/count</code></p>
 <pre class="highlight plaintext tab-plaintext"><code>e.g. curl -X GET https://synbiohub.org/Collection/Count
+</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+    <span class="s">'https://synbiohub.org/Collection/Count'</span><span class="p">,</span>
+    <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s">'X-authorization'</span><span class="p">:</span> <span class="s">'token'</span><span class="p">},</span>
+    <span class="n">headers</span><span class="o">=</span><span class="p">{</span><span class="s">'Accept'</span><span class="p">:</span> <span class="s">'text/plain'</span><span class="p">},</span>
+<span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
 </code></pre>
 <p>Note that you can replace <code>&lt;ObjectType&gt;</code> with any object type, such as <code>ComponentDefinition</code>, <code>SequenceAnnotation</code>, etc.</p>
 <h3 id='returns-all-collections-that-are-not-members-of-any-other-collection'>Returns all Collections that are not members of any other Collection</h3>
 <p><code>GET &lt;SynBioHub URL&gt;/rootCollections</code></p>
 <pre class="highlight plaintext tab-plaintext"><code>e.g. `curl -X GET -H "Accept: text/plain" -H "X-authorization: &lt;token&gt;" https://synbiohub.org/public/igem/igem_collection/1/subCollections
+</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+    <span class="s">'https://synbiohub.org/public/igem/igem_collection/1/subCollections'</span><span class="p">,</span>
+    <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s">'X-authorization'</span><span class="p">:</span> <span class="s">'token'</span><span class="p">},</span>
+    <span class="n">headers</span><span class="o">=</span><span class="p">{</span><span class="s">'Accept'</span><span class="p">:</span> <span class="s">'text/plain'</span><span class="p">},</span>
+<span class="p">)</span>
 </code></pre>
 <p>Note that the X-authorization header is optional, but if provided, it will also return private root collections for the logged in user.</p>
 <h3 id='perform-a-search-and-return-metadata'>Perform a search and return metadata</h3>
 <p><code>GET &lt;SynBioHub URL&gt;/search/&lt;key&gt;=&lt;value&gt;&amp;...&amp;&lt;search string&gt;/?offset=#&amp;limit=#</code></p>
-<pre class="highlight plaintext tab-plaintext"><code>e.g. `curl -X GET -H "Accept: text/plain" -H "X-authorization: &lt;token&gt;" 'https://synbiohub.org/search/objectType%3DComponentDefinition%26role%3D%3Chttp%3A%2F%2Fidentifiers.org%2Fso%2FSO%3A0000316%3E%26GFP/?offset=0&amp;limit=50'
+<pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+    <span class="s">'https://synbiohub.org/search/objectType</span><span class="si">%3</span><span class="s">DComponentDefinition</span><span class="si">%26</span><span class="s">role</span><span class="si">%3</span><span class="s">D</span><span class="si">%3</span><span class="s">Chttp</span><span class="si">%3</span><span class="s">A</span><span class="si">%2</span><span class="s">F</span><span class="si">%2</span><span class="s">Fidentifiers.org</span><span class="si">%2</span><span class="s">Fso</span><span class="si">%2</span><span class="s">FSO</span><span class="si">%3</span><span class="s">A0000316</span><span class="si">%3</span><span class="s">E</span><span class="si">%26</span><span class="s">GFP/?offset=0&amp;limit=50'</span><span class="p">,</span>
+    <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s">'X-authorization'</span><span class="p">:</span> <span class="s">'token'</span><span class="p">},</span>
+    <span class="n">headers</span><span class="o">=</span><span class="p">{</span><span class="s">'Accept'</span><span class="p">:</span> <span class="s">'text/plain'</span><span class="p">},</span>
+<span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
+</code></pre><pre class="highlight plaintext tab-plaintext"><code>e.g. `curl -X GET -H "Accept: text/plain" -H "X-authorization: &lt;token&gt;" 'https://synbiohub.org/search/objectType%3DComponentDefinition%26role%3D%3Chttp%3A%2F%2Fidentifiers.org%2Fso%2FSO%3A0000316%3E%26GFP/?offset=0&amp;limit=50'
 </code></pre>
 <p>Note that the X-authorization header is optional, but if provided, the search will also return private objects for the logged in user.</p>
 
@@ -495,14 +533,34 @@ This endpoint returns JSON metadata of the form
 ]
 </code></pre><h3 id='returns-all-collections-that-are-members-of-the-collection-specified-by-its-uri'>Returns all Collections that are members of the Collection specified by its URI</h3>
 <p><code>GET &lt;URI&gt;/subCollections</code></p>
-<pre class="highlight plaintext tab-plaintext"><code>e.g. `curl -X GET -H "Accept: text/plain" -H "X-authorization: &lt;token&gt;" https://synbiohub.org/subcollections`
+<pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+    <span class="s">'https://synbiohub.org/public/bsu/bsu_collection/1/subcollections'</span><span class="p">,</span>
+    <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s">'X-authorization'</span><span class="p">:</span> <span class="s">'token'</span><span class="p">},</span>
+    <span class="n">headers</span><span class="o">=</span><span class="p">{</span><span class="s">'Accept'</span><span class="p">:</span> <span class="s">'text/plain'</span><span class="p">},</span>
+<span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
+</code></pre><pre class="highlight plaintext tab-plaintext"><code>e.g. `curl -X GET -H "Accept: text/plain" -H "X-authorization: &lt;token&gt;" https://synbiohub.org/public/bsu/bsu_collection/1/subcollections`
 </code></pre>
 <p>Note that the X-authorization header is not needed for public collections, but it is required for private collections.</p>
 <h3 id='perform-a-search-and-return-count-of-search-results'>Perform a search and return count of search results</h3>
 <p>Returns the number of items matching the search result.</p>
 
 <p><code>GET &lt;SynBioHub URL&gt;/searchCount/&lt;key&gt;=&lt;value&gt;&amp;...&amp;&lt;search string&gt;/?offset=#&amp;limit=#</code></p>
-<pre class="highlight plaintext tab-plaintext"><code>e.g. `curl -X GET -H "Accept: text/plain" -H "X-authorization: &lt;token&gt;" 'https://synbiohub.org/searchCount/objectType%3DComponentDefinition%26role%3D%3Chttp%3A%2F%2Fidentifiers.org%2Fso%2FSO%3A0000316%3E%26GFP'`
+<pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+    <span class="s">'https://synbiohub.org/searchCount/objectType</span><span class="si">%3</span><span class="s">DComponentDefinition</span><span class="si">%26</span><span class="s">role</span><span class="si">%3</span><span class="s">D</span><span class="si">%3</span><span class="s">Chttp</span><span class="si">%3</span><span class="s">A</span><span class="si">%2</span><span class="s">F</span><span class="si">%2</span><span class="s">Fidentifiers.org</span><span class="si">%2</span><span class="s">Fso</span><span class="si">%2</span><span class="s">FSO</span><span class="si">%3</span><span class="s">A0000316</span><span class="si">%3</span><span class="s">E</span><span class="si">%26</span><span class="s">GFP'</span><span class="p">,</span>
+    <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s">'X-authorization'</span><span class="p">:</span> <span class="s">'token'</span><span class="p">},</span>
+    <span class="n">headers</span><span class="o">=</span><span class="p">{</span><span class="s">'Accept'</span><span class="p">:</span> <span class="s">'text/plain'</span><span class="p">},</span>
+<span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
+</code></pre><pre class="highlight plaintext tab-plaintext"><code>e.g. `curl -X GET -H "Accept: text/plain" -H "X-authorization: &lt;token&gt;" 'https://synbiohub.org/searchCount/objectType%3DComponentDefinition%26role%3D%3Chttp%3A%2F%2Fidentifiers.org%2Fso%2FSO%3A0000316%3E%26GFP'`
 </code></pre>
 <p>Note that the X-authorization header is optional, but if provided, the search count will also include private objects for the logged in user.</p>
 <h2 id='visaulization-endpoints'>Visaulization endpoints</h2><h2 id='views-endpoints'>Views endpoints</h2><h3 id='create-a-new-collection'>Create a new collection</h3>
