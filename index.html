@@ -266,42 +266,6 @@
                   <li>
                     <a href="#user-endpopints-2" class="toc-h2 toc-link" data-title="User Endpopints">User Endpopints</a>
                   </li>
-                  <li>
-                    <a href="#plugin-endpoints" class="toc-h2 toc-link" data-title="Plugin Endpoints">Plugin Endpoints</a>
-                  </li>
-                  <li>
-                    <a href="#edit-mutable-fields-endpoints" class="toc-h2 toc-link" data-title="Edit Mutable Fields Endpoints">Edit Mutable Fields Endpoints</a>
-                  </li>
-                  <li>
-                    <a href="#submission-endpoints-2" class="toc-h2 toc-link" data-title="Submission Endpoints">Submission Endpoints</a>
-                  </li>
-                  <li>
-                    <a href="#collection-view-endpoints" class="toc-h2 toc-link" data-title="Collection View Endpoints">Collection View Endpoints</a>
-                  </li>
-                  <li>
-                    <a href="#administration-endpoints" class="toc-h2 toc-link" data-title="Administration Endpoints">Administration Endpoints</a>
-                  </li>
-                  <li>
-                    <a href="#search-endpoints-2" class="toc-h2 toc-link" data-title="Search Endpoints">Search Endpoints</a>
-                  </li>
-                  <li>
-                    <a href="#manage-submission-endpoints" class="toc-h2 toc-link" data-title="Manage Submission Endpoints">Manage Submission Endpoints</a>
-                  </li>
-                  <li>
-                    <a href="#update-permissions-endpoints" class="toc-h2 toc-link" data-title="Update Permissions Endpoints">Update Permissions Endpoints</a>
-                  </li>
-                  <li>
-                    <a href="#attachment-endpoints-2" class="toc-h2 toc-link" data-title="Attachment Endpoints">Attachment Endpoints</a>
-                  </li>
-                  <li>
-                    <a href="#download-endpoints-2" class="toc-h2 toc-link" data-title="Download Endpoints">Download Endpoints</a>
-                  </li>
-                  <li>
-                    <a href="#view-download-endpoints" class="toc-h2 toc-link" data-title="View/Download Endpoints">View/Download Endpoints</a>
-                  </li>
-                  <li>
-                    <a href="#misc-endpoints-2" class="toc-h2 toc-link" data-title="Misc. endpoints">Misc. endpoints</a>
-                  </li>
               </ul>
           </li>
           <li>
@@ -632,6 +596,86 @@ This endpoint returns JSON metadata of the form
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
 
+</code></pre><h3 id='returns-sbolnr-for-the-object-with-the-specified-uri'>Returns SBOLnr for the object with the specified URI</h3>
+<p>Returns the SBOLnr for the object from the specified URI.</p>
+
+<p><code>GET &lt;URI&gt;/sbolnr</code></p>
+<pre class="highlight plaintext tab-plaintext"><code>e.g. `curl -X GET -H "Accept: text/plain" -H "X-authorization: &lt;token&gt;" https://synbiohub.org/public/igem/BBa_F2620/1/sbolnr`
+</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+    <span class="s">'https://synbiohub.org/public/igem/BBa_F2620/1/sbolnr'</span><span class="p">,</span>
+    <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s">'X-authorization'</span><span class="p">:</span> <span class="s">'token'</span><span class="p">},</span>
+    <span class="n">headers</span><span class="o">=</span><span class="p">{</span><span class="s">'Accept'</span><span class="p">:</span> <span class="s">'text/plain'</span><span class="p">},</span>
+<span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
+
+</code></pre><h3 id='returns-metadata-for-the-object-with-the-specified-uri'>Returns metadata for the object with the specified URI</h3>
+<p>Returns the metadata for the object from the specified URI.</p>
+
+<p><code>GET &lt;URI&gt;/metadata</code></p>
+<pre class="highlight plaintext tab-plaintext"><code>e.g. `curl -X GET -H "Accept: text/plain" -H "X-authorization: &lt;token&gt;" https://synbiohub.org/public/igem/BBa_K1479017/1/metadata`
+</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+    <span class="s">'https://synbiohub.org/public/igem/BBa_K1479017/1/metadata'</span><span class="p">,</span>
+    <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s">'X-authorization'</span><span class="p">:</span> <span class="s">'token'</span><span class="p">},</span>
+    <span class="n">headers</span><span class="o">=</span><span class="p">{</span><span class="s">'Accept'</span><span class="p">:</span> <span class="s">'text/plain'</span><span class="p">},</span>
+<span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
+
+</code></pre><h3 id='returns-genbank-for-the-object-with-the-specified-uri'>Returns GenBank for the object with the specified URI</h3>
+<p>Returns the GenBank for the object from the specified URI.</p>
+
+<p><code>GET &lt;URI&gt;/gb</code></p>
+<pre class="highlight plaintext tab-plaintext"><code>e.g. `curl -X GET -H "Accept: text/plain" -H "X-authorization: &lt;token&gt;" https://synbiohub.org/public/igem/BBa_K1479017/1/BBa_K1479017.gb`
+</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+    <span class="s">'https://synbiohub.org/public/igem/BBa_K1479017/1/BBa_K1479017.gb'</span><span class="p">,</span>
+    <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s">'X-authorization'</span><span class="p">:</span> <span class="s">'token'</span><span class="p">},</span>
+    <span class="n">headers</span><span class="o">=</span><span class="p">{</span><span class="s">'Accept'</span><span class="p">:</span> <span class="s">'text/plain'</span><span class="p">},</span>
+<span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
+
+</code></pre><h3 id='returns-fasta-for-the-object-with-the-specified-uri'>Returns FASTA for the object with the specified URI</h3>
+<p>Returns the FASTA for the object from the specified URI.</p>
+
+<p><code>GET &lt;URI&gt;/fasta</code></p>
+<pre class="highlight plaintext tab-plaintext"><code>e.g. `curl -X GET -H "Accept: text/plain" -H "X-authorization: &lt;token&gt;" https://synbiohub.org/public/igem/BBa_K1479017/1/BBa_K1479017.fasta`
+</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+    <span class="s">'https://synbiohub.org/public/igem/BBa_K1479017/1/BBa_K1479017.fasta'</span><span class="p">,</span>
+    <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s">'X-authorization'</span><span class="p">:</span> <span class="s">'token'</span><span class="p">},</span>
+    <span class="n">headers</span><span class="o">=</span><span class="p">{</span><span class="s">'Accept'</span><span class="p">:</span> <span class="s">'text/plain'</span><span class="p">},</span>
+<span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
+
+</code></pre><h3 id='returns-visualization-for-the-object-with-the-specified-uri'>Returns visualization for the object with the specified URI</h3>
+<p>Returns the visualization for the object from the specified URI.</p>
+
+<p><code>GET &lt;URI&gt;/visualization</code></p>
+<pre class="highlight plaintext tab-plaintext"><code>e.g. `curl -X GET -H "Accept: text/plain" -H "X-authorization: &lt;token&gt;" https://synbiohub.org/public/igem/BBa_K1479017/1/visualization`
+</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+    <span class="s">'https://synbiohub.org/public/igem/BBa_K1479017/1/visualization'</span><span class="p">,</span>
+    <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s">'X-authorization'</span><span class="p">:</span> <span class="s">'token'</span><span class="p">},</span>
+    <span class="n">headers</span><span class="o">=</span><span class="p">{</span><span class="s">'Accept'</span><span class="p">:</span> <span class="s">'text/plain'</span><span class="p">},</span>
+<span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
+
 </code></pre><h2 id='submission-endpoints'>Submission Endpoints</h2><h3 id='create-a-new-collection'>Create a new collection</h3>
 <p>Create a new collection</p>
 
@@ -679,6 +723,8 @@ This endpoint returns JSON metadata of the form
 <p><code>POST &lt;SynBioHub URL&gt;/submit</code></p>
 <pre class="highlight plaintext tab-plaintext"><code>e.g. `curl -X POST -H "Accept: text/plain" -H "X-authorization: &lt;token&gt;" -F rootCollections=&lt;URI&gt; -F overwrite_merge=&lt;overwrite_merge&gt; -F file=@&lt;filename&gt; https://synbiohub.org/submit
 </code></pre><h2 id='edit-endpoints'>Edit Endpoints</h2><h2 id='attachment-endpoints'>Attachment Endpoints</h2><h3 id='attach-file-to-a-specified-uri'>Attach file to a specified URI</h3>
+<p>Attach a specified file to a given URI</p>
+
 <p><code>POST &lt;URI&gt;/attach</code></p>
 <pre class="highlight plaintext tab-plaintext"><code>e.g. `curl -X POST -H "Accept: text/plain" -H "X-authorization: &lt;token&gt;" -F 'file=@&lt;filename&gt;' https://synbiohub.org/user/MyUserName/test/test_collection/1/attach
 </code></pre><h2 id='permission-endpoints'>Permission Endpoints</h2><h3 id='perform-a-sparql-admin-query'>Perform a SPARQL admin query</h3>
@@ -718,7 +764,7 @@ This endpoint returns JSON metadata of the form
 
 <p><code>POST http://synbiohub.org/logout</code></p>
 <pre class="highlight plaintext tab-plaintext"><code>e.g. `curl -X POST -H "Accept: test/plain" localhost:7777/logout`
-</code></pre><h2 id='plugin-endpoints'>Plugin Endpoints</h2><h2 id='edit-mutable-fields-endpoints'>Edit Mutable Fields Endpoints</h2><h2 id='submission-endpoints-2'>Submission Endpoints</h2><h2 id='collection-view-endpoints'>Collection View Endpoints</h2><h2 id='administration-endpoints'>Administration Endpoints</h2><h2 id='search-endpoints-2'>Search Endpoints</h2><h2 id='manage-submission-endpoints'>Manage Submission Endpoints</h2><h2 id='update-permissions-endpoints'>Update Permissions Endpoints</h2><h2 id='attachment-endpoints-2'>Attachment Endpoints</h2><h2 id='download-endpoints-2'>Download Endpoints</h2><h2 id='view-download-endpoints'>View/Download Endpoints</h2><h2 id='misc-endpoints-2'>Misc. endpoints</h2><h1 id='nginx-configuration'>NGINX configuration</h1>
+</code></pre><h1 id='nginx-configuration'>NGINX configuration</h1>
 <p>Instructions for managing nginx server blocks can be found <a href="https://www.digitalocean.com/community/tutorials/how-to-set-up-nginx-server-blocks-virtual-hosts-on-ubuntu-16-04#step-three-create-server-block-files-for-each-domain">here</a>.</p>
 
 <p>The server block for a SynBioHub installation listening on port 7777 is <a href="http://wiki.synbiohub.org/wiki/NGINX_configuration_instructions">here</a>.</p>
