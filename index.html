@@ -230,6 +230,17 @@
           </li>
           <li>
             <a href="#installation" class="toc-h1 toc-link" data-title="Installation">Installation</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#from-prebuilt-image" class="toc-h2 toc-link" data-title="From Prebuilt Image">From Prebuilt Image</a>
+                  </li>
+                  <li>
+                    <a href="#from-source" class="toc-h2 toc-link" data-title="From Source">From Source</a>
+                  </li>
+                  <li>
+                    <a href="#publishing-instance" class="toc-h2 toc-link" data-title="Publishing Instance">Publishing Instance</a>
+                  </li>
+              </ul>
           </li>
           <li>
             <a href="#documentation" class="toc-h1 toc-link" data-title="Documentation">Documentation</a>
@@ -294,8 +305,7 @@
 <li>A public instance of the aforementioned software project at <a href="http://synbiohub.org">synbiohub.org</a>, allowing users to upload and share designs.</li>
 </ul>
 
-<p>For those familiar with the 
- Stack, SynBioHub incorporates and extends its functionality.  An SBOL Stack installation is not required for SynBioHub.</p>
+<p>For those familiar with the SBOL Stack, SynBioHub incorporates and extends its functionality.  An SBOL Stack installation is not required for SynBioHub.</p>
 
 <p>What can SynBioHub be used for?</p>
 
@@ -329,60 +339,102 @@
 <ul>
 <li><a href="http://www.antarctic-design.co.uk/">Antarctic Design</a> </li>
 </ul>
-<h5 id='newcastle-university'>*<a href="http://ncl.ac.uk">Newcastle University</a></h5><h5 id='university-of-utah'>†<a href="https://www.utah.edu/">University of Utah</a></h5><h5 id='turing-ate-my-hamster-ltd'>‡Turing Ate My Hamster Ltd</h5><h5 id='boston-university'>§<a href="http://www.bu.edu/">Boston University</a></h5><h5 id='macquarie-university'>Δ<a href="https://www.mq.edu.au/">Macquarie University</a></h5><h1 id='installation'>Installation</h1>
-<p>The recommended way to install SynBioHub is via the Docker image.</p>
+<h5 id='newcastle-university'>*<a href="http://ncl.ac.uk">Newcastle University</a></h5><h5 id='university-of-utah'>†<a href="https://www.utah.edu/">University of Utah</a></h5><h5 id='turing-ate-my-hamster-ltd'>‡Turing Ate My Hamster Ltd</h5><h5 id='boston-university'>§<a href="http://www.bu.edu/">Boston University</a></h5><h5 id='macquarie-university'>Δ<a href="https://www.mq.edu.au/">Macquarie University</a></h5><h1 id='installation'>Installation</h1><h2 id='from-prebuilt-image'>From Prebuilt Image</h2><h3 id='install-docker'>Install Docker</h3>
+<p>First, install <a href="https://docs.docker.com/install/">Docker</a> and <a href="https://docs.docker.com/compose/install/">Docker Compose</a>.</p>
 
-<p>SynBioHub has both JavaScript (node.js) and Java components.</p>
+<p>Ensure that the Docker daemon is running on your system before continuing. On Mac and Windows, a small whale icon in the system tray indicates Docker is running.</p>
 
-<p>Prequisites:</p>
+<p>On Ubuntu, start docker using: </p>
 
-<ul>
-<li>Linux (only tested with Ubuntu 18.04.01) or macOS</li>
-<li>A JDK</li>
-<li>Apache Maven</li>
-<li>node.js &gt;= 6.10</li>
-<li>OpenLink Virtuoso 7.x.x</li>
-<li>rapper (apt install <code>raptor2-utils</code>)</li>
-<li>jq (apt install <code>jq</code>)</li>
-</ul>
+<p><code>systemctl start docker</code></p>
+<h3 id='starting-a-synbiohub-instance'>Starting a SynBioHub Instance</h3>
+<p>First, pull the docker-compose configuration:: </p>
 
-<p>Ubuntu 18.04.01</p>
+<p><code>git clone https://github.com/synbiohub/synbiohub-docker</code></p>
 
-<ol>
-<li>Install Virtuoso 7 from source at https://github.com/openlink/virtuoso-opensource</li>
-</ol>
+<p>Then, start SynBioHub with: </p>
 
-<ul>
-<li>Switch to the branch stable/7 before installing.</li>
-<li>Follow the README on installing virtuoso from source. This involves installing all the dependencies and running build commands.</li>
-<li>Currently, Virtuoso does not support versions of OpenSSL 1.1.0 and above, or versions of OpenSSL below 1.0.0. When installing the dependency, build from a binary between those versions from https://www.openssl.org/source/.</li>
-</ul>
+<p><code>docker-compose --file ./synbiohub-docker/docker-compose.yml up</code></p>
 
-<ol>
-<li>Set up the Node.js repository</li>
-<li>Download the Node setup script <code>curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -</code></li>
-<li>Update your package repositories <code>apt update</code></li>
-<li>Install the necessary packages <code>apt install default-jdk maven raptor2-utils nodejs jq build-essential python</code></li>
-<li>Clone the SynBioHub repository <code>git clone https://github.com/SynBioHub/synbiohub</code></li>
-<li>Change to the SynBioHub directory <code>cd synbiohub</code></li>
-<li>Build the Java components with Maven <code>cd java &amp;&amp; mvn package</code></li>
-<li>Return to the root directory and install the Node dependencies with yarn <code>cd ../ &amp;&amp; yarn install</code> Make sure that yarn is being used, not &#39;cmdtest&#39;.</li>
-<li>Install nodemon and forever with <code>npm install nodemon -g &amp;&amp; npm install forever -g</code></li>
-<li>Start virtuoso process <code>virtuoso-t +configfile /usr/local/virtuoso-opensource/var/lib/virtuoso/db/virtuoso.ini -f</code></li>
-<li>Add SPARQL update rights to the dba user in virtuoso.</li>
-</ol>
+<p>If you would like to start SynBioHub with <a href="https://github.com/SynBioDex/SBOLExplorer">SBOLExplorer</a> use the following commands instead: </p>
 
-<ul>
-<li>Visit localhost:8890, click conductor on the left hand side, and login with user name dba and password dba.</li>
-<li>Visit system admin -&gt; user accounts in the menu at the top.</li>
-<li>Find the accound labled dba and edit.</li>
-<li>Add SPARQL_UPDATE to roles using the menu at the bottom.</li>
-<li>If no dba account exists, add one, then add update rights.</li>
-</ul>
+<p><code>sysctl -w vm.max_map_count=262144</code></p>
 
-<ol>
-<li>Start the SynBioHub process <code>npm start</code> or npm <code>run-script dev</code></li>
-</ol>
+<p>`<code>docker-compose --file ./synbiohub-docker/docker-compose.yml --file ./synbiohub-docker/docker-compose.explorer.yml up</code></p>
+<h3 id='configuring'>Configuring</h3>
+<p>In a web broswer, visit </p>
+
+<p><code>http://localhost:7777/</code></p>
+
+<p>On first startup, you will be taken to the <a href="http://wiki.synbiohub.org/wiki/SynBioHub_Setup_Page">SynBioHub Setup Page</a>, which enables basic setup of the site. After first setup, the <a href="http://wiki.synbiohub.org/wiki/Admin_Portal">Admin Portal</a> will allow admin users to update their site configuration. </p>
+<h5 id='sendgrid-email-setup'>SendGrid email setup</h5>
+<p>In order to enable SynBioHub to send account-related emails, you need a <a href="https://sendgrid.com/">SendGrid</a> account and API key. Once you have created your account, you should click &quot;Settings&quot; in the left bar, then &quot;API Keys&quot;. On the resulting page, click the &quot;Create API Key&quot; button in the upper-right corner, and give your new API key a name. You should see the key on the next page. Copy the key and paste it into the &quot;SendGrid API Key&quot; in the Mail page on the SynBioHub admin dashboard. Save the API key in SynBioHub and you are ready to begin sending email. </p>
+<h3 id='updating'>Updating</h3>
+<p>To update a container, pull the new version and start it. </p>
+
+<p><code>cd synbiohub-docker</code></p>
+
+<p><code>git pull</code></p>
+
+<p><code>cd ..</code></p>
+
+<p><code>## if you are not running SBOL Explorer</code></p>
+
+<p><code>docker-compose --file synbiohub-docker/docker-compose.yml pull synbiohub</code></p>
+
+<p><code>docker-compose --file synbiohub-docker/docker-compose.yml up</code></p>
+
+<p><code>## If you are running SBOL Explorer:</code></p>
+
+<p><code>docker-compose --file synbiohub-docker/docker-compose.yml --file synbiohub-docker/docker-compose.explorer.yml pull synbiohub</code></p>
+
+<p><code>docker-compose --file synbiohub-docker/docker-compose.yml --file synbiohub-docker/docker-compose.explorer.yml up</code></p>
+<h6 id='persistent-logs-update'>PERSISTENT LOGS UPDATE</h6>
+<p>If you are updating from a version earlier than 1.5.2, then you must execute the following command to setup persistent log files: </p>
+
+<p><code>docker exec -it synbiohub-docker_synbiohub_1 mkdir /mnt/data/logs</code></p>
+<h4 id='if-you-are-updating-from-a-version-of-synbiohub-earlier-than-1-3-0-to-1-3-0-or-later-you-must-execute-the-following-steps-to-persist-your-data-between-instances'>If you are updating from a version of SynBioHub earlier than 1.3.0 to 1.3.0 or later, you must execute the following steps to persist your data between instances!</h4>
+<p><code>docker exec synbiohub cp /opt/synbiohub/synbiohub.sqlite /mnt/data/synbiohub.sqlite</code></p>
+
+<p><code>docker exec synbiohub cp -R /opt/synbiohub/uploads /mnt/data/uploads</code></p>
+
+<p><code>docker exec synbiohub chown synbiohub /mnt/data/synbiohub.sqlite</code></p>
+
+<p><code>docker exec synbiohub chgrp synbiohub /mnt/data/synbiohub.sqlite</code></p>
+
+<p><code>docker exec synbiohub chown -R synbiohub /mnt/data/uploads</code></p>
+
+<p><code>docker exec synbiohub chgrp -R synbiohub /mnt/data/uploads</code></p>
+
+<p>To update to the latest version of SynBioHub, first stop and remove the container: </p>
+
+<p><code>docker stop synbiohub</code></p>
+
+<p><code>docker rm synbiohub</code></p>
+
+<p>Then pull the latest version: </p>
+
+<p><code>docker pull synbiohub/synbiohub:1.3.0</code></p>
+
+<p>Finally, run a new container with the latest image: </p>
+
+<p><code>docker run -v synbiohub:/mnt -p 7777:7777 --name synbiohub -d synbiohub/synbiohub:1.3.0</code></p>
+<h2 id='from-source'>From Source</h2>
+<p>Follow the instructions on the <a href="https://github.com/synbiohub/synbiohub">GitHub README</a> to install SynBioHub locally on your system. If you would like SynBioHub to run as a service, you can enable Virtuoso using systemd or open a virtual terminal using tmux or GNU screen and run </p>
+
+<p><code>sudo /usr/local/bin/virtuoso-t +configfile $YOUR_CONFIG_FILE</code></p>
+
+<p>You should also run SynBioHub as a system service or using a virtual terminal and the command</p>
+
+<p><code>npm start</code></p>
+
+<p>If you are doing development work, you can start SynBioHub with the command </p>
+
+<p><code>npm run-script dev</code></p>
+
+<p>which will restart the application with any change to the JavaScript source. </p>
+<h2 id='publishing-instance'>Publishing Instance</h2>
+<p>Nginx is used for the <a href="https://synbiohub.org/">reference instance</a>. <a href="http://wiki.synbiohub.org/wiki/NGINX_configuration_instructions">NGINX configuration instructions</a> </p>
 <h1 id='documentation'>Documentation</h1>
 <aside class="success">Note that the X-authorization header is not needed for public objects, but is required for private objects unless stated otherwise.</aside>
 <h2 id='user-endpopints'>User Endpopints</h2>
@@ -419,7 +471,18 @@
 <p>Returns the metadata associated with the specified key and value.</p>
 
 <p><code>GET &lt;SynBioHub URL&gt;/search/&lt;key&gt;=&lt;value&gt;&amp;...&amp;&lt;search string&gt;/?offset=#&amp;limit=#</code></p>
-<pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+<pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">fetch</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"node-fetch"</span><span class="p">);</span>
+<span class="kr">const</span> <span class="nx">Url</span> <span class="o">=</span> <span class="s1">'https://synbiohub.org/search/objectType%3DComponentDefinition%26role%3D%3Chttp%3A%2F%2Fidentifiers.org%2Fso%2FSO%3A0000316%3E%26GFP/?offset=0&amp;limit=50'</span>
+<span class="kr">const</span> <span class="nx">otherPram</span><span class="o">=</span><span class="p">{</span>
+    <span class="na">headers</span><span class="p">:{</span>
+        <span class="s2">"content-type"</span> <span class="p">:</span> <span class="s2">"text/plain; charset=UTF-8"</span>
+    <span class="p">},</span>
+    <span class="na">method</span><span class="p">:</span><span class="s2">"GET"</span>
+<span class="p">};</span>
+<span class="nx">fetch</span><span class="p">(</span><span class="nx">Url</span><span class="p">,</span><span class="nx">otherPram</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">res</span> <span class="o">=&gt;</span> <span class="nx">res</span><span class="p">.</span><span class="nx">buffer</span><span class="p">()).</span><span class="nx">then</span><span class="p">(</span><span class="nx">buf</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">buf</span><span class="p">.</span><span class="nx">toString</span><span class="p">()))</span>
+    <span class="p">.</span><span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="o">=&gt;</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">error</span><span class="p">))</span>
+</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 
 <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
     <span class="s">'https://synbiohub.org/search/objectType</span><span class="si">%3</span><span class="s">DComponentDefinition</span><span class="si">%26</span><span class="s">role</span><span class="si">%3</span><span class="s">D</span><span class="si">%3</span><span class="s">Chttp</span><span class="si">%3</span><span class="s">A</span><span class="si">%2</span><span class="s">F</span><span class="si">%2</span><span class="s">Fidentifiers.org</span><span class="si">%2</span><span class="s">Fso</span><span class="si">%2</span><span class="s">FSO</span><span class="si">%3</span><span class="s">A0000316</span><span class="si">%3</span><span class="s">E</span><span class="si">%26</span><span class="s">GFP/?offset=0&amp;limit=50'</span><span class="p">,</span>
@@ -498,48 +561,37 @@ This endpoint returns JSON metadata of the form
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
 </code></pre><pre class="highlight plaintext tab-plaintext"><code>e.g. `curl -X GET -H "Accept: text/plain" -H "X-authorization: &lt;token&gt;" https://synbiohub.org/public/bsu/bsu_collection/1/subcollections`
-</code></pre><pre class="highlight javascript tab-javascript"><code>
-<span class="kr">const</span> <span class="nx">fetch</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"node-fetch"</span><span class="p">);</span>
-
+</code></pre>
+<p>Note that the X-authorization header is not needed for public collections, but it is required for private collections.</p>
+<pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">fetch</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"node-fetch"</span><span class="p">);</span>
 <span class="kr">const</span> <span class="nx">Url</span> <span class="o">=</span> <span class="s1">'https://synbiohub.org/public/bsu/bsu_collection/1/subcollections'</span>
-
 <span class="kr">const</span> <span class="nx">otherPram</span><span class="o">=</span><span class="p">{</span>
     <span class="na">headers</span><span class="p">:{</span>
         <span class="s2">"content-type"</span> <span class="p">:</span> <span class="s2">"text/plain; charset=UTF-8"</span>
     <span class="p">},</span>
     <span class="na">method</span><span class="p">:</span><span class="s2">"GET"</span>
-
 <span class="p">};</span>
-
 <span class="nx">fetch</span><span class="p">(</span><span class="nx">Url</span><span class="p">,</span><span class="nx">otherPram</span><span class="p">)</span>
     <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">res</span> <span class="o">=&gt;</span> <span class="nx">res</span><span class="p">.</span><span class="nx">buffer</span><span class="p">()).</span><span class="nx">then</span><span class="p">(</span><span class="nx">buf</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">buf</span><span class="p">.</span><span class="nx">toString</span><span class="p">()))</span>
     <span class="p">.</span><span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="o">=&gt;</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">error</span><span class="p">))</span>
-</code></pre>
-<p>Note that the X-authorization header is not needed for public collections, but it is required for private collections.</p>
-<h3 id='returns-all-collections-that-are-not-members-of-any-other-collection'>Returns all Collections that are not members of any other Collection</h3>
+</code></pre><h3 id='returns-all-collections-that-are-not-members-of-any-other-collection'>Returns all Collections that are not members of any other Collection</h3>
 <p><code>GET &lt;SynBioHub URL&gt;/rootCollections</code></p>
-<pre class="highlight plaintext tab-plaintext"><code>e.g. `curl -X GET -H "Accept: text/plain" -H "X-authorization: &lt;token&gt;" https://synbiohub.org/public/igem/igem_collection/1/subCollections
+<pre class="highlight plaintext tab-plaintext"><code>e.g. `curl -X GET -H "Accept: text/plain" -H "X-authorization: &lt;token&gt;" https://synbiohub.org/public/igem/igem_collection/1/rootCollections
 </code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 
 <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
-    <span class="s">'https://synbiohub.org/public/igem/igem_collection/1/subCollections'</span><span class="p">,</span>
+    <span class="s">'https://synbiohub.org/public/igem/igem_collection/1/rootCollections'</span><span class="p">,</span>
     <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s">'X-authorization'</span><span class="p">:</span> <span class="s">'token'</span><span class="p">},</span>
     <span class="n">headers</span><span class="o">=</span><span class="p">{</span><span class="s">'Accept'</span><span class="p">:</span> <span class="s">'text/plain'</span><span class="p">},</span>
 <span class="p">)</span>
-</code></pre><pre class="highlight javascript tab-javascript"><code>
-<span class="kr">const</span> <span class="nx">fetch</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"node-fetch"</span><span class="p">);</span>
-
-<span class="kr">const</span> <span class="nx">Url</span> <span class="o">=</span> <span class="s1">'https://synbiohub.org/public/igem/igem_collection/1/subCollections'</span>
-
-
+</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">fetch</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"node-fetch"</span><span class="p">);</span>
+<span class="kr">const</span> <span class="nx">Url</span> <span class="o">=</span> <span class="s1">'https://synbiohub.org/public/igem/igem_collection/1/rootCollections'</span>
 <span class="kr">const</span> <span class="nx">otherPram</span><span class="o">=</span><span class="p">{</span>
     <span class="na">headers</span><span class="p">:{</span>
         <span class="s2">"content-type"</span> <span class="p">:</span> <span class="s2">"text/plain; charset=UTF-8"</span>
     <span class="p">},</span>
     <span class="na">method</span><span class="p">:</span><span class="s2">"GET"</span>
-
 <span class="p">};</span>
-
 <span class="nx">fetch</span><span class="p">(</span><span class="nx">Url</span><span class="p">,</span><span class="nx">otherPram</span><span class="p">)</span>
     <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">res</span> <span class="o">=&gt;</span> <span class="nx">res</span><span class="p">.</span><span class="nx">buffer</span><span class="p">()).</span><span class="nx">then</span><span class="p">(</span><span class="nx">buf</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">buf</span><span class="p">.</span><span class="nx">toString</span><span class="p">()))</span>
     <span class="p">.</span><span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="o">=&gt;</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">error</span><span class="p">))</span>
@@ -560,19 +612,14 @@ This endpoint returns JSON metadata of the form
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
 </code></pre><pre class="highlight plaintext tab-plaintext"><code>e.g. `curl -X GET -H "Accept: text/plain" -H "X-authorization: &lt;token&gt;" 'https://synbiohub.org/searchCount/objectType%3DComponentDefinition%26role%3D%3Chttp%3A%2F%2Fidentifiers.org%2Fso%2FSO%3A0000316%3E%26GFP'`
-</code></pre><pre class="highlight javascript tab-javascript"><code>
-<span class="kr">const</span> <span class="nx">fetch</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"node-fetch"</span><span class="p">);</span>
-
+</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">fetch</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"node-fetch"</span><span class="p">);</span>
 <span class="kr">const</span> <span class="nx">Url</span> <span class="o">=</span> <span class="s1">'https://synbiohub.org/searchCount/objectType%3DComponentDefinition%26role%3D%3Chttp%3A%2F%2Fidentifiers.org%2Fso%2FSO%3A0000316%3E%26GFP'</span>
-
 <span class="kr">const</span> <span class="nx">otherPram</span><span class="o">=</span><span class="p">{</span>
     <span class="na">headers</span><span class="p">:{</span>
         <span class="s2">"content-type"</span> <span class="p">:</span> <span class="s2">"text/plain; charset=UTF-8"</span>
     <span class="p">},</span>
     <span class="na">method</span><span class="p">:</span><span class="s2">"GET"</span>
-
 <span class="p">};</span>
-
 <span class="nx">fetch</span><span class="p">(</span><span class="nx">Url</span><span class="p">,</span><span class="nx">otherPram</span><span class="p">)</span>
     <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">res</span> <span class="o">=&gt;</span> <span class="nx">res</span><span class="p">.</span><span class="nx">buffer</span><span class="p">()).</span><span class="nx">then</span><span class="p">(</span><span class="nx">buf</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">buf</span><span class="p">.</span><span class="nx">toString</span><span class="p">()))</span>
     <span class="p">.</span><span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="o">=&gt;</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">error</span><span class="p">))</span>
@@ -593,19 +640,14 @@ This endpoint returns JSON metadata of the form
 
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
-</code></pre><pre class="highlight javascript tab-javascript"><code>
-<span class="kr">const</span> <span class="nx">fetch</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"node-fetch"</span><span class="p">);</span>
-
+</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">fetch</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"node-fetch"</span><span class="p">);</span>
 <span class="kr">const</span> <span class="nx">Url</span> <span class="o">=</span> <span class="s1">'https://synbiohub.org/Collection/Count'</span>
-
 <span class="kr">const</span> <span class="nx">otherPram</span><span class="o">=</span><span class="p">{</span>
     <span class="na">headers</span><span class="p">:{</span>
         <span class="s2">"content-type"</span> <span class="p">:</span> <span class="s2">"text/plain; charset=UTF-8"</span>
     <span class="p">},</span>
     <span class="na">method</span><span class="p">:</span><span class="s2">"GET"</span>
-
 <span class="p">};</span>
-
 <span class="nx">fetch</span><span class="p">(</span><span class="nx">Url</span><span class="p">,</span><span class="nx">otherPram</span><span class="p">)</span>
     <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">res</span> <span class="o">=&gt;</span> <span class="nx">res</span><span class="p">.</span><span class="nx">buffer</span><span class="p">()).</span><span class="nx">then</span><span class="p">(</span><span class="nx">buf</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">buf</span><span class="p">.</span><span class="nx">toString</span><span class="p">()))</span>
     <span class="p">.</span><span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="o">=&gt;</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">error</span><span class="p">))</span>
@@ -627,29 +669,100 @@ This endpoint returns JSON metadata of the form
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
 
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">())</span>
-</code></pre><pre class="highlight javascript tab-javascript"><code>
-<span class="kr">const</span> <span class="nx">fetch</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"node-fetch"</span><span class="p">);</span>
+</code></pre>
+<p>Returns the results of the SPARQL query in JSON format. </p>
+<h3 id='find-the-twins-of-an-object'>Find the twins of an object</h3>
+<p>Returns the twins for a provided object</p>
+<pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 
-<span class="kr">const</span> <span class="nx">Url</span> <span class="o">=</span> <span class="s1">'https://synbiohub.org/sparql?query=select%20%3Fs%20%3Fp%20%3Fo%20where%20%7B%20%3Fs%20%3Fp%20%3Fo%20%7D'</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+    <span class="s">'https://synbiohub.org/public/bsu/BO_5629/1/twins'</span><span class="p">,</span>
+    <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s">'X-authorization'</span><span class="p">:</span> <span class="s">'token'</span><span class="p">},</span>
+    <span class="n">headers</span><span class="o">=</span><span class="p">{</span><span class="s">'Accept'</span><span class="p">:</span> <span class="s">'text/plain'</span><span class="p">},</span>
+<span class="p">)</span>
 
+<span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
+</code></pre><pre class="highlight plaintext tab-plaintext"><code>e.g. `curl -X GET -H "Accept: text/plain" -H "X-authorization: &lt;token&gt;" https://synbiohub.org/public/bsu/BO_5629/1/twins`
+</code></pre>
+<p>Note that the X-authorization header is not needed for public collections, but it is required for private collections.</p>
+<pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">fetch</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"node-fetch"</span><span class="p">);</span>
+<span class="kr">const</span> <span class="nx">Url</span> <span class="o">=</span> <span class="s1">'https://synbiohub.org/public/bsu/BO_5629/1/twins'</span>
 <span class="kr">const</span> <span class="nx">otherPram</span><span class="o">=</span><span class="p">{</span>
     <span class="na">headers</span><span class="p">:{</span>
         <span class="s2">"content-type"</span> <span class="p">:</span> <span class="s2">"text/plain; charset=UTF-8"</span>
     <span class="p">},</span>
     <span class="na">method</span><span class="p">:</span><span class="s2">"GET"</span>
-
 <span class="p">};</span>
-
 <span class="nx">fetch</span><span class="p">(</span><span class="nx">Url</span><span class="p">,</span><span class="nx">otherPram</span><span class="p">)</span>
     <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">res</span> <span class="o">=&gt;</span> <span class="nx">res</span><span class="p">.</span><span class="nx">buffer</span><span class="p">()).</span><span class="nx">then</span><span class="p">(</span><span class="nx">buf</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">buf</span><span class="p">.</span><span class="nx">toString</span><span class="p">()))</span>
     <span class="p">.</span><span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="o">=&gt;</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">error</span><span class="p">))</span>
+</code></pre><h3 id='find-similar-parts'>Find Similar Parts</h3>
+<p>Find similar parts to the part selected </p>
+<pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+    <span class="s">'https://synbiohub.org/public/bsu/BO_5629/1/similar'</span><span class="p">,</span>
+    <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s">'X-authorization'</span><span class="p">:</span> <span class="s">'token'</span><span class="p">},</span>
+    <span class="n">headers</span><span class="o">=</span><span class="p">{</span><span class="s">'Accept'</span><span class="p">:</span> <span class="s">'text/plain'</span><span class="p">},</span>
+<span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
+</code></pre><pre class="highlight plaintext tab-plaintext"><code>e.g. `curl -X GET -H "Accept: text/plain" -H "X-authorization: &lt;token&gt;" https://synbiohub.org/public/bsu/BO_5629/1/similar`
 </code></pre>
-<p>Returns the results of the SPARQL query in JSON format. </p>
-<h2 id='download-endpoints'>Download Endpoints</h2><h3 id='return-source-for-an-attachment-with-the-specified-uri'>Return source for an attachment with the specified URI</h3>
+<p>Note that the X-authorization header is not needed for public collections, but it is required for private collections.</p>
+<pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">fetch</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"node-fetch"</span><span class="p">);</span>
+<span class="kr">const</span> <span class="nx">Url</span> <span class="o">=</span> <span class="s1">'https://synbiohub.org/public/bsu/BO_5629/1/similar'</span>
+<span class="kr">const</span> <span class="nx">otherPram</span><span class="o">=</span><span class="p">{</span>
+    <span class="na">headers</span><span class="p">:{</span>
+        <span class="s2">"content-type"</span> <span class="p">:</span> <span class="s2">"text/plain; charset=UTF-8"</span>
+    <span class="p">},</span>
+    <span class="na">method</span><span class="p">:</span><span class="s2">"GET"</span>
+<span class="p">};</span>
+<span class="nx">fetch</span><span class="p">(</span><span class="nx">Url</span><span class="p">,</span><span class="nx">otherPram</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">res</span> <span class="o">=&gt;</span> <span class="nx">res</span><span class="p">.</span><span class="nx">buffer</span><span class="p">()).</span><span class="nx">then</span><span class="p">(</span><span class="nx">buf</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">buf</span><span class="p">.</span><span class="nx">toString</span><span class="p">()))</span>
+    <span class="p">.</span><span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="o">=&gt;</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">error</span><span class="p">))</span>
+</code></pre><h3 id='find-the-uses-for-a-part'>Find the Uses for a Part</h3><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+    <span class="s">'https://synbiohub.org/public/bsu/BO_5629/1/uses'</span><span class="p">,</span>
+    <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s">'X-authorization'</span><span class="p">:</span> <span class="s">'token'</span><span class="p">},</span>
+    <span class="n">headers</span><span class="o">=</span><span class="p">{</span><span class="s">'Accept'</span><span class="p">:</span> <span class="s">'text/plain'</span><span class="p">},</span>
+<span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
+</code></pre><pre class="highlight plaintext tab-plaintext"><code>e.g. `curl -X GET -H "Accept: text/plain" -H "X-authorization: &lt;token&gt;" https://synbiohub.org/public/bsu/BO_5629/1/uses`
+</code></pre>
+<p>Note that the X-authorization header is not needed for public collections, but it is required for private collections.</p>
+<pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">fetch</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"node-fetch"</span><span class="p">);</span>
+<span class="kr">const</span> <span class="nx">Url</span> <span class="o">=</span> <span class="s1">'https://synbiohub.org/public/bsu/BO_5629/1/uses'</span>
+<span class="kr">const</span> <span class="nx">otherPram</span><span class="o">=</span><span class="p">{</span>
+    <span class="na">headers</span><span class="p">:{</span>
+        <span class="s2">"content-type"</span> <span class="p">:</span> <span class="s2">"text/plain; charset=UTF-8"</span>
+    <span class="p">},</span>
+    <span class="na">method</span><span class="p">:</span><span class="s2">"GET"</span>
+<span class="p">};</span>
+<span class="nx">fetch</span><span class="p">(</span><span class="nx">Url</span><span class="p">,</span><span class="nx">otherPram</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">res</span> <span class="o">=&gt;</span> <span class="nx">res</span><span class="p">.</span><span class="nx">buffer</span><span class="p">()).</span><span class="nx">then</span><span class="p">(</span><span class="nx">buf</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">buf</span><span class="p">.</span><span class="nx">toString</span><span class="p">()))</span>
+    <span class="p">.</span><span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="o">=&gt;</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">error</span><span class="p">))</span>
+</code></pre><h2 id='download-endpoints'>Download Endpoints</h2><h3 id='return-source-for-an-attachment-with-the-specified-uri'>Return source for an attachment with the specified URI</h3>
 <p>Returns the source for an attachement to the specificified URI</p>
 
 <p><code>GET &lt;URI&gt;/download</code></p>
-<pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+<pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">fetch</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"node-fetch"</span><span class="p">);</span>
+<span class="kr">const</span> <span class="nx">Url</span> <span class="o">=</span> <span class="s1">'https://synbiohub.org/public/test/attachment_00009TGVMsfEoCdMeRzHrU/1/download'</span>
+<span class="kr">const</span> <span class="nx">otherPram</span><span class="o">=</span><span class="p">{</span>
+    <span class="na">headers</span><span class="p">:{</span>
+        <span class="s2">"content-type"</span> <span class="p">:</span> <span class="s2">"text/plain; charset=UTF-8"</span>
+    <span class="p">},</span>
+    <span class="na">method</span><span class="p">:</span><span class="s2">"GET"</span>
+<span class="p">};</span>
+<span class="nx">fetch</span><span class="p">(</span><span class="nx">Url</span><span class="p">,</span><span class="nx">otherPram</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">res</span> <span class="o">=&gt;</span> <span class="nx">res</span><span class="p">.</span><span class="nx">buffer</span><span class="p">()).</span><span class="nx">then</span><span class="p">(</span><span class="nx">buf</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">buf</span><span class="p">.</span><span class="nx">toString</span><span class="p">()))</span>
+    <span class="p">.</span><span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="o">=&gt;</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">error</span><span class="p">))</span>
+</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 
 <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
     <span class="s">'https://synbiohub.org/public/test/attachment_00009TGVMsfEoCdMeRzHrU/1/download'</span><span class="p">,</span>
@@ -662,27 +775,22 @@ This endpoint returns JSON metadata of the form
 
 
 </code></pre><pre class="highlight plaintext tab-plaintext"><code>e.g. `curl -X GET -H "Accept: text/plain" -H "X-authorization: &lt;token&gt;" https://synbiohub.org/public/test/attachment_00009TGVMsfEoCdMeRzHrU/1/download -O --compressed
-</code></pre><pre class="highlight javascript tab-javascript"><code>
-<span class="kr">const</span> <span class="nx">fetch</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"node-fetch"</span><span class="p">);</span>
-
-<span class="kr">const</span> <span class="nx">Url</span> <span class="o">=</span> <span class="s1">'https://synbiohub.org/public/test/attachment_00009TGVMsfEoCdMeRzHrU/1/download'</span>
-
-<span class="kr">const</span> <span class="nx">otherPram</span><span class="o">=</span><span class="p">{</span>
-    <span class="na">headers</span><span class="p">:{</span>
-        <span class="s2">"content-type"</span> <span class="p">:</span> <span class="s2">"text/plain; charset=UTF-8"</span>
-    <span class="p">},</span>
-    <span class="na">method</span><span class="p">:</span><span class="s2">"GET"</span>
-
-<span class="p">};</span>
-
-<span class="nx">fetch</span><span class="p">(</span><span class="nx">Url</span><span class="p">,</span><span class="nx">otherPram</span><span class="p">)</span>
-    <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">res</span> <span class="o">=&gt;</span> <span class="nx">res</span><span class="p">.</span><span class="nx">buffer</span><span class="p">()).</span><span class="nx">then</span><span class="p">(</span><span class="nx">buf</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">buf</span><span class="p">.</span><span class="nx">toString</span><span class="p">()))</span>
-    <span class="p">.</span><span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="o">=&gt;</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">error</span><span class="p">))</span>
 </code></pre><h3 id='returns-sbol-for-the-object-with-the-specified-uri'>Returns SBOL for the object with the specified URI</h3>
 <p>Returns the SBOL for the object from the specified URI.</p>
 
 <p><code>GET &lt;URI&gt;/sbol</code></p>
-<pre class="highlight plaintext tab-plaintext"><code>e.g. `curl -X GET -H "Accept: text/plain" -H "X-authorization: &lt;token&gt;" https://synbiohub.org/public/igem/BBa_F2620/1/sbol`
+<pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">fetch</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"node-fetch"</span><span class="p">);</span>
+<span class="kr">const</span> <span class="nx">Url</span> <span class="o">=</span> <span class="s1">'https://synbiohub.org/public/igem/BBa_K1479017/1/sbol'</span>
+<span class="kr">const</span> <span class="nx">otherPram</span><span class="o">=</span><span class="p">{</span>
+    <span class="na">headers</span><span class="p">:{</span>
+    <span class="s2">"content-type"</span> <span class="p">:</span> <span class="s2">"text/plain; charset=UTF-8"</span>
+    <span class="p">},</span>
+    <span class="na">method</span><span class="p">:</span><span class="s2">"GET"</span>
+<span class="p">};</span>
+<span class="nx">fetch</span><span class="p">(</span><span class="nx">Url</span><span class="p">,</span><span class="nx">otherPram</span><span class="p">)</span>
+<span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">res</span> <span class="o">=&gt;</span> <span class="nx">res</span><span class="p">.</span><span class="nx">buffer</span><span class="p">()).</span><span class="nx">then</span><span class="p">(</span><span class="nx">buf</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">buf</span><span class="p">.</span><span class="nx">toString</span><span class="p">()))</span>
+<span class="p">.</span><span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="o">=&gt;</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">error</span><span class="p">))</span>
+</code></pre><pre class="highlight plaintext tab-plaintext"><code>e.g. `curl -X GET -H "Accept: text/plain" -H "X-authorization: &lt;token&gt;" https://synbiohub.org/public/igem/BBa_F2620/1/sbol`
 </code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 
 <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
@@ -693,27 +801,23 @@ This endpoint returns JSON metadata of the form
 
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
-</code></pre><pre class="highlight javascript tab-javascript"><code>
-<span class="kr">const</span> <span class="nx">fetch</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"node-fetch"</span><span class="p">);</span>
 
-<span class="kr">const</span> <span class="nx">Url</span> <span class="o">=</span> <span class="s1">'https://synbiohub.org/public/igem/BBa_K1479017/1/sbol'</span>
+</code></pre><h3 id='returns-sbolnr-for-the-object-with-the-specified-uri'>Returns SBOLnr for the object with the specified URI</h3>
+<p>Returns the SBOLnr for the object from the specified URI.</p>
 
+<p><code>GET &lt;URI&gt;/sbolnr</code></p>
+<pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">fetch</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"node-fetch"</span><span class="p">);</span>
+<span class="kr">const</span> <span class="nx">Url</span> <span class="o">=</span> <span class="s1">'https://synbiohub.org/public/igem/BBa_K1479017/1/sbolnr'</span>
 <span class="kr">const</span> <span class="nx">otherPram</span><span class="o">=</span><span class="p">{</span>
     <span class="na">headers</span><span class="p">:{</span>
     <span class="s2">"content-type"</span> <span class="p">:</span> <span class="s2">"text/plain; charset=UTF-8"</span>
     <span class="p">},</span>
     <span class="na">method</span><span class="p">:</span><span class="s2">"GET"</span>
-
 <span class="p">};</span>
-
 <span class="nx">fetch</span><span class="p">(</span><span class="nx">Url</span><span class="p">,</span><span class="nx">otherPram</span><span class="p">)</span>
 <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">res</span> <span class="o">=&gt;</span> <span class="nx">res</span><span class="p">.</span><span class="nx">buffer</span><span class="p">()).</span><span class="nx">then</span><span class="p">(</span><span class="nx">buf</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">buf</span><span class="p">.</span><span class="nx">toString</span><span class="p">()))</span>
 <span class="p">.</span><span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="o">=&gt;</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">error</span><span class="p">))</span>
-</code></pre><h3 id='returns-sbolnr-for-the-object-with-the-specified-uri'>Returns SBOLnr for the object with the specified URI</h3>
-<p>Returns the SBOLnr for the object from the specified URI.</p>
-
-<p><code>GET &lt;URI&gt;/sbolnr</code></p>
-<pre class="highlight plaintext tab-plaintext"><code>e.g. `curl -X GET -H "Accept: text/plain" -H "X-authorization: &lt;token&gt;" https://synbiohub.org/public/igem/BBa_F2620/1/sbolnr`
+</code></pre><pre class="highlight plaintext tab-plaintext"><code>e.g. `curl -X GET -H "Accept: text/plain" -H "X-authorization: &lt;token&gt;" https://synbiohub.org/public/igem/BBa_F2620/1/sbolnr`
 </code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 
 <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
@@ -725,27 +829,22 @@ This endpoint returns JSON metadata of the form
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
 
-</code></pre><pre class="highlight javascript tab-javascript"><code>
-<span class="kr">const</span> <span class="nx">fetch</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"node-fetch"</span><span class="p">);</span>
-
-<span class="kr">const</span> <span class="nx">Url</span> <span class="o">=</span> <span class="s1">'https://synbiohub.org/public/igem/BBa_K1479017/1/sbolnr'</span>
-
-<span class="kr">const</span> <span class="nx">otherPram</span><span class="o">=</span><span class="p">{</span>
-    <span class="na">headers</span><span class="p">:{</span>
-    <span class="s2">"content-type"</span> <span class="p">:</span> <span class="s2">"text/plain; charset=UTF-8"</span>
-    <span class="p">},</span>
-    <span class="na">method</span><span class="p">:</span><span class="s2">"GET"</span>
-
-<span class="p">};</span>
-
-<span class="nx">fetch</span><span class="p">(</span><span class="nx">Url</span><span class="p">,</span><span class="nx">otherPram</span><span class="p">)</span>
-<span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">res</span> <span class="o">=&gt;</span> <span class="nx">res</span><span class="p">.</span><span class="nx">buffer</span><span class="p">()).</span><span class="nx">then</span><span class="p">(</span><span class="nx">buf</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">buf</span><span class="p">.</span><span class="nx">toString</span><span class="p">()))</span>
-<span class="p">.</span><span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="o">=&gt;</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">error</span><span class="p">))</span>
 </code></pre><h3 id='returns-metadata-for-the-object-with-the-specified-uri'>Returns metadata for the object with the specified URI</h3>
 <p>Returns the metadata for the object from the specified URI.</p>
 
 <p><code>GET &lt;URI&gt;/metadata</code></p>
-<pre class="highlight plaintext tab-plaintext"><code>e.g. `curl -X GET -H "Accept: text/plain" -H "X-authorization: &lt;token&gt;" https://synbiohub.org/public/igem/BBa_K1479017/1/metadata`
+<pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">fetch</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"node-fetch"</span><span class="p">);</span>
+<span class="kr">const</span> <span class="nx">Url</span> <span class="o">=</span> <span class="s1">'https://synbiohub.org/public/igem/BBa_K1479017/1/metadata'</span>
+<span class="kr">const</span> <span class="nx">otherPram</span><span class="o">=</span><span class="p">{</span>
+    <span class="na">headers</span><span class="p">:{</span>
+        <span class="s2">"content-type"</span> <span class="p">:</span> <span class="s2">"text/plain; charset=UTF-8"</span>
+    <span class="p">},</span>
+    <span class="na">method</span><span class="p">:</span><span class="s2">"GET"</span>
+<span class="p">};</span>
+<span class="nx">fetch</span><span class="p">(</span><span class="nx">Url</span><span class="p">,</span><span class="nx">otherPram</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">res</span> <span class="o">=&gt;</span> <span class="nx">res</span><span class="p">.</span><span class="nx">buffer</span><span class="p">()).</span><span class="nx">then</span><span class="p">(</span><span class="nx">buf</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">buf</span><span class="p">.</span><span class="nx">toString</span><span class="p">()))</span>
+    <span class="p">.</span><span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="o">=&gt;</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">error</span><span class="p">))</span>
+</code></pre><pre class="highlight plaintext tab-plaintext"><code>e.g. `curl -X GET -H "Accept: text/plain" -H "X-authorization: &lt;token&gt;" https://synbiohub.org/public/igem/BBa_K1479017/1/metadata`
 </code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 
 <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
@@ -757,27 +856,22 @@ This endpoint returns JSON metadata of the form
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
 
-</code></pre><pre class="highlight javascript tab-javascript"><code>
-<span class="kr">const</span> <span class="nx">fetch</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"node-fetch"</span><span class="p">);</span>
+</code></pre><h3 id='returns-genbank-for-the-object-with-the-specified-uri'>Returns GenBank for the object with the specified URI</h3>
+<p>Returns the GenBank for the object from the specified URI.</p>
 
-<span class="kr">const</span> <span class="nx">Url</span> <span class="o">=</span> <span class="s1">'https://synbiohub.org/public/igem/BBa_K1479017/1/metadata'</span>
-
+<p><code>GET &lt;URI&gt;/gb</code></p>
+<pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">fetch</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"node-fetch"</span><span class="p">);</span>
+<span class="kr">const</span> <span class="nx">Url</span> <span class="o">=</span> <span class="s1">'https://synbiohub.org/public/igem/BBa_K1479017/1/BBa_K1479017.gb'</span>
 <span class="kr">const</span> <span class="nx">otherPram</span><span class="o">=</span><span class="p">{</span>
     <span class="na">headers</span><span class="p">:{</span>
         <span class="s2">"content-type"</span> <span class="p">:</span> <span class="s2">"text/plain; charset=UTF-8"</span>
     <span class="p">},</span>
     <span class="na">method</span><span class="p">:</span><span class="s2">"GET"</span>
-
 <span class="p">};</span>
-
 <span class="nx">fetch</span><span class="p">(</span><span class="nx">Url</span><span class="p">,</span><span class="nx">otherPram</span><span class="p">)</span>
     <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">res</span> <span class="o">=&gt;</span> <span class="nx">res</span><span class="p">.</span><span class="nx">buffer</span><span class="p">()).</span><span class="nx">then</span><span class="p">(</span><span class="nx">buf</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">buf</span><span class="p">.</span><span class="nx">toString</span><span class="p">()))</span>
     <span class="p">.</span><span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="o">=&gt;</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">error</span><span class="p">))</span>
-</code></pre><h3 id='returns-genbank-for-the-object-with-the-specified-uri'>Returns GenBank for the object with the specified URI</h3>
-<p>Returns the GenBank for the object from the specified URI.</p>
-
-<p><code>GET &lt;URI&gt;/gb</code></p>
-<pre class="highlight plaintext tab-plaintext"><code>e.g. `curl -X GET -H "Accept: text/plain" -H "X-authorization: &lt;token&gt;" https://synbiohub.org/public/igem/BBa_K1479017/1/BBa_K1479017.gb`
+</code></pre><pre class="highlight plaintext tab-plaintext"><code>e.g. `curl -X GET -H "Accept: text/plain" -H "X-authorization: &lt;token&gt;" https://synbiohub.org/public/igem/BBa_K1479017/1/BBa_K1479017.gb`
 </code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 
 <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
@@ -789,27 +883,22 @@ This endpoint returns JSON metadata of the form
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
 
-</code></pre><pre class="highlight javascript tab-javascript"><code>
-<span class="kr">const</span> <span class="nx">fetch</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"node-fetch"</span><span class="p">);</span>
+</code></pre><h3 id='returns-fasta-for-the-object-with-the-specified-uri'>Returns FASTA for the object with the specified URI</h3>
+<p>Returns the FASTA for the object from the specified URI.</p>
 
-<span class="kr">const</span> <span class="nx">Url</span> <span class="o">=</span> <span class="s1">'https://synbiohub.org/public/igem/BBa_K1479017/1/BBa_K1479017.gb'</span>
-
+<p><code>GET &lt;URI&gt;/fasta</code></p>
+<pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">fetch</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"node-fetch"</span><span class="p">);</span>
+<span class="kr">const</span> <span class="nx">Url</span> <span class="o">=</span> <span class="s1">'https://synbiohub.org/public/igem/BBa_K1479017/1/BBa_K1479017.fasta'</span>
 <span class="kr">const</span> <span class="nx">otherPram</span><span class="o">=</span><span class="p">{</span>
     <span class="na">headers</span><span class="p">:{</span>
         <span class="s2">"content-type"</span> <span class="p">:</span> <span class="s2">"text/plain; charset=UTF-8"</span>
     <span class="p">},</span>
     <span class="na">method</span><span class="p">:</span><span class="s2">"GET"</span>
-
 <span class="p">};</span>
-
 <span class="nx">fetch</span><span class="p">(</span><span class="nx">Url</span><span class="p">,</span><span class="nx">otherPram</span><span class="p">)</span>
     <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">res</span> <span class="o">=&gt;</span> <span class="nx">res</span><span class="p">.</span><span class="nx">buffer</span><span class="p">()).</span><span class="nx">then</span><span class="p">(</span><span class="nx">buf</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">buf</span><span class="p">.</span><span class="nx">toString</span><span class="p">()))</span>
     <span class="p">.</span><span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="o">=&gt;</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">error</span><span class="p">))</span>
-</code></pre><h3 id='returns-fasta-for-the-object-with-the-specified-uri'>Returns FASTA for the object with the specified URI</h3>
-<p>Returns the FASTA for the object from the specified URI.</p>
-
-<p><code>GET &lt;URI&gt;/fasta</code></p>
-<pre class="highlight plaintext tab-plaintext"><code>e.g. `curl -X GET -H "Accept: text/plain" -H "X-authorization: &lt;token&gt;" https://synbiohub.org/public/igem/BBa_K1479017/1/BBa_K1479017.fasta`
+</code></pre><pre class="highlight plaintext tab-plaintext"><code>e.g. `curl -X GET -H "Accept: text/plain" -H "X-authorization: &lt;token&gt;" https://synbiohub.org/public/igem/BBa_K1479017/1/BBa_K1479017.fasta`
 </code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 
 <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
@@ -821,27 +910,22 @@ This endpoint returns JSON metadata of the form
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
 
-</code></pre><pre class="highlight javascript tab-javascript"><code>
-<span class="kr">const</span> <span class="nx">fetch</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"node-fetch"</span><span class="p">);</span>
+</code></pre><h3 id='returns-visualization-for-the-object-with-the-specified-uri'>Returns visualization for the object with the specified URI</h3>
+<p>Returns the visualization for the object from the specified URI.</p>
 
-<span class="kr">const</span> <span class="nx">Url</span> <span class="o">=</span> <span class="s1">'https://synbiohub.org/public/igem/BBa_K1479017/1/BBa_K1479017.fasta'</span>
-
+<p><code>GET &lt;URI&gt;/visualization</code></p>
+<pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">fetch</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"node-fetch"</span><span class="p">);</span>
+<span class="kr">const</span> <span class="nx">Url</span> <span class="o">=</span> <span class="s1">'https://synbiohub.org/public/igem/BBa_K1479017/1/visualization'</span>
 <span class="kr">const</span> <span class="nx">otherPram</span><span class="o">=</span><span class="p">{</span>
     <span class="na">headers</span><span class="p">:{</span>
         <span class="s2">"content-type"</span> <span class="p">:</span> <span class="s2">"text/plain; charset=UTF-8"</span>
     <span class="p">},</span>
     <span class="na">method</span><span class="p">:</span><span class="s2">"GET"</span>
-
 <span class="p">};</span>
-
 <span class="nx">fetch</span><span class="p">(</span><span class="nx">Url</span><span class="p">,</span><span class="nx">otherPram</span><span class="p">)</span>
     <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">res</span> <span class="o">=&gt;</span> <span class="nx">res</span><span class="p">.</span><span class="nx">buffer</span><span class="p">()).</span><span class="nx">then</span><span class="p">(</span><span class="nx">buf</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">buf</span><span class="p">.</span><span class="nx">toString</span><span class="p">()))</span>
     <span class="p">.</span><span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="o">=&gt;</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">error</span><span class="p">))</span>
-</code></pre><h3 id='returns-visualization-for-the-object-with-the-specified-uri'>Returns visualization for the object with the specified URI</h3>
-<p>Returns the visualization for the object from the specified URI.</p>
-
-<p><code>GET &lt;URI&gt;/visualization</code></p>
-<pre class="highlight plaintext tab-plaintext"><code>e.g. `curl -X GET -H "Accept: text/plain" -H "X-authorization: &lt;token&gt;" https://synbiohub.org/public/igem/BBa_K1479017/1/visualization`
+</code></pre><pre class="highlight plaintext tab-plaintext"><code>e.g. `curl -X GET -H "Accept: text/plain" -H "X-authorization: &lt;token&gt;" https://synbiohub.org/public/igem/BBa_K1479017/1/visualization`
 </code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 
 <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
@@ -853,22 +937,6 @@ This endpoint returns JSON metadata of the form
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
 
-</code></pre><pre class="highlight javascript tab-javascript"><code>
-<span class="kr">const</span> <span class="nx">fetch</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"node-fetch"</span><span class="p">);</span>
-
-<span class="kr">const</span> <span class="nx">Url</span> <span class="o">=</span> <span class="s1">'https://synbiohub.org/public/igem/BBa_K1479017/1/visualization'</span>
-
-<span class="kr">const</span> <span class="nx">otherPram</span><span class="o">=</span><span class="p">{</span>
-    <span class="na">headers</span><span class="p">:{</span>
-        <span class="s2">"content-type"</span> <span class="p">:</span> <span class="s2">"text/plain; charset=UTF-8"</span>
-    <span class="p">},</span>
-    <span class="na">method</span><span class="p">:</span><span class="s2">"GET"</span>
-
-<span class="p">};</span>
-
-<span class="nx">fetch</span><span class="p">(</span><span class="nx">Url</span><span class="p">,</span><span class="nx">otherPram</span><span class="p">)</span>
-    <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">res</span> <span class="o">=&gt;</span> <span class="nx">res</span><span class="p">.</span><span class="nx">buffer</span><span class="p">()).</span><span class="nx">then</span><span class="p">(</span><span class="nx">buf</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">buf</span><span class="p">.</span><span class="nx">toString</span><span class="p">()))</span>
-    <span class="p">.</span><span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="o">=&gt;</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">error</span><span class="p">))</span>
 </code></pre><h2 id='submission-endpoints'>Submission Endpoints</h2><h3 id='create-a-new-collection'>Create a new collection</h3>
 <p>Create a new collection</p>
 
