@@ -540,16 +540,33 @@
 
 <p>which will restart the application with any change to the JavaScript source. </p>
 <h2 id='publishing-instance'>Publishing Instance</h2>
-<p>Nginx is used for the <a href="https://synbiohub.org/">reference instance</a>. <a href="http://wiki.synbiohub.org/wiki/NGINX_configuration_instructions">NGINX configuration instructions</a> </p>
+<p>Nginx is used for the <a href="https://synbiohub.org/">reference instance</a>.</p>
 <h2 id='nginx-configuration'>NGINX configuration</h2>
 <p>Instructions for managing nginx server blocks can be found <a href="https://www.digitalocean.com/community/tutorials/how-to-set-up-nginx-server-blocks-virtual-hosts-on-ubuntu-16-04#step-three-create-server-block-files-for-each-domain">here</a>.</p>
 
-<p>The server block for a SynBioHub installation listening on port 7777 is <a href="http://wiki.synbiohub.org/wiki/NGINX_configuration_instructions">here</a>.</p>
+<p>The server block for a SynBioHub installation listening on port 7777 is to the right </p>
+<pre class="highlight plaintext"><code>client_max_body_size 800m;
+proxy_connect_timeout 6000;
+proxy_send_timeout 6000;
+proxy_read_timeout 6000;
+send_timeout 6000;
+server {
+        listen 80;
+        server_name _;
 
+        location / {
+                proxy_set_header X-Real-IP  $remote_addr;
+                proxy_set_header X-Forwarded-Server $host;
+                proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+                proxy_set_header Host $host;
+                proxy_pass http://127.0.0.1:7777$request_uri;
+        }
+}
+</code></pre>
 <p>This is most useful when you would like to host SynBioHub on a subdomain alongside other content (using nginx as an HTTP proxy) or using HTTPS. </p>
-
-<aside class="success">Note that the X-authorization header is not needed for public objects, but is required for private objects unless stated otherwise.</aside>
 <h1 id='user-endpoints'>User Endpoints</h1>
+<aside class="success">Note that the X-authorization header is not needed for public objects, but is required for private objects unless stated otherwise.</aside>
+
 <p>Endpoints that control user related functions</p>
 <h2 id='login'>Login</h2>
 <p>Returns a string token to be passed with any call to submit as the <code>user</code> parameter. </p>
@@ -626,23 +643,23 @@
 </thead><tbody>
 <tr>
 <td>objectType=value</td>
-<td>The type of object to search for (e.g. objectType=ComponentDefinition&amp;)</td>
+<td>The type of object to search for ( objectType=ComponentDefinition&amp;)</td>
 </tr>
 <tr>
 <td>sbolTag=value</td>
-<td>A tag in the SBOL namespace to search for (e.g. role=<a href="http://identifiers.org/so/SO:0000316">http://identifiers.org/so/SO:0000316</a>&amp;)</td>
+<td>A tag in the SBOL namespace to search for ( role=<a href="http://identifiers.org/so/SO:0000316">http://identifiers.org/so/SO:0000316</a>&amp;)</td>
 </tr>
 <tr>
 <td>collection=value</td>
-<td>Matches objects that are members of the specified collection (e.g., collection=<a href="http://synbiohub.org/public/igem/igem_collection">http://synbiohub.org/public/igem/igem_collection</a>&amp;)</td>
+<td>Matches objects that are members of the specified collection (, collection=<a href="http://synbiohub.org/public/igem/igem_collection">http://synbiohub.org/public/igem/igem_collection</a>&amp;)</td>
 </tr>
 <tr>
 <td>dcterms:tag=value</td>
-<td>A tag in the dcterms namespace to search for (e.g. dcterms:title=&#39;pLac&#39;&amp;) - note this requires an exact match</td>
+<td>A tag in the dcterms namespace to search for ( dcterms:title=&#39;pLac&#39;&amp;) - note this requires an exact match</td>
 </tr>
 <tr>
 <td>namespace/tag=value</td>
-<td>A full namespace with tag separated by appropriate delimiter (e.g. <a href="http://sbols.org/v2#role">http://sbols.org/v2#role</a>=<a href="http://identifiers.org/so/SO:0000316">http://identifiers.org/so/SO:0000316</a>&amp;)</td>
+<td>A full namespace with tag separated by appropriate delimiter ( <a href="http://sbols.org/v2#role">http://sbols.org/v2#role</a>=<a href="http://identifiers.org/so/SO:0000316">http://identifiers.org/so/SO:0000316</a>&amp;)</td>
 </tr>
 </tbody></table>
 
@@ -676,7 +693,7 @@ This endpoint returns JSON metadata of the form
 
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
-</code></pre><pre class="highlight plaintext tab-plaintext"><code>e.g. `curl -X GET -H "Accept: text/plain" -H "X-authorization: &lt;token&gt;" https://synbiohub.org/public/bsu/bsu_collection/1/subcollections`
+</code></pre><pre class="highlight plaintext tab-plaintext"><code> `curl -X GET -H "Accept: text/plain" -H "X-authorization: &lt;token&gt;" https://synbiohub.org/public/bsu/bsu_collection/1/subcollections`
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">fetch</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"node-fetch"</span><span class="p">);</span>
 <span class="kr">const</span> <span class="nx">Url</span> <span class="o">=</span> <span class="s1">'https://synbiohub.org/public/bsu/bsu_collection/1/subcollections'</span>
 <span class="kr">const</span> <span class="nx">otherPram</span><span class="o">=</span><span class="p">{</span>
@@ -690,7 +707,7 @@ This endpoint returns JSON metadata of the form
     <span class="p">.</span><span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="o">=&gt;</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">error</span><span class="p">))</span>
 </code></pre><h2 id='search-root-collections'>Search Root Collections</h2>
 <p><code>GET &lt;SynBioHub URL&gt;/rootCollections</code></p>
-<pre class="highlight plaintext tab-plaintext"><code>e.g. `curl -X GET -H "Accept: text/plain" -H "X-authorization: &lt;token&gt;" https://synbiohub.org/public/igem/igem_collection/1/rootCollections
+<pre class="highlight plaintext tab-plaintext"><code> `curl -X GET -H "Accept: text/plain" -H "X-authorization: &lt;token&gt;" https://synbiohub.org/public/igem/igem_collection/1/rootCollections
 </code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 
 <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
@@ -725,7 +742,7 @@ This endpoint returns JSON metadata of the form
 
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
-</code></pre><pre class="highlight plaintext tab-plaintext"><code>e.g. `curl -X GET -H "Accept: text/plain" -H "X-authorization: &lt;token&gt;" https://synbiohub.org/public/bsu/BO_5629/1/twins`
+</code></pre><pre class="highlight plaintext tab-plaintext"><code> `curl -X GET -H "Accept: text/plain" -H "X-authorization: &lt;token&gt;" https://synbiohub.org/public/bsu/BO_5629/1/twins`
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">fetch</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"node-fetch"</span><span class="p">);</span>
 <span class="kr">const</span> <span class="nx">Url</span> <span class="o">=</span> <span class="s1">'https://synbiohub.org/public/bsu/BO_5629/1/twins'</span>
 <span class="kr">const</span> <span class="nx">otherPram</span><span class="o">=</span><span class="p">{</span>
@@ -751,7 +768,7 @@ This endpoint returns JSON metadata of the form
 
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
-</code></pre><pre class="highlight plaintext tab-plaintext"><code>e.g. `curl -X GET -H "Accept: text/plain" -H "X-authorization: &lt;token&gt;" https://synbiohub.org/public/bsu/BO_5629/1/similar`
+</code></pre><pre class="highlight plaintext tab-plaintext"><code> `curl -X GET -H "Accept: text/plain" -H "X-authorization: &lt;token&gt;" https://synbiohub.org/public/bsu/BO_5629/1/similar`
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">fetch</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"node-fetch"</span><span class="p">);</span>
 <span class="kr">const</span> <span class="nx">Url</span> <span class="o">=</span> <span class="s1">'https://synbiohub.org/public/bsu/BO_5629/1/similar'</span>
 <span class="kr">const</span> <span class="nx">otherPram</span><span class="o">=</span><span class="p">{</span>
@@ -777,7 +794,7 @@ This endpoint returns JSON metadata of the form
 
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
-</code></pre><pre class="highlight plaintext tab-plaintext"><code>e.g. `curl -X GET -H "Accept: text/plain" -H "X-authorization: &lt;token&gt;" https://synbiohub.org/public/bsu/BO_5629/1/uses`
+</code></pre><pre class="highlight plaintext tab-plaintext"><code> `curl -X GET -H "Accept: text/plain" -H "X-authorization: &lt;token&gt;" https://synbiohub.org/public/bsu/BO_5629/1/uses`
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">fetch</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"node-fetch"</span><span class="p">);</span>
 <span class="kr">const</span> <span class="nx">Url</span> <span class="o">=</span> <span class="s1">'https://synbiohub.org/public/bsu/BO_5629/1/uses'</span>
 <span class="kr">const</span> <span class="nx">otherPram</span><span class="o">=</span><span class="p">{</span>
@@ -803,7 +820,7 @@ This endpoint returns JSON metadata of the form
 
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
-</code></pre><pre class="highlight plaintext tab-plaintext"><code>e.g. `curl -X GET -H "Accept: text/plain" -H "X-authorization: &lt;token&gt;" 'https://synbiohub.org/searchCount/objectType%3DComponentDefinition%26role%3D%3Chttp%3A%2F%2Fidentifiers.org%2Fso%2FSO%3A0000316%3E%26GFP'`
+</code></pre><pre class="highlight plaintext tab-plaintext"><code> `curl -X GET -H "Accept: text/plain" -H "X-authorization: &lt;token&gt;" 'https://synbiohub.org/searchCount/objectType%3DComponentDefinition%26role%3D%3Chttp%3A%2F%2Fidentifiers.org%2Fso%2FSO%3A0000316%3E%26GFP'`
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">fetch</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"node-fetch"</span><span class="p">);</span>
 <span class="kr">const</span> <span class="nx">Url</span> <span class="o">=</span> <span class="s1">'https://synbiohub.org/searchCount/objectType%3DComponentDefinition%26role%3D%3Chttp%3A%2F%2Fidentifiers.org%2Fso%2FSO%3A0000316%3E%26GFP'</span>
 <span class="kr">const</span> <span class="nx">otherPram</span><span class="o">=</span><span class="p">{</span>
@@ -821,7 +838,7 @@ This endpoint returns JSON metadata of the form
 <p><code>GET &lt;SynBioHub URL&gt;/&lt;ObjectType&gt;/count</code></p>
 
 <p>Returns the number of objects within a specified collection</p>
-<pre class="highlight plaintext tab-plaintext"><code>e.g. curl -X GET https://synbiohub.org/Collection/Count
+<pre class="highlight plaintext tab-plaintext"><code> curl -X GET https://synbiohub.org/Collection/Count
 </code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 
 <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
@@ -849,7 +866,7 @@ This endpoint returns JSON metadata of the form
 <p><code>GET &lt;SynBioHub URL&gt;/sparql?query=&lt;SPARQL query&gt;</code></p>
 
 <p>Returns the results of the SPARQL query in JSON format. </p>
-<pre class="highlight plaintext tab-plaintext"><code>e.g. `curl -X GET -H "Accept: application/json" 'https://synbiohub.org/sparql?query=select%20%3Fs%20%3Fp%20%3Fo%20where%20%7B%20%3Fs%20%3Fp%20%3Fo%20%7D'
+<pre class="highlight plaintext tab-plaintext"><code> `curl -X GET -H "Accept: application/json" 'https://synbiohub.org/sparql?query=select%20%3Fs%20%3Fp%20%3Fo%20where%20%7B%20%3Fs%20%3Fp%20%3Fo%20%7D'
 </code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 
 <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
@@ -892,7 +909,7 @@ This endpoint returns JSON metadata of the form
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
 
 
-</code></pre><pre class="highlight plaintext tab-plaintext"><code>e.g. `curl -X GET -H "Accept: text/plain" -H "X-authorization: &lt;token&gt;" https://synbiohub.org/public/test/attachment_00009TGVMsfEoCdMeRzHrU/1/download -O --compressed
+</code></pre><pre class="highlight plaintext tab-plaintext"><code> `curl -X GET -H "Accept: text/plain" -H "X-authorization: &lt;token&gt;" https://synbiohub.org/public/test/attachment_00009TGVMsfEoCdMeRzHrU/1/download -O --compressed
 </code></pre><h2 id='download-sbol'>Download SBOL</h2>
 <p><code>GET &lt;URI&gt;/sbol</code></p>
 
@@ -908,7 +925,7 @@ This endpoint returns JSON metadata of the form
 <span class="nx">fetch</span><span class="p">(</span><span class="nx">Url</span><span class="p">,</span><span class="nx">otherPram</span><span class="p">)</span>
 <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">res</span> <span class="o">=&gt;</span> <span class="nx">res</span><span class="p">.</span><span class="nx">buffer</span><span class="p">()).</span><span class="nx">then</span><span class="p">(</span><span class="nx">buf</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">buf</span><span class="p">.</span><span class="nx">toString</span><span class="p">()))</span>
 <span class="p">.</span><span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="o">=&gt;</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">error</span><span class="p">))</span>
-</code></pre><pre class="highlight plaintext tab-plaintext"><code>e.g. `curl -X GET -H "Accept: text/plain" -H "X-authorization: &lt;token&gt;" https://synbiohub.org/public/igem/BBa_F2620/1/sbol`
+</code></pre><pre class="highlight plaintext tab-plaintext"><code> `curl -X GET -H "Accept: text/plain" -H "X-authorization: &lt;token&gt;" https://synbiohub.org/public/igem/BBa_F2620/1/sbol`
 </code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 
 <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
@@ -935,7 +952,7 @@ This endpoint returns JSON metadata of the form
 <span class="nx">fetch</span><span class="p">(</span><span class="nx">Url</span><span class="p">,</span><span class="nx">otherPram</span><span class="p">)</span>
 <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">res</span> <span class="o">=&gt;</span> <span class="nx">res</span><span class="p">.</span><span class="nx">buffer</span><span class="p">()).</span><span class="nx">then</span><span class="p">(</span><span class="nx">buf</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">buf</span><span class="p">.</span><span class="nx">toString</span><span class="p">()))</span>
 <span class="p">.</span><span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="o">=&gt;</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">error</span><span class="p">))</span>
-</code></pre><pre class="highlight plaintext tab-plaintext"><code>e.g. `curl -X GET -H "Accept: text/plain" -H "X-authorization: &lt;token&gt;" https://synbiohub.org/public/igem/BBa_F2620/1/sbolnr`
+</code></pre><pre class="highlight plaintext tab-plaintext"><code> `curl -X GET -H "Accept: text/plain" -H "X-authorization: &lt;token&gt;" https://synbiohub.org/public/igem/BBa_F2620/1/sbolnr`
 </code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 
 <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
@@ -960,7 +977,7 @@ This endpoint returns JSON metadata of the form
 <span class="nx">fetch</span><span class="p">(</span><span class="nx">Url</span><span class="p">,</span><span class="nx">otherPram</span><span class="p">)</span>
     <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">res</span> <span class="o">=&gt;</span> <span class="nx">res</span><span class="p">.</span><span class="nx">buffer</span><span class="p">()).</span><span class="nx">then</span><span class="p">(</span><span class="nx">buf</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">buf</span><span class="p">.</span><span class="nx">toString</span><span class="p">()))</span>
     <span class="p">.</span><span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="o">=&gt;</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">error</span><span class="p">))</span>
-</code></pre><pre class="highlight plaintext tab-plaintext"><code>e.g. `curl -X GET -H "Accept: text/plain" -H "X-authorization: &lt;token&gt;" https://synbiohub.org/public/igem/BBa_K1479017/1/metadata`
+</code></pre><pre class="highlight plaintext tab-plaintext"><code> `curl -X GET -H "Accept: text/plain" -H "X-authorization: &lt;token&gt;" https://synbiohub.org/public/igem/BBa_K1479017/1/metadata`
 </code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 
 <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
@@ -989,7 +1006,7 @@ This endpoint returns JSON metadata of the form
 <span class="nx">fetch</span><span class="p">(</span><span class="nx">Url</span><span class="p">,</span><span class="nx">otherPram</span><span class="p">)</span>
     <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">res</span> <span class="o">=&gt;</span> <span class="nx">res</span><span class="p">.</span><span class="nx">buffer</span><span class="p">()).</span><span class="nx">then</span><span class="p">(</span><span class="nx">buf</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">buf</span><span class="p">.</span><span class="nx">toString</span><span class="p">()))</span>
     <span class="p">.</span><span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="o">=&gt;</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">error</span><span class="p">))</span>
-</code></pre><pre class="highlight plaintext tab-plaintext"><code>e.g. `curl -X GET -H "Accept: text/plain" -H "X-authorization: &lt;token&gt;" https://synbiohub.org/public/igem/BBa_K1479017/1/BBa_K1479017.gb`
+</code></pre><pre class="highlight plaintext tab-plaintext"><code> `curl -X GET -H "Accept: text/plain" -H "X-authorization: &lt;token&gt;" https://synbiohub.org/public/igem/BBa_K1479017/1/BBa_K1479017.gb`
 </code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 
 <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
@@ -1016,7 +1033,7 @@ This endpoint returns JSON metadata of the form
 <span class="nx">fetch</span><span class="p">(</span><span class="nx">Url</span><span class="p">,</span><span class="nx">otherPram</span><span class="p">)</span>
     <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">res</span> <span class="o">=&gt;</span> <span class="nx">res</span><span class="p">.</span><span class="nx">buffer</span><span class="p">()).</span><span class="nx">then</span><span class="p">(</span><span class="nx">buf</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">buf</span><span class="p">.</span><span class="nx">toString</span><span class="p">()))</span>
     <span class="p">.</span><span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="o">=&gt;</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">error</span><span class="p">))</span>
-</code></pre><pre class="highlight plaintext tab-plaintext"><code>e.g. `curl -X GET -H "Accept: text/plain" -H "X-authorization: &lt;token&gt;" https://synbiohub.org/public/igem/BBa_K1479017/1/BBa_K1479017.fasta`
+</code></pre><pre class="highlight plaintext tab-plaintext"><code> `curl -X GET -H "Accept: text/plain" -H "X-authorization: &lt;token&gt;" https://synbiohub.org/public/igem/BBa_K1479017/1/BBa_K1479017.fasta`
 </code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 
 <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
@@ -1073,11 +1090,11 @@ This endpoint returns JSON metadata of the form
 </thead><tbody>
 <tr>
 <td>id</td>
-<td>a user-defined string identifier for the submission; alphanumeric and underscores only, e.g. <code>BBa_R0010</code></td>
+<td>a user-defined string identifier for the submission; alphanumeric and underscores only,  <code>BBa_R0010</code></td>
 </tr>
 <tr>
 <td>version</td>
-<td>the version string to associate with the submission, e.g. <code>1</code></td>
+<td>the version string to associate with the submission,  <code>1</code></td>
 </tr>
 <tr>
 <td>name</td>
@@ -1117,7 +1134,7 @@ rootCollections | If creating a collection, provide the id, viersion ,name , des
 <span class="nx">fetch</span><span class="p">(</span><span class="nx">Url</span><span class="p">,</span><span class="nx">otherPram</span><span class="p">)</span>
 <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">res</span> <span class="o">=&gt;</span> <span class="nx">res</span><span class="p">.</span><span class="nx">buffer</span><span class="p">()).</span><span class="nx">then</span><span class="p">(</span><span class="nx">buf</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">buf</span><span class="p">.</span><span class="nx">toString</span><span class="p">()))</span>
 <span class="p">.</span><span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="o">=&gt;</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">error</span><span class="p">))</span>
-</code></pre><pre class="highlight plaintext tab-plaintext"><code>e.g. `curl -X GET -H "Accept: text/plain" -H "X-authorization: &lt;token&gt;" https://synbiohub.org/public/igem/BBa_F2620/1/removeCollection`
+</code></pre><pre class="highlight plaintext tab-plaintext"><code> `curl -X GET -H "Accept: text/plain" -H "X-authorization: &lt;token&gt;" https://synbiohub.org/public/igem/BBa_F2620/1/removeCollection`
 </code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 
 <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
@@ -1144,7 +1161,7 @@ rootCollections | If creating a collection, provide the id, viersion ,name , des
 <span class="nx">fetch</span><span class="p">(</span><span class="nx">Url</span><span class="p">,</span><span class="nx">otherPram</span><span class="p">)</span>
 <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">res</span> <span class="o">=&gt;</span> <span class="nx">res</span><span class="p">.</span><span class="nx">buffer</span><span class="p">()).</span><span class="nx">then</span><span class="p">(</span><span class="nx">buf</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">buf</span><span class="p">.</span><span class="nx">toString</span><span class="p">()))</span>
 <span class="p">.</span><span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="o">=&gt;</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">error</span><span class="p">))</span>
-</code></pre><pre class="highlight plaintext tab-plaintext"><code>e.g. `curl -X GET -H "Accept: text/plain" -H "X-authorization: &lt;token&gt;" https://synbiohub.org/public/igem/BBa_F2620/1/remove`
+</code></pre><pre class="highlight plaintext tab-plaintext"><code> `curl -X GET -H "Accept: text/plain" -H "X-authorization: &lt;token&gt;" https://synbiohub.org/public/igem/BBa_F2620/1/remove`
 </code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 
 <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
@@ -1197,6 +1214,17 @@ rootCollections | If creating a collection, provide the id, viersion ,name , des
 
 <p>Returns the results of the SPARQL admin query in JSON format.</p>
 <pre class="highlight plaintext tab-plaintext"><code> ` curl -X GET -H "Accept: application/json" 'https://synbiohub.org/admin/sparql?query=select%20%3Fs%20%3Fp%20%3Fo%20where%20%7B%20%3Fs%20%3Fp%20%3Fo%20%7D'
+</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+    <span class="s">'https://synbiohub.org/admin/sparql?query=select</span><span class="si">%20%3</span><span class="s">Fs</span><span class="si">%20%3</span><span class="s">Fp</span><span class="si">%20%3</span><span class="s">Fo</span><span class="si">%20</span><span class="s">where</span><span class="si">%20%7</span><span class="s">B</span><span class="si">%20%3</span><span class="s">Fs</span><span class="si">%20%3</span><span class="s">Fp</span><span class="si">%20%3</span><span class="s">Fo</span><span class="si">%20%7</span><span class="s">D'</span><span class="p">,</span>
+    <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s">'X-authorization'</span><span class="p">:</span> <span class="s">'token'</span><span class="p">},</span>
+    <span class="n">headers</span><span class="o">=</span><span class="p">{</span><span class="s">'Accept'</span><span class="p">:</span> <span class="s">'application/json'</span><span class="p">},</span>
+<span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">())</span>
 </code></pre><h1 id='plugins'>Plugins</h1><h3 id='rationale'>Rationale</h3>
 <p>It should be possible for someone running a SynBioHub instance to configure plugins to extend the functionality of SynBioHub without altering the main codebase. </p>
 <h3 id='goals'>Goals</h3>
