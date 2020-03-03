@@ -472,7 +472,7 @@
 
 <p><code>http://localhost:7777/</code></p>
 
-<p>On the first startup, you will be taken to the <a href="http://wiki.synbiohub.org/wiki/SynBioHub_Setup_Page">SynBioHub Setup Page</a>, which enables basic setup of the site. After the first setup, the <a href="http://wiki.synbiohub.org/wiki/Admin_Portal">Admin Portal</a> will allow admin users to update their site configuration. </p>
+<p>On the first startup, you will be taken to the SynBioHub Setup Page, which enables basic setup of the site. After the first setup, the Admin Portal will allow admin users to update their site configuration. </p>
 <h5 id='sendgrid-email-setup'>SendGrid email setup</h5>
 <p>In order to enable SynBioHub to send account-related emails, you need a <a href="https://sendgrid.com/">SendGrid</a> account and API key. Once you have created your account, you should click &quot;Settings&quot; in the left bar, then &quot;API Keys&quot;. On the resulting page, click the &quot;Create API Key&quot; button in the upper-right corner, and give your new API key a name. You should see the key on the next page. Copy the key and paste it into the &quot;SendGrid API Key&quot; in the Mail page on the SynBioHub admin dashboard. Save the API key in SynBioHub and you are ready to begin sending email. </p>
 <h3 id='updating'>Updating</h3>
@@ -579,7 +579,11 @@
 
 <p>If <code>user</code> is currently logged in, this post request will logout the user.</p>
 <pre class="highlight plaintext tab-plaintext"><code>`curl -X POST -H "Accept: test/plain" localhost:7777/logout`
-</code></pre><h1 id='search-endpoints'>Search Endpoints</h1><h2 id='search-metadata'>Search Metadata</h2>
+</code></pre><h1 id='search-endpoints'>Search Endpoints</h1>
+<p>The following endpoints are used to search within SynBioHub.</p>
+
+<aside class="success">Note that the X-authorization header is not needed, but if specified, search will return information about both public and private objects.</aside>
+<h2 id='search-metadata'>Search Metadata</h2>
 <p><code>GET &lt;SynBioHub URL&gt;/search/&lt;key&gt;=&lt;value&gt;&amp;...&amp;&lt;search string&gt;/?offset=#&amp;limit=#</code></p>
 
 <p>Returns the metadata associated with the specified key and value.</p>
@@ -857,7 +861,11 @@ This endpoint returns JSON metadata of the form
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
 
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">())</span>
-</code></pre><h1 id='download-endpoints'>Download Endpoints</h1><h2 id='download-attachment'>Download Attachment</h2>
+</code></pre><h1 id='download-endpoints'>Download Endpoints</h1>
+<p>The following endpoints are for downloading content from SynBioHub in various fomats.</p>
+
+<aside class="success">Note that the X-authorization header is needed for downloading from private objects.</aside>
+<h2 id='download-attachment'>Download Attachment</h2>
 <p><code>GET &lt;URI&gt;/download</code></p>
 
 <p>Returns the source for an attachment to the specified URI</p>
@@ -1047,7 +1055,9 @@ This endpoint returns JSON metadata of the form
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
 
-</code></pre><h1 id='submission-endpoints'>Submission Endpoints</h1><h2 id='submit'>Submit</h2>
+</code></pre><h1 id='submission-endpoints'>Submission Endpoints</h1>
+<aside class="success">Note that the X-authorization header is requireed for all submission endpoints.</aside>
+<h2 id='submit'>Submit</h2>
 <p><code>POST &lt;SynBioHub URL&gt;/submit</code></p>
 
 <p>Create a new collection including the elements within a file or add to a preexisting collection using the elements within a file.</p>
@@ -1085,15 +1095,13 @@ This endpoint returns JSON metadata of the form
 <td>overwrite_merge</td>
 <td>&#39;0&#39; prevent if submission exists, &#39;1&#39; overwrite if submission exists, &#39;2&#39; to merge and prevent if submission exists, &#39;3&#39; to merge and overwrite matching URIS</td>
 </tr>
-<tr>
-<td>file</td>
-<td>contents of an SBOL2, SBOL1, GenBank, FASTA, GFF3, ZIP, or COMBINE Archive file</td>
-</tr>
-<tr>
-<td>rootCollections</td>
-<td>If submitting the contents into the file, provide the previous parameters, otherwise, only provide a URI into rootCollections to append into an existing collection</td>
-</tr>
 </tbody></table>
+
+<p>0 creating a new collection that doens&#39;t exist. 1 if it does&#39;nt exit
+file | contents of an SBOL2, SBOL1, GenBank, FASTA, GFF3, ZIP, or COMBINE Archive file
+rootCollections | If creating a collection, provide the id, viersion ,name , descripton, citations. Overwrite merge of 0 or 1. If </p>
+
+<p>If submitting the contents into the file, provide the previous parameters, otherwise, only provide a URI into rootCollections to append into an existing collection</p>
 <h2 id='remove-collection'>Remove Collection</h2>
 <p><code>GET &lt;URI&gt;/removeCollection</code></p>
 
