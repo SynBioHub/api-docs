@@ -298,7 +298,7 @@
                     <a href="#download-sbol" class="toc-h2 toc-link" data-title="Download SBOL">Download SBOL</a>
                   </li>
                   <li>
-                    <a href="#download-sbolnr" class="toc-h2 toc-link" data-title="Download SBOLnr">Download SBOLnr</a>
+                    <a href="#download-sbol-non-recursive" class="toc-h2 toc-link" data-title="Download SBOL Non-Recursive">Download SBOL Non-Recursive</a>
                   </li>
                   <li>
                     <a href="#download-metadata" class="toc-h2 toc-link" data-title="Download Metadata">Download Metadata</a>
@@ -333,6 +333,11 @@
           </li>
           <li>
             <a href="#edit-endpoints" class="toc-h1 toc-link" data-title="Edit Endpoints">Edit Endpoints</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#edit-mutable-descriptions" class="toc-h2 toc-link" data-title="Edit Mutable Descriptions">Edit Mutable Descriptions</a>
+                  </li>
+              </ul>
           </li>
           <li>
             <a href="#attachment-endpoints" class="toc-h1 toc-link" data-title="Attachment Endpoints">Attachment Endpoints</a>
@@ -937,7 +942,7 @@ This endpoint returns JSON metadata of the form
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
 
-</code></pre><h2 id='download-sbolnr'>Download SBOLnr</h2>
+</code></pre><h2 id='download-sbol-non-recursive'>Download SBOL Non-Recursive</h2>
 <p><code>GET &lt;URI&gt;/sbolnr</code></p>
 
 <p>Returns the SBOLnr (SBOL not recursive, i.e. fetches the object without its children) for the object from the specified URI.</p>
@@ -1200,7 +1205,8 @@ rootCollections | If creating a collection, provide the id, viersion ,name , des
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
 
-</code></pre><h1 id='edit-endpoints'>Edit Endpoints</h1><h1 id='attachment-endpoints'>Attachment Endpoints</h1><h2 id='attach-file'>Attach File</h2>
+</code></pre><h1 id='edit-endpoints'>Edit Endpoints</h1><h2 id='edit-mutable-descriptions'>Edit Mutable Descriptions</h2><pre class="highlight plaintext tab-plaintext"><code>curl -X POST -H "Accept: text/plan" -H "X-authorization:&lt;&gt;" -d "uri=&lt;&gt;&amp;value=&lt;&gt;" http://synbiohub.org/updateMutableDescription
+</code></pre><h1 id='attachment-endpoints'>Attachment Endpoints</h1><h2 id='attach-file'>Attach File</h2>
 <p><code>POST &lt;URI&gt;/attach</code></p>
 
 <p>Attach a specified file to a given URI</p>
