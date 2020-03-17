@@ -337,6 +337,21 @@
                   <li>
                     <a href="#edit-mutable-descriptions" class="toc-h2 toc-link" data-title="Edit Mutable Descriptions">Edit Mutable Descriptions</a>
                   </li>
+                  <li>
+                    <a href="#add-field" class="toc-h2 toc-link" data-title="Add Field">Add Field</a>
+                  </li>
+                  <li>
+                    <a href="#remove-field" class="toc-h2 toc-link" data-title="Remove Field">Remove Field</a>
+                  </li>
+                  <li>
+                    <a href="#add-owner" class="toc-h2 toc-link" data-title="Add Owner">Add Owner</a>
+                  </li>
+                  <li>
+                    <a href="#remove-owner" class="toc-h2 toc-link" data-title="Remove Owner">Remove Owner</a>
+                  </li>
+                  <li>
+                    <a href="#make-public-collection" class="toc-h2 toc-link" data-title="Make Public Collection">Make Public Collection</a>
+                  </li>
               </ul>
           </li>
           <li>
@@ -1205,7 +1220,24 @@ rootCollections | If creating a collection, provide the id, viersion ,name , des
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
 
-</code></pre><h1 id='edit-endpoints'>Edit Endpoints</h1><h2 id='edit-mutable-descriptions'>Edit Mutable Descriptions</h2><pre class="highlight plaintext tab-plaintext"><code>curl -X POST -H "Accept: text/plan" -H "X-authorization:&lt;&gt;" -d "uri=&lt;&gt;&amp;value=&lt;&gt;" http://synbiohub.org/updateMutableDescription
+</code></pre><h1 id='edit-endpoints'>Edit Endpoints</h1><h2 id='edit-mutable-descriptions'>Edit Mutable Descriptions</h2>
+<p><code>POST &lt;URI&gt;/updateMutableDescription</code></p>
+<pre class="highlight plaintext tab-plaintext"><code>curl -X POST -H "Accept: text/plain" -H "X-authorization:&lt;&gt;" -d "uri=&lt;&gt;&amp;value=&lt;&gt;" http://synbiohub.org/updateMutableDescription
+</code></pre><h2 id='add-field'>Add Field</h2>
+<p><code>POST &lt;URI&gt;/user/:userId/:collectionId/:displayId/:version/add/:field</code></p>
+<pre class="highlight plaintext tab-plaintext"><code>curl -X POST -H "Accept: text/plain" -H "X-authorization:&lt;&gt;" -d "object=&lt;&gt;" http://synbiohub.org/user/:userId/:collectionId/:displayId/:version/add/:field
+</code></pre><h2 id='remove-field'>Remove Field</h2>
+<p><code>POST &lt;URI&gt;/user/:userId/:collectionId/:displayId/:version/remove/:field</code></p>
+<pre class="highlight plaintext tab-plaintext"><code>curl -X POST -H "Accept: text/plain" -H "X-authorization:&lt;&gt;" -d "object=&lt;&gt;" http://synbiohub.org/user/:userId/:collectionId/:displayId/:version/remove/:field
+</code></pre><h2 id='add-owner'>Add Owner</h2>
+<p><code>POST &lt;URI&gt;/public/:collectionId/:displayId/:version/addOwner</code></p>
+<pre class="highlight plaintext tab-plaintext"><code>curl -X POST -H "Accept: text/plain" -H "X-authorization:&lt;&gt;" -d "user=&lt;&gt;&amp;uri=&lt;&gt;" http://synbiohub.org/public/:collectionId/:displayId/:version/addOwner
+</code></pre><h2 id='remove-owner'>Remove Owner</h2>
+<p><code>POST &lt;URI&gt;/public/:collectionId/:displayId/:version/removeOwner/:username</code></p>
+<pre class="highlight plaintext tab-plaintext"><code>curl -X POST -H "Accept: text/plain" -H "X-authorization:&lt;&gt;" -d "userUri=&lt;&gt;" http://synbiohub.org/public/:collectionId/:displayId/:version/removeOwner/:username
+</code></pre><h2 id='make-public-collection'>Make Public Collection</h2>
+<p><code>POST &lt;URI&gt;//user/:userId/:collectionId/:displayId/:version/makePublic</code></p>
+<pre class="highlight plaintext tab-plaintext"><code>curl -X POST -H "Accept: text/plain" -H "X-authorization:&lt;&gt;" -d "userUri=&lt;&gt;" http://synbiohub.org/user/:userId/:collectionId/:displayId/:version/remove/:field
 </code></pre><h1 id='attachment-endpoints'>Attachment Endpoints</h1><h2 id='attach-file'>Attach File</h2>
 <p><code>POST &lt;URI&gt;/attach</code></p>
 
