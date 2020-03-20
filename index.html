@@ -199,6 +199,7 @@
     <link href="stylesheets/screen-a1ce949a.css" rel="stylesheet" media="screen" />
     <link href="stylesheets/print-bccf8c07.css" rel="stylesheet" media="print" />
       <script src="javascripts/all-c5541673.js"></script>
+    <link href="images/favicon.ico" rel="icon" type="image/ico" />
   </head>
 
   <body class="index" data-languages="[&quot;plaintext&quot;,&quot;python&quot;,&quot;javascript&quot;]">
@@ -286,6 +287,14 @@
               </ul>
           </li>
           <li>
+            <a href="#management-endpoints" class="toc-h1 toc-link" data-title="Management Endpoints">Management Endpoints</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#make-public-collection" class="toc-h2 toc-link" data-title="Make Public Collection">Make Public Collection</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
             <a href="#download-endpoints" class="toc-h1 toc-link" data-title="Download Endpoints">Download Endpoints</a>
               <ul class="toc-list-h2">
                   <li>
@@ -328,9 +337,6 @@
                   </li>
                   <li>
                     <a href="#replace-object" class="toc-h2 toc-link" data-title="Replace Object">Replace Object</a>
-                  </li>
-                  <li>
-                    <a href="#make-public-collection" class="toc-h2 toc-link" data-title="Make Public Collection">Make Public Collection</a>
                   </li>
               </ul>
           </li>
@@ -930,10 +936,17 @@ This endpoint returns JSON metadata of the form:
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
 
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">())</span>
-</code></pre><h1 id='download-endpoints'>Download Endpoints</h1>
-<p>The following endpoints are for downloading content from SynBioHub in various fomats.</p>
+</code></pre><h1 id='management-endpoints'>Management Endpoints</h1>
+<p>The following endpoints are for managing one&#39;s submissions.</p>
+<h2 id='make-public-collection'>Make Public Collection</h2>
+<p>Makes the specified collection public</p>
 
-<aside class="success">Note that the X-authorization header is needed for downloading imformation about private objects.</aside>
+<p><code>POST &lt;URI&gt;/user/:userId/:collectionId/:displayId/:version/makePublic</code></p>
+<pre class="highlight plaintext tab-plaintext"><code>curl -X POST -H "Accept: text/plain" -H "X-authorization:&lt;&gt;" -d "id=&lt;&gt;&amp;version=&lt;&gt;&amp;name=&lt;&gt;&amp;description=&lt;&gt;&amp;citations=&lt;&gt;" https://synbiohub.org/ user/:userId/:collectionId/:displayId/:version/makePublic
+</code></pre><h1 id='download-endpoints'>Download Endpoints</h1>
+<p>The following endpoints are for downloading content from SynBioHub in various formats.</p>
+
+<aside class="success">Note that the X-authorization header is needed for downloading information about private objects.</aside>
 <h2 id='download-attachment'>Download Attachment</h2>
 <p><code>GET &lt;URI&gt;/download</code></p>
 
@@ -1046,7 +1059,7 @@ This endpoint returns JSON metadata of the form:
 <h2 id='download-genbank'>Download GenBank</h2>
 <p><code>GET &lt;URI&gt;/gb</code></p>
 
-<p>Returns the object from the specified URI in GenBakn format.</p>
+<p>Returns the object from the specified URI in GenBank format.</p>
 <pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">fetch</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"node-fetch"</span><span class="p">);</span>
 <span class="kr">const</span> <span class="nx">Url</span> <span class="o">=</span> <span class="s1">'https://synbiohub.org/public/igem/BBa_K1479017/1/BBa_K1479017.gb'</span>
 <span class="kr">const</span> <span class="nx">otherPram</span><span class="o">=</span><span class="p">{</span>
@@ -1199,7 +1212,7 @@ This endpoint returns JSON metadata of the form:
 </tr>
 </tbody></table>
 
-<p>If creating a collection, provide the id, version, name, descripton, citations, and optionally a file. In this case, overwrite_merge should be 0 or 1. If submitting the contents into an existing collection, otherwise, only provide a URI for the rootCollections that you are submitting into and the file that you are submitting.</p>
+<p>If creating a collection, provide the id, version, name, description, citations, and optionally a file. In this case, overwrite_merge should be 0 or 1. If submitting the contents into an existing collection, otherwise, only provide a URI for the rootCollections that you are submitting into and the file that you are submitting.</p>
 <h2 id='remove-collection'>Remove Collection</h2>
 <p><code>GET &lt;URI&gt;/removeCollection</code></p>
 
@@ -1281,11 +1294,6 @@ This endpoint returns JSON metadata of the form:
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
 
-</code></pre><h2 id='make-public-collection'>Make Public Collection</h2>
-<p>Makes the specified collection public</p>
-
-<p><code>POST &lt;URI&gt;/user/:userId/:collectionId/:displayId/:version/makePublic</code></p>
-<pre class="highlight plaintext tab-plaintext"><code>curl -X POST -H "Accept: text/plain" -H "X-authorization:&lt;&gt;" -d "id=&lt;&gt;&amp;version=&lt;&gt;&amp;name=&lt;&gt;&amp;description=&lt;&gt;&amp;citations=&lt;&gt;" https://synbiohub.org/ user/:userId/:collectionId/:displayId/:version/makePublic
 </code></pre><h1 id='edit-endpoints'>Edit Endpoints</h1><h2 id='edit-mutable-descriptions'>Edit Mutable Descriptions</h2>
 <p><code>POST &lt;URI&gt;/updateMutableDescription</code></p>
 <pre class="highlight plaintext tab-plaintext"><code>curl -X POST -H "Accept: text/plain" -H "X-authorization:&lt;&gt;" -d "uri=&lt;&gt;&amp;value=&lt;&gt;" http://synbiohub.org/updateMutableDescription
