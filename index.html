@@ -279,18 +279,10 @@
                     <a href="#search-uses" class="toc-h2 toc-link" data-title="Search Uses">Search Uses</a>
                   </li>
                   <li>
-                    <a href="#count-objects" class="toc-h2 toc-link" data-title="Count objects">Count objects</a>
+                    <a href="#count-objects" class="toc-h2 toc-link" data-title="Count Objects">Count Objects</a>
                   </li>
                   <li>
                     <a href="#sparql-query" class="toc-h2 toc-link" data-title="SPARQL Query">SPARQL Query</a>
-                  </li>
-              </ul>
-          </li>
-          <li>
-            <a href="#management-endpoints" class="toc-h1 toc-link" data-title="Management Endpoints">Management Endpoints</a>
-              <ul class="toc-list-h2">
-                  <li>
-                    <a href="#make-public-collection" class="toc-h2 toc-link" data-title="Make Public Collection">Make Public Collection</a>
                   </li>
               </ul>
           </li>
@@ -328,6 +320,9 @@
               <ul class="toc-list-h2">
                   <li>
                     <a href="#submit" class="toc-h2 toc-link" data-title="Submit">Submit</a>
+                  </li>
+                  <li>
+                    <a href="#make-public-collection" class="toc-h2 toc-link" data-title="Make Public Collection">Make Public Collection</a>
                   </li>
                   <li>
                     <a href="#remove-collection" class="toc-h2 toc-link" data-title="Remove Collection">Remove Collection</a>
@@ -432,7 +427,7 @@
 
 <p>What can SynBioHub be used for?</p>
 
-<p>SynBioHub can be used to publish a library of synthetic parts and designs as a service, to share designs with collaborators, and to store designs of biological systems locally. Data in SynBioHub can be accessed via the HTTP API or Java API, where it can then be integrated into CAD tools for building genetic designs. SynBioHub contains an interface for users to upload new biological data to the database, to visualize DNA parts, to perform queries to access desired parts, and to download SBOL, GenBank or FASTA data.</p>
+<p>SynBioHub can be used to publish a library of synthetic parts and designs as a service, to share designs with collaborators, and to store designs of biological systems locally. Data in SynBioHub can be accessed via the HTTP API, Java API, or Python API where it can then be integrated into CAD tools for building genetic designs. SynBioHub contains an interface for users to upload new biological data to the database, to visualize DNA parts, to perform queries to access desired parts, and to download SBOL, GenBank, FASTA, etc.</p>
 <h3 id='contributors'>Contributors</h3>
 <p>SynBioHub</p>
 
@@ -603,11 +598,9 @@ server {
 </tr>
 </tbody></table>
 <h2 id='logout'>Logout</h2>
-<p>This post request logs out the user specified in the X-authorization header.</p>
-
 <p><code>POST http://synbiohub.org/logout</code></p>
 
-<p>If <code>user</code> is currently logged in, this post request will logout the user.</p>
+<p>This post request logs out the user specified in the X-authorization header.</p>
 <pre class="highlight plaintext tab-plaintext"><code>curl -X POST -H "Accept: text/plain" -H "X-authorization: &lt;token&gt;" localhost:7777/logout
 </code></pre><h1 id='search-endpoints'>Search Endpoints</h1>
 <p>The following endpoints are used to search within SynBioHub.</p>
@@ -882,10 +875,10 @@ This endpoint returns JSON metadata of the form:
 <span class="nx">fetch</span><span class="p">(</span><span class="nx">Url</span><span class="p">,</span><span class="nx">otherPram</span><span class="p">)</span>
     <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">res</span> <span class="o">=&gt;</span> <span class="nx">res</span><span class="p">.</span><span class="nx">buffer</span><span class="p">()).</span><span class="nx">then</span><span class="p">(</span><span class="nx">buf</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">buf</span><span class="p">.</span><span class="nx">toString</span><span class="p">()))</span>
     <span class="p">.</span><span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="o">=&gt;</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">error</span><span class="p">))</span>
-</code></pre><h2 id='count-objects'>Count objects</h2>
+</code></pre><h2 id='count-objects'>Count Objects</h2>
 <p><code>GET &lt;SynBioHub URL&gt;/&lt;ObjectType&gt;/count</code></p>
 
-<p>Returns the number of objects within a specified object type.</p>
+<p>Returns the number of objects with a specified object type.</p>
 <pre class="highlight plaintext tab-plaintext"><code>curl -X GET https://synbiohub.org/Collection/Count
 </code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 
@@ -936,13 +929,6 @@ This endpoint returns JSON metadata of the form:
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
 
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">())</span>
-</code></pre><h1 id='management-endpoints'>Management Endpoints</h1>
-<p>The following endpoints are for managing one&#39;s submissions.</p>
-<h2 id='make-public-collection'>Make Public Collection</h2>
-<p>Makes the specified collection public</p>
-
-<p><code>POST &lt;URI&gt;/user/:userId/:collectionId/:displayId/:version/makePublic</code></p>
-<pre class="highlight plaintext tab-plaintext"><code>curl -X POST -H "Accept: text/plain" -H "X-authorization:&lt;&gt;" -d "id=&lt;&gt;&amp;version=&lt;&gt;&amp;name=&lt;&gt;&amp;description=&lt;&gt;&amp;citations=&lt;&gt;" https://synbiohub.org/ user/:userId/:collectionId/:displayId/:version/makePublic
 </code></pre><h1 id='download-endpoints'>Download Endpoints</h1>
 <p>The following endpoints are for downloading content from SynBioHub in various formats.</p>
 
@@ -976,7 +962,8 @@ This endpoint returns JSON metadata of the form:
 
 </code></pre><pre class="highlight plaintext tab-plaintext"><code>curl -X GET -H "Accept: text/plain" -H "X-authorization: &lt;token&gt;" https://synbiohub.org/public/test/attachment_00009TGVMsfEoCdMeRzHrU/1/download -O --compressed
 </code></pre><h2 id='download-sbol'>Download SBOL</h2>
-<p><code>GET &lt;URI&gt;/sbol</code></p>
+<p><code>GET &lt;URI&gt;/sbol</code> OR
+<code>GET &lt;URI&gt;</code></p>
 
 <p>Returns the object from the specified URI in SBOL format.</p>
 <pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">fetch</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"node-fetch"</span><span class="p">);</span>
@@ -1213,7 +1200,12 @@ This endpoint returns JSON metadata of the form:
 </tbody></table>
 
 <p>If creating a collection, provide the id, version, name, description, citations, and optionally a file. In this case, overwrite_merge should be 0 or 1. If submitting the contents into an existing collection, otherwise, only provide a URI for the rootCollections that you are submitting into and the file that you are submitting.</p>
-<h2 id='remove-collection'>Remove Collection</h2>
+<h2 id='make-public-collection'>Make Public Collection</h2>
+<p>Makes the specified collection public</p>
+
+<p><code>POST &lt;URI&gt;/user/:userId/:collectionId/:displayId/:version/makePublic</code></p>
+<pre class="highlight plaintext tab-plaintext"><code>curl -X POST -H "Accept: text/plain" -H "X-authorization:fb4ede73-c8bb-4b1e-bc73-d1fccbf140f2" -d "id=bruh&amp;version=1&amp;name=&amp;description=&amp;citations=&amp;tabState=new" http://localhost:7777/user/testuser/bruh/bruh_collection/1/makePublic
+</code></pre><h2 id='remove-collection'>Remove Collection</h2>
 <p><code>GET &lt;URI&gt;/removeCollection</code></p>
 
 <p>Removes the collection specified by the URI.</p>
@@ -1296,6 +1288,8 @@ This endpoint returns JSON metadata of the form:
 
 </code></pre><h1 id='edit-endpoints'>Edit Endpoints</h1><h2 id='edit-mutable-descriptions'>Edit Mutable Descriptions</h2>
 <p><code>POST &lt;URI&gt;/updateMutableDescription</code></p>
+
+<p>Edits the description of a part. </p>
 <pre class="highlight plaintext tab-plaintext"><code>curl -X POST -H "Accept: text/plain" -H "X-authorization:&lt;&gt;" -d "uri=&lt;&gt;&amp;value=&lt;&gt;" http://synbiohub.org/updateMutableDescription
 </code></pre><h2 id='remove-owner'>Remove Owner</h2>
 <p><code>POST &lt;URI&gt;/public/:collectionId/:displayId/:version/removeOwner/:username</code></p>
@@ -1366,6 +1360,10 @@ size: a number representing an estimate of the size of the object, probably trip
 </tr>
 </thead><tbody>
 <tr>
+<td>400</td>
+<td>Bad Request -- Server cannot or will not process the request due to something that is perceived to be a client error</td>
+</tr>
+<tr>
 <td>401</td>
 <td>Unauthorized -- This endpoint is reserved for valid users only.</td>
 </tr>
@@ -1390,8 +1388,8 @@ size: a number representing an estimate of the size of the object, probably trip
 <td>Gone -- The endpoint requested has been removed from our servers.</td>
 </tr>
 <tr>
-<td>418</td>
-<td>I&#39;m a teapot.</td>
+<td>422</td>
+<td>Unprocessable Entity -- Unable to be processed.</td>
 </tr>
 <tr>
 <td>429</td>
