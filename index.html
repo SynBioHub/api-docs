@@ -336,13 +336,30 @@
               </ul>
           </li>
           <li>
+            <a href="#permission-endpoints" class="toc-h1 toc-link" data-title="Permission Endpoints">Permission Endpoints</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#add-owner" class="toc-h2 toc-link" data-title="Add Owner">Add Owner</a>
+                  </li>
+                  <li>
+                    <a href="#remove-owner" class="toc-h2 toc-link" data-title="Remove Owner">Remove Owner</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
             <a href="#edit-endpoints" class="toc-h1 toc-link" data-title="Edit Endpoints">Edit Endpoints</a>
               <ul class="toc-list-h2">
                   <li>
                     <a href="#edit-mutable-descriptions" class="toc-h2 toc-link" data-title="Edit Mutable Descriptions">Edit Mutable Descriptions</a>
                   </li>
                   <li>
-                    <a href="#remove-owner" class="toc-h2 toc-link" data-title="Remove Owner">Remove Owner</a>
+                    <a href="#edit-mutable-notes" class="toc-h2 toc-link" data-title="Edit Mutable Notes">Edit Mutable Notes</a>
+                  </li>
+                  <li>
+                    <a href="#edit-mutable-source" class="toc-h2 toc-link" data-title="Edit Mutable Source">Edit Mutable Source</a>
+                  </li>
+                  <li>
+                    <a href="#edit-citations" class="toc-h2 toc-link" data-title="Edit Citations">Edit Citations</a>
                   </li>
               </ul>
           </li>
@@ -936,7 +953,7 @@ This endpoint returns JSON metadata of the form:
 <h2 id='download-attachment'>Download Attachment</h2>
 <p><code>GET &lt;URI&gt;/download</code></p>
 
-<p>Returns the source for an attachment to the specified URI</p>
+<p>Returns the source for an attachment to the specified URI.</p>
 <pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">fetch</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"node-fetch"</span><span class="p">);</span>
 <span class="kr">const</span> <span class="nx">Url</span> <span class="o">=</span> <span class="s1">'https://synbiohub.org/public/test/attachment_00009TGVMsfEoCdMeRzHrU/1/download'</span>
 <span class="kr">const</span> <span class="nx">otherPram</span><span class="o">=</span><span class="p">{</span>
@@ -1018,6 +1035,8 @@ This endpoint returns JSON metadata of the form:
 
 </code></pre><h2 id='download-metadata'>Download Metadata</h2>
 <p><code>GET &lt;URI&gt;/metadata</code></p>
+
+<p>Returns the metadata for the object from the specified URI.</p>
 <pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">fetch</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"node-fetch"</span><span class="p">);</span>
 <span class="kr">const</span> <span class="nx">Url</span> <span class="o">=</span> <span class="s1">'https://synbiohub.org/public/igem/BBa_K1479017/1/metadata'</span>
 <span class="kr">const</span> <span class="nx">otherPram</span><span class="o">=</span><span class="p">{</span>
@@ -1041,9 +1060,7 @@ This endpoint returns JSON metadata of the form:
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
 
-</code></pre>
-<p>Returns the metadata for the object from the specified URI.</p>
-<h2 id='download-genbank'>Download GenBank</h2>
+</code></pre><h2 id='download-genbank'>Download GenBank</h2>
 <p><code>GET &lt;URI&gt;/gb</code></p>
 
 <p>Returns the object from the specified URI in GenBank format.</p>
@@ -1201,9 +1218,9 @@ This endpoint returns JSON metadata of the form:
 
 <p>If creating a collection, provide the id, version, name, description, citations, and optionally a file. In this case, overwrite_merge should be 0 or 1. If submitting the contents into an existing collection, otherwise, only provide a URI for the rootCollections that you are submitting into and the file that you are submitting.</p>
 <h2 id='make-public-collection'>Make Public Collection</h2>
-<p>Makes the specified collection public</p>
-
 <p><code>POST &lt;URI&gt;/user/:userId/:collectionId/:displayId/:version/makePublic</code></p>
+
+<p>Makes the specified collection public.</p>
 <pre class="highlight plaintext tab-plaintext"><code>curl -X POST -H "Accept: text/plain" -H "X-authorization:fb4ede73-c8bb-4b1e-bc73-d1fccbf140f2" -d "id=bruh&amp;version=1&amp;name=&amp;description=&amp;citations=&amp;tabState=new" http://localhost:7777/user/testuser/bruh/bruh_collection/1/makePublic
 </code></pre><h2 id='remove-collection'>Remove Collection</h2>
 <p><code>GET &lt;URI&gt;/removeCollection</code></p>
@@ -1286,23 +1303,43 @@ This endpoint returns JSON metadata of the form:
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
 
+</code></pre><h1 id='permission-endpoints'>Permission Endpoints</h1>
+<p>Change the permission of a part.</p>
+<h2 id='add-owner'>Add Owner</h2>
+<p><code>POST &lt;URI&gt;/public/:collectionId/:displayId/:version/addOwner</code></p>
+
+<p>Adds an owner to a part.</p>
+<h2 id='remove-owner'>Remove Owner</h2>
+<p><code>POST &lt;URI&gt;/public/:collectionId/:displayId/:version/removeOwner/:username</code></p>
+
+<p>Removes an owner from a part.</p>
+<pre class="highlight plaintext tab-plaintext"><code>curl -X POST -H "Accept: text/plain" -H "X-authorization:&lt;&gt;" -d "userUri=&lt;&gt;" http://synbiohub.org/public/:collectionId/:displayId/:version/removeOwner/:username
 </code></pre><h1 id='edit-endpoints'>Edit Endpoints</h1><h2 id='edit-mutable-descriptions'>Edit Mutable Descriptions</h2>
 <p><code>POST &lt;URI&gt;/updateMutableDescription</code></p>
 
 <p>Edits the description of a part. </p>
 <pre class="highlight plaintext tab-plaintext"><code>curl -X POST -H "Accept: text/plain" -H "X-authorization:&lt;&gt;" -d "uri=&lt;&gt;&amp;value=&lt;&gt;" http://synbiohub.org/updateMutableDescription
-</code></pre><h2 id='remove-owner'>Remove Owner</h2>
-<p><code>POST &lt;URI&gt;/public/:collectionId/:displayId/:version/removeOwner/:username</code></p>
-<pre class="highlight plaintext tab-plaintext"><code>curl -X POST -H "Accept: text/plain" -H "X-authorization:&lt;&gt;" -d "userUri=&lt;&gt;" http://synbiohub.org/public/:collectionId/:displayId/:version/removeOwner/:username
-</code></pre><h1 id='attachment-endpoints'>Attachment Endpoints</h1><h2 id='attach-file'>Attach File</h2>
+</code></pre><h2 id='edit-mutable-notes'>Edit Mutable Notes</h2>
+<p><code>POST &lt;URI&gt;/updateMutableNotes</code></p>
+
+<p>Edits the notes of a part.</p>
+<h2 id='edit-mutable-source'>Edit Mutable Source</h2>
+<p><code>POST &lt;URI&gt;/updateMutableSource</code></p>
+
+<p>Edits the source of a part.</p>
+<h2 id='edit-citations'>Edit Citations</h2>
+<p><code>POST &lt;URI&gt;/updateCitations</code></p>
+
+<p>Edits the citations of a part.</p>
+<h1 id='attachment-endpoints'>Attachment Endpoints</h1><h2 id='attach-file'>Attach File</h2>
 <p><code>POST &lt;URI&gt;/attach</code></p>
 
-<p>Attach a specified file to a given URI</p>
+<p>Attach a specified file to a given URI.</p>
 <pre class="highlight plaintext tab-plaintext"><code>curl -X POST -H "Accept: text/plain" -H "X-authorization: &lt;token&gt;" -F 'file=@&lt;filename&gt;' https://synbiohub.org/user/MyUserName/test/test_collection/1/attach
 </code></pre><h2 id='attach-url'>Attach URL</h2>
 <p><code>POST &lt;URI&gt;/attachURL</code></p>
 
-<p>Attach a specified URL to a given URI</p>
+<p>Attach a specified URL to a given URI.</p>
 <h1 id='administration-endpoints'>Administration Endpoints</h1><h2 id='sparql-admin-query'>SPARQL Admin Query</h2>
 <p><code>GET &lt;SynBioHub URL&gt;/admin/sparql?query=&lt;SPARQL query&gt;</code></p>
 
