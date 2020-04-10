@@ -712,6 +712,79 @@ print(response.status_code)
 print(response.json())
 ```
 
+## Manage
+
+`GET <SynBioHub URL>/manage`
+
+Returns the meta data on submissions.
+
+```plaintext
+curl -X GET -H "Accept: text/plain" -H "X-authorization: <token>" https://synbiohub.org/manage
+```
+
+```python
+import requests
+
+response = requests.get(
+    'https://synbiohub.org/manage',
+    headers={'X-authorization': '<token>',
+    'Accept': 'text/plain'}
+)
+
+print(response.status_code)
+print(response.content)
+
+```
+
+```javascript
+const fetch = require("node-fetch");
+const url = 'https://synbiohub.org/manage'
+const headers={
+        "Accept" : "text/plain; charset=UTF-8",
+	"X-authorization" : "<token>"
+};
+fetch(url, { method: 'GET', headers: headers})
+    .then(res => res.buffer()).then(buf => console.log(buf.toString()))
+    .catch (error=>console.log(error))
+```
+
+## Shared
+
+`GET <SynBioHub URL>/shared`
+
+Returns the meta data on submissions the user has ownership of. 
+
+```plaintext
+curl -X GET -H "Accept: text/plain" -H "X-authorization: <token>" https://synbiohub.org/shared
+```
+
+```python
+import requests
+
+response = requests.get(
+    'https://synbiohub.org/shared',
+    headers={'X-authorization': '<token>',
+    'Accept': 'text/plain'}
+)
+
+print(response.status_code)
+print(response.content)
+
+```
+
+```javascript
+const fetch = require("node-fetch");
+const url = 'https://synbiohub.org/shared'
+const headers={
+        "Accept" : "text/plain; charset=UTF-8",
+	"X-authorization" : "<token>"
+};
+fetch(url, { method: 'GET', headers: headers})
+    .then(res => res.buffer()).then(buf => console.log(buf.toString()))
+    .catch (error=>console.log(error))
+```
+
+
 # Download Endpoints
 
 The following endpoints are for downloading content from SynBioHub in various formats.
