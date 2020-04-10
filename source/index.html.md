@@ -719,7 +719,7 @@ print(response.json())
 Returns the meta data on submissions.
 
 ```plaintext
-curl -X GET -H "Accept: text/plain" -H "X-authorization: <token>" localhost:7777/manage
+curl -X GET -H "Accept: text/plain" -H "X-authorization: <token>" https://synbiohub.org/manage
 ```
 
 ```python
@@ -746,8 +746,42 @@ const headers={
 fetch(url, { method: 'GET', headers: headers})
     .then(res => res.buffer()).then(buf => console.log(buf.toString()))
     .catch (error=>console.log(error))
+```
 
+## Shared
 
+`GET <SynBioHub URL>/shared`
+
+Returns the meta data on submissions the user has ownership of. 
+
+```plaintext
+curl -X GET -H "Accept: text/plain" -H "X-authorization: <token>" https://synbiohub.org/shared
+```
+
+```python
+import requests
+
+response = requests.get(
+    'https://synbiohub.org/shared',
+    headers={'X-authorization': '<token>',
+    'Accept': 'text/plain'}
+)
+
+print(response.status_code)
+print(response.content)
+
+```
+
+```javascript
+const fetch = require("node-fetch");
+const url = 'https://synbiohub.org/shared'
+const headers={
+        "Accept" : "text/plain; charset=UTF-8",
+	"X-authorization" : "<token>"
+};
+fetch(url, { method: 'GET', headers: headers})
+    .then(res => res.buffer()).then(buf => console.log(buf.toString()))
+    .catch (error=>console.log(error))
 ```
 
 
