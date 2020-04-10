@@ -720,6 +720,23 @@ Returns the meta data on submissions.
 
 ```plaintext
 curl -X GET -H "Accept: text/plain" -H "X-authorization: <token>" https://synbiohub.org/manage
+
+This endpoint returns JSON metadata of the form:
+
+[...
+	{
+	"displayId":"bruh_collection",
+	"version":"1",
+	"name":"bruh",
+	"description":"testbruh",
+	"type":"http://sbols.org/v2#Collection",
+	"uri":"http://localhost:7777/user/testuser/bruh/bruh_collection/1",
+	"typeName":"Collection",
+	"url":"/user/testuser/bruh/bruh_collection/1",
+	"triplestore":"private",
+	"prefix":""
+	}
+...]
 ```
 
 ```python
@@ -756,6 +773,23 @@ Returns the meta data on submissions the user has ownership of.
 
 ```plaintext
 curl -X GET -H "Accept: text/plain" -H "X-authorization: <token>" https://synbiohub.org/shared
+
+This endpoint returns JSON metadata of the form:
+
+[...
+	{
+	"displayId":"bruh_collection",
+	"version":"1",
+	"name":"bruh",
+	"description":"testbruh",
+	"type":"http://sbols.org/v2#Collection",
+	"uri":"http://localhost:7777/user/testuser/bruh/bruh_collection/1",
+	"typeName":"Collection",
+	"url":"/user/testuser/bruh/bruh_collection/1",
+	"triplestore":"private",
+	"prefix":""
+	}
+...]
 ```
 
 ```python
