@@ -458,8 +458,113 @@ fetch(Url,otherPram)
     .catch (error=>console.log(error))
 ```
 
+## Search Submissions
 
-## Search Subcollections
+`GET <SynBioHub URL>/manage`
+
+Returns the meta data on all submissions for the user specified by the X-authorization token.
+
+```plaintext
+curl -X GET -H "Accept: text/plain" -H "X-authorization: <token>" https://synbiohub.org/manage
+
+This endpoint returns JSON metadata of the form:
+
+[...
+	{
+	"displayId":"bruh_collection",
+	"version":"1",
+	"name":"bruh",
+	"description":"testbruh",
+	"type":"http://sbols.org/v2#Collection",
+	"uri":"http://localhost:7777/user/testuser/bruh/bruh_collection/1",
+	"typeName":"Collection",
+	"url":"/user/testuser/bruh/bruh_collection/1",
+	"triplestore":"private",
+	"prefix":""
+	}
+...]
+```
+
+```python
+import requests
+
+response = requests.get(
+    'https://synbiohub.org/manage',
+    headers={'X-authorization': '<token>',
+    'Accept': 'text/plain'}
+)
+
+print(response.status_code)
+print(response.content)
+
+```
+
+```javascript
+const fetch = require("node-fetch");
+const url = 'https://synbiohub.org/manage'
+const headers={
+        "Accept" : "text/plain; charset=UTF-8",
+	"X-authorization" : "<token>"
+};
+fetch(url, { method: 'GET', headers: headers})
+    .then(res => res.buffer()).then(buf => console.log(buf.toString()))
+    .catch (error=>console.log(error))
+```
+
+## Search Shared Objects
+
+`GET <SynBioHub URL>/shared`
+
+Returns the meta data on objects that other users have shared with the user specified by the X-authorization token. 
+
+```plaintext
+curl -X GET -H "Accept: text/plain" -H "X-authorization: <token>" https://synbiohub.org/shared
+
+This endpoint returns JSON metadata of the form:
+
+[...
+	{
+	"displayId":"bruh_collection",
+	"version":"1",
+	"name":"bruh",
+	"description":"testbruh",
+	"type":"http://sbols.org/v2#Collection",
+	"uri":"http://localhost:7777/user/testuser/bruh/bruh_collection/1",
+	"typeName":"Collection",
+	"url":"/user/testuser/bruh/bruh_collection/1",
+	"triplestore":"private",
+	"prefix":""
+	}
+...]
+```
+
+```python
+import requests
+
+response = requests.get(
+    'https://synbiohub.org/shared',
+    headers={'X-authorization': '<token>',
+    'Accept': 'text/plain'}
+)
+
+print(response.status_code)
+print(response.content)
+
+```
+
+```javascript
+const fetch = require("node-fetch");
+const url = 'https://synbiohub.org/shared'
+const headers={
+        "Accept" : "text/plain; charset=UTF-8",
+	"X-authorization" : "<token>"
+};
+fetch(url, { method: 'GET', headers: headers})
+    .then(res => res.buffer()).then(buf => console.log(buf.toString()))
+    .catch (error=>console.log(error))
+```
+
+## Search Sub-Collections
 
 `GET <URI>/subCollections`
 
@@ -710,112 +815,6 @@ response = requests.get(
 print(response.status_code)
 
 print(response.json())
-```
-
-## Manage
-
-`GET <SynBioHub URL>/manage`
-
-Returns the meta data on submissions.
-
-```plaintext
-curl -X GET -H "Accept: text/plain" -H "X-authorization: <token>" https://synbiohub.org/manage
-
-This endpoint returns JSON metadata of the form:
-
-[...
-	{
-	"displayId":"bruh_collection",
-	"version":"1",
-	"name":"bruh",
-	"description":"testbruh",
-	"type":"http://sbols.org/v2#Collection",
-	"uri":"http://localhost:7777/user/testuser/bruh/bruh_collection/1",
-	"typeName":"Collection",
-	"url":"/user/testuser/bruh/bruh_collection/1",
-	"triplestore":"private",
-	"prefix":""
-	}
-...]
-```
-
-```python
-import requests
-
-response = requests.get(
-    'https://synbiohub.org/manage',
-    headers={'X-authorization': '<token>',
-    'Accept': 'text/plain'}
-)
-
-print(response.status_code)
-print(response.content)
-
-```
-
-```javascript
-const fetch = require("node-fetch");
-const url = 'https://synbiohub.org/manage'
-const headers={
-        "Accept" : "text/plain; charset=UTF-8",
-	"X-authorization" : "<token>"
-};
-fetch(url, { method: 'GET', headers: headers})
-    .then(res => res.buffer()).then(buf => console.log(buf.toString()))
-    .catch (error=>console.log(error))
-```
-
-## Shared
-
-`GET <SynBioHub URL>/shared`
-
-Returns the meta data on submissions the user has ownership of. 
-
-```plaintext
-curl -X GET -H "Accept: text/plain" -H "X-authorization: <token>" https://synbiohub.org/shared
-
-This endpoint returns JSON metadata of the form:
-
-[...
-	{
-	"displayId":"bruh_collection",
-	"version":"1",
-	"name":"bruh",
-	"description":"testbruh",
-	"type":"http://sbols.org/v2#Collection",
-	"uri":"http://localhost:7777/user/testuser/bruh/bruh_collection/1",
-	"typeName":"Collection",
-	"url":"/user/testuser/bruh/bruh_collection/1",
-	"triplestore":"private",
-	"prefix":""
-	}
-...]
-```
-
-```python
-import requests
-
-response = requests.get(
-    'https://synbiohub.org/shared',
-    headers={'X-authorization': '<token>',
-    'Accept': 'text/plain'}
-)
-
-print(response.status_code)
-print(response.content)
-
-```
-
-```javascript
-const fetch = require("node-fetch");
-const url = 'https://synbiohub.org/shared'
-const headers={
-        "Accept" : "text/plain; charset=UTF-8",
-	"X-authorization" : "<token>"
-};
-fetch(url, { method: 'GET', headers: headers})
-    .then(res => res.buffer()).then(buf => console.log(buf.toString()))
-    .catch (error=>console.log(error))
 ```
 
 
@@ -1170,6 +1169,35 @@ Makes the specified collection public.
 
 ```plaintext
 curl -X POST -H "Accept: text/plain" -H "X-authorization:fb4ede73-c8bb-4b1e-bc73-d1fccbf140f2" -d "id=bruh&version=1&name=&description=&citations=&tabState=new" http://localhost:7777/user/testuser/bruh/bruh_collection/1/makePublic
+```
+
+```python
+import requests
+
+response = requests.post(
+    'http://localhost:7777/user/testuser/bruh1/bruh1_collection/1/makePublic',
+    headers={
+        'X-authorization': '4d358080-5ab7-48ad-813d-65231c24f38e',
+        'Accept': 'text/plain'
+    },
+    data={
+        'id': 'bruh1',
+        'version' : '1',
+        'name' : '',
+        'description' : '',
+        'citations' : '',
+        'tabState' : 'new'
+        },
+)
+
+print(response.status_code)
+print(response.content)
+
+```
+
+```javascript
+
+
 ```
 
 
