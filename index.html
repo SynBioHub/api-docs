@@ -267,7 +267,13 @@
                     <a href="#search-root-collections" class="toc-h2 toc-link" data-title="Search Root Collections">Search Root Collections</a>
                   </li>
                   <li>
-                    <a href="#search-subcollections" class="toc-h2 toc-link" data-title="Search Subcollections">Search Subcollections</a>
+                    <a href="#search-submissions" class="toc-h2 toc-link" data-title="Search Submissions">Search Submissions</a>
+                  </li>
+                  <li>
+                    <a href="#search-shared-objects" class="toc-h2 toc-link" data-title="Search Shared Objects">Search Shared Objects</a>
+                  </li>
+                  <li>
+                    <a href="#search-sub-collections" class="toc-h2 toc-link" data-title="Search Sub-Collections">Search Sub-Collections</a>
                   </li>
                   <li>
                     <a href="#search-twins" class="toc-h2 toc-link" data-title="Search Twins">Search Twins</a>
@@ -283,12 +289,6 @@
                   </li>
                   <li>
                     <a href="#sparql-query" class="toc-h2 toc-link" data-title="SPARQL Query">SPARQL Query</a>
-                  </li>
-                  <li>
-                    <a href="#manage" class="toc-h2 toc-link" data-title="Manage">Manage</a>
-                  </li>
-                  <li>
-                    <a href="#shared" class="toc-h2 toc-link" data-title="Shared">Shared</a>
                   </li>
               </ul>
           </li>
@@ -815,7 +815,91 @@ This endpoint returns JSON metadata of the form:
 <span class="nx">fetch</span><span class="p">(</span><span class="nx">Url</span><span class="p">,</span><span class="nx">otherPram</span><span class="p">)</span>
     <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">res</span> <span class="o">=&gt;</span> <span class="nx">res</span><span class="p">.</span><span class="nx">buffer</span><span class="p">()).</span><span class="nx">then</span><span class="p">(</span><span class="nx">buf</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">buf</span><span class="p">.</span><span class="nx">toString</span><span class="p">()))</span>
     <span class="p">.</span><span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="o">=&gt;</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">error</span><span class="p">))</span>
-</code></pre><h2 id='search-subcollections'>Search Subcollections</h2>
+</code></pre><h2 id='search-submissions'>Search Submissions</h2>
+<p><code>GET &lt;SynBioHub URL&gt;/manage</code></p>
+
+<p>Returns the meta data on all submissions for the user specified by the X-authorization token.</p>
+<pre class="highlight plaintext tab-plaintext"><code>curl -X GET -H "Accept: text/plain" -H "X-authorization: &lt;token&gt;" https://synbiohub.org/manage
+
+This endpoint returns JSON metadata of the form:
+
+[...
+    {
+    "displayId":"bruh_collection",
+    "version":"1",
+    "name":"bruh",
+    "description":"testbruh",
+    "type":"http://sbols.org/v2#Collection",
+    "uri":"http://localhost:7777/user/testuser/bruh/bruh_collection/1",
+    "typeName":"Collection",
+    "url":"/user/testuser/bruh/bruh_collection/1",
+    "triplestore":"private",
+    "prefix":""
+    }
+...]
+</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+    <span class="s">'https://synbiohub.org/manage'</span><span class="p">,</span>
+    <span class="n">headers</span><span class="o">=</span><span class="p">{</span><span class="s">'X-authorization'</span><span class="p">:</span> <span class="s">'&lt;token&gt;'</span><span class="p">,</span>
+    <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'text/plain'</span><span class="p">}</span>
+<span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
+
+</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">fetch</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"node-fetch"</span><span class="p">);</span>
+<span class="kr">const</span> <span class="nx">url</span> <span class="o">=</span> <span class="s1">'https://synbiohub.org/manage'</span>
+<span class="kr">const</span> <span class="nx">headers</span><span class="o">=</span><span class="p">{</span>
+        <span class="s2">"Accept"</span> <span class="p">:</span> <span class="s2">"text/plain; charset=UTF-8"</span><span class="p">,</span>
+    <span class="s2">"X-authorization"</span> <span class="p">:</span> <span class="s2">"&lt;token&gt;"</span>
+<span class="p">};</span>
+<span class="nx">fetch</span><span class="p">(</span><span class="nx">url</span><span class="p">,</span> <span class="p">{</span> <span class="na">method</span><span class="p">:</span> <span class="s1">'GET'</span><span class="p">,</span> <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span><span class="p">})</span>
+    <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">res</span> <span class="o">=&gt;</span> <span class="nx">res</span><span class="p">.</span><span class="nx">buffer</span><span class="p">()).</span><span class="nx">then</span><span class="p">(</span><span class="nx">buf</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">buf</span><span class="p">.</span><span class="nx">toString</span><span class="p">()))</span>
+    <span class="p">.</span><span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="o">=&gt;</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">error</span><span class="p">))</span>
+</code></pre><h2 id='search-shared-objects'>Search Shared Objects</h2>
+<p><code>GET &lt;SynBioHub URL&gt;/shared</code></p>
+
+<p>Returns the meta data on objects that other users have shared with the user specified by the X-authorization token. </p>
+<pre class="highlight plaintext tab-plaintext"><code>curl -X GET -H "Accept: text/plain" -H "X-authorization: &lt;token&gt;" https://synbiohub.org/shared
+
+This endpoint returns JSON metadata of the form:
+
+[...
+    {
+    "displayId":"bruh_collection",
+    "version":"1",
+    "name":"bruh",
+    "description":"testbruh",
+    "type":"http://sbols.org/v2#Collection",
+    "uri":"http://localhost:7777/user/testuser/bruh/bruh_collection/1",
+    "typeName":"Collection",
+    "url":"/user/testuser/bruh/bruh_collection/1",
+    "triplestore":"private",
+    "prefix":""
+    }
+...]
+</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+    <span class="s">'https://synbiohub.org/shared'</span><span class="p">,</span>
+    <span class="n">headers</span><span class="o">=</span><span class="p">{</span><span class="s">'X-authorization'</span><span class="p">:</span> <span class="s">'&lt;token&gt;'</span><span class="p">,</span>
+    <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'text/plain'</span><span class="p">}</span>
+<span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
+
+</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">fetch</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"node-fetch"</span><span class="p">);</span>
+<span class="kr">const</span> <span class="nx">url</span> <span class="o">=</span> <span class="s1">'https://synbiohub.org/shared'</span>
+<span class="kr">const</span> <span class="nx">headers</span><span class="o">=</span><span class="p">{</span>
+        <span class="s2">"Accept"</span> <span class="p">:</span> <span class="s2">"text/plain; charset=UTF-8"</span><span class="p">,</span>
+    <span class="s2">"X-authorization"</span> <span class="p">:</span> <span class="s2">"&lt;token&gt;"</span>
+<span class="p">};</span>
+<span class="nx">fetch</span><span class="p">(</span><span class="nx">url</span><span class="p">,</span> <span class="p">{</span> <span class="na">method</span><span class="p">:</span> <span class="s1">'GET'</span><span class="p">,</span> <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span><span class="p">})</span>
+    <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">res</span> <span class="o">=&gt;</span> <span class="nx">res</span><span class="p">.</span><span class="nx">buffer</span><span class="p">()).</span><span class="nx">then</span><span class="p">(</span><span class="nx">buf</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">buf</span><span class="p">.</span><span class="nx">toString</span><span class="p">()))</span>
+    <span class="p">.</span><span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="o">=&gt;</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">error</span><span class="p">))</span>
+</code></pre><h2 id='search-sub-collections'>Search Sub-Collections</h2>
 <p><code>GET &lt;URI&gt;/subCollections</code></p>
 
 <p>Returns the collections that are members of another collection.</p>
@@ -1000,90 +1084,6 @@ This endpoint returns JSON metadata of the form:
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
 
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">())</span>
-</code></pre><h2 id='manage'>Manage</h2>
-<p><code>GET &lt;SynBioHub URL&gt;/manage</code></p>
-
-<p>Returns the meta data on submissions.</p>
-<pre class="highlight plaintext tab-plaintext"><code>curl -X GET -H "Accept: text/plain" -H "X-authorization: &lt;token&gt;" https://synbiohub.org/manage
-
-This endpoint returns JSON metadata of the form:
-
-[...
-    {
-    "displayId":"bruh_collection",
-    "version":"1",
-    "name":"bruh",
-    "description":"testbruh",
-    "type":"http://sbols.org/v2#Collection",
-    "uri":"http://localhost:7777/user/testuser/bruh/bruh_collection/1",
-    "typeName":"Collection",
-    "url":"/user/testuser/bruh/bruh_collection/1",
-    "triplestore":"private",
-    "prefix":""
-    }
-...]
-</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
-
-<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
-    <span class="s">'https://synbiohub.org/manage'</span><span class="p">,</span>
-    <span class="n">headers</span><span class="o">=</span><span class="p">{</span><span class="s">'X-authorization'</span><span class="p">:</span> <span class="s">'&lt;token&gt;'</span><span class="p">,</span>
-    <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'text/plain'</span><span class="p">}</span>
-<span class="p">)</span>
-
-<span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
-
-</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">fetch</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"node-fetch"</span><span class="p">);</span>
-<span class="kr">const</span> <span class="nx">url</span> <span class="o">=</span> <span class="s1">'https://synbiohub.org/manage'</span>
-<span class="kr">const</span> <span class="nx">headers</span><span class="o">=</span><span class="p">{</span>
-        <span class="s2">"Accept"</span> <span class="p">:</span> <span class="s2">"text/plain; charset=UTF-8"</span><span class="p">,</span>
-    <span class="s2">"X-authorization"</span> <span class="p">:</span> <span class="s2">"&lt;token&gt;"</span>
-<span class="p">};</span>
-<span class="nx">fetch</span><span class="p">(</span><span class="nx">url</span><span class="p">,</span> <span class="p">{</span> <span class="na">method</span><span class="p">:</span> <span class="s1">'GET'</span><span class="p">,</span> <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span><span class="p">})</span>
-    <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">res</span> <span class="o">=&gt;</span> <span class="nx">res</span><span class="p">.</span><span class="nx">buffer</span><span class="p">()).</span><span class="nx">then</span><span class="p">(</span><span class="nx">buf</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">buf</span><span class="p">.</span><span class="nx">toString</span><span class="p">()))</span>
-    <span class="p">.</span><span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="o">=&gt;</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">error</span><span class="p">))</span>
-</code></pre><h2 id='shared'>Shared</h2>
-<p><code>GET &lt;SynBioHub URL&gt;/shared</code></p>
-
-<p>Returns the meta data on submissions the user has ownership of. </p>
-<pre class="highlight plaintext tab-plaintext"><code>curl -X GET -H "Accept: text/plain" -H "X-authorization: &lt;token&gt;" https://synbiohub.org/shared
-
-This endpoint returns JSON metadata of the form:
-
-[...
-    {
-    "displayId":"bruh_collection",
-    "version":"1",
-    "name":"bruh",
-    "description":"testbruh",
-    "type":"http://sbols.org/v2#Collection",
-    "uri":"http://localhost:7777/user/testuser/bruh/bruh_collection/1",
-    "typeName":"Collection",
-    "url":"/user/testuser/bruh/bruh_collection/1",
-    "triplestore":"private",
-    "prefix":""
-    }
-...]
-</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
-
-<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
-    <span class="s">'https://synbiohub.org/shared'</span><span class="p">,</span>
-    <span class="n">headers</span><span class="o">=</span><span class="p">{</span><span class="s">'X-authorization'</span><span class="p">:</span> <span class="s">'&lt;token&gt;'</span><span class="p">,</span>
-    <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'text/plain'</span><span class="p">}</span>
-<span class="p">)</span>
-
-<span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
-
-</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">fetch</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"node-fetch"</span><span class="p">);</span>
-<span class="kr">const</span> <span class="nx">url</span> <span class="o">=</span> <span class="s1">'https://synbiohub.org/shared'</span>
-<span class="kr">const</span> <span class="nx">headers</span><span class="o">=</span><span class="p">{</span>
-        <span class="s2">"Accept"</span> <span class="p">:</span> <span class="s2">"text/plain; charset=UTF-8"</span><span class="p">,</span>
-    <span class="s2">"X-authorization"</span> <span class="p">:</span> <span class="s2">"&lt;token&gt;"</span>
-<span class="p">};</span>
-<span class="nx">fetch</span><span class="p">(</span><span class="nx">url</span><span class="p">,</span> <span class="p">{</span> <span class="na">method</span><span class="p">:</span> <span class="s1">'GET'</span><span class="p">,</span> <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span><span class="p">})</span>
-    <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">res</span> <span class="o">=&gt;</span> <span class="nx">res</span><span class="p">.</span><span class="nx">buffer</span><span class="p">()).</span><span class="nx">then</span><span class="p">(</span><span class="nx">buf</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">buf</span><span class="p">.</span><span class="nx">toString</span><span class="p">()))</span>
-    <span class="p">.</span><span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="o">=&gt;</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">error</span><span class="p">))</span>
 </code></pre><h1 id='download-endpoints'>Download Endpoints</h1>
 <p>The following endpoints are for downloading content from SynBioHub in various formats.</p>
 
@@ -1362,6 +1362,29 @@ This endpoint returns JSON metadata of the form:
 
 <p>Makes the specified collection public.</p>
 <pre class="highlight plaintext tab-plaintext"><code>curl -X POST -H "Accept: text/plain" -H "X-authorization:fb4ede73-c8bb-4b1e-bc73-d1fccbf140f2" -d "id=bruh&amp;version=1&amp;name=&amp;description=&amp;citations=&amp;tabState=new" http://localhost:7777/user/testuser/bruh/bruh_collection/1/makePublic
+</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span>
+    <span class="s">'http://localhost:7777/user/testuser/bruh1/bruh1_collection/1/makePublic'</span><span class="p">,</span>
+    <span class="n">headers</span><span class="o">=</span><span class="p">{</span>
+        <span class="s">'X-authorization'</span><span class="p">:</span> <span class="s">'4d358080-5ab7-48ad-813d-65231c24f38e'</span><span class="p">,</span>
+        <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'text/plain'</span>
+    <span class="p">},</span>
+    <span class="n">data</span><span class="o">=</span><span class="p">{</span>
+        <span class="s">'id'</span><span class="p">:</span> <span class="s">'bruh1'</span><span class="p">,</span>
+        <span class="s">'version'</span> <span class="p">:</span> <span class="s">'1'</span><span class="p">,</span>
+        <span class="s">'name'</span> <span class="p">:</span> <span class="s">''</span><span class="p">,</span>
+        <span class="s">'description'</span> <span class="p">:</span> <span class="s">''</span><span class="p">,</span>
+        <span class="s">'citations'</span> <span class="p">:</span> <span class="s">''</span><span class="p">,</span>
+        <span class="s">'tabState'</span> <span class="p">:</span> <span class="s">'new'</span>
+        <span class="p">},</span>
+<span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
+
+</code></pre><pre class="highlight javascript tab-javascript"><code>
+
 </code></pre><h2 id='remove-collection'>Remove Collection</h2>
 <p><code>GET &lt;URI&gt;/removeCollection</code></p>
 
