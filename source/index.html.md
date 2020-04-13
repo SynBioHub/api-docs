@@ -1181,12 +1181,12 @@ response = requests.post(
         'Accept': 'text/plain'
     },
     data={
-        'id': '',
-        'version' : '',
-        'name' : '',
-        'description' : '',
-        'citations' : '',
-        'tabState' : ''
+        'id': '<id>',
+        'version' : '<version>',
+        'name' : '<name>',
+        'description' : '<description>',
+        'citations' : '<citations>',
+        'tabState' : '<tabState>'
         },
 )
 
@@ -1205,12 +1205,12 @@ var headers={
 };
 
 const params = new URLSearchParams();
-params.append('id', '');
-params.append('version', '');
-params.append('name', '');
-params.append('description', '');
-params.append('citations', '');
-params.append('tabState', '');
+params.append('id', '<id>');
+params.append('version', '<version>');
+params.append('name', '<name>');
+params.append('description', '<description>');
+params.append('citations', '<citations>');
+params.append('tabState', '<tabState>');
 
 fetch(url, { method: 'POST', headers: headers, body:params})
     .then(res => res.buffer()).then(buf => console.log(buf.toString()))
