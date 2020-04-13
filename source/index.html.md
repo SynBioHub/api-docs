@@ -1165,7 +1165,7 @@ If creating a collection, provide the id, version, name, description, citations,
 
 `POST <URI>/makePublic`
 
-Makes the specified collection public.
+Makes the collection specified by the URI public.
 
 ```plaintext
 curl -X POST -H "Accept: text/plain" -H "X-authorization:<>token" -d "id=bruh&version=1&name=&description=&citations=&tabState=new" https://synbiohub.org/user/testuser/bruh1/bruh1_collection/1/makePublic
@@ -1343,7 +1343,7 @@ The following endpoints are for managing permissions on SynBioHub.
 
 `POST <URI>/addOwner`
 
-Adds an owner to an object.
+Adds an owner to an object specfied by the URI.
 
 ```plaintext
 curl -X POST -H "Accept: text/plain" -H "X-authorization:59763b66-ce63-471b-ac1e-2cfcb9926bb0" -d "user=dockertestuser&uri=http://localhost:7777/user/testuser/bruh/bruh_collection/1/addOwner" http://localhost:7777/user/testuser/bruh/bruh_collection/1/addOwner
@@ -1353,7 +1353,7 @@ curl -X POST -H "Accept: text/plain" -H "X-authorization:59763b66-ce63-471b-ac1e
 
 `POST <URI>/public/:collectionId/:displayId/:version/removeOwner/:username`
 
-Removes an owner from an object.
+Removes an owner from an object specified  by the URI.
 
 ```plaintext
 curl -X POST -H "Accept: text/plain" -H "X-authorization:<>" -d "userUri=<>" http://synbiohub.org/public/:collectionId/:displayId/:version/removeOwner/:username
@@ -1369,7 +1369,7 @@ These endpoints allow you to edit various fields within each object.
 
 `POST <URI>/updateMutableDescription `
 
-Edit the mutable description of an object. 
+Edit the mutable description of an object specified by the URI. 
 
 ```plaintext
 curl -X POST -H "Accept: text/plain" -H "X-authorization:<>" -d "uri=<>&value=<>" http://synbiohub.org/updateMutableDescription
@@ -1378,19 +1378,19 @@ curl -X POST -H "Accept: text/plain" -H "X-authorization:<>" -d "uri=<>&value=<>
 
 `POST <URI>/updateMutableNotes`
 
-Edit the mutable notes of an object.
+Edit the mutable notes of an object specified by the URI.
 
 ## Edit Mutable Source
 
 `POST <URI>/updateMutableSource`
 
-Edit the mutable source of an object.
+Edit the mutable source of an object specified by the URI.
 
 ## Edit Citations
 
 `POST <URI>/updateCitations`
 
-Edit the citations of an object.
+Edit the citations of an object specified by the URI.
 
 # Attachment Endpoints
 
@@ -1406,6 +1406,14 @@ Attach a specified file to a given URI.
 
 ```plaintext
 curl -X POST -H "Accept: text/plain" -H "X-authorization: <token>" -F 'file=@<filename>' https://synbiohub.org/user/MyUserName/test/test_collection/1/attach
+```
+
+```python
+
+```
+
+```javascript
+
 ```
 
 ## Attach URL
