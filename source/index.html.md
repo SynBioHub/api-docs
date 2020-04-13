@@ -1168,25 +1168,25 @@ If creating a collection, provide the id, version, name, description, citations,
 Makes the specified collection public.
 
 ```plaintext
-curl -X POST -H "Accept: text/plain" -H "X-authorization:fb4ede73-c8bb-4b1e-bc73-d1fccbf140f2" -d "id=bruh&version=1&name=&description=&citations=&tabState=new" http://localhost:7777/user/testuser/bruh/bruh_collection/1/makePublic
+curl -X POST -H "Accept: text/plain" -H "X-authorization:<>token" -d "id=bruh&version=1&name=&description=&citations=&tabState=new" https://synbiohub.org/user/testuser/bruh1/bruh1_collection/1/makePublic
 ```
 
 ```python
 import requests
 
 response = requests.post(
-    'http://localhost:7777/user/testuser/bruh1/bruh1_collection/1/makePublic',
+    'https://synbiohub.org/user/testuser/bruh1/bruh1_collection/1/makePublic',
     headers={
-        'X-authorization': '4d358080-5ab7-48ad-813d-65231c24f38e',
+        'X-authorization': '<token>',
         'Accept': 'text/plain'
     },
     data={
-        'id': 'bruh1',
-        'version' : '1',
+        'id': '',
+        'version' : '',
         'name' : '',
         'description' : '',
         'citations' : '',
-        'tabState' : 'new'
+        'tabState' : ''
         },
 )
 
@@ -1196,8 +1196,25 @@ print(response.content)
 ```
 
 ```javascript
+const fetch = require("node-fetch");
+const { URLSearchParams } = require('url');
+const url = 'https://synbiohub.org/user/testuser/bruh2/bruh2_collection/1/makePublic'
+var headers={
+    "Accept" : "text/plain; charset=UTF-8",
+    "X-authorization" : "<token>"
+};
 
+const params = new URLSearchParams();
+params.append('id', '');
+params.append('version', '');
+params.append('name', '');
+params.append('description', '');
+params.append('citations', '');
+params.append('tabState', '');
 
+fetch(url, { method: 'POST', headers: headers, body:params})
+    .then(res => res.buffer()).then(buf => console.log(buf.toString()))
+    .catch (error=>console.log(error))
 ```
 
 
