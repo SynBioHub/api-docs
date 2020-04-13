@@ -1352,7 +1352,7 @@ These endpoints allow you to edit various fields within each object.
 
 `POST <URI>/updateMutableDescription `
 
-Edit the mutable description of a part. 
+Edit the mutable description of an object. 
 
 ```plaintext
 curl -X POST -H "Accept: text/plain" -H "X-authorization:<>" -d "uri=<>&value=<>" http://synbiohub.org/updateMutableDescription
@@ -1361,19 +1361,19 @@ curl -X POST -H "Accept: text/plain" -H "X-authorization:<>" -d "uri=<>&value=<>
 
 `POST <URI>/updateMutableNotes`
 
-Edit the mutable notes of a part.
+Edit the mutable notes of an object.
 
 ## Edit Mutable Source
 
 `POST <URI>/updateMutableSource`
 
-Edit the mutable source of a part.
+Edit the mutable source of an object.
 
 ## Edit Citations
 
 `POST <URI>/updateCitations`
 
-Edit the citations of a part.
+Edit the citations of an object.
 
 # Attachment Endpoints
 
