@@ -1134,9 +1134,9 @@ print(response.content)
 
 # Submission Endpoints
 
-<aside class="success">Note that the X-authorization header is required for all submission endpoints.</aside>
-
 The following endpoints are for managing submissions on SynBioHub.
+
+<aside class="success">Note that the X-authorization header is required for all submission endpoints.</aside>
 
 ## Submit
 
@@ -1317,13 +1317,16 @@ print(response.content)
 
 # Permission Endpoints
 
+
 The following endpoints are for managing permissions on SynBioHub.
+
+!! add banner
 
 ## Add Owner
 
 `POST <URI>/addOwner`
 
-Adds an owner to a part.
+Adds an owner to an object.
 
 ```plaintext
 curl -X POST -H "Accept: text/plain" -H "X-authorization:59763b66-ce63-471b-ac1e-2cfcb9926bb0" -d "user=dockertestuser&uri=http://localhost:7777/user/testuser/bruh/bruh_collection/1/addOwner" http://localhost:7777/user/testuser/bruh/bruh_collection/1/addOwner
@@ -1333,7 +1336,7 @@ curl -X POST -H "Accept: text/plain" -H "X-authorization:59763b66-ce63-471b-ac1e
 
 `POST <URI>/public/:collectionId/:displayId/:version/removeOwner/:username`
 
-Removes an owner from a part.
+Removes an owner from an object.
 
 ```plaintext
 curl -X POST -H "Accept: text/plain" -H "X-authorization:<>" -d "userUri=<>" http://synbiohub.org/public/:collectionId/:displayId/:version/removeOwner/:username
@@ -1343,7 +1346,7 @@ curl -X POST -H "Accept: text/plain" -H "X-authorization:<>" -d "userUri=<>" htt
 
 <aside class="success">Note that the X-authorization header is required for all edit endpoints.</aside>
 
-These endpoints allow you to edit various fields in for a 
+These endpoints allow you to edit various fields within each object. 
 
 ## Edit Mutable Descriptions
 
@@ -1374,9 +1377,9 @@ Edit the citations of a part.
 
 # Attachment Endpoints
 
-<aside class="success">Note that the X-authorization header is required for all attachment endpoints.</aside>
-
 The following endpoints are for creating attachments on SynBioHub.
+
+<aside class="success">Note that the X-authorization header is required for all attachment endpoints.</aside>
 
 ## Attach File
 
@@ -1395,6 +1398,8 @@ curl -X POST -H "Accept: text/plain" -H "X-authorization: <token>" -F 'file=@<fi
 Attach a specified URL to a given URI.
 
 # Administration Endpoints
+
+The following endpoints are for users with administration privileges.
 
 <aside class="success">Note that the X-authorization header is required for all administration endpoints.</aside>
 
