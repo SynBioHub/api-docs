@@ -1414,6 +1414,18 @@ curl -X POST -H "Accept: text/plain" -H "X-authorization: <token>" -F 'file=@<fi
 
 Attach a specified URL to a given URI.
 
+```plaintext
+
+```
+
+```python
+
+```
+
+```javascript
+
+```
+
 # Administration Endpoints
 
 The following endpoints are for users with administration privileges.
