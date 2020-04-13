@@ -1337,7 +1337,7 @@ print(response.content)
 
 The following endpoints are for managing permissions on SynBioHub.
 
-!! add banner
+//!! add banner
 
 ## Add Owner
 
