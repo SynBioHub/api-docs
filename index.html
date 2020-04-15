@@ -367,6 +367,15 @@
                   <li>
                     <a href="#edit-citations" class="toc-h2 toc-link" data-title="Edit Citations">Edit Citations</a>
                   </li>
+                  <li>
+                    <a href="#edit-field" class="toc-h2 toc-link" data-title="Edit Field">Edit Field</a>
+                  </li>
+                  <li>
+                    <a href="#add-field" class="toc-h2 toc-link" data-title="Add Field">Add Field</a>
+                  </li>
+                  <li>
+                    <a href="#remove-field" class="toc-h2 toc-link" data-title="Remove Field">Remove Field</a>
+                  </li>
               </ul>
           </li>
           <li>
@@ -1486,38 +1495,263 @@ This endpoint returns JSON metadata of the form:
 </code></pre><h1 id='permission-endpoints'>Permission Endpoints</h1>
 <p>The following endpoints are for managing permissions on SynBioHub.</p>
 
-<p>//!! add banner</p>
+<aside class="success">Note that the X-authorization header is required for all permission endpoints.</aside>
 <h2 id='add-owner'>Add Owner</h2>
 <p><code>POST &lt;URI&gt;/addOwner</code></p>
 
 <p>Adds an owner to an object specfied by the URI.</p>
 <pre class="highlight plaintext tab-plaintext"><code>curl -X POST -H "Accept: text/plain" -H "X-authorization:59763b66-ce63-471b-ac1e-2cfcb9926bb0" -d "user=dockertestuser&amp;uri=http://localhost:7777/user/testuser/bruh/bruh_collection/1/addOwner" http://localhost:7777/user/testuser/bruh/bruh_collection/1/addOwner
 </code></pre><h2 id='remove-owner'>Remove Owner</h2>
-<p><code>POST &lt;URI&gt;/public/:collectionId/:displayId/:version/removeOwner/:username</code></p>
+<p><code>POST &lt;URI&gt;/removeOwner/&lt;username&gt;</code></p>
 
 <p>Removes an owner from an object specified  by the URI.</p>
 <pre class="highlight plaintext tab-plaintext"><code>curl -X POST -H "Accept: text/plain" -H "X-authorization:&lt;&gt;" -d "userUri=&lt;&gt;" http://synbiohub.org/public/:collectionId/:displayId/:version/removeOwner/:username
 </code></pre><h1 id='edit-endpoints'>Edit Endpoints</h1>
-<aside class="success">Note that the X-authorization header is required for all edit endpoints.</aside>
-
 <p>These endpoints allow you to edit various fields within each object. </p>
+
+<aside class="success">Note that the X-authorization header is required for all edit endpoints.</aside>
 <h2 id='edit-mutable-descriptions'>Edit Mutable Descriptions</h2>
 <p><code>POST &lt;URI&gt;/updateMutableDescription</code></p>
 
 <p>Edit the mutable description of an object specified by the URI. </p>
 <pre class="highlight plaintext tab-plaintext"><code>curl -X POST -H "Accept: text/plain" -H "X-authorization:&lt;&gt;" -d "uri=&lt;&gt;&amp;value=&lt;&gt;" http://synbiohub.org/updateMutableDescription
-</code></pre><h2 id='edit-mutable-notes'>Edit Mutable Notes</h2>
+</code></pre><pre class="highlight python tab-python"><code>
+<span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span>
+    <span class="s">'https://synbiohub.org/updateMutableDescription'</span><span class="p">,</span>
+    <span class="n">headers</span><span class="o">=</span><span class="p">{</span>
+        <span class="s">'X-authorization'</span><span class="p">:</span> <span class="s">'&lt;token&gt;'</span><span class="p">,</span>
+        <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'text/plain'</span>
+    <span class="p">},</span>
+    <span class="n">data</span><span class="o">=</span><span class="p">{</span>
+        <span class="s">'uri'</span><span class="p">:</span> <span class="s">'&lt;uri&gt;'</span><span class="p">,</span>
+        <span class="s">'value'</span> <span class="p">:</span> <span class="s">'&lt;value&gt;'</span>
+        <span class="p">},</span>
+<span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
+
+</code></pre><pre class="highlight javascript tab-javascript"><code>
+<span class="kr">const</span> <span class="nx">fetch</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"node-fetch"</span><span class="p">);</span>
+<span class="kr">const</span> <span class="p">{</span> <span class="nx">URLSearchParams</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'url'</span><span class="p">);</span>
+<span class="kr">const</span> <span class="nx">url</span> <span class="o">=</span> <span class="s1">'https://synbiohub.org/updateMutableDescription'</span>
+<span class="kd">var</span> <span class="nx">headers</span><span class="o">=</span><span class="p">{</span>
+    <span class="s2">"Accept"</span> <span class="p">:</span> <span class="s2">"text/plain; charset=UTF-8"</span><span class="p">,</span>
+    <span class="s2">"X-authorization"</span> <span class="p">:</span> <span class="s2">"&lt;token&gt;"</span>
+<span class="p">};</span>
+
+
+<span class="kr">const</span> <span class="nx">params</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">URLSearchParams</span><span class="p">();</span>
+<span class="nx">params</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'uri'</span><span class="p">,</span> <span class="s1">'&lt;uri&gt;'</span><span class="p">);</span>
+<span class="nx">params</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'value'</span><span class="p">,</span> <span class="s1">'&lt;value&gt;'</span><span class="p">);</span>
+
+
+<span class="nx">fetch</span><span class="p">(</span><span class="nx">url</span><span class="p">,</span> <span class="p">{</span> <span class="na">method</span><span class="p">:</span> <span class="s1">'POST'</span><span class="p">,</span> <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span><span class="p">,</span> <span class="na">body</span><span class="p">:</span><span class="nx">params</span><span class="p">})</span>
+    <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">res</span> <span class="o">=&gt;</span> <span class="nx">res</span><span class="p">.</span><span class="nx">buffer</span><span class="p">()).</span><span class="nx">then</span><span class="p">(</span><span class="nx">buf</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">buf</span><span class="p">.</span><span class="nx">toString</span><span class="p">()))</span>
+    <span class="p">.</span><span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="o">=&gt;</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">error</span><span class="p">))</span>
+
+
+</code></pre>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>uri</td>
+<td>The identity of the object to update.</td>
+</tr>
+<tr>
+<td>value</td>
+<td>The new value for the mutable description</td>
+</tr>
+</tbody></table>
+<h2 id='edit-mutable-notes'>Edit Mutable Notes</h2>
 <p><code>POST &lt;URI&gt;/updateMutableNotes</code></p>
 
 <p>Edit the mutable notes of an object specified by the URI.</p>
+<pre class="highlight plaintext tab-plaintext"><code>curl -X POST -H "Accept: text/plain" -H "X-authorization:&lt;&gt;" -d "uri=&lt;&gt;&amp;value=&lt;&gt;" http://synbiohub.org/updateMutableNotes
+</code></pre><pre class="highlight python tab-python"><code>
+<span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span>
+    <span class="s">'https://synbiohub.org/updateMutableNotes'</span><span class="p">,</span>
+    <span class="n">headers</span><span class="o">=</span><span class="p">{</span>
+        <span class="s">'X-authorization'</span><span class="p">:</span> <span class="s">'&lt;token&gt;'</span><span class="p">,</span>
+        <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'text/plain'</span>
+    <span class="p">},</span>
+    <span class="n">data</span><span class="o">=</span><span class="p">{</span>
+        <span class="s">'uri'</span><span class="p">:</span> <span class="s">'&lt;uri&gt;'</span><span class="p">,</span>
+        <span class="s">'value'</span> <span class="p">:</span> <span class="s">'&lt;value&gt;'</span>
+        <span class="p">},</span>
+<span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
+
+</code></pre><pre class="highlight javascript tab-javascript"><code>
+<span class="kr">const</span> <span class="nx">fetch</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"node-fetch"</span><span class="p">);</span>
+<span class="kr">const</span> <span class="p">{</span> <span class="nx">URLSearchParams</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'url'</span><span class="p">);</span>
+<span class="kr">const</span> <span class="nx">url</span> <span class="o">=</span> <span class="s1">'https://synbiohub.org/updateMutableNotes'</span>
+<span class="kd">var</span> <span class="nx">headers</span><span class="o">=</span><span class="p">{</span>
+    <span class="s2">"Accept"</span> <span class="p">:</span> <span class="s2">"text/plain; charset=UTF-8"</span><span class="p">,</span>
+    <span class="s2">"X-authorization"</span> <span class="p">:</span> <span class="s2">"&lt;token&gt;"</span>
+<span class="p">};</span>
+
+
+<span class="kr">const</span> <span class="nx">params</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">URLSearchParams</span><span class="p">();</span>
+<span class="nx">params</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'uri'</span><span class="p">,</span> <span class="s1">'&lt;uri&gt;'</span><span class="p">);</span>
+<span class="nx">params</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'value'</span><span class="p">,</span> <span class="s1">'&lt;value&gt;'</span><span class="p">);</span>
+
+
+<span class="nx">fetch</span><span class="p">(</span><span class="nx">url</span><span class="p">,</span> <span class="p">{</span> <span class="na">method</span><span class="p">:</span> <span class="s1">'POST'</span><span class="p">,</span> <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span><span class="p">,</span> <span class="na">body</span><span class="p">:</span><span class="nx">params</span><span class="p">})</span>
+    <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">res</span> <span class="o">=&gt;</span> <span class="nx">res</span><span class="p">.</span><span class="nx">buffer</span><span class="p">()).</span><span class="nx">then</span><span class="p">(</span><span class="nx">buf</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">buf</span><span class="p">.</span><span class="nx">toString</span><span class="p">()))</span>
+    <span class="p">.</span><span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="o">=&gt;</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">error</span><span class="p">))</span>
+
+
+</code></pre>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>uri</td>
+<td>The identity of the object to update.</td>
+</tr>
+<tr>
+<td>value</td>
+<td>The new value for the mutable notes.</td>
+</tr>
+</tbody></table>
 <h2 id='edit-mutable-source'>Edit Mutable Source</h2>
 <p><code>POST &lt;URI&gt;/updateMutableSource</code></p>
 
 <p>Edit the mutable source of an object specified by the URI.</p>
+<pre class="highlight plaintext tab-plaintext"><code>curl -X POST -H "Accept: text/plain" -H "X-authorization:&lt;&gt;" -d "uri=&lt;&gt;&amp;value=&lt;&gt;" http://synbiohub.org/updateMutableSource
+</code></pre><pre class="highlight python tab-python"><code>
+<span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span>
+    <span class="s">'https://synbiohub.org/updateMutableSource'</span><span class="p">,</span>
+    <span class="n">headers</span><span class="o">=</span><span class="p">{</span>
+        <span class="s">'X-authorization'</span><span class="p">:</span> <span class="s">'&lt;token&gt;'</span><span class="p">,</span>
+        <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'text/plain'</span>
+    <span class="p">},</span>
+    <span class="n">data</span><span class="o">=</span><span class="p">{</span>
+        <span class="s">'uri'</span><span class="p">:</span> <span class="s">'&lt;uri&gt;'</span><span class="p">,</span>
+        <span class="s">'value'</span> <span class="p">:</span> <span class="s">'&lt;value&gt;'</span>
+        <span class="p">},</span>
+<span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
+
+</code></pre><pre class="highlight javascript tab-javascript"><code>
+<span class="kr">const</span> <span class="nx">fetch</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"node-fetch"</span><span class="p">);</span>
+<span class="kr">const</span> <span class="p">{</span> <span class="nx">URLSearchParams</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'url'</span><span class="p">);</span>
+<span class="kr">const</span> <span class="nx">url</span> <span class="o">=</span> <span class="s1">'https://synbiohub.org/updateMutableSource'</span>
+<span class="kd">var</span> <span class="nx">headers</span><span class="o">=</span><span class="p">{</span>
+    <span class="s2">"Accept"</span> <span class="p">:</span> <span class="s2">"text/plain; charset=UTF-8"</span><span class="p">,</span>
+    <span class="s2">"X-authorization"</span> <span class="p">:</span> <span class="s2">"&lt;token&gt;"</span>
+<span class="p">};</span>
+
+
+<span class="kr">const</span> <span class="nx">params</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">URLSearchParams</span><span class="p">();</span>
+<span class="nx">params</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'uri'</span><span class="p">,</span> <span class="s1">'&lt;uri&gt;'</span><span class="p">);</span>
+<span class="nx">params</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'value'</span><span class="p">,</span> <span class="s1">'&lt;value&gt;'</span><span class="p">);</span>
+
+
+<span class="nx">fetch</span><span class="p">(</span><span class="nx">url</span><span class="p">,</span> <span class="p">{</span> <span class="na">method</span><span class="p">:</span> <span class="s1">'POST'</span><span class="p">,</span> <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span><span class="p">,</span> <span class="na">body</span><span class="p">:</span><span class="nx">params</span><span class="p">})</span>
+    <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">res</span> <span class="o">=&gt;</span> <span class="nx">res</span><span class="p">.</span><span class="nx">buffer</span><span class="p">()).</span><span class="nx">then</span><span class="p">(</span><span class="nx">buf</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">buf</span><span class="p">.</span><span class="nx">toString</span><span class="p">()))</span>
+    <span class="p">.</span><span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="o">=&gt;</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">error</span><span class="p">))</span>
+
+
+</code></pre>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>uri</td>
+<td>The identity of the object to update.</td>
+</tr>
+<tr>
+<td>value</td>
+<td>The new value for the mutable source.</td>
+</tr>
+</tbody></table>
 <h2 id='edit-citations'>Edit Citations</h2>
 <p><code>POST &lt;URI&gt;/updateCitations</code></p>
 
 <p>Edit the citations of an object specified by the URI.</p>
+<pre class="highlight plaintext tab-plaintext"><code>curl -X POST -H "Accept: text/plain" -H "X-authorization:&lt;&gt;" -d "uri=&lt;&gt;&amp;value=&lt;&gt;" http://synbiohub.org/updateCitations
+</code></pre><pre class="highlight python tab-python"><code>
+<span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span>
+    <span class="s">'https://synbiohub.org/updateCitations'</span><span class="p">,</span>
+    <span class="n">headers</span><span class="o">=</span><span class="p">{</span>
+        <span class="s">'X-authorization'</span><span class="p">:</span> <span class="s">'&lt;token&gt;'</span><span class="p">,</span>
+        <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'text/plain'</span>
+    <span class="p">},</span>
+    <span class="n">data</span><span class="o">=</span><span class="p">{</span>
+        <span class="s">'uri'</span><span class="p">:</span> <span class="s">'&lt;uri&gt;'</span><span class="p">,</span>
+        <span class="s">'value'</span> <span class="p">:</span> <span class="s">'&lt;value&gt;'</span>
+        <span class="p">},</span>
+<span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
+
+</code></pre><pre class="highlight javascript tab-javascript"><code>
+<span class="kr">const</span> <span class="nx">fetch</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"node-fetch"</span><span class="p">);</span>
+<span class="kr">const</span> <span class="p">{</span> <span class="nx">URLSearchParams</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'url'</span><span class="p">);</span>
+<span class="kr">const</span> <span class="nx">url</span> <span class="o">=</span> <span class="s1">'https://synbiohub.org/updateCitations'</span>
+<span class="kd">var</span> <span class="nx">headers</span><span class="o">=</span><span class="p">{</span>
+    <span class="s2">"Accept"</span> <span class="p">:</span> <span class="s2">"text/plain; charset=UTF-8"</span><span class="p">,</span>
+    <span class="s2">"X-authorization"</span> <span class="p">:</span> <span class="s2">"&lt;token&gt;"</span>
+<span class="p">};</span>
+
+
+<span class="kr">const</span> <span class="nx">params</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">URLSearchParams</span><span class="p">();</span>
+<span class="nx">params</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'uri'</span><span class="p">,</span> <span class="s1">'&lt;uri&gt;'</span><span class="p">);</span>
+<span class="nx">params</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'value'</span><span class="p">,</span> <span class="s1">'&lt;value&gt;'</span><span class="p">);</span>
+
+
+<span class="nx">fetch</span><span class="p">(</span><span class="nx">url</span><span class="p">,</span> <span class="p">{</span> <span class="na">method</span><span class="p">:</span> <span class="s1">'POST'</span><span class="p">,</span> <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span><span class="p">,</span> <span class="na">body</span><span class="p">:</span><span class="nx">params</span><span class="p">})</span>
+    <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">res</span> <span class="o">=&gt;</span> <span class="nx">res</span><span class="p">.</span><span class="nx">buffer</span><span class="p">()).</span><span class="nx">then</span><span class="p">(</span><span class="nx">buf</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">buf</span><span class="p">.</span><span class="nx">toString</span><span class="p">()))</span>
+    <span class="p">.</span><span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="o">=&gt;</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">error</span><span class="p">))</span>
+
+
+</code></pre>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>uri</td>
+<td>The identity of the object to update.</td>
+</tr>
+<tr>
+<td>value</td>
+<td>The new value for the citation.</td>
+</tr>
+</tbody></table>
+<h2 id='edit-field'>Edit Field</h2>
+<p><code>POST &lt;URI&gt;/edit/&lt;field&gt;</code></p>
+<h2 id='add-field'>Add Field</h2>
+<p><code>POST &lt;URI&gt;/add/&lt;field&gt;</code></p>
+<h2 id='remove-field'>Remove Field</h2>
+<p><code>POST &lt;URI&gt;/remove/&lt;field&gt;</code></p>
 <h1 id='attachment-endpoints'>Attachment Endpoints</h1>
 <p>The following endpoints are for creating attachments on SynBioHub.</p>
 
