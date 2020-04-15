@@ -1337,7 +1337,7 @@ print(response.content)
 
 The following endpoints are for managing permissions on SynBioHub.
 
-//!! add banner
+<aside class="success">Note that the X-authorization header is required for all permission endpoints.</aside>
 
 ## Add Owner
 
@@ -1351,7 +1351,7 @@ curl -X POST -H "Accept: text/plain" -H "X-authorization:59763b66-ce63-471b-ac1e
 
 ## Remove Owner
 
-`POST <URI>/public/:collectionId/:displayId/:version/removeOwner/:username`
+`POST <URI>/removeOwner/<username>`
 
 Removes an owner from an object specified  by the URI.
 
@@ -1361,9 +1361,9 @@ curl -X POST -H "Accept: text/plain" -H "X-authorization:<>" -d "userUri=<>" htt
 
 # Edit Endpoints
 
-<aside class="success">Note that the X-authorization header is required for all edit endpoints.</aside>
-
 These endpoints allow you to edit various fields within each object. 
+
+<aside class="success">Note that the X-authorization header is required for all edit endpoints.</aside>
 
 ## Edit Mutable Descriptions
 
@@ -1374,11 +1374,115 @@ Edit the mutable description of an object specified by the URI.
 ```plaintext
 curl -X POST -H "Accept: text/plain" -H "X-authorization:<>" -d "uri=<>&value=<>" http://synbiohub.org/updateMutableDescription
 ```
+
+```python
+
+import requests
+
+response = requests.post(
+    'https://synbiohub.org/updateMutableDescription',
+    headers={
+        'X-authorization': '<token>',
+        'Accept': 'text/plain'
+    },
+    data={
+        'uri': '<uri>',
+        'value' : '<value>'
+        },
+)
+
+print(response.status_code)
+print(response.content)
+
+```
+
+```javascript
+
+const fetch = require("node-fetch");
+const { URLSearchParams } = require('url');
+const url = 'https://synbiohub.org/updateMutableDescription'
+var headers={
+    "Accept" : "text/plain; charset=UTF-8",
+    "X-authorization" : "<token>"
+};
+
+
+const params = new URLSearchParams();
+params.append('uri', '<uri>');
+params.append('value', '<value>');
+
+
+fetch(url, { method: 'POST', headers: headers, body:params})
+    .then(res => res.buffer()).then(buf => console.log(buf.toString()))
+    .catch (error=>console.log(error))
+
+
+```
+
+Parameter | Description
+--------- | -----------
+uri | The identity of the object to update.
+value | The new value for the mutable description
+
+
 ## Edit Mutable Notes
 
 `POST <URI>/updateMutableNotes`
 
 Edit the mutable notes of an object specified by the URI.
+
+```plaintext
+curl -X POST -H "Accept: text/plain" -H "X-authorization:<>" -d "uri=<>&value=<>" http://synbiohub.org/updateMutableNotes
+```
+
+```python
+
+import requests
+
+response = requests.post(
+    'https://synbiohub.org/updateMutableNotes',
+    headers={
+        'X-authorization': '<token>',
+        'Accept': 'text/plain'
+    },
+    data={
+        'uri': '<uri>',
+        'value' : '<value>'
+        },
+)
+
+print(response.status_code)
+print(response.content)
+
+```
+
+```javascript
+
+const fetch = require("node-fetch");
+const { URLSearchParams } = require('url');
+const url = 'https://synbiohub.org/updateMutableNotes'
+var headers={
+    "Accept" : "text/plain; charset=UTF-8",
+    "X-authorization" : "<token>"
+};
+
+
+const params = new URLSearchParams();
+params.append('uri', '<uri>');
+params.append('value', '<value>');
+
+
+fetch(url, { method: 'POST', headers: headers, body:params})
+    .then(res => res.buffer()).then(buf => console.log(buf.toString()))
+    .catch (error=>console.log(error))
+
+
+```
+
+Parameter | Description
+--------- | -----------
+uri | The identity of the object to update.
+value | The new value for the mutable notes.
 
 ## Edit Mutable Source
 
@@ -1386,11 +1490,129 @@ Edit the mutable notes of an object specified by the URI.
 
 Edit the mutable source of an object specified by the URI.
 
+```plaintext
+curl -X POST -H "Accept: text/plain" -H "X-authorization:<>" -d "uri=<>&value=<>" http://synbiohub.org/updateMutableSource
+```
+
+```python
+
+import requests
+
+response = requests.post(
+    'https://synbiohub.org/updateMutableSource',
+    headers={
+        'X-authorization': '<token>',
+        'Accept': 'text/plain'
+    },
+    data={
+        'uri': '<uri>',
+        'value' : '<value>'
+        },
+)
+
+print(response.status_code)
+print(response.content)
+
+```
+
+```javascript
+
+const fetch = require("node-fetch");
+const { URLSearchParams } = require('url');
+const url = 'https://synbiohub.org/updateMutableSource'
+var headers={
+    "Accept" : "text/plain; charset=UTF-8",
+    "X-authorization" : "<token>"
+};
+
+
+const params = new URLSearchParams();
+params.append('uri', '<uri>');
+params.append('value', '<value>');
+
+
+fetch(url, { method: 'POST', headers: headers, body:params})
+    .then(res => res.buffer()).then(buf => console.log(buf.toString()))
+    .catch (error=>console.log(error))
+
+
+```
+
+Parameter | Description
+--------- | -----------
+uri | The identity of the object to update.
+value | The new value for the mutable source.
+
 ## Edit Citations
 
 `POST <URI>/updateCitations`
 
 Edit the citations of an object specified by the URI.
+
+```plaintext
+curl -X POST -H "Accept: text/plain" -H "X-authorization:<>" -d "uri=<>&value=<>" http://synbiohub.org/updateCitations
+```
+
+```python
+
+import requests
+
+response = requests.post(
+    'https://synbiohub.org/updateCitations',
+    headers={
+        'X-authorization': '<token>',
+        'Accept': 'text/plain'
+    },
+    data={
+        'uri': '<uri>',
+        'value' : '<value>'
+        },
+)
+
+print(response.status_code)
+print(response.content)
+
+```
+
+```javascript
+
+const fetch = require("node-fetch");
+const { URLSearchParams } = require('url');
+const url = 'https://synbiohub.org/updateCitations'
+var headers={
+    "Accept" : "text/plain; charset=UTF-8",
+    "X-authorization" : "<token>"
+};
+
+
+const params = new URLSearchParams();
+params.append('uri', '<uri>');
+params.append('value', '<value>');
+
+
+fetch(url, { method: 'POST', headers: headers, body:params})
+    .then(res => res.buffer()).then(buf => console.log(buf.toString()))
+    .catch (error=>console.log(error))
+
+
+```
+
+Parameter | Description
+--------- | -----------
+uri | The identity of the object to update.
+value | The new value for the citation.
+
+## Edit Field
+
+`POST <URI>/edit/<field>`
+
+## Add Field
+
+`POST <URI>/add/<field>`
+
+## Remove Field
+
+`POST <URI>/remove/<field>`
 
 # Attachment Endpoints
 
