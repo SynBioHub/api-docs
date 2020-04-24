@@ -618,7 +618,6 @@ server {
 <span class="n">url</span> <span class="o">=</span> <span class="s">'https://synbiohub.org/login'</span>
 <span class="n">myobj</span> <span class="o">=</span> <span class="p">{</span><span class="s">'email'</span><span class="p">:</span> <span class="s">'test@user.synbiohub'</span><span class="p">,</span>
          <span class="s">'password'</span> <span class="p">:</span> <span class="s">'test'</span><span class="p">}</span>
-<span class="n">headers</span> <span class="o">=</span><span class="p">{</span><span class="s">'Accept'</span> <span class="p">:</span> <span class="s">'text/plain'</span><span class="p">}</span>
 
 <span class="n">x</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">myobj</span><span class="p">,</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span><span class="p">)</span>
 
@@ -1500,8 +1499,26 @@ This endpoint returns JSON metadata of the form:
 <p><code>POST &lt;URI&gt;/addOwner</code></p>
 
 <p>Adds an owner to an object specfied by the URI.</p>
-<pre class="highlight plaintext tab-plaintext"><code>curl -X POST -H "Accept: text/plain" -H "X-authorization:59763b66-ce63-471b-ac1e-2cfcb9926bb0" -d "user=dockertestuser&amp;uri=http://localhost:7777/user/testuser/bruh/bruh_collection/1/addOwner" http://localhost:7777/user/testuser/bruh/bruh_collection/1/addOwner
-</code></pre><h2 id='remove-owner'>Remove Owner</h2>
+<pre class="highlight plaintext tab-plaintext"><code>ucurl -X POST -H "Accept: text/plain" -H "X-authorization:59763b66-ce63-471b-ac1e-2cfcb9926bb0" -d "user=dockertestuser&amp;uri=http://localhost:7777/user/testuser/bruh/bruh_collection/1/addOwner" http://localhost:7777/user/testuser/bruh/bruh_collection/1/addOwner
+</code></pre><pre class="highlight python tab-python"><code>
+</code></pre><pre class="highlight javascript tab-javascript"><code>
+</code></pre>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>user</td>
+<td>The user id of owner being added.</td>
+</tr>
+<tr>
+<td>uri</td>
+<td>The identity of the object to add owner to.</td>
+</tr>
+</tbody></table>
+<h2 id='remove-owner'>Remove Owner</h2>
 <p><code>POST &lt;URI&gt;/removeOwner/&lt;username&gt;</code></p>
 
 <p>Removes an owner from an object specified  by the URI.</p>
