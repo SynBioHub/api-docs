@@ -229,7 +229,6 @@ import requests
 url = 'https://synbiohub.org/login'
 myobj = {'email': 'test@user.synbiohub',
          'password' : 'test'}
-headers ={'Accept' : 'text/plain'}
 
 x = requests.post(url, data = myobj, headers = headers)
 
@@ -1346,8 +1345,21 @@ The following endpoints are for managing permissions on SynBioHub.
 Adds an owner to an object specfied by the URI.
 
 ```plaintext
-curl -X POST -H "Accept: text/plain" -H "X-authorization:59763b66-ce63-471b-ac1e-2cfcb9926bb0" -d "user=dockertestuser&uri=http://localhost:7777/user/testuser/bruh/bruh_collection/1/addOwner" http://localhost:7777/user/testuser/bruh/bruh_collection/1/addOwner
+ucurl -X POST -H "Accept: text/plain" -H "X-authorization:59763b66-ce63-471b-ac1e-2cfcb9926bb0" -d "user=dockertestuser&uri=http://localhost:7777/user/testuser/bruh/bruh_collection/1/addOwner" http://localhost:7777/user/testuser/bruh/bruh_collection/1/addOwner
 ```
+
+```python
+
+```
+
+```javascript
+
+```
+
+Parameter | Description
+--------- | ------- | -----------
+user | The user id of owner being added.
+uri | The identity of the object to add owner to.
 
 ## Remove Owner
 
