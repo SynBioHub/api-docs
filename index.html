@@ -1323,6 +1323,54 @@ This endpoint returns JSON metadata of the form:
 
 <p>Create a new collection including the elements within a file or add to a preexisting collection using the elements within a file.</p>
 <pre class="highlight plaintext tab-plaintext"><code>curl -X POST -H "Accept: text/plain" -H "X-authorization: &lt;token&gt;" -F id=&lt;id&gt; -F version=&lt;version&gt; -F name=&lt;name&gt; -F description=&lt;description&gt; -F citations=&lt;citations&gt; -F overwrite_merge=&lt;overwrite_merge&gt; -F file=@&lt;filename&gt; https://synbiohub.org/submit
+</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span>
+    <span class="s">'https://synbiohub.org/submit'</span><span class="p">,</span>
+    <span class="n">headers</span><span class="o">=</span><span class="p">{</span>
+        <span class="s">'X-authorization'</span><span class="p">:</span> <span class="s">'&lt;token&gt;'</span><span class="p">,</span>
+        <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'text/plain'</span>
+    <span class="p">},</span>
+    <span class="n">files</span><span class="o">=</span><span class="p">{</span>
+    <span class="s">'files'</span><span class="p">:</span> <span class="nb">open</span><span class="p">(</span><span class="s">'&lt;file.txt&gt;'</span><span class="p">,</span><span class="s">'rb'</span><span class="p">),</span>
+    <span class="p">},</span>
+    <span class="n">data</span><span class="o">=</span><span class="p">{</span>
+        <span class="s">'id'</span><span class="p">:</span> <span class="s">'&lt;id&gt;'</span><span class="p">,</span>
+        <span class="s">'version'</span> <span class="p">:</span> <span class="s">'&lt;version&gt;'</span><span class="p">,</span>
+        <span class="s">'name'</span> <span class="p">:</span> <span class="s">'&lt;name&gt;'</span><span class="p">,</span>
+        <span class="s">'description'</span> <span class="p">:</span> <span class="s">'&lt;description&gt;'</span><span class="p">,</span>
+        <span class="s">'citations'</span> <span class="p">:</span> <span class="s">'&lt;citations&gt;'</span><span class="p">,</span>
+        <span class="s">'overwrite_merge'</span> <span class="p">:</span> <span class="s">'&lt;tabState&gt;'</span>
+    <span class="p">},</span>
+
+<span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
+
+</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">fetch</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"node-fetch"</span><span class="p">);</span>
+<span class="kr">const</span> <span class="nx">FormData</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'form-data'</span><span class="p">);</span>
+<span class="kr">const</span> <span class="p">{</span> <span class="nx">createReadStream</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'fs'</span><span class="p">);</span>
+<span class="kr">const</span> <span class="nx">url</span> <span class="o">=</span> <span class="s1">'https://synbiohub.org/submit'</span>
+<span class="kr">const</span> <span class="nx">stream</span> <span class="o">=</span> <span class="nx">createReadStream</span><span class="p">(</span><span class="s1">'input.txt'</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">headers</span><span class="o">=</span><span class="p">{</span>
+    <span class="s2">"Accept"</span> <span class="p">:</span> <span class="s2">"text/plain; charset=UTF-8"</span><span class="p">,</span>
+    <span class="s2">"X-authorization"</span> <span class="p">:</span> <span class="s2">"&lt;token&gt;"</span>
+<span class="p">};</span>
+
+<span class="kr">const</span> <span class="nx">form</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">FormData</span><span class="p">();</span>
+<span class="nx">form</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'id'</span><span class="p">,</span> <span class="s1">'&lt;id&gt;'</span><span class="p">);</span>
+<span class="nx">form</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'version'</span><span class="p">,</span> <span class="s1">'&lt;version&gt;'</span><span class="p">);</span>
+<span class="nx">form</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'name'</span><span class="p">,</span> <span class="s1">'&lt;name&gt;'</span><span class="p">);</span>
+<span class="nx">form</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'description'</span><span class="p">,</span> <span class="s1">'&lt;description&gt;'</span><span class="p">);</span>
+<span class="nx">form</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'citations'</span><span class="p">,</span> <span class="s1">'&lt;citations&gt;'</span><span class="p">);</span>
+<span class="nx">form</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'overwrite_merge'</span><span class="p">,</span> <span class="s1">'&lt;overwrite_merge&gt;'</span><span class="p">);</span>
+<span class="nx">form</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'file'</span><span class="p">,</span> <span class="nx">stream</span><span class="p">);</span>
+
+
+<span class="nx">fetch</span><span class="p">(</span><span class="nx">url</span><span class="p">,</span> <span class="p">{</span> <span class="na">method</span><span class="p">:</span> <span class="s1">'POST'</span><span class="p">,</span> <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span><span class="p">,</span> <span class="na">body</span><span class="p">:</span><span class="nx">form</span><span class="p">})</span>
+    <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">res</span> <span class="o">=&gt;</span> <span class="nx">res</span><span class="p">.</span><span class="nx">buffer</span><span class="p">()).</span><span class="nx">then</span><span class="p">(</span><span class="nx">buf</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">buf</span><span class="p">.</span><span class="nx">toString</span><span class="p">()))</span>
+    <span class="p">.</span><span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="o">=&gt;</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">error</span><span class="p">))</span>
 </code></pre>
 <table><thead>
 <tr>
@@ -1499,9 +1547,39 @@ This endpoint returns JSON metadata of the form:
 <p><code>POST &lt;URI&gt;/addOwner</code></p>
 
 <p>Adds an owner to an object specfied by the URI.</p>
-<pre class="highlight plaintext tab-plaintext"><code>ucurl -X POST -H "Accept: text/plain" -H "X-authorization:59763b66-ce63-471b-ac1e-2cfcb9926bb0" -d "user=dockertestuser&amp;uri=http://localhost:7777/user/testuser/bruh/bruh_collection/1/addOwner" http://localhost:7777/user/testuser/bruh/bruh_collection/1/addOwner
-</code></pre><pre class="highlight python tab-python"><code>
-</code></pre><pre class="highlight javascript tab-javascript"><code>
+<pre class="highlight plaintext tab-plaintext"><code>curl -X POST -H "Accept: text/plain" -H "X-authorization:&lt;token&gt;" -d "user=&lt;user&gt;&amp;uri=&lt;uri&gt;" https://synbiohub.org/user/testuser/bruh/bruh_collection/1/addOwner
+</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span>
+    <span class="s">'http://localhost:7777/user/testuser/bruh/bruh_collection/1/addOwner'</span><span class="p">,</span>
+    <span class="n">headers</span><span class="o">=</span><span class="p">{</span>
+        <span class="s">'X-authorization'</span><span class="p">:</span> <span class="s">'47f48533-0b4f-4aa1-b410-2aa1f7235eae'</span><span class="p">,</span>
+        <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'text/plain'</span>
+    <span class="p">},</span>
+    <span class="n">data</span><span class="o">=</span><span class="p">{</span>
+        <span class="s">'user'</span><span class="p">:</span> <span class="s">'jvscholz'</span><span class="p">,</span>
+        <span class="s">'uri'</span> <span class="p">:</span> <span class="s">'http://localhost:7777/user/testuser/bruh/bruh_collection/1/addOwner'</span>
+        <span class="p">},</span>
+<span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
+</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">fetch</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"node-fetch"</span><span class="p">);</span>
+<span class="kr">const</span> <span class="p">{</span> <span class="nx">URLSearchParams</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'url'</span><span class="p">);</span>
+<span class="kr">const</span> <span class="nx">url</span> <span class="o">=</span> <span class="s1">'https://synbiohub.org/user/testuser/bruh2/bruh2_collection/1/addOwner'</span>
+<span class="kd">var</span> <span class="nx">headers</span><span class="o">=</span><span class="p">{</span>
+    <span class="s2">"Accept"</span> <span class="p">:</span> <span class="s2">"text/plain; charset=UTF-8"</span><span class="p">,</span>
+    <span class="s2">"X-authorization"</span> <span class="p">:</span> <span class="s2">"&lt;token&gt;"</span>
+<span class="p">};</span>
+
+<span class="kr">const</span> <span class="nx">params</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">URLSearchParams</span><span class="p">();</span>
+<span class="nx">params</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'user'</span><span class="p">,</span> <span class="s1">'&lt;id&gt;'</span><span class="p">);</span>
+<span class="nx">params</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'uri'</span><span class="p">,</span> <span class="s1">'&lt;version&gt;'</span><span class="p">);</span>
+
+
+<span class="nx">fetch</span><span class="p">(</span><span class="nx">url</span><span class="p">,</span> <span class="p">{</span> <span class="na">method</span><span class="p">:</span> <span class="s1">'POST'</span><span class="p">,</span> <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span><span class="p">,</span> <span class="na">body</span><span class="p">:</span><span class="nx">params</span><span class="p">})</span>
+    <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">res</span> <span class="o">=&gt;</span> <span class="nx">res</span><span class="p">.</span><span class="nx">buffer</span><span class="p">()).</span><span class="nx">then</span><span class="p">(</span><span class="nx">buf</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">buf</span><span class="p">.</span><span class="nx">toString</span><span class="p">()))</span>
+    <span class="p">.</span><span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="o">=&gt;</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">error</span><span class="p">))</span>
 </code></pre>
 <table><thead>
 <tr>
@@ -1523,7 +1601,50 @@ This endpoint returns JSON metadata of the form:
 
 <p>Removes an owner from an object specified  by the URI.</p>
 <pre class="highlight plaintext tab-plaintext"><code>curl -X POST -H "Accept: text/plain" -H "X-authorization:&lt;&gt;" -d "userUri=&lt;&gt;" http://synbiohub.org/public/:collectionId/:displayId/:version/removeOwner/:username
-</code></pre><h1 id='edit-endpoints'>Edit Endpoints</h1>
+</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span>
+    <span class="s">'http://localhost:7777/user/testuser/bruh/bruh_collection/1/removeOwner/:username'</span><span class="p">,</span>
+    <span class="n">headers</span><span class="o">=</span><span class="p">{</span>
+        <span class="s">'X-authorization'</span><span class="p">:</span> <span class="s">'47f48533-0b4f-4aa1-b410-2aa1f7235eae'</span><span class="p">,</span>
+        <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'text/plain'</span>
+    <span class="p">},</span>
+    <span class="n">data</span><span class="o">=</span><span class="p">{</span>
+        <span class="s">'userUri'</span><span class="p">:</span> <span class="s">'jvscholz'</span><span class="p">,</span>
+        <span class="p">},</span>
+<span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
+</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">fetch</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"node-fetch"</span><span class="p">);</span>
+<span class="kr">const</span> <span class="p">{</span> <span class="nx">URLSearchParams</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'url'</span><span class="p">);</span>
+<span class="kr">const</span> <span class="nx">url</span> <span class="o">=</span> <span class="s1">'https://synbiohub.org/user/testuser/bruh2/bruh2_collection/1/removeOwner/:username'</span>
+<span class="kd">var</span> <span class="nx">headers</span><span class="o">=</span><span class="p">{</span>
+    <span class="s2">"Accept"</span> <span class="p">:</span> <span class="s2">"text/plain; charset=UTF-8"</span><span class="p">,</span>
+    <span class="s2">"X-authorization"</span> <span class="p">:</span> <span class="s2">"&lt;token&gt;"</span>
+<span class="p">};</span>
+
+<span class="kr">const</span> <span class="nx">params</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">URLSearchParams</span><span class="p">();</span>
+<span class="nx">params</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'userUri'</span><span class="p">,</span> <span class="s1">'&lt;id&gt;'</span><span class="p">);</span>
+
+
+
+<span class="nx">fetch</span><span class="p">(</span><span class="nx">url</span><span class="p">,</span> <span class="p">{</span> <span class="na">method</span><span class="p">:</span> <span class="s1">'POST'</span><span class="p">,</span> <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span><span class="p">,</span> <span class="na">body</span><span class="p">:</span><span class="nx">params</span><span class="p">})</span>
+    <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">res</span> <span class="o">=&gt;</span> <span class="nx">res</span><span class="p">.</span><span class="nx">buffer</span><span class="p">()).</span><span class="nx">then</span><span class="p">(</span><span class="nx">buf</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">buf</span><span class="p">.</span><span class="nx">toString</span><span class="p">()))</span>
+    <span class="p">.</span><span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="o">=&gt;</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">error</span><span class="p">))</span>
+</code></pre>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>userUri</td>
+<td>The user id of the user being removed.</td>
+</tr>
+</tbody></table>
+<h1 id='edit-endpoints'>Edit Endpoints</h1>
 <p>These endpoints allow you to edit various fields within each object. </p>
 
 <aside class="success">Note that the X-authorization header is required for all edit endpoints.</aside>
@@ -1765,9 +1886,15 @@ This endpoint returns JSON metadata of the form:
 </tbody></table>
 <h2 id='edit-field'>Edit Field</h2>
 <p><code>POST &lt;URI&gt;/edit/&lt;field&gt;</code></p>
-<h2 id='add-field'>Add Field</h2>
+<pre class="highlight plaintext tab-plaintext"><code>curl -X POST -H "Accept: text/plain" -H "X-authorization: 9ff4f790-a9e8-42be-979f-9472be53f905" -d "previous=hi&amp;object=test"  localhost:7777/user/testuser/bruh/bruh_collection/1/edit/description
+</code></pre><pre class="highlight python tab-python"><code>
+</code></pre><pre class="highlight javascript tab-javascript"><code>
+</code></pre><h2 id='add-field'>Add Field</h2>
 <p><code>POST &lt;URI&gt;/add/&lt;field&gt;</code></p>
-<h2 id='remove-field'>Remove Field</h2>
+<pre class="highlight plaintext tab-plaintext"><code>curl -X POST -H "Accept: text/plain" -H "X-authorization: 9ff4f790-a9e8-42be-979f-9472be53f905" -d "object=test"  localhost:7777/user/testuser/bruh/bruh_collection/1/add/Notes
+</code></pre><pre class="highlight python tab-python"><code>
+</code></pre><pre class="highlight javascript tab-javascript"><code>
+</code></pre><h2 id='remove-field'>Remove Field</h2>
 <p><code>POST &lt;URI&gt;/remove/&lt;field&gt;</code></p>
 <h1 id='attachment-endpoints'>Attachment Endpoints</h1>
 <p>The following endpoints are for creating attachments on SynBioHub.</p>
