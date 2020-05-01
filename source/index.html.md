@@ -1147,6 +1147,60 @@ Create a new collection including the elements within a file or add to a preexis
 curl -X POST -H "Accept: text/plain" -H "X-authorization: <token>" -F id=<id> -F version=<version> -F name=<name> -F description=<description> -F citations=<citations> -F overwrite_merge=<overwrite_merge> -F file=@<filename> https://synbiohub.org/submit
 ```
 
+```python
+import requests
+
+response = requests.post(
+    'https://synbiohub.org/submit',
+    headers={
+        'X-authorization': '<token>',
+        'Accept': 'text/plain'
+    },
+    files={
+	'files': open('<file.txt>','rb'),
+	},
+    data={
+        'id': '<id>',
+        'version' : '<version>',
+        'name' : '<name>',
+        'description' : '<description>',
+        'citations' : '<citations>',
+        'overwrite_merge' : '<tabState>'
+    },
+
+)
+
+print(response.status_code)
+print(response.content)
+
+```
+
+```javascript
+const fetch = require("node-fetch");
+const FormData = require('form-data');
+const { createReadStream } = require('fs');
+const url = 'https://synbiohub.org/submit'
+const stream = createReadStream('input.txt');
+var headers={
+    "Accept" : "text/plain; charset=UTF-8",
+    "X-authorization" : "<token>"
+};
+
+const form = new FormData();
+form.append('id', '<id>');
+form.append('version', '<version>');
+form.append('name', '<name>');
+form.append('description', '<description>');
+form.append('citations', '<citations>');
+form.append('overwrite_merge', '<overwrite_merge>');
+form.append('file', stream);
+
+
+fetch(url, { method: 'POST', headers: headers, body:form})
+    .then(res => res.buffer()).then(buf => console.log(buf.toString()))
+    .catch (error=>console.log(error))
+```
+
 Parameter | Description
 --------- | -----------
 id | a user-defined string identifier for the submission; alphanumeric and underscores only,  (ex.`BBa_R0010`)
@@ -1345,15 +1399,45 @@ The following endpoints are for managing permissions on SynBioHub.
 Adds an owner to an object specfied by the URI.
 
 ```plaintext
-ucurl -X POST -H "Accept: text/plain" -H "X-authorization:59763b66-ce63-471b-ac1e-2cfcb9926bb0" -d "user=dockertestuser&uri=http://localhost:7777/user/testuser/bruh/bruh_collection/1/addOwner" http://localhost:7777/user/testuser/bruh/bruh_collection/1/addOwner
+curl -X POST -H "Accept: text/plain" -H "X-authorization:<token>" -d "user=<user>&uri=<uri>" https://synbiohub.org/user/testuser/bruh/bruh_collection/1/addOwner
 ```
 
 ```python
+import requests
 
+response = requests.post(
+    'http://localhost:7777/user/testuser/bruh/bruh_collection/1/addOwner',
+    headers={
+        'X-authorization': '47f48533-0b4f-4aa1-b410-2aa1f7235eae',
+        'Accept': 'text/plain'
+    },
+    data={
+        'user': 'jvscholz',
+        'uri' : 'http://localhost:7777/user/testuser/bruh/bruh_collection/1/addOwner'
+        },
+)
+
+print(response.status_code)
+print(response.content)
 ```
 
 ```javascript
+const fetch = require("node-fetch");
+const { URLSearchParams } = require('url');
+const url = 'https://synbiohub.org/user/testuser/bruh2/bruh2_collection/1/addOwner'
+var headers={
+    "Accept" : "text/plain; charset=UTF-8",
+    "X-authorization" : "<token>"
+};
 
+const params = new URLSearchParams();
+params.append('user', '<id>');
+params.append('uri', '<version>');
+
+
+fetch(url, { method: 'POST', headers: headers, body:params})
+    .then(res => res.buffer()).then(buf => console.log(buf.toString()))
+    .catch (error=>console.log(error))
 ```
 
 Parameter | Description
@@ -1370,6 +1454,47 @@ Removes an owner from an object specified  by the URI.
 ```plaintext
 curl -X POST -H "Accept: text/plain" -H "X-authorization:<>" -d "userUri=<>" http://synbiohub.org/public/:collectionId/:displayId/:version/removeOwner/:username
 ```
+
+```python
+import requests
+
+response = requests.post(
+    'http://localhost:7777/user/testuser/bruh/bruh_collection/1/removeOwner/:username',
+    headers={
+        'X-authorization': '47f48533-0b4f-4aa1-b410-2aa1f7235eae',
+        'Accept': 'text/plain'
+    },
+    data={
+        'userUri': 'jvscholz',
+        },
+)
+
+print(response.status_code)
+print(response.content)
+```
+
+```javascript
+const fetch = require("node-fetch");
+const { URLSearchParams } = require('url');
+const url = 'https://synbiohub.org/user/testuser/bruh2/bruh2_collection/1/removeOwner/:username'
+var headers={
+    "Accept" : "text/plain; charset=UTF-8",
+    "X-authorization" : "<token>"
+};
+
+const params = new URLSearchParams();
+params.append('userUri', '<id>');
+
+
+
+fetch(url, { method: 'POST', headers: headers, body:params})
+    .then(res => res.buffer()).then(buf => console.log(buf.toString()))
+    .catch (error=>console.log(error))
+```
+
+Parameter | Description
+--------- | ------- | -----------
+userUri | The user id of the user being removed.
 
 # Edit Endpoints
 
@@ -1618,9 +1743,34 @@ value | The new value for the citation.
 
 `POST <URI>/edit/<field>`
 
+```plaintext
+curl -X POST -H "Accept: text/plain" -H "X-authorization: 9ff4f790-a9e8-42be-979f-9472be53f905" -d "previous=hi&object=test"  localhost:7777/user/testuser/bruh/bruh_collection/1/edit/description
+```
+
+```python
+
+```
+
+```javascript
+
+```
+
 ## Add Field
 
 `POST <URI>/add/<field>`
+
+```plaintext
+curl -X POST -H "Accept: text/plain" -H "X-authorization: 9ff4f790-a9e8-42be-979f-9472be53f905" -d "object=test"  localhost:7777/user/testuser/bruh/bruh_collection/1/add/Notes
+```
+
+```python
+
+```
+
+```javascript
+
+```
+
 
 ## Remove Field
 
