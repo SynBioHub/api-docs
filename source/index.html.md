@@ -306,6 +306,23 @@ fetch(url, { method: 'POST', headers: headers, body: params})
     .then(body => console.log(body));
 ```
 
+## Reset Password
+
+`POST <SynBioHub URL>/setNewPassword`
+
+Resets the user's password.
+
+## View Profile
+
+`GET <SynBioHub URL>/profile`
+
+View the user's profile.
+
+## Update Profile
+
+`POST <SynBioHub URL>/profile`
+
+Update the user's profile.
 
 # Search Endpoints
 
@@ -1570,11 +1587,10 @@ These endpoints allow you to edit various fields within each object.
 Edit the mutable description of an object specified by the URI. 
 
 ```plaintext
-curl -X POST -H "Accept: text/plain" -H "X-authorization:<>" -d "uri=<>&value=<>" http://synbiohub.org/updateMutableDescription
+curl -X POST -H "Accept: text/plain" -H "X-authorization:<token>" -d "uri=<uri>&value=<value>" http://synbiohub.org/updateMutableDescription
 ```
 
 ```python
-
 import requests
 
 response = requests.post(
@@ -1630,7 +1646,7 @@ value | The new value for the mutable description
 Edit the mutable notes of an object specified by the URI.
 
 ```plaintext
-curl -X POST -H "Accept: text/plain" -H "X-authorization:<>" -d "uri=<>&value=<>" http://synbiohub.org/updateMutableNotes
+curl -X POST -H "Accept: text/plain" -H "X-authorization:<token>" -d "uri=<uri>&value=<value>" http://synbiohub.org/updateMutableNotes
 ```
 
 ```python
@@ -1748,7 +1764,7 @@ value | The new value for the mutable source.
 Edit the citations of an object specified by the URI.
 
 ```plaintext
-curl -X POST -H "Accept: text/plain" -H "X-authorization:<>" -d "uri=<>&value=<>" http://synbiohub.org/updateCitations
+curl -X POST -H "Accept: text/plain" -H "X-authorization:<token>" -d "uri=<uri>&value=<value>" http://synbiohub.org/updateCitations
 ```
 
 ```python
@@ -1804,9 +1820,10 @@ value | The new value for the citation.
 
 `POST <URI>/edit/<field>`
 
-```plaintext
-curl -X POST -H "Accept: text/plain" -H "X-authorization: 9ff4f790-a9e8-42be-979f-9472be53f905" -d "previous=bruh&object=test"  localhost:7777/user/testuser/bruh/bruh_collection/1/edit/description
+Edit field of an object.
 
+```plaintext
+curl -X POST -H "Accept: text/plain" -H "X-authorization: <token>" -d "previous=<previous>&object=<test>"  synbiohub.org/edit/:field
 ```
 
 ```python
@@ -1816,13 +1833,27 @@ curl -X POST -H "Accept: text/plain" -H "X-authorization: 9ff4f790-a9e8-42be-979
 ```javascript
 
 ```
+
+Parameter | Description
+--------- | -----------
+previous | The previous value of the field.
+object | The new value of the field.
+
+Possible fields to edit:
+`title`
+`description`
+`role`
+`wasDerivedFrom`
+`type`
 
 ## Add Field
 
 `POST <URI>/add/<field>`
 
+Add field to an object.
+
 ```plaintext
-curl -X POST -H "Accept: text/plain" -H "X-authorization: 9ff4f790-a9e8-42be-979f-9472be53f905" -d "object=test"  localhost:7777/user/testuser/bruh/bruh_collection/1/add/Notes
+curl -X POST -H "Accept: text/plain" -H "X-authorization:<token>" -d "object=<object>"  synbiohub.org/add/:field
 ```
 
 ```python
@@ -1832,11 +1863,38 @@ curl -X POST -H "Accept: text/plain" -H "X-authorization: 9ff4f790-a9e8-42be-979
 ```javascript
 
 ```
+Parameter | Description
+--------- | -----------
+object | The new value of the field.
 
+Possible fields to add:
+`role`
+`type`
 
 ## Remove Field
 
 `POST <URI>/remove/<field>`
+
+Remove field from an object.
+
+```plaintext
+curl -X POST -H "Accept: text/plain" -H "X-authorization:<token>" -d "object=<object>"  synbiohub.org/remove/:field
+```
+
+```python
+
+```
+
+```javascript
+
+```
+Parameter | Description
+--------- | -----------
+object | The value of the field to remove.
+
+Possible fields to remove:
+`role`
+`type`
 
 # Attachment Endpoints
 
@@ -1950,145 +2008,145 @@ print(response.json())
 
 ## Admin
 
-`GET <SynBioHub URL/admin>`
+`GET <SynBioHub URL>/admin`
 
 not sure what this does
 
 ## View Graphs
 
-`GET <SynBioHub URL/admin/graphs>`
+`GET <SynBioHub URL>/admin/graphs`
 
 Returns existing graphs and its number of triples.
 
 ## View Log
 
-`GET <SynBioHub URL/admin/log>`
+`GET <SynBioHub URL>/admin/log`
 
 Returns the log.
 
 ## View Current Mail Settings
 
-`GET <SynBioHub URL/admin/mail>`
+`GET <SynBioHub URL>/admin/mail`
 
 Returns the current mail configuration.
 
 ## Update Mail Settings
 
-`POST <SynBioHub URL/admin/mail>`
+`POST <SynBioHub URL>/admin/mail`
 
 Update the mail configuration.
 
 ## View Plugins
 
-`GET <SynBioHub URL/admin/plugins>`
+`GET <SynBioHub URL>/admin/plugins`
 
 View current plugins.
 
 ## Save Plugin
 
-`POST <SynBioHub URL/admin/savePlugin>`
+`POST <SynBioHub URL>/admin/savePlugin`
 
 Save a new plugin.
 
 ## Delete Plugin
 
-`POST <SynBioHub URL/admin/deletePlugin>`
+`POST <SynBioHub URL>/admin/deletePlugin`
 
 Delete a plugin.
 
 ## View Registries
 
-`GET <SynBioHub URL/admin/registries>`
+`GET <SynBioHub URL>/admin/registries`
 
 View current registries.
 
 ## Save Registry
 
-`POST <SynBioHub URL/admin/saveRegistry>`
+`POST <SynBioHub URL>/admin/saveRegistry`
 
 Save a new registry.
 
 ## Delete Registry
 
-`POST <SynBioHub URL/admin/deleteRegistry>`
+`POST <SynBioHub URL>/admin/deleteRegistry`
 
 Delete a registry.
 
 ## Set Administrator Email
 
-`POST <SynBioHub URL/admin/setAdministratorEmail>`
+`POST <SynBioHub URL>/admin/setAdministratorEmail`
 
 Update Web Of Registries administrator email.
 
 ## Retrieve From Web Of Registries
 
-`POST <SynBioHub URL/admin/retrieveFromWebOfRegistries>`
+`POST <SynBioHub URL>/admin/retrieveFromWebOfRegistries`
 
 Update registries from Web Of Registries.
 
 ## Federate
 
-`POST <SynBioHub URL/admin/federate>`
+`POST <SynBioHub URL>/admin/federate`
 
 Send request to join Web-of-Registries for a SynBioHub.
 
 ## View Remotes
 
-`GET <SynBioHub URL/admin/remotes>`
+`GET <SynBioHub URL>/admin/remotes`
 
 View current remotes.
 
 ## Save Remote
 
-`POST <SynBioHub URL/admin/saveRemote>`
+`POST <SynBioHub URL>/admin/saveRemote`
 
 Save a new remote.
 
 ## Delete Remote
 
-`POST <SynBioHub URL/admin/deleteRemote>`
+`POST <SynBioHub URL>/admin/deleteRemote`
 
 Delete a new remote.
 
 ## View SBOLExplorer
 
-`GET <SynBioHub URL/admin/explorer>`
+`GET <SynBioHub URL>/admin/explorer`
 
 View current SBOLExplorer Endpoint
 
 ## Update SBOLExplorer
 
-`POST <SynBioHub URL/admin/explorer>`
+`POST <SynBioHub URL>/admin/explorer`
 
 Update SBOLExplorer endpoint.
 
 ## Explorer Update Index
 
-`POST <SynBioHub URL/admin/explorerUpdateIndex>`
+`POST <SynBioHub URL>/admin/explorerUpdateIndex`
 
 don't know
 
 ## View Theme
 
-`GET <SynBioHub URL/admin/theme>`
+`GET <SynBioHub URL>/admin/theme`
 
 View the current theme.
 
 ## Update Theme
 
-`POST <SynBioHub URL/admin/theme>`
+`POST <SynBioHub URL>/admin/theme`
 
 Update the theme.
 
 ## View Users
 
-`GET <SynBioHub URL/admin/users>`
+`GET <SynBioHub URL>/admin/users`
 
 View the current users.
 
 ## Update Users
 
-`POST <SynBioHub URL/admin/users>`
+`POST <SynBioHub URL>/admin/users`
 
 Update the user's settings.
 
@@ -2100,13 +2158,13 @@ don't know
 
 ## Update User
 
-`POST <SynBioHub URL/admin/updateUser>`
+`POST <SynBioHub URL>/admin/updateUser`
 
 don't know
 
 ## Delete User
 
-`POST <SynBioHub URL/admin/deleteUser>`
+`POST <SynBioHub URL>/admin/deleteUser`
 
 Delete a user. 
 
