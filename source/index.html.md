@@ -227,7 +227,7 @@ curl -X POST -H "Accept: text/plain" -d "email=<email>&password=<password>" http
 import requests
 
 response = requests.post(
-    'http://localhost:7777/login',
+    'http://synbiohub.org/login',
     headers={
         'X-authorization': '<token>',
         'Accept': 'text/plain'
@@ -252,8 +252,8 @@ var headers = {
 }
 
 const params = new URLSearchParams();
-params.append('email', 'test@user.synbiohub');
-params.append('password', 'test');
+params.append('email', '<email>');
+params.append('password', '<password>');
 
 fetch(url, { method: 'POST', headers: headers, body: params})
     .then(res => res.text())
@@ -262,29 +262,28 @@ fetch(url, { method: 'POST', headers: headers, body: params})
 
 Parameter | Description
 --------- | ------- | -----------
-email | the e-mail address of the user to login with
-password | the password of the user
+email | The e-mail address of the user to login with.
+password | The password of the user.
 
 ## Logout
 
-`POST http://synbiohub.org/logout `
+`POST <SynBioHub URL>/logout `
 
 This post request logs out the user specified in the X-authorization header.
 
 
 ```plaintext
-curl -X POST -H "Accept: text/plain" -H "X-authorization: <token>" localhost:7777/logout
+curl -X POST -H "Accept: text/plain" -H "X-authorization: <token>" http://synbiohub.org/logout
 ```
 
 ```python
 import requests
 
 url = 'https://synbiohub.org/logout'
-myobj = {'email': 'test@user.synbiohub',
-         'password' : 'test'}
+
 headers ={'Accept' : 'text/plain'}
 
-x = requests.post(url, data = myobj, headers = headers)
+x = requests.post(url, headers = headers)
 
 print(x.status_code)
 ```
@@ -297,11 +296,7 @@ var headers = {
     "Accept": "text/plain",
 }
 
-const params = new URLSearchParams();
-params.append('email', 'test@user.synbiohub');
-params.append('password', 'test');
-
-fetch(url, { method: 'POST', headers: headers, body: params})
+fetch(url, { method: 'POST', headers: headers})
     .then(res => res.text())
     .then(body => console.log(body));
 ```
@@ -336,7 +331,7 @@ The following endpoints are used to search within SynBioHub.
 
 ```javascript
 const fetch = require("node-fetch");
-const Url = 'https://synbiohub.org/search/objectType%3DComponentDefinition%26role%3D%3Chttp%3A%2F%2Fidentifiers.org%2Fso%2FSO%3A0000316%3E%26GFP/?offset=0&limit=50'
+const Url = 'https://synbiohub.org/search/<key>=<value>&...&<search string>/?offset=#&limit=#'
 const otherPram={
     headers:{
         "content-type" : "text/plain; charset=UTF-8"
@@ -352,8 +347,8 @@ fetch(Url,otherPram)
 import requests
 
 response = requests.get(
-    'https://synbiohub.org/search/objectType%3DComponentDefinition%26role%3D%3Chttp%3A%2F%2Fidentifiers.org%2Fso%2FSO%3A0000316%3E%26GFP/?offset=0&limit=50',
-    params={'X-authorization': 'token'},
+    'https://synbiohub.org/search/<key>=<value>&...&<search string>/?offset=#&limit=#',
+    params={'X-authorization': '<token>'},
     headers={'Accept': 'text/plain'},
 )
 
@@ -398,11 +393,15 @@ Finally, the URL can end with an offset and limit parameter.
 
 Returns the number of items matching the search result.
 
+```plaintext
+curl -X GET -H "Accept: text/plain" -H "X-authorization: <token>" https://synbiohub.org/searchCount/<key>=<value>&...&<search string>/?offset=#&limit=#
+```
+
 ```python
 import requests
 
 response = requests.get(
-    'https://synbiohub.org/searchCount/objectType%3DComponentDefinition%26role%3D%3Chttp%3A%2F%2Fidentifiers.org%2Fso%2FSO%3A0000316%3E%26GFP',
+    'https://synbiohub.org/searchCount/<key>=<value>&...&<search string>/?offset=#&limit=#',
     params={'X-authorization': 'token'},
     headers={'Accept': 'text/plain'},
 )
@@ -411,14 +410,9 @@ print(response.status_code)
 print(response.content)
 ```
 
-```plaintext
-curl -X GET -H "Accept: text/plain" -H "X-authorization: <token>" https://synbiohub.org/searchCount/objectType%3DComponentDefinition%26role%3D%3Chttp%3A%2F%2Fidentifiers.org%2Fso%2FSO%3A0000316%3E%26GFP
-
-```
-
 ```javascript
 const fetch = require("node-fetch");
-const Url = 'https://synbiohub.org/searchCount/objectType%3DComponentDefinition%26role%3D%3Chttp%3A%2F%2Fidentifiers.org%2Fso%2FSO%3A0000316%3E%26GFP'
+const Url = 'https://synbiohub.org/searchCount/<key>=<value>&...&<search string>/?offset=#&limit=#'
 const otherPram={
     headers:{
         "content-type" : "text/plain; charset=UTF-8"
@@ -432,11 +426,9 @@ fetch(Url,otherPram)
 
 ## Search Root Collections
 
-`GET <SynBioHub URL>/rootCollections
-`
+`GET <SynBioHub URL>/rootCollections`
 
 Returns all root collections.
-
 
 ```plaintext
 
@@ -598,7 +590,7 @@ Returns the collections that are members of another collection.
 import requests
 
 response = requests.get(
-    'https://synbiohub.org/public/bsu/bsu_collection/1/subcollections',
+    '<URI>/subcollections',
     params={'X-authorization': 'token'},
     headers={'Accept': 'text/plain'},
 )
@@ -608,7 +600,7 @@ print(response.content)
 ```
 
 ```plaintext
-curl -X GET -H "Accept: text/plain" -H "X-authorization: <token>" https://synbiohub.org/public/bsu/bsu_collection/1/subcollections
+curl -X GET -H "Accept: text/plain" -H "X-authorization: <token>" <URI>/subcollections
 
 This endpoint returns JSON metadata of the form:
 [
@@ -624,7 +616,7 @@ This endpoint returns JSON metadata of the form:
 
 ```javascript
 const fetch = require("node-fetch");
-const Url = 'https://synbiohub.org/public/bsu/bsu_collection/1/subcollections'
+const Url = '<URI>/subcollections'
 const otherPram={
     headers:{
         "content-type" : "text/plain; charset=UTF-8"
@@ -639,7 +631,7 @@ fetch(Url,otherPram)
 
 ## Search Twins
 
-`GET <SynBioHub URL>/twins`
+`GET <URI>/twins`
 
 Returns other components that have the same sequence.
 
@@ -647,8 +639,8 @@ Returns other components that have the same sequence.
 import requests
 
 response = requests.get(
-    'https://synbiohub.org/public/bsu/BO_5629/1/twins',
-    params={'X-authorization': 'token'},
+    '<URI>/twins',
+    params={'X-authorization': '<token>'},
     headers={'Accept': 'text/plain'},
 )
 
@@ -657,12 +649,12 @@ print(response.content)
 ```
 
 ```plaintext
-curl -X GET -H "Accept: text/plain" -H "X-authorization: <token>" https://synbiohub.org/public/bsu/BO_5629/1/twins
+curl -X GET -H "Accept: text/plain" -H "X-authorization: <token>" <URI>/twins
 ```
 
 ```javascript
 const fetch = require("node-fetch");
-const Url = 'https://synbiohub.org/public/bsu/BO_5629/1/twins'
+const Url = '<URI>/twins'
 const otherPram={
     headers:{
         "content-type" : "text/plain; charset=UTF-8"
@@ -676,18 +668,22 @@ fetch(Url,otherPram)
 
 ## Search Similar 
 
-`GET <SynBioHub URL>/similar`
+`GET <URI>/similar`
 
 Returns other components that have similar sequences.
 
 Note that this endpoint only works if SBOLExplorer is activated.
 
+```plaintext
+curl -X GET -H "Accept: text/plain" -H "X-authorization: <token>" <URI>/similar
+```
+
 ```python
 import requests
 
 response = requests.get(
-    'https://synbiohub.org/public/bsu/BO_5629/1/similar',
-    params={'X-authorization': 'token'},
+    '<URI>/similar',
+    params={'X-authorization': '<token>'},
     headers={'Accept': 'text/plain'},
 )
 
@@ -695,13 +691,9 @@ print(response.status_code)
 print(response.content)
 ```
 
-```plaintext
-curl -X GET -H "Accept: text/plain" -H "X-authorization: <token>" https://synbiohub.org/public/bsu/BO_5629/1/similar
-```
-
 ```javascript
 const fetch = require("node-fetch");
-const Url = 'https://synbiohub.org/public/bsu/BO_5629/1/similar'
+const Url = '<URI>/similar'
 const otherPram={
     headers:{
         "content-type" : "text/plain; charset=UTF-8"
@@ -714,25 +706,12 @@ fetch(Url,otherPram)
 ```
 ## Search Uses
 
-`GET <SynBioHub URL>/uses`
+`GET <URI>/uses`
 
 Returns any other object that refers to this object, for example, if this is a component, it will return all other components that use this as a sub-component.
 
-```python
-import requests
-
-response = requests.get(
-    'https://synbiohub.org/public/bsu/BO_5629/1/uses',
-    params={'X-authorization': 'token'},
-    headers={'Accept': 'text/plain'},
-)
-
-print(response.status_code)
-print(response.content)
-```
-
 ```plaintext
-curl -X GET -H "Accept: text/plain" -H "X-authorization: <token>" https://synbiohub.org/public/bsu/BO_5629/1/uses
+curl -X GET -H "Accept: text/plain" -H "X-authorization: <token>" <URI>/uses
 
 This endpoint returns JSON metadata of the form:
 
@@ -749,6 +728,18 @@ This endpoint returns JSON metadata of the form:
 
 ```
 
+```python
+import requests
+
+response = requests.get(
+    '<URI>/uses',
+    params={'X-authorization': '<token>'},
+    headers={'Accept': 'text/plain'},
+)
+
+print(response.status_code)
+print(response.content)
+```
 
 ```javascript
 const fetch = require("node-fetch");
@@ -764,9 +755,6 @@ fetch(Url,otherPram)
     .catch (error=>console.log(error))
 ```
 
-
-
-
 ## Count Objects
 
 `GET <SynBioHub URL>/<ObjectType>/count`
@@ -774,15 +762,15 @@ fetch(Url,otherPram)
 Returns the number of objects with a specified object type.
 
 ```plaintext
-curl -X GET https://synbiohub.org/Collection/Count
+curl -X GET -H "Accept: text/plain" -H "X-authorization: <token>" https://synbiohub.org/<ObjectType>/Count
 ```
 
 ```python
 import requests
 
 response = requests.get(
-    'https://synbiohub.org/Collection/Count',
-    params={'X-authorization': 'token'},
+    'https://synbiohub.org/<ObjectType>/Count',
+    params={'X-authorization': '<token>'},
     headers={'Accept': 'text/plain'},
 )
 
@@ -793,7 +781,7 @@ print(response.content)
 
 ```javascript
 const fetch = require("node-fetch");
-const Url = 'https://synbiohub.org/Collection/Count'
+const Url = 'https://synbiohub.org/<ObjectType>/Count'
 const otherPram={
     headers:{
         "content-type" : "text/plain; charset=UTF-8"
@@ -814,7 +802,7 @@ Note that you can replace `<ObjectType>` with any object type, such as `Componen
 Returns the results of the SPARQL query in JSON format. 
 
 ```plaintext
-curl -X GET -H "Accept: application/json" https://synbiohub.org/sparql?query=select%20%3Fs%20%3Fp%20%3Fo%20where%20%7B%20%3Fs%20%3Fp%20%3Fo%20%7D
+curl -X GET -H "Accept: application/json" https://synbiohub.org/sparql?query=<SPARQL query>
 
 This endpoint returns JSON metadata of the form:
 
@@ -831,14 +819,29 @@ This endpoint returns JSON metadata of the form:
 import requests
 
 response = requests.get(
-    'https://synbiohub.org/sparql?query=select%20%3Fs%20%3Fp%20%3Fo%20where%20%7B%20%3Fs%20%3Fp%20%3Fo%20%7D',
-    params={'X-authorization': 'token'},
+    'https://synbiohub.org/sparql?query=<SPARQL query>',
+    params={'X-authorization': '<token>'},
     headers={'Accept': 'application/json'},
 )
 
 print(response.status_code)
 
 print(response.json())
+```
+
+
+```javascript
+const fetch = require("node-fetch");
+const Url = 'https://synbiohub.org/sparql?query=<SPARQL query>'
+const otherPram={
+    headers:{
+        "content-type" : "text/plain; charset=UTF-8"
+    },
+    method:"GET"
+};
+fetch(Url,otherPram)
+    .then(res => res.buffer()).then(buf => console.log(buf.toString()))
+    .catch (error=>console.log(error))
 ```
 
 
@@ -854,9 +857,13 @@ The following endpoints are for downloading content from SynBioHub in various fo
 
 Returns the source for an attachment to the specified URI.
 
+```plaintext
+curl -X GET -H "Accept: text/plain" -H "X-authorization: <token>" <URI>/download -O --compressed
+```
+
 ```javascript
 const fetch = require("node-fetch");
-const Url = 'https://synbiohub.org/public/test/attachment_00009TGVMsfEoCdMeRzHrU/1/download'
+const Url = '<URI>/download'
 const otherPram={
     headers:{
         "content-type" : "text/plain; charset=UTF-8"
@@ -872,7 +879,7 @@ fetch(Url,otherPram)
 import requests
 
 response = requests.get(
-    'https://synbiohub.org/public/test/attachment_00009TGVMsfEoCdMeRzHrU/1/download',
+    '<URI>/download',
     params={'X-authorization': 'token'},
     headers={'Accept': 'text/plain'},
 )
@@ -883,21 +890,33 @@ print(response.content)
 
 ```
 
-```plaintext
-curl -X GET -H "Accept: text/plain" -H "X-authorization: <token>" https://synbiohub.org/public/test/attachment_00009TGVMsfEoCdMeRzHrU/1/download -O --compressed
-```
-
-
 ## Download SBOL
 
-`GET <URI>/sbol` OR
-`GET <URI>`
+`GET <URI>/sbol` OR `GET <URI>`
 
 Returns the object from the specified URI in SBOL format.
 
+```plaintext
+curl -X GET -H "Accept: text/plain" -H "X-authorization: <token>" <URI>/sbol
+```
+
+```python
+import requests
+
+response = requests.get(
+    '<URI>/sbol',
+    params={'X-authorization': '<token>'},
+    headers={'Accept': 'text/plain'},
+)
+
+print(response.status_code)
+print(response.content)
+
+```
+
 ```javascript
 const fetch = require("node-fetch");
-const Url = 'https://synbiohub.org/public/igem/BBa_K1479017/1/sbol'
+const Url = '<URI>/sbol'
 const otherPram={
     headers:{
 	"content-type" : "text/plain; charset=UTF-8"
@@ -907,24 +926,6 @@ const otherPram={
 fetch(Url,otherPram)
 .then(res => res.buffer()).then(buf => console.log(buf.toString()))
 .catch (error=>console.log(error))
-```
-
-```plaintext
-curl -X GET -H "Accept: text/plain" -H "X-authorization: <token>" https://synbiohub.org/public/igem/BBa_F2620/1/sbol
-```
-
-```python
-import requests
-
-response = requests.get(
-    'https://synbiohub.org/public/igem/BBa_F2620/1/sbol',
-    params={'X-authorization': 'token'},
-    headers={'Accept': 'text/plain'},
-)
-
-print(response.status_code)
-print(response.content)
-
 ```
 
 ## Download Non-Recursive SBOL 
@@ -933,9 +934,27 @@ print(response.content)
 
 Returns the object from the specified URI in SBOL format non-recursively ( i.e. fetches the object without its children.)
 
+```plaintext
+curl -X GET -H "Accept: text/plain" -H "X-authorization: <token>" <URI>/sbolnr
+```
+
+```python
+import requests
+
+response = requests.get(
+    '<URI>/sbolnr',
+    params={'X-authorization': '<token>'},
+    headers={'Accept': 'text/plain'},
+)
+
+print(response.status_code)
+print(response.content)
+
+```
+
 ```javascript
 const fetch = require("node-fetch");
-const Url = 'https://synbiohub.org/public/igem/BBa_K1479017/1/sbolnr'
+const Url = '<URI>/sbolnr'
 const otherPram={
     headers:{
 	"content-type" : "text/plain; charset=UTF-8"
@@ -948,16 +967,22 @@ fetch(Url,otherPram)
 ```
 
 
+## Download Metadata
+
+`GET <URI>/metadata`
+
+Returns the metadata for the object from the specified URI.
+
 ```plaintext
-curl -X GET -H "Accept: text/plain" -H "X-authorization: <token>" https://synbiohub.org/public/igem/BBa_F2620/1/sbolnr
+curl -X GET -H "Accept: text/plain" -H "X-authorization: <token>" <URI>/metadata
 ```
 
 ```python
 import requests
 
 response = requests.get(
-    'https://synbiohub.org/public/igem/BBa_F2620/1/sbolnr',
-    params={'X-authorization': 'token'},
+    '<URI>/metadata',
+    params={'X-authorization': '<token>'},
     headers={'Accept': 'text/plain'},
 )
 
@@ -966,15 +991,9 @@ print(response.content)
 
 ```
 
-## Download Metadata
-
-`GET <URI>/metadata`
-
-Returns the metadata for the object from the specified URI.
-
 ```javascript
 const fetch = require("node-fetch");
-const Url = 'https://synbiohub.org/public/igem/BBa_K1479017/1/metadata'
+const Url = '<URI>/metadata'
 const otherPram={
     headers:{
         "content-type" : "text/plain; charset=UTF-8"
@@ -984,24 +1003,6 @@ const otherPram={
 fetch(Url,otherPram)
     .then(res => res.buffer()).then(buf => console.log(buf.toString()))
     .catch (error=>console.log(error))
-```
-
-```plaintext
-curl -X GET -H "Accept: text/plain" -H "X-authorization: <token>" https://synbiohub.org/public/igem/BBa_K1479017/1/metadata
-```
-
-```python
-import requests
-
-response = requests.get(
-    'https://synbiohub.org/public/igem/BBa_K1479017/1/metadata',
-    params={'X-authorization': 'token'},
-    headers={'Accept': 'text/plain'},
-)
-
-print(response.status_code)
-print(response.content)
-
 ```
 
 ## Download GenBank
@@ -1010,9 +1011,27 @@ print(response.content)
 
 Returns the object from the specified URI in GenBank format.
 
+```plaintext
+curl -X GET -H "Accept: text/plain" -H "X-authorization: <token>" <URI>/gb
+```
+
+```python
+import requests
+
+response = requests.get(
+    '<URI>/gb',
+    params={'X-authorization': '<token>'},
+    headers={'Accept': 'text/plain'},
+)
+
+print(response.status_code)
+print(response.content)
+
+```
+
 ```javascript
 const fetch = require("node-fetch");
-const Url = 'https://synbiohub.org/public/igem/BBa_K1479017/1/BBa_K1479017.gb'
+const Url = '<URI>/gb'
 const otherPram={
     headers:{
         "content-type" : "text/plain; charset=UTF-8"
@@ -1022,24 +1041,6 @@ const otherPram={
 fetch(Url,otherPram)
     .then(res => res.buffer()).then(buf => console.log(buf.toString()))
     .catch (error=>console.log(error))
-```
-
-```plaintext
-curl -X GET -H "Accept: text/plain" -H "X-authorization: <token>" https://synbiohub.org/public/igem/BBa_K1479017/1/BBa_K1479017.gb
-```
-
-```python
-import requests
-
-response = requests.get(
-    'https://synbiohub.org/public/igem/BBa_K1479017/1/BBa_K1479017.gb',
-    params={'X-authorization': 'token'},
-    headers={'Accept': 'text/plain'},
-)
-
-print(response.status_code)
-print(response.content)
-
 ```
 
 ## Download FASTA
@@ -1048,9 +1049,27 @@ print(response.content)
 
 Returns the object from the specified URI in FASTA format.
 
+```plaintext
+curl -X GET -H "Accept: text/plain" -H "X-authorization: <token>" <URI>/fasta
+```
+
+```python
+import requests
+
+response = requests.get(
+    '<URI>/fasta',
+    params={'X-authorization': '<token>'},
+    headers={'Accept': 'text/plain'},
+)
+
+print(response.status_code)
+print(response.content)
+
+```
+
 ```javascript
 const fetch = require("node-fetch");
-const Url = 'https://synbiohub.org/public/igem/BBa_K1479017/1/BBa_K1479017.fasta'
+const Url = '<URI>/fasta'
 const otherPram={
     headers:{
         "content-type" : "text/plain; charset=UTF-8"
@@ -1060,24 +1079,6 @@ const otherPram={
 fetch(Url,otherPram)
     .then(res => res.buffer()).then(buf => console.log(buf.toString()))
     .catch (error=>console.log(error))
-```
-
-```plaintext
-curl -X GET -H "Accept: text/plain" -H "X-authorization: <token>" https://synbiohub.org/public/igem/BBa_K1479017/1/BBa_K1479017.fasta
-```
-
-```python
-import requests
-
-response = requests.get(
-    'https://synbiohub.org/public/igem/BBa_K1479017/1/BBa_K1479017.fasta',
-    params={'X-authorization': 'token'},
-    headers={'Accept': 'text/plain'},
-)
-
-print(response.status_code)
-print(response.content)
-
 ```
 
 ## Download GFF3 
@@ -1086,9 +1087,27 @@ print(response.content)
 
 Returns the object from the specified URI in GFF3 format.
 
+```plaintext
+curl -X GET -H "Accept: text/plain" -H "X-authorization: <token>" <URI>/gff
+```
+
+```python
+import requests
+
+response = requests.get(
+    '<URI>/gff',
+    params={'X-authorization': '<token>'},
+    headers={'Accept': 'text/plain'},
+)
+
+print(response.status_code)
+print(response.content)
+
+```
+
 ```javascript
 const fetch = require("node-fetch");
-const Url = 'https://synbiohub.org/public/igem/BBa_K1479017/1/BBa_K1479017.gff'
+const Url = '<URI>/gff'
 const otherPram={
     headers:{
         "content-type" : "text/plain; charset=UTF-8"
@@ -1098,24 +1117,6 @@ const otherPram={
 fetch(Url,otherPram)
     .then(res => res.buffer()).then(buf => console.log(buf.toString()))
     .catch (error=>console.log(error))
-```
-
-```plaintext
-curl -X GET -H "Accept: text/plain" -H "X-authorization: <token>" https://synbiohub.org/public/igem/BBa_K1479017/1/BBa_K1479017.gff
-```
-
-```python
-import requests
-
-response = requests.get(
-    'https://synbiohub.org/public/igem/BBa_K1479017/1/BBa_K1479017.gff',
-    params={'X-authorization': 'token'},
-    headers={'Accept': 'text/plain'},
-)
-
-print(response.status_code)
-print(response.content)
-
 ```
 
 ## Download Visualization
@@ -1124,9 +1125,27 @@ print(response.content)
 
 Returns the visualization for the object from the specified URI.
 
+```plaintext
+curl -X GET -H "Accept: text/plain" -H "X-authorization: <token>" <URI>/visualization
+```
+
+```python
+import requests
+
+response = requests.get(
+    '<URI>/visualization',
+    params={'X-authorization': '<token>'},
+    headers={'Accept': 'text/plain'},
+)
+
+print(response.status_code)
+print(response.content)
+
+```
+
 ```javascript
 const fetch = require("node-fetch");
-const Url = 'https://synbiohub.org/public/igem/BBa_K1479017/1/visualization'
+const Url = '<URI>/visualization'
 const otherPram={
     headers:{
         "content-type" : "text/plain; charset=UTF-8"
@@ -1136,24 +1155,6 @@ const otherPram={
 fetch(Url,otherPram)
     .then(res => res.buffer()).then(buf => console.log(buf.toString()))
     .catch (error=>console.log(error))
-```
-
-```plaintext
-curl -X GET -H "Accept: text/plain" -H "X-authorization: <token>" https://synbiohub.org/public/igem/BBa_K1479017/1/visualization
-```
-
-```python
-import requests
-
-response = requests.get(
-    'https://synbiohub.org/public/igem/BBa_K1479017/1/visualization',
-    params={'X-authorization': 'token'},
-    headers={'Accept': 'text/plain'},
-)
-
-print(response.status_code)
-print(response.content)
-
 ```
 
 # Submission Endpoints
@@ -1164,7 +1165,7 @@ The following endpoints are for managing submissions on SynBioHub.
 
 ## Submit
 
-`POST <SynBioHub URL>/submit `
+`POST <SynBioHub URL>/submit`
 
 Create a new collection including the elements within a file or add to a preexisting collection using the elements within a file.
 
@@ -1246,14 +1247,14 @@ If creating a collection, provide the id, version, name, description, citations,
 Makes the collection specified by the URI public.
 
 ```plaintext
-curl -X POST -H "Accept: text/plain" -H "X-authorization:<>token" -d "id=bruh&version=1&name=&description=&citations=&tabState=new" https://synbiohub.org/user/testuser/bruh1/bruh1_collection/1/makePublic
+curl -X POST -H "Accept: text/plain" -H "X-authorization:<token>" -d "id=<id>&version=<version>&name=<name>&description=<description>&citations=<citations>&tabState=<tabState>" URI/makePublic
 ```
 
 ```python
 import requests
 
 response = requests.post(
-    'https://synbiohub.org/user/testuser/bruh1/bruh1_collection/1/makePublic',
+    '<URI>/makePublic',
     headers={
         'X-authorization': '<token>',
         'Accept': 'text/plain'
@@ -1276,7 +1277,7 @@ print(response.content)
 ```javascript
 const fetch = require("node-fetch");
 const { URLSearchParams } = require('url');
-const url = 'https://synbiohub.org/user/testuser/bruh2/bruh2_collection/1/makePublic'
+const url = '<URI>/makePublic'
 var headers={
     "Accept" : "text/plain; charset=UTF-8",
     "X-authorization" : "<token>"
@@ -1302,9 +1303,27 @@ fetch(url, { method: 'POST', headers: headers, body:params})
 
 Removes the collection specified by the URI.
 
+```plaintext
+curl -X GET -H "Accept: text/plain" -H "X-authorization: <token>" <URI>/removeCollection
+```
+
+```python
+import requests
+
+response = requests.get(
+    '<URI>/removeCollection',
+    params={'X-authorization': '<token>'},
+    headers={'Accept': 'text/plain'},
+)
+
+print(response.status_code)
+print(response.content)
+
+```
+
 ```javascript
 const fetch = require("node-fetch");
-const Url = 'https://synbiohub.org/public/igem/BBa_K1479017/1/removeCollection'
+const Url = '<URI>/removeCollection'
 const otherPram={
     headers:{
 	"content-type" : "text/plain; charset=UTF-8"
@@ -1314,24 +1333,6 @@ const otherPram={
 fetch(Url,otherPram)
 .then(res => res.buffer()).then(buf => console.log(buf.toString()))
 .catch (error=>console.log(error))
-```
-
-```plaintext
-curl -X GET -H "Accept: text/plain" -H "X-authorization: <token>" https://synbiohub.org/public/igem/BBa_F2620/1/removeCollection
-```
-
-```python
-import requests
-
-response = requests.get(
-    'https://synbiohub.org/public/igem/BBa_F2620/1/removeCollection',
-    params={'X-authorization': 'token'},
-    headers={'Accept': 'text/plain'},
-)
-
-print(response.status_code)
-print(response.content)
-
 ```
 
 ## Remove Object
@@ -1340,9 +1341,28 @@ print(response.content)
 
 Remove the object specified by the URI, and the references to that object.
 
+```plaintext
+curl -X GET -H "Accept: text/plain" -H "X-authorization: <token>" <URI>/remove
+```
+
+```python
+import requests
+
+response = requests.get(
+    '<URI>/remove',
+    params={'X-authorization': '<token>'},
+    headers={'Accept': 'text/plain'},
+)
+
+print(response.status_code)
+print(response.content)
+
+```
+
+
 ```javascript
 const fetch = require("node-fetch");
-const Url = 'https://synbiohub.org/public/igem/BBa_K1479017/1/remove'
+const Url = '<URI>/remove'
 const otherPram={
     headers:{
 	"content-type" : "text/plain; charset=UTF-8"
@@ -1352,24 +1372,6 @@ const otherPram={
 fetch(Url,otherPram)
 .then(res => res.buffer()).then(buf => console.log(buf.toString()))
 .catch (error=>console.log(error))
-```
-
-```plaintext
-curl -X GET -H "Accept: text/plain" -H "X-authorization: <token>" https://synbiohub.org/public/igem/BBa_F2620/1/remove
-```
-
-```python
-import requests
-
-response = requests.get(
-    'https://synbiohub.org/public/igem/BBa_F2620/1/remove',
-    params={'X-authorization': 'token'},
-    headers={'Accept': 'text/plain'},
-)
-
-print(response.status_code)
-print(response.content)
-
 ```
 
 ## Replace Object
@@ -1378,9 +1380,27 @@ print(response.content)
 
 Remove the object specified from URI, but leave references to the object.
 
+```plaintext
+curl -X GET -H "Accept: text/plain" -H "X-authorization: <token>" <URI>/remove
+```
+
+```python
+import requests
+
+response = requests.get(
+    '<URI>/replace',
+    params={'X-authorization': '<token>'},
+    headers={'Accept': 'text/plain'},
+)
+
+print(response.status_code)
+print(response.content)
+
+```
+
 ```javascript
 const fetch = require("node-fetch");
-const Url = 'https://synbiohub.org/public/igem/BBa_K1479017/1/replace'
+const Url = '<URI>/replace'
 const otherPram={
     headers:{
 	"content-type" : "text/plain; charset=UTF-8"
@@ -1390,24 +1410,6 @@ const otherPram={
 fetch(Url,otherPram)
 .then(res => res.buffer()).then(buf => console.log(buf.toString()))
 .catch (error=>console.log(error))
-```
-
-```plaintext
-curl -X GET -H "Accept: text/plain" -H "X-authorization: <token>" https://synbiohub.org/public/igem/BBa_F2620/1/remove
-```
-
-```python
-import requests
-
-response = requests.get(
-    'https://synbiohub.org/public/igem/BBa_F2620/1/replace',
-    params={'X-authorization': 'token'},
-    headers={'Accept': 'text/plain'},
-)
-
-print(response.status_code)
-print(response.content)
-
 ```
 
 ## Update Collection Icon
@@ -1477,21 +1479,21 @@ The following endpoints are for managing permissions on SynBioHub.
 Adds an owner to an object specfied by the URI.
 
 ```plaintext
-curl -X POST -H "Accept: text/plain" -H "X-authorization:<token>" -d "user=<user>&uri=<uri>" https://synbiohub.org/user/testuser/bruh/bruh_collection/1/addOwner
+curl -X POST -H "Accept: text/plain" -H "X-authorization:<token>" -d "user=<user>&uri=<uri>" <URI>/addOwner
 ```
 
 ```python
 import requests
 
 response = requests.post(
-    'http://localhost:7777/user/testuser/bruh/bruh_collection/1/addOwner',
+    '<URI>/addOwner',
     headers={
-        'X-authorization': '47f48533-0b4f-4aa1-b410-2aa1f7235eae',
+        'X-authorization': '<token>',
         'Accept': 'text/plain'
     },
     data={
-        'user': 'jvscholz',
-        'uri' : 'http://localhost:7777/user/testuser/bruh/bruh_collection/1/addOwner'
+        'user': '<user>',
+        'uri' : '<uri>'
         },
 )
 
@@ -1502,15 +1504,15 @@ print(response.content)
 ```javascript
 const fetch = require("node-fetch");
 const { URLSearchParams } = require('url');
-const url = 'https://synbiohub.org/user/testuser/bruh2/bruh2_collection/1/addOwner'
+const url = '<URI>/addOwner'
 var headers={
     "Accept" : "text/plain; charset=UTF-8",
     "X-authorization" : "<token>"
 };
 
 const params = new URLSearchParams();
-params.append('user', '<id>');
-params.append('uri', '<version>');
+params.append('user', '<user>');
+params.append('uri', '<uri>');
 
 
 fetch(url, { method: 'POST', headers: headers, body:params})
@@ -1530,20 +1532,20 @@ uri | The identity of the object to add owner to.
 Removes an owner from an object specified  by the URI.
 
 ```plaintext
-curl -X POST -H "Accept: text/plain" -H "X-authorization:<>" -d "userUri=<>" http://synbiohub.org/public/:collectionId/:displayId/:version/removeOwner/:username
+curl -X POST -H "Accept: text/plain" -H "X-authorization:<token>" -d "userUri=<userUri>" <URI>/removeOwner/<username>
 ```
 
 ```python
 import requests
 
 response = requests.post(
-    'http://localhost:7777/user/testuser/bruh/bruh_collection/1/removeOwner/:username',
+    '<URI>/removeOwner/<username>',
     headers={
-        'X-authorization': '47f48533-0b4f-4aa1-b410-2aa1f7235eae',
+        'X-authorization': '<token>',
         'Accept': 'text/plain'
     },
     data={
-        'userUri': 'jvscholz',
+        'userUri': '<userUri>',
         },
 )
 
@@ -1554,14 +1556,14 @@ print(response.content)
 ```javascript
 const fetch = require("node-fetch");
 const { URLSearchParams } = require('url');
-const url = 'https://synbiohub.org/user/testuser/bruh2/bruh2_collection/1/removeOwner/:username'
+const url = '<URI>/removeOwner/<username>'
 var headers={
     "Accept" : "text/plain; charset=UTF-8",
     "X-authorization" : "<token>"
 };
 
 const params = new URLSearchParams();
-params.append('userUri', '<id>');
+params.append('userUri', '<userUri>');
 
 
 
@@ -1582,7 +1584,7 @@ These endpoints allow you to edit various fields within each object.
 
 ## Edit Mutable Descriptions
 
-`POST <URI>/updateMutableDescription `
+`POST <SynBioHub URL>/updateMutableDescription `
 
 Edit the mutable description of an object specified by the URI. 
 
@@ -1641,7 +1643,7 @@ value | The new value for the mutable description
 
 ## Edit Mutable Notes
 
-`POST <URI>/updateMutableNotes`
+`POST <SynBioHub>/updateMutableNotes`
 
 Edit the mutable notes of an object specified by the URI.
 
@@ -1700,12 +1702,12 @@ value | The new value for the mutable notes.
 
 ## Edit Mutable Source
 
-`POST <URI>/updateMutableSource`
+`POST <SynBioHub URL>/updateMutableSource`
 
 Edit the mutable source of an object specified by the URI.
 
 ```plaintext
-curl -X POST -H "Accept: text/plain" -H "X-authorization:<>" -d "uri=<>&value=<>" http://synbiohub.org/updateMutableSource
+curl -X POST -H "Accept: text/plain" -H "X-authorization:<token>" -d "uri=<uri>&value=<value>" http://synbiohub.org/updateMutableSource
 ```
 
 ```python
@@ -1759,7 +1761,7 @@ value | The new value for the mutable source.
 
 ## Edit Citations
 
-`POST <URI>/updateCitations`
+`POST <SynBioHub URL>/updateCitations`
 
 Edit the citations of an object specified by the URI.
 
@@ -1823,15 +1825,44 @@ value | The new value for the citation.
 Edit field of an object.
 
 ```plaintext
-curl -X POST -H "Accept: text/plain" -H "X-authorization: <token>" -d "previous=<previous>&object=<test>"  synbiohub.org/edit/:field
+curl -X POST -H "Accept: text/plain" -H "X-authorization: <token>" -d "previous=<previous>&object=<test>"  <URI>/edit/<field>
 ```
 
 ```python
+import requests
 
+response = requests.post(
+    '<URI>/edit/<field>',
+    headers={
+        'X-authorization': '<token>',
+        'Accept': 'text/plain'
+    },
+    data={
+        'previous': '<previous>',
+        'object' : '<object>',
+        },
+)
+
+print(response.status_code)
+print(response.content)
 ```
 
 ```javascript
+const fetch = require("node-fetch");
+const { URLSearchParams } = require('url');
+const url = '<URI>/edit/<field>'
+var headers={
+    "Accept" : "text/plain; charset=UTF-8",
+    "X-authorization" : "<token>"
+};
 
+const params = new URLSearchParams();
+params.append('previous', '<previous>');
+params.append('object', '<object>');
+
+fetch(url, { method: 'POST', headers: headers, body:params})
+    .then(res => res.buffer()).then(buf => console.log(buf.toString()))
+    .catch (error=>console.log(error))
 ```
 
 Parameter | Description
@@ -1853,15 +1884,42 @@ Possible fields to edit:
 Add field to an object.
 
 ```plaintext
-curl -X POST -H "Accept: text/plain" -H "X-authorization:<token>" -d "object=<object>"  synbiohub.org/add/:field
+curl -X POST -H "Accept: text/plain" -H "X-authorization:<token>" -d "object=<object>"  <URI>/add/<field>
 ```
 
 ```python
+import requests
 
+response = requests.post(
+    '<URI>/add/<field>',
+    headers={
+        'X-authorization': '<token>',
+        'Accept': 'text/plain'
+    },
+    data={
+        'object' : '<object>',
+        },
+)
+
+print(response.status_code)
+print(response.content)
 ```
 
 ```javascript
+const fetch = require("node-fetch");
+const { URLSearchParams } = require('url');
+const url = 'https://synbiohub.org/add/<field>'
+var headers={
+    "Accept" : "text/plain; charset=UTF-8",
+    "X-authorization" : "<token>"
+};
 
+const params = new URLSearchParams();
+params.append('object', '<object>');
+
+fetch(url, { method: 'POST', headers: headers, body:params})
+    .then(res => res.buffer()).then(buf => console.log(buf.toString()))
+    .catch (error=>console.log(error))
 ```
 Parameter | Description
 --------- | -----------
@@ -1878,15 +1936,42 @@ Possible fields to add:
 Remove field from an object.
 
 ```plaintext
-curl -X POST -H "Accept: text/plain" -H "X-authorization:<token>" -d "object=<object>"  synbiohub.org/remove/:field
+curl -X POST -H "Accept: text/plain" -H "X-authorization:<token>" -d "object=<object>"  synbiohub.org/remove/<field>
 ```
 
 ```python
+import requests
 
+response = requests.post(
+    'https://synbiohub.org/remove/<field>',
+    headers={
+        'X-authorization': '<token>',
+        'Accept': 'text/plain'
+    },
+    data={
+        'object' : '<object>',
+        },
+)
+
+print(response.status_code)
+print(response.content)
 ```
 
 ```javascript
+const fetch = require("node-fetch");
+const { URLSearchParams } = require('url');
+const url = 'https://synbiohub.org/remove/<field>'
+var headers={
+    "Accept" : "text/plain; charset=UTF-8",
+    "X-authorization" : "<token>"
+};
 
+const params = new URLSearchParams();
+params.append('object', '<object>');
+
+fetch(url, { method: 'POST', headers: headers, body:params})
+    .then(res => res.buffer()).then(buf => console.log(buf.toString()))
+    .catch (error=>console.log(error))
 ```
 Parameter | Description
 --------- | -----------
@@ -1909,7 +1994,7 @@ The following endpoints are for creating attachments on SynBioHub.
 Attach a specified file to a given URI.
 
 ```plaintext
-curl -X POST -H "Accept: text/plain" -H "X-authorization: <token>" -F 'file=@<filename>' https://synbiohub.org/user/MyUserName/test/test_collection/1/attach
+curl -X POST -H "Accept: text/plain" -H "X-authorization: <token>" -F 'file=@<filename>' <URI>/attach
 ```
 
 ```python
@@ -1927,7 +2012,7 @@ curl -X POST -H "Accept: text/plain" -H "X-authorization: <token>" -F 'file=@<fi
 Attach a specified URL to a given URI.
 
 ```plaintext
-curl -X POST -H "Accept: text/plain" -H "X-authorization: <token>" -d "url=<url>&name=<name>&type=<type>" https://synbiohub.org/public/bruh2/bruh2_collection/1/attachURL
+curl -X POST -H "Accept: text/plain" -H "X-authorization: <token>" -d "url=<url>&name=<name>&type=<type>" <URI>/attachURL
 
 ```
 
@@ -1935,7 +2020,7 @@ curl -X POST -H "Accept: text/plain" -H "X-authorization: <token>" -d "url=<url>
 import requests
 
 response = requests.post(
-    'https://synbiohub.org/public/bruh2/bruh2_collection/1/attachURL',
+    '<URI>/attachURL',
     headers={
         'X-authorization': '<token>',
         'Accept': 'text/plain'
@@ -1955,7 +2040,7 @@ print(response.content)
 ```javascript
 const fetch = require("node-fetch");
 const { URLSearchParams } = require('url');
-const url = 'https://synbiohub.org/public/bruh2/bruh2_collection/1/attachURL'
+const url = '<URI>/attachURL'
 var headers={
     "Accept" : "text/plain; charset=UTF-8",
     "X-authorization" : "<token>"
@@ -1970,10 +2055,13 @@ params.append('type', '<type>');
 fetch(url, { method: 'POST', headers: headers, body:params})
     .then(res => res.buffer()).then(buf => console.log(buf.toString()))
     .catch (error=>console.log(error))
-
-
-
 ```
+
+Parameter | Description
+--------- | -----------
+url | The URL to attach.
+name | The name of the attachment.
+type | The format type of the object at the URL.
 
 # Administration Endpoints
 
@@ -1988,7 +2076,7 @@ The following endpoints are for users with administration privileges.
 Returns the results of the SPARQL admin query in JSON format.
 
 ```plaintext
-curl -X GET -H "Accept: application/json" 'https://synbiohub.org/admin/sparql?query=select%20%3Fs%20%3Fp%20%3Fo%20where%20%7B%20%3Fs%20%3Fp%20%3Fo%20%7D
+curl -X GET -H "Accept: application/json" 'https://synbiohub.org/admin/sparql?query=<SPARQL query>
 ```
 
 
@@ -1996,14 +2084,28 @@ curl -X GET -H "Accept: application/json" 'https://synbiohub.org/admin/sparql?qu
 import requests
 
 response = requests.get(
-    'https://synbiohub.org/admin/sparql?query=select%20%3Fs%20%3Fp%20%3Fo%20where%20%7B%20%3Fs%20%3Fp%20%3Fo%20%7D',
-    params={'X-authorization': 'token'},
+    'https://synbiohub.org/admin/sparql?query=<SPARQL query>',
+    params={'X-authorization': '<token>'},
     headers={'Accept': 'application/json'},
 )
 
 print(response.status_code)
 
 print(response.json())
+```
+
+```javascript
+const fetch = require("node-fetch");
+const Url = 'https://synbiohub.org/admin/sparql?query=<SPARQL query>'
+const otherPram={
+    headers:{
+        "content-type" : "application/json; charset=UTF-8"
+    },
+    method:"GET"
+};
+fetch(Url,otherPram)
+    .then(res => res.buffer()).then(buf => console.log(buf.toString()))
+    .catch (error=>console.log(error))
 ```
 
 ## Admin
