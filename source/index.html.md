@@ -226,13 +226,21 @@ curl -X POST -H "Accept: text/plain" -d "email=<email>&password=<password>" http
 ```python
 import requests
 
-url = 'https://synbiohub.org/login'
-myobj = {'email': 'test@user.synbiohub',
-         'password' : 'test'}
+response = requests.post(
+    'http://localhost:7777/login',
+    headers={
+        'X-authorization': '<token>',
+        'Accept': 'text/plain'
+    },
+    data={
+        'email': 'test@user.synbiohub',
+        'password' : 'test',
+        },
+)
 
-x = requests.post(url, data = myobj, headers = headers)
+print(response.status_code)
+print(response.content)
 
-print(x.content)
 ```
 
 ```javascript
@@ -1744,7 +1752,8 @@ value | The new value for the citation.
 `POST <URI>/edit/<field>`
 
 ```plaintext
-curl -X POST -H "Accept: text/plain" -H "X-authorization: 9ff4f790-a9e8-42be-979f-9472be53f905" -d "previous=hi&object=test"  localhost:7777/user/testuser/bruh/bruh_collection/1/edit/description
+curl -X POST -H "Accept: text/plain" -H "X-authorization: 9ff4f790-a9e8-42be-979f-9472be53f905" -d "previous=bruh&object=test"  localhost:7777/user/testuser/bruh/bruh_collection/1/edit/description
+
 ```
 
 ```python
