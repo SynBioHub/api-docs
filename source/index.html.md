@@ -1393,6 +1393,59 @@ print(response.content)
 
 ```
 
+## Update Collection Icon
+
+`POST <URI>/icon`
+
+Updates the collection's icon.
+
+```plaintext
+curl -X POST -H "Accept: text/plain" -H "X-authorization:febee2f0-ea67-4b1b-a588-45b837f1c161" -F "CollectionIcon=@/home/Desktop/icon.png" localhost:7777/public/testid0/testid0_collection/1/icon
+```
+
+```python
+import requests
+
+response = requests.post(
+    'http://localhost:7777/user/testuser/bruh/bruh_collection/1/addOwner',
+    headers={
+        'X-authorization': '47f48533-0b4f-4aa1-b410-2aa1f7235eae',
+        'Accept': 'text/plain'
+    },
+    data={
+        'user': 'jvscholz',
+        'uri' : 'http://localhost:7777/user/testuser/bruh/bruh_collection/1/addOwner'
+        },
+)
+
+print(response.status_code)
+print(response.content)
+```
+
+```javascript
+const fetch = require("node-fetch");
+const { URLSearchParams } = require('url');
+const url = 'https://synbiohub.org/user/testuser/bruh2/bruh2_collection/1/addOwner'
+var headers={
+    "Accept" : "text/plain; charset=UTF-8",
+    "X-authorization" : "<token>"
+};
+
+const params = new URLSearchParams();
+params.append('user', '<id>');
+params.append('uri', '<version>');
+
+
+fetch(url, { method: 'POST', headers: headers, body:params})
+    .then(res => res.buffer()).then(buf => console.log(buf.toString()))
+    .catch (error=>console.log(error))
+```
+
+Parameter | Description
+--------- | ------- | -----------
+filename | The desired collection icon.
+
+
 # Permission Endpoints
 
 
@@ -1894,6 +1947,168 @@ print(response.status_code)
 
 print(response.json())
 ```
+
+## Admin
+
+`GET <SynBioHub URL/admin>`
+
+not sure what this does
+
+## View Graphs
+
+`GET <SynBioHub URL/admin/graphs>`
+
+Returns existing graphs and its number of triples.
+
+## View Log
+
+`GET <SynBioHub URL/admin/log>`
+
+Returns the log.
+
+## View Current Mail Settings
+
+`GET <SynBioHub URL/admin/mail>`
+
+Returns the current mail configuration.
+
+## Update Mail Settings
+
+`POST <SynBioHub URL/admin/mail>`
+
+Update the mail configuration.
+
+## View Plugins
+
+`GET <SynBioHub URL/admin/plugins>`
+
+View current plugins.
+
+## Save Plugin
+
+`POST <SynBioHub URL/admin/savePlugin>`
+
+Save a new plugin.
+
+## Delete Plugin
+
+`POST <SynBioHub URL/admin/deletePlugin>`
+
+Delete a plugin.
+
+## View Registries
+
+`GET <SynBioHub URL/admin/registries>`
+
+View current registries.
+
+## Save Registry
+
+`POST <SynBioHub URL/admin/saveRegistry>`
+
+Save a new registry.
+
+## Delete Registry
+
+`POST <SynBioHub URL/admin/deleteRegistry>`
+
+Delete a registry.
+
+## Set Administrator Email
+
+`POST <SynBioHub URL/admin/setAdministratorEmail>`
+
+Update Web Of Registries administrator email.
+
+## Retrieve From Web Of Registries
+
+`POST <SynBioHub URL/admin/retrieveFromWebOfRegistries>`
+
+Update registries from Web Of Registries.
+
+## Federate
+
+`POST <SynBioHub URL/admin/federate>`
+
+Send request to join Web-of-Registries for a SynBioHub.
+
+## View Remotes
+
+`GET <SynBioHub URL/admin/remotes>`
+
+View current remotes.
+
+## Save Remote
+
+`POST <SynBioHub URL/admin/saveRemote>`
+
+Save a new remote.
+
+## Delete Remote
+
+`POST <SynBioHub URL/admin/deleteRemote>`
+
+Delete a new remote.
+
+## View SBOLExplorer
+
+`GET <SynBioHub URL/admin/explorer>`
+
+View current SBOLExplorer Endpoint
+
+## Update SBOLExplorer
+
+`POST <SynBioHub URL/admin/explorer>`
+
+Update SBOLExplorer endpoint.
+
+## Explorer Update Index
+
+`POST <SynBioHub URL/admin/explorerUpdateIndex>`
+
+don't know
+
+## View Theme
+
+`GET <SynBioHub URL/admin/theme>`
+
+View the current theme.
+
+## Update Theme
+
+`POST <SynBioHub URL/admin/theme>`
+
+Update the theme.
+
+## View Users
+
+`GET <SynBioHub URL/admin/users>`
+
+View the current users.
+
+## Update Users
+
+`POST <SynBioHub URL/admin/users>`
+
+Update the user's settings.
+
+## New User
+
+post and get
+
+don't know
+
+## Update User
+
+`POST <SynBioHub URL/admin/updateUser>`
+
+don't know
+
+## Delete User
+
+`POST <SynBioHub URL/admin/deleteUser>`
+
+Delete a user. 
 
 # Plugins
 
