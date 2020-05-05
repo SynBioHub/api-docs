@@ -301,6 +301,7 @@ fetch(url, { method: 'POST', headers: headers})
     .then(body => console.log(body));
 ```
 
+
 ## Reset Password
 
 `POST <SynBioHub URL>/setNewPassword`
@@ -1296,6 +1297,15 @@ fetch(url, { method: 'POST', headers: headers, body:params})
     .catch (error=>console.log(error))
 ```
 
+Parameter | Description
+--------- | ------- | -----------
+id | The id for the new collection.
+version | The version for the new collection.
+name | The name for the new collection (optional: default is existing name).
+description | The description for the new collection (optional: default is existing description).
+citations | The comma-separated listed of PubMed ids (optional: default is existing citations).
+tabState | 
+
 
 ## Remove Collection
 
@@ -2004,6 +2014,10 @@ curl -X POST -H "Accept: text/plain" -H "X-authorization: <token>" -F 'file=@<fi
 ```javascript
 
 ```
+
+Parameter | Description
+--------- | -----------
+file | The name of the file to attach.
 
 ## Attach URL
 
