@@ -19,24 +19,20 @@ search: true
 ---
 
 # About SynBioHub
-What is SynBioHub?
+### What is SynBioHub?
 
 SynBioHub includes two projects:
 
 * An [open source software project](http://github.com/SynBioHub) providing a web interface for the storing and publishing of synthetic biology designs.
 * A public instance of the aforementioned software project at [synbiohub.org](http://synbiohub.org), allowing users to upload and share designs.
 
-For those familiar with the SBOL Stack, SynBioHub incorporates and extends its functionality.  An SBOL Stack installation is not required for SynBioHub.
 
-
-What can SynBioHub be used for?
+### What can SynBioHub be used for?
 
 SynBioHub can be used to publish a library of synthetic parts and designs as a service, to share designs with collaborators, and to store designs of biological systems locally. Data in SynBioHub can be accessed via the HTTP API, Java API, or Python API where it can then be integrated into CAD tools for building genetic designs. SynBioHub contains an interface for users to upload new biological data to the database, to visualize DNA parts, to perform queries to access desired parts, and to download SBOL, GenBank, FASTA, etc.
 
 
 ### Contributors
-
-SynBioHub
 
 * [James Alastair McLaughlin](http://homepages.cs.ncl.ac.uk/j.a.mclaughlin)*
 * [Prof. Chris J. Myers](http://www.async.ece.utah.edu/Myers)†
@@ -45,7 +41,7 @@ SynBioHub
 * [Zach Zundel](http://www.async.ece.utah.edu/people/students/zach-zundel/)†
 * [James Scholz](https://www.async.ece.utah.edu/~scholz/)†
 
-SBOL Stack
+An earlier version of SynBioHub known as SBOL Stack was developed by the following people:
 
 * [Dr Curtis Madsen](http://sites.bu.edu/ckmadsen/)§ 
 * [James Alastair McLaughlin](http://homepages.cs.ncl.ac.uk/j.a.mclaughlin)* 
@@ -70,7 +66,6 @@ Web Design
 # Installation
 
 ## From Prebuilt Image
-
 ### Install Docker
 
 First, install [Docker](https://docs.docker.com/install/) and [Docker Compose](https://docs.docker.com/compose/install/).
@@ -106,7 +101,7 @@ In a web browser, visit
 
 On the first startup, you will be taken to the SynBioHub Setup Page, which enables basic setup of the site. After the first setup, the Admin Portal will allow admin users to update their site configuration. 
 
-##### SendGrid email setup
+### SendGrid email setup
 In order to enable SynBioHub to send account-related emails, you need a [SendGrid](https://sendgrid.com/) account and API key. Once you have created your account, you should click "Settings" in the left bar, then "API Keys". On the resulting page, click the "Create API Key" button in the upper-right corner, and give your new API key a name. You should see the key on the next page. Copy the key and paste it into the "SendGrid API Key" in the Mail page on the SynBioHub admin dashboard. Save the API key in SynBioHub and you are ready to begin sending email. 
 
 ### Updating
@@ -301,12 +296,25 @@ fetch(url, { method: 'POST', headers: headers})
     .then(body => console.log(body));
 ```
 
+## Register
 
-## Reset Password
+`POST <SynBioHub URL>/register`
+
+Register a new user on SynBioHub.
+
+## Request Reset Password Token
+
+`POST <SynBioHub URL>/resetPassword`
+
+Request a reset password token.
+
+## Set New Password
 
 `POST <SynBioHub URL>/setNewPassword`
 
-Resets the user's password.
+--->takes token and new password
+
+Resets the user's password with the provided token and two copies of the new password.
 
 ## View Profile
 
@@ -1304,7 +1312,8 @@ version | The version for the new collection.
 name | The name for the new collection (optional: default is existing name).
 description | The description for the new collection (optional: default is existing description).
 citations | The comma-separated listed of PubMed ids (optional: default is existing citations).
-tabState | 
+tabState | Use "new" for moving to a new public collection, and "existing" if moving into an existing public collection.
+collections| If moving into an existing collection, collections is the URI of the collection
 
 
 ## Remove Collection
@@ -1429,7 +1438,7 @@ fetch(Url,otherPram)
 Updates the collection's icon.
 
 ```plaintext
-curl -X POST -H "Accept: text/plain" -H "X-authorization:febee2f0-ea67-4b1b-a588-45b837f1c161" -F "CollectionIcon=@/home/Desktop/icon.png" localhost:7777/public/testid0/testid0_collection/1/icon
+curl -X POST -H "Accept: text/plain" -H "X-authorization:febee2f0-ea67-4b1b-a588-45b837f1c161" -F "collectionIcon=@/home/j/Desktop/icon.png" localhost:7777/public/testid0/testid0_collection/1/icon
 ```
 
 ```python
@@ -1472,7 +1481,7 @@ fetch(url, { method: 'POST', headers: headers, body:params})
 
 Parameter | Description
 --------- | ------- | -----------
-filename | The desired collection icon.
+collectionIcon | The desired collection icon.
 
 
 # Permission Endpoints
@@ -2122,11 +2131,15 @@ fetch(Url,otherPram)
     .catch (error=>console.log(error))
 ```
 
-## Admin
+## Get Status
 
 `GET <SynBioHub URL>/admin`
 
-not sure what this does
+Returns configuration options for SynBioHub.
+
+```plaintext
+example
+```
 
 ## View Graphs
 
@@ -2138,7 +2151,7 @@ Returns existing graphs and its number of triples.
 
 `GET <SynBioHub URL>/admin/log`
 
-Returns the log.
+Returns the SynBioHub log file.
 
 ## View Current Mail Settings
 
@@ -2198,7 +2211,7 @@ Update Web Of Registries administrator email.
 
 `POST <SynBioHub URL>/admin/retrieveFromWebOfRegistries`
 
-Update registries from Web Of Registries.
+Update registries from Web-of-Registries.
 
 ## Federate
 
@@ -2222,7 +2235,7 @@ Save a new remote.
 
 `POST <SynBioHub URL>/admin/deleteRemote`
 
-Delete a new remote.
+Delete a remote.
 
 ## View SBOLExplorer
 
@@ -2236,11 +2249,11 @@ View current SBOLExplorer Endpoint
 
 Update SBOLExplorer endpoint.
 
-## Explorer Update Index
+## Update SBOLExplorer Index.
 
 `POST <SynBioHub URL>/admin/explorerUpdateIndex`
 
-don't know
+Updates SBOLExplorer index.
 
 ## View Theme
 
@@ -2268,15 +2281,15 @@ Update the user's settings.
 
 ## New User
 
-post and get
+`POST 
 
-don't know
+Create a new user.
 
 ## Update User
 
 `POST <SynBioHub URL>/admin/updateUser`
 
-don't know
+Update a user's settings.
 
 ## Delete User
 
