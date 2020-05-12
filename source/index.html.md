@@ -1438,21 +1438,20 @@ fetch(Url,otherPram)
 Updates the collection's icon.
 
 ```plaintext
-curl -X POST -H "Accept: text/plain" -H "X-authorization:febee2f0-ea67-4b1b-a588-45b837f1c161" -F "collectionIcon=@/home/j/Desktop/icon.png" localhost:7777/public/testid0/testid0_collection/1/icon
+curl -X POST -H "Accept: text/plain" -H "X-authorization:<token>" -F "collectionIcon=<icon>" <URI>/icon
 ```
 
 ```python
 import requests
 
 response = requests.post(
-    'http://localhost:7777/user/testuser/bruh/bruh_collection/1/addOwner',
+    'localhost:7777/public/testid0/testid0_collection/1/icon',
     headers={
-        'X-authorization': '47f48533-0b4f-4aa1-b410-2aa1f7235eae',
+        'X-authorization': '88472249-ee84-49c6-8f81-0b7a6b9dce64',
         'Accept': 'text/plain'
     },
-    data={
-        'user': 'jvscholz',
-        'uri' : 'http://localhost:7777/user/testuser/bruh/bruh_collection/1/addOwner'
+    files={
+        'collectionIcon': open('icon.png', 'rb'),
         },
 )
 
@@ -2138,7 +2137,7 @@ fetch(Url,otherPram)
 Returns configuration options for SynBioHub.
 
 ```plaintext
-example
+curl -X GET -H "Accept: text/plain" -H "X-authorization: <token>" <SynBioHub URL>/admin
 ```
 
 ## View Graphs
@@ -2147,17 +2146,29 @@ example
 
 Returns existing graphs and its number of triples.
 
+```plaintext
+curl -X GET -H "Accept: text/plain" -H "X-authorization: <token>" <SynBioHub URL>/admin/graphs
+```
+
 ## View Log
 
 `GET <SynBioHub URL>/admin/log`
 
 Returns the SynBioHub log file.
 
+```plaintext
+curl -X GET -H "Accept: text/plain" -H "X-authorization: <token>" <SynBioHub URL>/admin/log
+```
+
 ## View Current Mail Settings
 
 `GET <SynBioHub URL>/admin/mail`
 
 Returns the current mail configuration.
+
+```plaintext
+curl -X GET -H "Accept: text/plain" -H "X-authorization: <token>" <SynBioHub URL>/admin/mail
+```
 
 ## Update Mail Settings
 
@@ -2170,6 +2181,10 @@ Update the mail configuration.
 `GET <SynBioHub URL>/admin/plugins`
 
 View current plugins.
+
+```plaintext
+curl -X GET -H "Accept: text/plain" -H "X-authorization: <token>" <SynBioHub URL>/admin/plugins
+```
 
 ## Save Plugin
 
@@ -2186,6 +2201,10 @@ Delete a plugin.
 ## View Registries
 
 `GET <SynBioHub URL>/admin/registries`
+
+```plaintext
+curl -X GET -H "Accept: text/plain" -H "X-authorization: <token>" <SynBioHub URL>/admin/registries
+```
 
 View current registries.
 
@@ -2225,6 +2244,10 @@ Send request to join Web-of-Registries for a SynBioHub.
 
 View current remotes.
 
+```plaintext
+curl -X GET -H "Accept: text/plain" -H "X-authorization: <token>" <SynBioHub URL>/admin/remotes
+```
+
 ## Save Remote
 
 `POST <SynBioHub URL>/admin/saveRemote`
@@ -2242,6 +2265,10 @@ Delete a remote.
 `GET <SynBioHub URL>/admin/explorer`
 
 View current SBOLExplorer Endpoint
+
+```plaintext
+curl -X GET -H "Accept: text/plain" -H "X-authorization: <token>" <SynBioHub URL>/admin/explorer
+```
 
 ## Update SBOLExplorer
 
@@ -2261,6 +2288,10 @@ Updates SBOLExplorer index.
 
 View the current theme.
 
+```plaintext
+curl -X GET -H "Accept: text/plain" -H "X-authorization: <token>" <SynBioHub URL>/admin/theme
+```
+
 ## Update Theme
 
 `POST <SynBioHub URL>/admin/theme`
@@ -2272,6 +2303,10 @@ Update the theme.
 `GET <SynBioHub URL>/admin/users`
 
 View the current users.
+
+```plaintext
+curl -X GET -H "Accept: text/plain" -H "X-authorization: <token>" <SynBioHub URL>/admin/users
+```
 
 ## Update Users
 
