@@ -34,34 +34,26 @@ SynBioHub can be used to publish a library of synthetic parts and designs as a s
 
 ### Contributors
 
-* [James Alastair McLaughlin](http://homepages.cs.ncl.ac.uk/j.a.mclaughlin)*
-* [Prof. Chris J. Myers](http://www.async.ece.utah.edu/Myers)†
-* [Dr Goksel Misirli](http://homepages.cs.ncl.ac.uk/goksel.misirli)*
-* [Prof. Anil Wipat](http://homepages.cs.ncl.ac.uk/anil.wipat/)*
-* [Zach Zundel](http://www.async.ece.utah.edu/people/students/zach-zundel/)†
-* [James Scholz](https://www.async.ece.utah.edu/~scholz/)†
+* [James Alastair McLaughlin](http://homepages.cs.ncl.ac.uk/j.a.mclaughlin) (Newcastle University)
+* [Prof. Chris J. Myers](http://www.async.ece.utah.edu/Myers) (University of Colorado Boulder)
+* [Dr Goksel Misirli](http://homepages.cs.ncl.ac.uk/goksel.misirli) (Newcastle University)
+* [Prof. Anil Wipat](http://homepages.cs.ncl.ac.uk/anil.wipat/) (Newcastle University)
+* [Zach Zundel](http://www.async.ece.utah.edu/people/students/zach-zundel/) (University of Utah)
+* [James Scholz](https://www.async.ece.utah.edu/~scholz/) (University of Utah)
 
 An earlier version of SynBioHub known as SBOL Stack was developed by the following people:
 
-* [Dr Curtis Madsen](http://sites.bu.edu/ckmadsen/)§ 
-* [James Alastair McLaughlin](http://homepages.cs.ncl.ac.uk/j.a.mclaughlin)* 
-* [Dr Goksel Misirli](http://homepages.cs.ncl.ac.uk/goksel.misirli/)*
-* [Dr Matthew Pocock](http://intbio.ncl.ac.uk/?people=matthew-pocock)‡
-* [Dr Keith Flanagan](http://intbio.ncl.ac.uk/?people=dr-keith-flanagan)*
-* [Dr Jennifer Hallinan](https://research.science.mq.edu.au/synthetic-biology/people/)Δ
-* [Prof. Anil Wipat](http://homepages.cs.ncl.ac.uk/anil.wipat/)* 
+* [Dr Curtis Madsen](http://sites.bu.edu/ckmadsen/) (Boston University)
+* [James Alastair McLaughlin](http://homepages.cs.ncl.ac.uk/j.a.mclaughlin) (Newcastle University) 
+* [Dr Goksel Misirli](http://homepages.cs.ncl.ac.uk/goksel.misirli/) (Newcastle University)
+* [Dr Matthew Pocock](http://intbio.ncl.ac.uk/?people=matthew-pocock) (Turing Ate My Hamster Ltd.)
+* [Dr Keith Flanagan](http://intbio.ncl.ac.uk/?people=dr-keith-flanagan) (Newcastle University) 
+* [Dr Jennifer Hallinan](https://research.science.mq.edu.au/synthetic-biology/people/) (Macquarie University)
+* [Prof. Anil Wipat](http://homepages.cs.ncl.ac.uk/anil.wipat/) (Newcastle University) 
 
 Web Design
 
 * [Antarctic Design](http://www.antarctic-design.co.uk/) 
-
-
-
-##### *[Newcastle University](http://ncl.ac.uk) 
-##### †[University of Utah](https://www.utah.edu/) 
-##### ‡Turing Ate My Hamster Ltd
-##### §[Boston University](http://www.bu.edu/) 
-##### Δ[Macquarie University](https://www.mq.edu.au/) 
 
 # Installation
 
@@ -433,6 +425,19 @@ fetch(Url,otherPram)
     .catch (error=>console.log(error))
 ```
 
+Key/value pair | Description
+--------- | -----------
+objectType=value | The type of object to search for ( objectType=ComponentDefinition)
+sbolTag=value |  A tag in the SBOL namespace to search for ( role=<http://identifiers.org/so/SO:0000316>)
+collection=value | Matches objects that are members of the specified collection (collection=<http://synbiohub.org/public/igem/igem_collection>)
+dcterms:tag=value | A tag in the dcterms namespace to search for ( dcterms:title='pLac'&) - note this requires an exact match
+namespace/tag=value | A full namespace with tag separated by appropriate delimiter ( <http://sbols.org/v2#role>=<http://identifiers.org/so/SO:0000316>)
+
+After the key/value pairs, an optional search string can be provided that will be used to search for partial matches in the displayId, name, or description fields.
+
+Finally, the URL can end with an offset and limit parameter.
+
+
 ## Search Root Collections
 
 `GET <URI>/rootCollections`
@@ -764,7 +769,7 @@ fetch(Url,otherPram)
     .catch (error=>console.log(error))
 ```
 
-## Count Objects
+## Count Objects by Type
 
 `GET <SynBioHub URL>/<ObjectType>/count`
 
@@ -859,45 +864,6 @@ fetch(Url,otherPram)
 The following endpoints are for downloading content from SynBioHub in various formats.
 
 <aside class="success">Note that the X-authorization header is needed for downloading information about private objects.</aside>
-
-## Download Attachment
-
-`GET <URI>/download `
-
-Returns the source for an attachment to the specified URI.
-
-```plaintext
-curl -X GET -H "Accept: text/plain" -H "X-authorization: <token>" <URI>/download -O --compressed
-```
-
-```javascript
-const fetch = require("node-fetch");
-const Url = '<URI>/download'
-const otherPram={
-    headers:{
-        "content-type" : "text/plain; charset=UTF-8"
-    },
-    method:"GET"
-};
-fetch(Url,otherPram)
-    .then(res => res.buffer()).then(buf => console.log(buf.toString()))
-    .catch (error=>console.log(error))
-```
-
-```python
-import requests
-
-response = requests.get(
-    '<URI>/download',
-    params={'X-authorization': 'token'},
-    headers={'Accept': 'text/plain'},
-)
-
-print(response.status_code)
-print(response.content)
-
-
-```
 
 ## Download SBOL
 
@@ -1164,6 +1130,43 @@ const otherPram={
 fetch(Url,otherPram)
     .then(res => res.buffer()).then(buf => console.log(buf.toString()))
     .catch (error=>console.log(error))
+```
+
+## Download Attachment
+
+`GET <URI>/download `
+
+Returns the source for an attachment to the specified URI.
+
+```plaintext
+curl -X GET -H "Accept: text/plain" -H "X-authorization: <token>" <URI>/download -O --compressed
+```
+
+```javascript
+const fetch = require("node-fetch");
+const Url = '<URI>/download'
+const otherPram={
+    headers:{
+        "content-type" : "text/plain; charset=UTF-8"
+    },
+    method:"GET"
+};
+fetch(Url,otherPram)
+    .then(res => res.buffer()).then(buf => console.log(buf.toString()))
+    .catch (error=>console.log(error))
+```
+
+```python
+import requests
+
+response = requests.get(
+    '<URI>/download',
+    params={'X-authorization': 'token'},
+    headers={'Accept': 'text/plain'},
+)
+
+print(response.status_code)
+print(response.content)
 ```
 
 # Submission Endpoints
@@ -2035,7 +2038,6 @@ Attach a specified URL to a given URI.
 
 ```plaintext
 curl -X POST -H "Accept: text/plain" -H "X-authorization: <token>" -d "url=<url>&name=<name>&type=<type>" <URI>/attachURL
-
 ```
 
 ```python
@@ -2084,6 +2086,46 @@ Parameter | Description
 url | The URL to attach.
 name | The name of the attachment.
 type | The format type of the object at the URL.
+
+## Download Attachment
+
+`GET <URI>/download `
+
+Returns the source for an attachment to the specified URI.
+
+```plaintext
+curl -X GET -H "Accept: text/plain" -H "X-authorization: <token>" <URI>/download -O --compressed
+```
+
+```javascript
+const fetch = require("node-fetch");
+const Url = '<URI>/download'
+const otherPram={
+    headers:{
+        "content-type" : "text/plain; charset=UTF-8"
+    },
+    method:"GET"
+};
+fetch(Url,otherPram)
+    .then(res => res.buffer()).then(buf => console.log(buf.toString()))
+    .catch (error=>console.log(error))
+```
+
+```python
+import requests
+
+response = requests.get(
+    '<URI>/download',
+    params={'X-authorization': 'token'},
+    headers={'Accept': 'text/plain'},
+)
+
+print(response.status_code)
+print(response.content)
+
+
+```
+
 
 # Administration Endpoints
 
