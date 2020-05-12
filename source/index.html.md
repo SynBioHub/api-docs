@@ -222,7 +222,7 @@ curl -X POST -H "Accept: text/plain" -d "email=<email>&password=<password>" <Syn
 import requests
 
 response = requests.post(
-    'http://synbiohub.org/login',
+    '<SynBioHub URL>/login',
     headers={
         'X-authorization': '<token>',
         'Accept': 'text/plain'
@@ -371,7 +371,7 @@ curl -X GET -H "Accept: text/plain" -H "X-authorization: <token>" '<SynBioHub UR
 This endpoint returns JSON metadata of the form 
 [
     {
-        "uri":"http://synbiohub.org/public/igem/BBa_K1404008/1",
+        "uri":"<SynBioHub URL>/public/igem/BBa_K1404008/1",
         "name":"BBa_K1404008",
         "description":"p70-CsgA-His*2, double His-tagged curli generator",
         "displayId":"BBa_K1404008",
@@ -1725,7 +1725,7 @@ value | The new value for the mutable notes.
 Edit the mutable source of an object specified by the URI.
 
 ```plaintext
-curl -X POST -H "Accept: text/plain" -H "X-authorization:<token>" -d "uri=<uri>&value=<value>" http://synbiohub.org/updateMutableSource
+curl -X POST -H "Accept: text/plain" -H "X-authorization:<token>" -d "uri=<uri>&value=<value>" <SynBioHub URL>/updateMutableSource
 ```
 
 ```python
@@ -1784,7 +1784,7 @@ value | The new value for the mutable source.
 Edit the citations of an object specified by the URI.
 
 ```plaintext
-curl -X POST -H "Accept: text/plain" -H "X-authorization:<token>" -d "uri=<uri>&value=<value>" http://synbiohub.org/updateCitations
+curl -X POST -H "Accept: text/plain" -H "X-authorization:<token>" -d "uri=<uri>&value=<value>" <SynBioHub URL>/updateCitations
 ```
 
 ```python
@@ -1954,14 +1954,14 @@ Possible fields to add:
 Remove field from an object.
 
 ```plaintext
-curl -X POST -H "Accept: text/plain" -H "X-authorization:<token>" -d "object=<object>"  synbiohub.org/remove/<field>
+curl -X POST -H "Accept: text/plain" -H "X-authorization:<token>" -d "object=<object>"  <URI>/remove/<field>
 ```
 
 ```python
 import requests
 
 response = requests.post(
-    '<SynBioHub URL>/remove/<field>',
+    '<URI>/remove/<field>',
     headers={
         'X-authorization': '<token>',
         'Accept': 'text/plain'
@@ -1978,7 +1978,7 @@ print(response.content)
 ```javascript
 const fetch = require("node-fetch");
 const { URLSearchParams } = require('url');
-const url = '<SynBioHub URL>/remove/<field>'
+const url = '<URI>/remove/<field>'
 var headers={
     "Accept" : "text/plain; charset=UTF-8",
     "X-authorization" : "<token>"
@@ -2334,50 +2334,51 @@ Delete a user.
 
 # Plugins
 
-### Rationale 
-
-It should be possible for someone running a SynBioHub instance to configure plugins to extend the functionality of SynBioHub without altering the main codebase. 
-
-
-### Goals
-SynBioHub administrators should be able to:
-Add processing steps to the submission pipeline
-Add rendering steps construct pages
-
-
 ### Implementation
 Plugins and SynBioHub will communicate using HTTP. The end user’s browser will not communicate with the plugin server.
 
-To execute a plugin, SynBioHub will send an HTTP POST request to the plugin’s execute endpoint. The body of the request will contain a JSON object containing:
-complete_sbol: the single-use URL for the complete object to operate on
-shallow_sbol: the single-use URL for a summarized or truncated view of the object
-top_level: the top-level URL of the SBOL object
-instanceUrl: the top-level URL of the SBOL object 
-size: a number representing an estimate of the size of the object, probably triple count
+To execute a plugin, SynBioHub will send an HTTP POST request to the plugin’s execute endpoint. The body of the request will contain a **JSON** object containing:
+
+	1. complete_sbol: the single-use URL for the complete object to operate on
+
+	2. shallow_sbol: the single-use URL for a summarized or truncated view of the object
+
+	3. top_level: the top-level URL of the SBOL object
+
+	4. instanceUrl: the top-level URL of the SBOL object 
+
+	5. size: a number representing an estimate of the size of the object, probably triple count
 
 These pages needn’t be ready immediately upon responding to the SynBioHub plugin request. It should respond with an HTTP 503 error and the Retry-After header set to the number of seconds SynBioHub should wait before retrying.
 
-### Submission
+*Submission*
+
 Intake plugins should interpret the complete_data object, which may not be in SBOL, and return a page containing SBOL. This page needn’t be ready immediately upon responding to the SynBioHub plugin request.
 
-### Curation
+*Curation*
+
 Intake plugins should interpret the complete_data object, which will be in SBOL, and return a page containing SBOL. This page needn’t be ready immediately upon responding to the SynBioHub plugin request.
 
-### Download
-The response of download plugins should be a URL where the representation of the part can be downloaded. This page needn’t be ready immediately upon responding to the SynBioHub plugin request.
+*Download*
 
-### Rendering
-The response of rendering plugins should be HTML which will be displayed on the top-level page. Rendering responses may be cached to improve performance.
+The response of download plugins should be a **URL** where the representation of the part can be downloaded. This page needn’t be ready immediately upon responding to the SynBioHub plugin request.
+
+*Rendering*
+
+The response of rendering plugins should be **HTML** which will be displayed on the top-level page. Rendering responses may be cached to improve performance.
+
 
 
 ### Plugin Specification
 Plugins must provide two endpoints, /status and /run. 
 
-### Status endpoint
+*Status endpoint*
+
 The status endpoint should listen for HTTP GET requests and return an HTTP 200 OK and (optionally) a short message if the plugin service is ready to handle requests. Otherwise, an HTTP error code and short error message should be returned. 
 
-### Run endpoint
-The run endpoint should function as described above in the Implementation section. 
+*Run endpoint*
+
+The run endpoint should function as described above in the **Implementation** section. 
  
 
 
