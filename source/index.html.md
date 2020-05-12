@@ -2019,11 +2019,43 @@ curl -X POST -H "Accept: text/plain" -H "X-authorization: <token>" -F 'file=@<fi
 ```
 
 ```python
+import requests
+
+response = requests.post(
+    '<URI>/attach',
+    headers={
+        'X-authorization': '<token>',
+        'Accept': 'text/plain'
+    },
+    files={
+	'file': open('<file>','rb'),
+	},
+
+)
+
+print(response.status_code)
+print(response.content)
 
 ```
 
 ```javascript
+const fetch = require("node-fetch");
+const FormData = require('form-data');
+const { createReadStream } = require('fs');
+const url = '<URI>/attach'
+const stream = createReadStream('<file>');
+var headers={
+    "Accept" : "text/plain; charset=UTF-8",
+    "X-authorization" : "<token>"
+};
 
+const form = new FormData();
+form.append('file', stream);
+
+
+fetch(url, { method: 'POST', headers: headers, body:form})
+    .then(res => res.buffer()).then(buf => console.log(buf.toString()))
+    .catch (error=>console.log(error))
 ```
 
 Parameter | Description
