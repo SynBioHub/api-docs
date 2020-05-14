@@ -31,24 +31,28 @@ SynBioHub includes two projects:
 
 SynBioHub can be used to publish a library of synthetic parts and designs as a service, to share designs with collaborators, and to store designs of biological systems locally. Data in SynBioHub can be accessed via the HTTP API, Java API, or Python API where it can then be integrated into CAD tools for building genetic designs. SynBioHub contains an interface for users to upload new biological data to the database, to visualize DNA parts, to perform queries to access desired parts, and to download SBOL, GenBank, FASTA, etc.
 
+### Publications
+
+
+
 
 ### Contributors
 
-* [James Alastair McLaughlin](http://homepages.cs.ncl.ac.uk/j.a.mclaughlin) (Newcastle University)
-* [Prof. Chris J. Myers](http://www.async.ece.utah.edu/Myers) (University of Colorado Boulder)
-* [Dr Goksel Misirli](http://homepages.cs.ncl.ac.uk/goksel.misirli) (Newcastle University)
+* [Dr. James Alastair McLaughlin](http://homepages.cs.ncl.ac.uk/j.a.mclaughlin) (Newcastle University)
+* [Prof. Chris J. Myers](http://www.async.ece.utah.edu/Myers) (University of Utah)
+* [Dr. Goksel Misirli](http://homepages.cs.ncl.ac.uk/goksel.misirli) (Newcastle University)
 * [Prof. Anil Wipat](http://homepages.cs.ncl.ac.uk/anil.wipat/) (Newcastle University)
 * [Zach Zundel](http://www.async.ece.utah.edu/people/students/zach-zundel/) (University of Utah)
 * [James Scholz](https://www.async.ece.utah.edu/~scholz/) (University of Utah)
 
 An earlier version of SynBioHub known as SBOL Stack was developed by the following people:
 
-* [Dr Curtis Madsen](http://sites.bu.edu/ckmadsen/) (Boston University)
+* [Dr. Curtis Madsen](http://sites.bu.edu/ckmadsen/) (Boston University)
 * [James Alastair McLaughlin](http://homepages.cs.ncl.ac.uk/j.a.mclaughlin) (Newcastle University) 
-* [Dr Goksel Misirli](http://homepages.cs.ncl.ac.uk/goksel.misirli/) (Newcastle University)
-* [Dr Matthew Pocock](http://intbio.ncl.ac.uk/?people=matthew-pocock) (Turing Ate My Hamster Ltd.)
-* [Dr Keith Flanagan](http://intbio.ncl.ac.uk/?people=dr-keith-flanagan) (Newcastle University) 
-* [Dr Jennifer Hallinan](https://research.science.mq.edu.au/synthetic-biology/people/) (Macquarie University)
+* [Dr. Goksel Misirli](http://homepages.cs.ncl.ac.uk/goksel.misirli/) (Newcastle University)
+* [Dr. Matthew Pocock](http://intbio.ncl.ac.uk/?people=matthew-pocock) (Turing Ate My Hamster Ltd.)
+* [Dr. Keith Flanagan](http://intbio.ncl.ac.uk/?people=dr-keith-flanagan) (Newcastle University) 
+* [Dr. Jennifer Hallinan](https://research.science.mq.edu.au/synthetic-biology/people/) (Macquarie University)
 * [Prof. Anil Wipat](http://homepages.cs.ncl.ac.uk/anil.wipat/) (Newcastle University) 
 
 Web Design
@@ -386,7 +390,7 @@ namespace/tag=value | A full namespace with tag separated by appropriate delimit
 
 After the key/value pairs, an optional search string can be provided that will be used to search for partial matches in the displayId, name, or description fields.
 
-Finally, the URL can end with an offset and limit parameter.
+Finally, the URL can end with an offset (where you want to start) and limit parameter (how many results you want to get).
 
 ## Count Search Results
 
@@ -434,8 +438,6 @@ dcterms:tag=value | A tag in the dcterms namespace to search for ( dcterms:title
 namespace/tag=value | A full namespace with tag separated by appropriate delimiter ( <http://sbols.org/v2#role>=<http://identifiers.org/so/SO:0000316>)
 
 After the key/value pairs, an optional search string can be provided that will be used to search for partial matches in the displayId, name, or description fields.
-
-Finally, the URL can end with an offset and limit parameter.
 
 
 ## Search Root Collections
@@ -807,7 +809,7 @@ fetch(Url,otherPram)
     .catch (error=>console.log(error))
 ```
 
-Note that you can replace `<ObjectType>` with any object type, such as `ComponentDefinition`, `SequenceAnnotation`, etc.
+Note that you can replace `<ObjectType>` with any SBOL object type, such as `ComponentDefinition`, `SequenceAnnotation`, etc. See [here](https://sbolstandard.org/data-model-specification/) for more object types
 
 ## SPARQL Query
 
@@ -1083,44 +1085,6 @@ print(response.content)
 ```javascript
 const fetch = require("node-fetch");
 const Url = '<URI>/gff'
-const otherPram={
-    headers:{
-        "content-type" : "text/plain; charset=UTF-8"
-    },
-    method:"GET"
-};
-fetch(Url,otherPram)
-    .then(res => res.buffer()).then(buf => console.log(buf.toString()))
-    .catch (error=>console.log(error))
-```
-
-## Download Visualization
-
-`GET <URI>/visualization`
-
-Returns the visualization for the object from the specified URI.
-
-```plaintext
-curl -X GET -H "Accept: text/plain" -H "X-authorization: <token>" <URI>/visualization
-```
-
-```python
-import requests
-
-response = requests.get(
-    '<URI>/visualization',
-    params={'X-authorization': '<token>'},
-    headers={'Accept': 'text/plain'},
-)
-
-print(response.status_code)
-print(response.content)
-
-```
-
-```javascript
-const fetch = require("node-fetch");
-const Url = '<URI>/visualization'
 const otherPram={
     headers:{
         "content-type" : "text/plain; charset=UTF-8"
@@ -2195,7 +2159,8 @@ const fetch = require("node-fetch");
 const Url = '<SynBioHub URL>/admin/sparql?query=<SPARQL query>'
 const otherPram={
     headers:{
-        "content-type" : "application/json; charset=UTF-8"
+        "content-type" : "application/json; charset=UTF-8",
+	"X-authorization" : "<token>"
     },
     method:"GET"
 };
@@ -2212,6 +2177,31 @@ Returns configuration options for SynBioHub.
 
 ```plaintext
 curl -X GET -H "Accept: text/plain" -H "X-authorization: <token>" <SynBioHub URL>/admin
+```
+
+```python
+import requests
+
+response = requests.get(
+    '<SynBioHub URL>/admin',
+    params={'X-authorization': 'token'},
+    headers={'Accept': 'text/plain'},
+)
+
+print(response.status_code)
+print(response.content)
+```
+
+```javascript
+const fetch = require("node-fetch");
+const url = '<SynBioHub URL>/manage'
+const headers={
+        "Accept" : "text/plain; charset=UTF-8",
+	"X-authorization" : "<token>"
+};
+fetch(url, { method: 'GET', headers: headers})
+    .then(res => res.buffer()).then(buf => console.log(buf.toString()))
+    .catch (error=>console.log(error))
 ```
 
 ## View Graphs
@@ -2390,7 +2380,7 @@ Update the user's settings.
 
 ## New User
 
-`POST 
+`POST <SynBioHub URL>/admin/newUser`
 
 Create a new user.
 
