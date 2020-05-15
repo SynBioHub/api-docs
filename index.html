@@ -509,10 +509,10 @@
             <a href="#plugins" class="toc-h1 toc-link" data-title="Plugins">Plugins</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#implementation" class="toc-h2 toc-link" data-title="Implementation">Implementation</a>
+                    <a href="#plugin-specification" class="toc-h2 toc-link" data-title="Plugin Specification">Plugin Specification</a>
                   </li>
                   <li>
-                    <a href="#plugin-specification" class="toc-h2 toc-link" data-title="Plugin Specification">Plugin Specification</a>
+                    <a href="#implementation" class="toc-h2 toc-link" data-title="Implementation">Implementation</a>
                   </li>
               </ul>
           </li>
@@ -2432,8 +2432,7 @@ This endpoint returns JSON metadata of the form:
 <span class="kr">const</span> <span class="nx">Url</span> <span class="o">=</span> <span class="s1">'&lt;SynBioHub URL&gt;/admin/sparql?query=&lt;SPARQL query&gt;'</span>
 <span class="kr">const</span> <span class="nx">otherPram</span><span class="o">=</span><span class="p">{</span>
     <span class="na">headers</span><span class="p">:{</span>
-        <span class="s2">"content-type"</span> <span class="p">:</span> <span class="s2">"application/json; charset=UTF-8"</span><span class="p">,</span>
-    <span class="s2">"X-authorization"</span> <span class="p">:</span> <span class="s2">"&lt;token&gt;"</span>
+        <span class="s2">"content-type"</span> <span class="p">:</span> <span class="s2">"application/json; charset=UTF-8"</span>
     <span class="p">},</span>
     <span class="na">method</span><span class="p">:</span><span class="s2">"GET"</span>
 <span class="p">};</span>
@@ -2445,25 +2444,6 @@ This endpoint returns JSON metadata of the form:
 
 <p>Returns configuration options for SynBioHub.</p>
 <pre class="highlight plaintext tab-plaintext"><code>curl -X GET -H "Accept: text/plain" -H "X-authorization: &lt;token&gt;" &lt;SynBioHub URL&gt;/admin
-</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
-
-<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
-    <span class="s">'&lt;SynBioHub URL&gt;/admin'</span><span class="p">,</span>
-    <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s">'X-authorization'</span><span class="p">:</span> <span class="s">'token'</span><span class="p">},</span>
-    <span class="n">headers</span><span class="o">=</span><span class="p">{</span><span class="s">'Accept'</span><span class="p">:</span> <span class="s">'text/plain'</span><span class="p">},</span>
-<span class="p">)</span>
-
-<span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
-</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">fetch</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"node-fetch"</span><span class="p">);</span>
-<span class="kr">const</span> <span class="nx">url</span> <span class="o">=</span> <span class="s1">'&lt;SynBioHub URL&gt;/manage'</span>
-<span class="kr">const</span> <span class="nx">headers</span><span class="o">=</span><span class="p">{</span>
-        <span class="s2">"Accept"</span> <span class="p">:</span> <span class="s2">"text/plain; charset=UTF-8"</span><span class="p">,</span>
-    <span class="s2">"X-authorization"</span> <span class="p">:</span> <span class="s2">"&lt;token&gt;"</span>
-<span class="p">};</span>
-<span class="nx">fetch</span><span class="p">(</span><span class="nx">url</span><span class="p">,</span> <span class="p">{</span> <span class="na">method</span><span class="p">:</span> <span class="s1">'GET'</span><span class="p">,</span> <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span><span class="p">})</span>
-    <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">res</span> <span class="o">=&gt;</span> <span class="nx">res</span><span class="p">.</span><span class="nx">buffer</span><span class="p">()).</span><span class="nx">then</span><span class="p">(</span><span class="nx">buf</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">buf</span><span class="p">.</span><span class="nx">toString</span><span class="p">()))</span>
-    <span class="p">.</span><span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="o">=&gt;</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">error</span><span class="p">))</span>
 </code></pre><h2 id='view-graphs'>View Graphs</h2>
 <p><code>GET &lt;SynBioHub URL&gt;/admin/graphs</code></p>
 
@@ -2577,48 +2557,91 @@ This endpoint returns JSON metadata of the form:
 <p><code>POST &lt;SynBioHub URL&gt;/admin/deleteUser</code></p>
 
 <p>Delete a user. </p>
-<h1 id='plugins'>Plugins</h1><h3 id='implementation'>Implementation</h3>
+<h1 id='plugins'>Plugins</h1><h3 id='plugin-specification'>Plugin Specification</h3>
+<p>Plugins must provide three endpoints, /status, /evaluate, and /run. </p>
+
+<p><em>Status endpoint</em>
+The status endpoint should listen for HTTP GET requests and return an HTTP 200 OK and (optionally) a short message if the plugin service is ready to handle requests. Otherwise, an HTTP error code and short error message should be returned. </p>
+
+<p><em>Evaluate endpoint</em>
+The evaluate endpoint should listen for HTTP POST requests, and return an HTTP 200 OK if the request can be handled by the run endpoint. 
+The body of evaluate requests sent to each plugin type is described below.</p>
+
+<p><em>Run endpoint</em>
+The run endpoint should listen for HTTP POST requests, and return an HTTP 200 OK with the result of the plugin operation. 
+The body of run requests sent to each plugin type is described below.</p>
+<h3 id='implementation'>Implementation</h3>
 <p>Plugins and SynBioHub will communicate using HTTP. The end user’s browser will not communicate with the plugin server.</p>
+<h4 id='submission'>Submission</h4>
+<p>For both the <code>evaluate</code> and <code>run</code> endpoints, SynBioHub will send a JSON object structured as follows:
+<code>{ manifest: { files: [ ... ] } }</code></p>
 
-<p>To execute a plugin, SynBioHub will send an HTTP POST request to the plugin’s execute endpoint. The body of the request will contain a <strong>JSON</strong> object containing:</p>
+<p>Each file in <code>files</code> will have the following parameters:</p>
 
-<p>1. complete_sbol: the single-use URL for the complete object to operate on</p>
+<p>1. <code>filename</code>: The name of the file</p>
 
-<p>2. shallow_sbol: the single-use URL for a summarized or truncated view of the object</p>
+<p>2. <code>type</code>: the Content-Type of the file</p>
 
-<p>3. top_level: the top-level URL of the SBOL object</p>
+<p>3. <code>url</code>: A URL where the file can be accessed</p>
 
-<p>4. instanceUrl: the top-level URL of the SBOL object </p>
+<p><em>Evaluate endpoint</em></p>
 
-<p>5. size: a number representing an estimate of the size of the object, probably triple count</p>
-
-<p>These pages needn’t be ready immediately upon responding to the SynBioHub plugin request. It should respond with an HTTP 503 error and the Retry-After header set to the number of seconds SynBioHub should wait before retrying.</p>
-
-<p><em>Submission</em></p>
-
-<p>Intake plugins should interpret the complete_data object, which may not be in SBOL, and return a page containing SBOL. This page needn’t be ready immediately upon responding to the SynBioHub plugin request.</p>
-
-<p><em>Curation</em></p>
-
-<p>Intake plugins should interpret the complete_data object, which will be in SBOL, and return a page containing SBOL. This page needn’t be ready immediately upon responding to the SynBioHub plugin request.</p>
-
-<p><em>Download</em></p>
-
-<p>The response of download plugins should be a <strong>URL</strong> where the representation of the part can be downloaded. This page needn’t be ready immediately upon responding to the SynBioHub plugin request.</p>
-
-<p><em>Rendering</em></p>
-
-<p>The response of rendering plugins should be <strong>HTML</strong> which will be displayed on the top-level page. Rendering responses may be cached to improve performance.</p>
-<h3 id='plugin-specification'>Plugin Specification</h3>
-<p>Plugins must provide two endpoints, /status and /run. </p>
-
-<p><em>Status endpoint</em></p>
-
-<p>The status endpoint should listen for HTTP GET requests and return an HTTP 200 OK and (optionally) a short message if the plugin service is ready to handle requests. Otherwise, an HTTP error code and short error message should be returned. </p>
+<p>SynBioHub will send an HTTP POST request containing the manifest to the submit plugin&#39;s evaluate endpoint.
+The plugin should respond with HTTP 200 OK if the plugin can handle the submission.</p>
 
 <p><em>Run endpoint</em></p>
 
-<p>The run endpoint should function as described above in the <strong>Implementation</strong> section. </p>
+<p>SynBioHub will send an HTTP POST request containing the manifest to the submit plugin&#39;s run endpoint.
+It will also send the <code>instanceUrl</code> parameter.
+The plugin should respond with an HTTP response and file attachment, which represents the submission.</p>
+<h4 id='download'>Download</h4>
+<p><em>Evaluate endpoint</em></p>
+
+<p>SynBioHub will send an HTTP POST request to the download plugin&#39;s evaluate endpoint. The body of the request will contain a <strong>JSON</strong> containing:</p>
+
+<p>1. <code>type</code>: The RDF type of the top-level object</p>
+
+<p>The plugin should respond with an HTTP 200 OK if the request can be handled.</p>
+
+<p><em>Run endpoint</em></p>
+
+<p>SynBioHub will send an HTTP POST request to the dwonload plugin’s run endpoint. The body of the request will contain a <strong>JSON</strong> object containing:</p>
+
+<p>1. <code>complete_sbol</code>: the single-use URL for the complete object to operate on</p>
+
+<p>2. <code>shallow_sbol</code>: the single-use URL for a summarized or truncated view of the object</p>
+
+<p>3. <code>top_level</code>: the top-level URL of the SBOL object</p>
+
+<p>4. <code>instanceUrl</code>: the top-level URL of the SBOL object </p>
+
+<p>5. <code>size</code>: a number representing an estimate of the size of the object, probably triple count</p>
+
+<p>The plugin should respond with an HTTP request and file attachment which represents the object.</p>
+<h4 id='visualization'>Visualization</h4>
+<p>The response of visualization plugins should be <strong>HTML</strong> which will be displayed on the top-level page. Rendering responses may be cached to improve performance.</p>
+
+<p><em>Evaluate endpoint</em></p>
+
+<p>SynBioHub will send an HTTP POST request to the visualization plugin&#39;s evaluate endpoint. The body of the request will contain a <strong>JSON</strong> containing:</p>
+
+<p>1. <code>type</code>: The RDF type of the top-level object</p>
+
+<p><em>Run endpoint</em></p>
+
+<p>SynBioHub will send an HTTP POST request to the visualization plugin’s run endpoint. The body of the request will contain a <strong>JSON</strong> object containing:</p>
+
+<p>1. <code>complete_sbol</code>: the single-use URL for the complete object to operate on</p>
+
+<p>2. <code>shallow_sbol</code>: the single-use URL for a summarized or truncated view of the object</p>
+
+<p>3. <code>top_level</code>: the top-level URL of the SBOL object</p>
+
+<p>4. <code>instanceUrl</code>: the top-level URL of the SBOL object </p>
+
+<p>5. <code>size</code>: a number representing an estimate of the size of the object, probably triple count</p>
+
+<p>The plugin should respond with an HTML page to be rendered in-frame on the corresponding SynBioHub page. </p>
 <h1 id='errors'>Errors</h1>
 <p>The SynBioHub API uses the following error codes:</p>
 
