@@ -319,11 +319,66 @@ Resets the user's password with the provided token and two copies of the new pas
 
 View the user's profile.
 
+```plaintext
+curl -X GET -H "Accept: text/plain" -H "X-authorization: <token>" <SynBioHub URL>/profile
+
+```
+
+```python
+import requests
+
+response = requests.get(
+    '<SynBioHub URL>/profile',
+    headers={'X-authorization': '<token>',
+    'Accept': 'text/plain'}
+)
+
+print(response.status_code)
+print(response.content)
+
+```
+
+```javascript
+const fetch = require("node-fetch");
+const url = '<SynBioHub URL>/profile	'
+const headers={
+        "Accept" : "text/plain; charset=UTF-8",
+	"X-authorization" : "<token>"
+};
+fetch(url, { method: 'GET', headers: headers})
+    .then(res => res.buffer()).then(buf => console.log(buf.toString()))
+    .catch (error=>console.log(error))
+```
+
+
+
 ## Update Profile
 
 `POST <SynBioHub URL>/profile`
 
 Update the user's profile.
+
+```javascript
+const fetch = require("node-fetch");
+const { URLSearchParams } = require('url');
+const url = '<SynBioHub URL>/profile'
+var headers={
+    "Accept" : "text/plain; charset=UTF-8",
+    "X-authorization" : "<token>"
+};
+
+const params = new URLSearchParams();
+params.append('name', '<name>');
+params.append('affiliation', '<affiliation>');
+params.append('email', '<email>');
+params.append('password1', '<password1>');
+params.append('password2', '<password2>');
+
+fetch(url, { method: 'POST', headers: headers, body:params})
+    .then(res => res.buffer()).then(buf => console.log(buf.toString()))
+    .catch (error=>console.log(error))
+
+```
 
 # Search Endpoints
 
@@ -363,7 +418,7 @@ print(response.content)
 ```
 
 ```plaintext
-curl -X GET -H "Accept: text/plain" -H "X-authorization: <token>" '<SynBioHub URL>/search/objectType%3DComponentDefinition%26role%3D%3Chttp%3A%2F%2Fidentifiers.org%2Fso%2FSO%3A0000316%3E%26GFP/?offset=0&limit=50
+curl -X GET -H "Accept: text/plain" -H "X-authorization: <token>" <SynBioHub URL>/search/objectType%3DComponentDefinition%26role%3D%3Chttp%3A%2F%2Fidentifiers.org%2Fso%2FSO%3A0000316%3E%26GFP/?offset=0&limit=50
 
 This endpoint returns JSON metadata of the form 
 [
@@ -1969,7 +2024,15 @@ Possible fields to remove:
 
 ## Add to Collection
 
+`POST <URI>/addToCollection`
+
+Add an object as a new member of a Collection.
+
 ## Remove Membership
+
+`POST <URI>/removeMembership`
+
+Remove an object as a new member of a Collection.
 
 # Attachment Endpoints
 
