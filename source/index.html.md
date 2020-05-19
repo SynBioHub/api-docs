@@ -1967,10 +1967,6 @@ Possible fields to remove:
 `role`
 `type`
 
-## Add to Collection
-
-## Remove Membership
-
 # Attachment Endpoints
 
 The following endpoints are for creating attachments on SynBioHub.
@@ -2144,6 +2140,7 @@ Returns the results of the SPARQL admin query in JSON format.
 curl -X GET -H "Accept: application/json" '<SynBioHub URL>/admin/sparql?query=<SPARQL query>
 ```
 
+
 ```python
 import requests
 
@@ -2198,7 +2195,7 @@ print(response.content)
 
 ```javascript
 const fetch = require("node-fetch");
-const url = '<SynBioHub URL>/admin'
+const url = '<SynBioHub URL>/manage'
 const headers={
         "Accept" : "text/plain; charset=UTF-8",
 	"X-authorization" : "<token>"
@@ -2218,33 +2215,6 @@ Returns existing graphs and its number of triples.
 curl -X GET -H "Accept: text/plain" -H "X-authorization: <token>" <SynBioHub URL>/admin/graphs
 ```
 
-```python
-import requests
-
-response = requests.get(
-    '<SynBioHub URL>/admin/graphs',
-    params={'X-authorization': '<token>'},
-    headers={'Accept': 'application/json'},
-)
-
-print(response.status_code)
-
-print(response.json())
-`
-```
-
-```javascript
-const fetch = require("node-fetch");
-const url = '<SynBioHub URL>/admin/graphs'
-const headers={
-        "Accept" : "text/plain; charset=UTF-8",
-	"X-authorization" : "<token>"
-};
-fetch(url, { method: 'GET', headers: headers})
-    .then(res => res.buffer()).then(buf => console.log(buf.toString()))
-    .catch (error=>console.log(error))
-```
-
 ## View Log
 
 `GET <SynBioHub URL>/admin/log`
@@ -2254,33 +2224,6 @@ Returns the SynBioHub log file.
 ```plaintext
 curl -X GET -H "Accept: text/plain" -H "X-authorization: <token>" <SynBioHub URL>/admin/log
 ```
-```python
-import requests
-
-response = requests.get(
-    '<SynBioHub URL>/admin/log',
-    params={'X-authorization': '<token>'},
-    headers={'Accept': 'application/json'},
-)
-
-print(response.status_code)
-
-print(response.json())
-`
-```
-
-```javascript
-const fetch = require("node-fetch");
-const url = '<SynBioHub URL>/admin/log'
-const headers={
-        "Accept" : "text/plain; charset=UTF-8",
-	"X-authorization" : "<token>"
-};
-fetch(url, { method: 'GET', headers: headers})
-    .then(res => res.buffer()).then(buf => console.log(buf.toString()))
-    .catch (error=>console.log(error))
-```
-
 
 ## View Current Mail Settings
 
@@ -2291,34 +2234,6 @@ Returns the current mail configuration.
 ```plaintext
 curl -X GET -H "Accept: text/plain" -H "X-authorization: <token>" <SynBioHub URL>/admin/mail
 ```
-
-```python
-import requests
-
-response = requests.get(
-    '<SynBioHub URL>/admin/mail',
-    params={'X-authorization': '<token>'},
-    headers={'Accept': 'application/json'},
-)
-
-print(response.status_code)
-
-print(response.json())
-`
-```
-
-```javascript
-const fetch = require("node-fetch");
-const url = '<SynBioHub URL>/admin/mail'
-const headers={
-        "Accept" : "text/plain; charset=UTF-8",
-	"X-authorization" : "<token>"
-};
-fetch(url, { method: 'GET', headers: headers})
-    .then(res => res.buffer()).then(buf => console.log(buf.toString()))
-    .catch (error=>console.log(error))
-```
-
 
 ## Update Mail Settings
 
@@ -2334,33 +2249,6 @@ View current plugins.
 
 ```plaintext
 curl -X GET -H "Accept: text/plain" -H "X-authorization: <token>" <SynBioHub URL>/admin/plugins
-```
-
-```python
-import requests
-
-response = requests.get(
-    '<SynBioHub URL>/admin/plugins',
-    params={'X-authorization': '<token>'},
-    headers={'Accept': 'application/json'},
-)
-
-print(response.status_code)
-
-print(response.json())
-`
-```
-
-```javascript
-const fetch = require("node-fetch");
-const url = '<SynBioHub URL>/admin/plugins'
-const headers={
-        "Accept" : "text/plain; charset=UTF-8",
-	"X-authorization" : "<token>"
-};
-fetch(url, { method: 'GET', headers: headers})
-    .then(res => res.buffer()).then(buf => console.log(buf.toString()))
-    .catch (error=>console.log(error))
 ```
 
 ## Save Plugin
@@ -2381,33 +2269,6 @@ Delete a plugin.
 
 ```plaintext
 curl -X GET -H "Accept: text/plain" -H "X-authorization: <token>" <SynBioHub URL>/admin/registries
-```
-
-```python
-import requests
-
-response = requests.get(
-    '<SynBioHub URL>/admin/registries',
-    params={'X-authorization': '<token>'},
-    headers={'Accept': 'application/json'},
-)
-
-print(response.status_code)
-
-print(response.json())
-`
-```
-
-```javascript
-const fetch = require("node-fetch");
-const url = '<SynBioHub URL>/admin/registries'
-const headers={
-        "Accept" : "text/plain; charset=UTF-8",
-	"X-authorization" : "<token>"
-};
-fetch(url, { method: 'GET', headers: headers})
-    .then(res => res.buffer()).then(buf => console.log(buf.toString()))
-    .catch (error=>console.log(error))
 ```
 
 View current registries.
@@ -2452,33 +2313,6 @@ View current remotes.
 curl -X GET -H "Accept: text/plain" -H "X-authorization: <token>" <SynBioHub URL>/admin/remotes
 ```
 
-```python
-import requests
-
-response = requests.get(
-    '<SynBioHub URL>/admin/remotes',
-    params={'X-authorization': '<token>'},
-    headers={'Accept': 'application/json'},
-)
-
-print(response.status_code)
-
-print(response.json())
-`
-```
-
-```javascript
-const fetch = require("node-fetch");
-const url = '<SynBioHub URL>/admin/remotes'
-const headers={
-        "Accept" : "text/plain; charset=UTF-8",
-	"X-authorization" : "<token>"
-};
-fetch(url, { method: 'GET', headers: headers})
-    .then(res => res.buffer()).then(buf => console.log(buf.toString()))
-    .catch (error=>console.log(error))
-```
-
 ## Save Remote
 
 `POST <SynBioHub URL>/admin/saveRemote`
@@ -2499,33 +2333,6 @@ View current SBOLExplorer Endpoint
 
 ```plaintext
 curl -X GET -H "Accept: text/plain" -H "X-authorization: <token>" <SynBioHub URL>/admin/explorer
-```
-
-```python
-import requests
-
-response = requests.get(
-    '<SynBioHub URL>/admin/explorer',
-    params={'X-authorization': '<token>'},
-    headers={'Accept': 'application/json'},
-)
-
-print(response.status_code)
-
-print(response.json())
-`
-```
-
-```javascript
-const fetch = require("node-fetch");
-const url = '<SynBioHub URL>/admin/explorer'
-const headers={
-        "Accept" : "text/plain; charset=UTF-8",
-	"X-authorization" : "<token>"
-};
-fetch(url, { method: 'GET', headers: headers})
-    .then(res => res.buffer()).then(buf => console.log(buf.toString()))
-    .catch (error=>console.log(error))
 ```
 
 ## Update SBOLExplorer
@@ -2550,33 +2357,6 @@ View the current theme.
 curl -X GET -H "Accept: text/plain" -H "X-authorization: <token>" <SynBioHub URL>/admin/theme
 ```
 
-```python
-import requests
-
-response = requests.get(
-    '<SynBioHub URL>/admin/theme',
-    params={'X-authorization': '<token>'},
-    headers={'Accept': 'application/json'},
-)
-
-print(response.status_code)
-
-print(response.json())
-`
-```
-
-```javascript
-const fetch = require("node-fetch");
-const url = '<SynBioHub URL>/admin/theme'
-const headers={
-        "Accept" : "text/plain; charset=UTF-8",
-	"X-authorization" : "<token>"
-};
-fetch(url, { method: 'GET', headers: headers})
-    .then(res => res.buffer()).then(buf => console.log(buf.toString()))
-    .catch (error=>console.log(error))
-```
-
 ## Update Theme
 
 `POST <SynBioHub URL>/admin/theme`
@@ -2591,33 +2371,6 @@ View the current users.
 
 ```plaintext
 curl -X GET -H "Accept: text/plain" -H "X-authorization: <token>" <SynBioHub URL>/admin/users
-```
-
-```python
-import requests
-
-response = requests.get(
-    '<SynBioHub URL>/admin/users',
-    params={'X-authorization': '<token>'},
-    headers={'Accept': 'application/json'},
-)
-
-print(response.status_code)
-
-print(response.json())
-`
-```
-
-```javascript
-const fetch = require("node-fetch");
-const url = '<SynBioHub URL>/admin/users'
-const headers={
-        "Accept" : "text/plain; charset=UTF-8",
-	"X-authorization" : "<token>"
-};
-fetch(url, { method: 'GET', headers: headers})
-    .then(res => res.buffer()).then(buf => console.log(buf.toString()))
-    .catch (error=>console.log(error))
 ```
 
 ## Update Users
