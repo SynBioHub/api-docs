@@ -502,18 +502,18 @@ curl -X POST -H "Accept: text/plain" -H "X-authorization:<token>" -d "name=<name
 ```python
 import requests
 response = requests.post(
-    '<URI>/makePublic',
+    '<URI>/profile',
     headers={
         'X-authorization': '<token>',
         'Accept': 'text/plain'
     },
     data={
-        'id': '<id>',
-        'version' : '<version>',
-        'name' : '<name>',
-        'description' : '<description>',
-        'citations' : '<citations>',
-        'tabState' : '<tabState>'
+        'name': '<name>',
+        'affiliation' : '<affiliation>',
+        'email' : '<email>',
+        'password1' : '<password1>',
+        'password2' : '<password2>',
+
         },
 )
 print(response.status_code)
