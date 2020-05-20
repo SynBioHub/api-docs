@@ -319,6 +319,8 @@ Resets the user's password with the provided token and two copies of the new pas
 
 View the user's profile.
 
+
+
 ## Update Profile
 
 `POST <SynBioHub URL>/profile`
