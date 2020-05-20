@@ -363,7 +363,7 @@ print(response.content)
 ```
 
 ```plaintext
-curl -X GET -H "Accept: text/plain" -H "X-authorization: <token>" '<SynBioHub URL>/search/objectType%3DComponentDefinition%26role%3D%3Chttp%3A%2F%2Fidentifiers.org%2Fso%2FSO%3A0000316%3E%26GFP/?offset=0&limit=50
+curl -X GET -H "Accept: text/plain" -H "X-authorization: <token>" '<SynBioHub URL>/search/objectType%3DComponentDefinition%26role%3D%3Chttp%3A%2F%2Fidentifiers.org%2Fso%2FSO%3A0000316%3E%26GFP/?offset=0&limit=50'
 
 This endpoint returns JSON metadata of the form 
 [
@@ -400,7 +400,7 @@ Finally, the URL can end with an offset (where you want to start) and limit para
 Returns the number of items matching the search result.
 
 ```plaintext
-curl -X GET -H "Accept: text/plain" -H "X-authorization: <token>" <SynBioHub URL>/searchCount/<key>=<value>&...&<search string>/?offset=#&limit=#
+curl -X GET -H "Accept: text/plain" -H "X-authorization: <token>" '<SynBioHub URL>/searchCount/<key>=<value>&...&<search string>/?offset=#&limit=#'
 ```
 
 ```python
