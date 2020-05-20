@@ -206,7 +206,7 @@ Endpoints that control user related functions
 
 ## Login
 
-`POST <SynBioHub URL>/login ` 
+`POST <SynBioHub URL>/login` 
 
 This POST request requires email/password and returns a user token that should be passed in the X-authorization header to view private objects and submit new objects, etc. 
 
@@ -259,7 +259,7 @@ password | The password of the user.
 
 ## Logout
 
-`POST <SynBioHub URL>/logout `
+`POST <SynBioHub URL>/logout`
 
 This post request logs out the user specified in the X-authorization header.
 
@@ -319,13 +319,76 @@ Resets the user's password with the provided token and two copies of the new pas
 
 View the user's profile.
 
+```plaintext
+curl -X GET -H "Accept: text/plain" -H "X-authorization: <token>" <SynBioHub URL>/profile
+```
 
+```python
+import requests
+
+response = requests.get(
+    '<SynBioHub URL>/profile',
+    headers={
+	'X-authorization': '<token>',
+	'Accept': 'text/plain'
+    }
+)
+
+print(response.status_code)
+print(response.content)
+```
+
+```javascript
+const fetch = require("node-fetch");
+const url = '<SynBioHub URL>/profile'	'
+const headers={
+        "Accept" : "text/plain; charset=UTF-8",
+	"X-authorization" : "<token>"
+};
+fetch(url, { method: 'GET', headers: headers})
+    .then(res => res.buffer()).then(buf => console.log(buf.toString()))
+    .catch (error=>console.log(error))
+```
 
 ## Update Profile
 
 `POST <SynBioHub URL>/profile`
 
 Update the user's profile.
+
+```plaintext
+curl -X POST -H "Accept: text/plain" -H "X-authorization:<token>" -d "name=<name>&affiliation=<affiliation>&email=<email>&password1=<password1>&password2=<password2>" <SynBioHub URL>/profile
+```
+
+```javascript
+const fetch = require("node-fetch");
+const { URLSearchParams } = require('url');
+const url = '<SynBioHub URL>/profile'
+var headers={
+    "Accept" : "text/plain; charset=UTF-8",
+    "X-authorization" : "<token>"
+};
+
+const params = new URLSearchParams();
+params.append('name', '<name>');
+params.append('affiliation', '<affiliation>');
+params.append('email', '<email>');
+params.append('password1', '<password1>');
+params.append('password2', '<password2>');
+
+fetch(url, { method: 'POST', headers: headers, body:params})
+    .then(res => res.buffer()).then(buf => console.log(buf.toString()))
+    .catch (error=>console.log(error))
+
+```
+
+Parameter | Description
+--------- | ------- | -----------
+name | Name of the user
+affiliation | Affilation of the user
+email | Email address of the user
+password1 | Password of the user
+password2 | Password confirmation
 
 # Search Endpoints
 
