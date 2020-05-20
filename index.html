@@ -539,7 +539,7 @@
 <p>SynBioHub includes two projects:</p>
 
 <ul>
-<li>An <a href="http://github.com/SynBioHub">open source software project</a> providing a web interface for the storing and publishing of synthetic biology designs.</li>
+<li>An <a href="https://github.com/SynBioHub/synbiohub">open source software project</a> providing a web interface for the storing and publishing of synthetic biology designs.</li>
 <li>A public instance of the aforementioned software project at <a href="http://synbiohub.org">synbiohub.org</a>, allowing users to upload and share designs.</li>
 </ul>
 <h3 id='what-can-synbiohub-be-used-for'>What can SynBioHub be used for?</h3>
@@ -926,11 +926,11 @@ This endpoint returns JSON metadata of the form
 
 <p>After the key/value pairs, an optional search string can be provided that will be used to search for partial matches in the displayId, name, or description fields.</p>
 <h2 id='search-root-collections'>Search Root Collections</h2>
-<p><code>GET &lt;URI&gt;/rootCollections</code></p>
+<p><code>GET &lt;SynBioHub URL&gt;/rootCollections</code></p>
 
 <p>Returns all root collections.</p>
 <pre class="highlight plaintext tab-plaintext"><code>
-curl -X GET -H "Accept: text/plain" -H "X-authorization: &lt;token&gt;" &lt;URI&gt;/rootCollections
+curl -X GET -H "Accept: text/plain" -H "X-authorization: &lt;token&gt;" &lt;SynBioHub URL&gt;/rootCollections
 
 This endpoint returns JSON metadata of the form:
 
@@ -949,12 +949,12 @@ This endpoint returns JSON metadata of the form:
 </code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 
 <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
-    <span class="s">'&lt;URI&gt;/rootCollections'</span><span class="p">,</span>
+    <span class="s">'&lt;SynBioHub URL&gt;/rootCollections'</span><span class="p">,</span>
     <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s">'X-authorization'</span><span class="p">:</span> <span class="s">'token'</span><span class="p">},</span>
     <span class="n">headers</span><span class="o">=</span><span class="p">{</span><span class="s">'Accept'</span><span class="p">:</span> <span class="s">'text/plain'</span><span class="p">},</span>
 <span class="p">)</span>
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">fetch</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"node-fetch"</span><span class="p">);</span>
-<span class="kr">const</span> <span class="nx">Url</span> <span class="o">=</span> <span class="s1">'&lt;URI&gt;/rootCollections'</span>
+<span class="kr">const</span> <span class="nx">Url</span> <span class="o">=</span> <span class="s1">'&lt;SynBioHub URL&gt;/rootCollections'</span>
 <span class="kr">const</span> <span class="nx">otherPram</span><span class="o">=</span><span class="p">{</span>
     <span class="na">headers</span><span class="p">:{</span>
         <span class="s2">"content-type"</span> <span class="p">:</span> <span class="s2">"text/plain; charset=UTF-8"</span>
