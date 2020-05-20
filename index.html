@@ -546,9 +546,9 @@
 <p>SynBioHub can be used to publish a library of synthetic parts and designs as a service, to share designs with collaborators, and to store designs of biological systems locally. Data in SynBioHub can be accessed via the HTTP API, Java API, or Python API where it can then be integrated into CAD tools for building genetic designs. SynBioHub contains an interface for users to upload new biological data to the database, to visualize DNA parts, to perform queries to access desired parts, and to download SBOL, GenBank, FASTA, etc.</p>
 <h3 id='publications'>Publications</h3>
 <ul>
-<li><a href="https://pubs.acs.org/doi/abs/10.1021/acssynbio.7b00403">SBH Paper</a></li>
-<li><a href="https://pubs.acs.org/doi/abs/10.1021/acssynbio.0c00056">SBH Plugin Paper</a></li>
-<li><a href="https://pubs.acs.org/doi/abs/10.1021/acssynbio.9b00089">SBOLExplorer</a> </li>
+<li><em>McLaughlin, James Alastair, et al. <a href="(https://pubs.acs.org/doi/abs/10.1021/acssynbio.7b00403)">&quot;SynBioHub: a standards-enabled design repository for synthetic biology.&quot;</a> ACS synthetic biology 7.2 (2018): 682-688.</em></li>
+<li><em>Mante, Jeanet, Zach Zundel, and Chris J. Myers. <a href="(https://pubs.acs.org/doi/abs/10.1021/acssynbio.0c00056)">&quot;Extending SynBioHub&#39;s Functionality with Plugins.&quot;</a> ACS Synthetic Biology (2020).</em></li>
+<li><em>Zhang, Michael, Zach Zundel, and Chris J. Myers. <a href="(https://pubs.acs.org/doi/abs/10.1021/acssynbio.9b00089)">&quot;SBOLExplorer: Data Infrastructure and Data Mining for Genetic Design Repositories.&quot;</a> ACS synthetic biology 8.10 (2019): 2287-2294.</em></li>
 </ul>
 <h3 id='contributors'>Contributors</h3>
 <ul>
@@ -776,24 +776,269 @@ server {
 <p><code>POST &lt;SynBioHub URL&gt;/register</code></p>
 
 <p>Register a new user on SynBioHub.</p>
+<pre class="highlight plaintext tab-plaintext"><code>curl -X POST -H "Accept: text/plain" -d "username=&lt;username&gt;&amp;name=&lt;name&gt;&amp;affiliation=&lt;affiliation&gt;&amp;email=&lt;email&gt;&amp;password1=&lt;password1&gt;&amp;password2=&lt;password2&gt;" &lt;SynBioHub URL&gt;/register
+</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span>
+    <span class="s">'&lt;SynBioHub URL&gt;/register'</span><span class="p">,</span>
+    <span class="n">headers</span><span class="o">=</span><span class="p">{</span>
+        <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'text/plain'</span>
+    <span class="p">},</span>
+    <span class="n">data</span><span class="o">=</span><span class="p">{</span>
+        <span class="s">'username'</span><span class="p">:</span> <span class="s">'&lt;username&gt;'</span><span class="p">,</span>
+        <span class="s">'name'</span> <span class="p">:</span> <span class="s">'&lt;name&gt;'</span><span class="p">,</span>
+        <span class="s">'affiliation'</span> <span class="p">:</span> <span class="s">'&lt;affiliation&gt;'</span><span class="p">,</span>
+        <span class="s">'email'</span> <span class="p">:</span> <span class="s">'&lt;email&gt;'</span><span class="p">,</span>
+        <span class="s">'password1'</span> <span class="p">:</span> <span class="s">'&lt;password1&gt;'</span><span class="p">,</span>
+        <span class="s">'password2'</span> <span class="p">:</span> <span class="s">'&lt;password2&gt;'</span>
+        <span class="p">},</span>
+<span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
+</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">fetch</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"node-fetch"</span><span class="p">);</span>
+<span class="kr">const</span> <span class="p">{</span> <span class="nx">URLSearchParams</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'url'</span><span class="p">);</span>
+<span class="kr">const</span> <span class="nx">url</span> <span class="o">=</span> <span class="s1">'http://localhost:7777/register'</span>
+<span class="kd">var</span> <span class="nx">headers</span><span class="o">=</span><span class="p">{</span>
+    <span class="s2">"Accept"</span> <span class="p">:</span> <span class="s2">"text/plain; charset=UTF-8"</span>
+<span class="p">};</span>
+
+<span class="kr">const</span> <span class="nx">params</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">URLSearchParams</span><span class="p">();</span>
+<span class="nx">params</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'username'</span><span class="p">,</span> <span class="s1">'jimmy'</span><span class="p">);</span>
+<span class="nx">params</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'name'</span><span class="p">,</span> <span class="s1">'jimmy'</span><span class="p">);</span>
+<span class="nx">params</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'affiliation'</span><span class="p">,</span> <span class="s1">'amazon'</span><span class="p">);</span>
+<span class="nx">params</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'email'</span><span class="p">,</span> <span class="s1">'ronnie33@utah.edu'</span><span class="p">);</span>
+<span class="nx">params</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'password1'</span><span class="p">,</span> <span class="s1">'mika123'</span><span class="p">);</span>
+<span class="nx">params</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'password2'</span><span class="p">,</span> <span class="s1">'mika123'</span><span class="p">);</span>
+
+<span class="nx">fetch</span><span class="p">(</span><span class="nx">url</span><span class="p">,</span> <span class="p">{</span> <span class="na">method</span><span class="p">:</span> <span class="s1">'POST'</span><span class="p">,</span> <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span><span class="p">,</span> <span class="na">body</span><span class="p">:</span><span class="nx">params</span><span class="p">})</span>
+    <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">res</span> <span class="o">=&gt;</span> <span class="nx">res</span><span class="p">.</span><span class="nx">buffer</span><span class="p">()).</span><span class="nx">then</span><span class="p">(</span><span class="nx">buf</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">buf</span><span class="p">.</span><span class="nx">toString</span><span class="p">()))</span>
+    <span class="p">.</span><span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="o">=&gt;</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">error</span><span class="p">))</span>
+</code></pre>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>username</td>
+<td>Username of the user</td>
+</tr>
+<tr>
+<td>name</td>
+<td>Name of the user</td>
+</tr>
+<tr>
+<td>affiliation</td>
+<td>Affilation of the user</td>
+</tr>
+<tr>
+<td>email</td>
+<td>Email address of the user</td>
+</tr>
+<tr>
+<td>password1</td>
+<td>Password of the user</td>
+</tr>
+<tr>
+<td>password2</td>
+<td>Password confirmation</td>
+</tr>
+</tbody></table>
 <h2 id='request-reset-password-token'>Request Reset Password Token</h2>
 <p><code>POST &lt;SynBioHub URL&gt;/resetPassword</code></p>
 
 <p>Request a reset password token.</p>
+<pre class="highlight plaintext tab-plaintext"><code>curl -X POST -H "Accept: text/plain" -d "email=&lt;email&gt;" &lt;SynBioHub URL&gt;/resetPassword
+</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span>
+    <span class="s">'&lt;SynBioHub URL&gt;/resetpassword'</span><span class="p">,</span>
+    <span class="n">headers</span><span class="o">=</span><span class="p">{</span>
+        <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'text/plain'</span>
+    <span class="p">},</span>
+    <span class="n">data</span><span class="o">=</span><span class="p">{</span>
+        <span class="s">'email'</span><span class="p">:</span> <span class="s">'&lt;email&gt;'</span>
+        <span class="p">},</span>
+<span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
+
+</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">fetch</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"node-fetch"</span><span class="p">);</span>
+<span class="kr">const</span> <span class="p">{</span> <span class="nx">URLSearchParams</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'url'</span><span class="p">);</span>
+<span class="kr">const</span> <span class="nx">url</span> <span class="o">=</span> <span class="s1">'&lt;SynBioHub URL&gt;/resetPassword'</span>
+<span class="kd">var</span> <span class="nx">headers</span><span class="o">=</span><span class="p">{</span>
+    <span class="s2">"Accept"</span> <span class="p">:</span> <span class="s2">"text/plain; charset=UTF-8"</span>
+<span class="p">};</span>
+
+<span class="kr">const</span> <span class="nx">params</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">URLSearchParams</span><span class="p">();</span>
+<span class="nx">params</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'email'</span><span class="p">,</span> <span class="s1">'&lt;email&gt;'</span><span class="p">);</span>
+
+<span class="nx">fetch</span><span class="p">(</span><span class="nx">url</span><span class="p">,</span> <span class="p">{</span> <span class="na">method</span><span class="p">:</span> <span class="s1">'POST'</span><span class="p">,</span> <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span><span class="p">,</span> <span class="na">body</span><span class="p">:</span><span class="nx">params</span><span class="p">})</span>
+    <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">res</span> <span class="o">=&gt;</span> <span class="nx">res</span><span class="p">.</span><span class="nx">buffer</span><span class="p">()).</span><span class="nx">then</span><span class="p">(</span><span class="nx">buf</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">buf</span><span class="p">.</span><span class="nx">toString</span><span class="p">()))</span>
+    <span class="p">.</span><span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="o">=&gt;</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">error</span><span class="p">))</span>
+</code></pre>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>email</td>
+<td>Email address of the user to send password reset link</td>
+</tr>
+</tbody></table>
 <h2 id='set-new-password'>Set New Password</h2>
 <p><code>POST &lt;SynBioHub URL&gt;/setNewPassword</code></p>
 
-<p>---&gt;takes token and new password</p>
-
 <p>Resets the user&#39;s password with the provided token and two copies of the new password.</p>
+<pre class="highlight plaintext tab-plaintext"><code>curl -X POST -H "Accept: text/plain" -d "token=&lt;token&gt;&amp;password1=&lt;password1&gt;&amp;password2=&lt;password2&gt;" &lt;SynBioHub URL&gt;/setNewPassword
+</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span>
+    <span class="s">'&lt;SynBioHub URL&gt;/setNewPassword'</span><span class="p">,</span>
+    <span class="n">headers</span><span class="o">=</span><span class="p">{</span>
+        <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'text/plain'</span>
+    <span class="p">},</span>
+    <span class="n">data</span><span class="o">=</span><span class="p">{</span>
+        <span class="s">'token'</span><span class="p">:</span> <span class="s">'&lt;token&gt;'</span><span class="p">,</span>
+        <span class="s">'password1'</span><span class="p">:</span> <span class="s">'&lt;password1&gt;'</span><span class="p">,</span>
+        <span class="s">'password2'</span><span class="p">:</span> <span class="s">'&lt;password2&gt;'</span>
+        <span class="p">},</span>
+<span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
+
+</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">fetch</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"node-fetch"</span><span class="p">);</span>
+<span class="kr">const</span> <span class="p">{</span> <span class="nx">URLSearchParams</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'url'</span><span class="p">);</span>
+<span class="kr">const</span> <span class="nx">url</span> <span class="o">=</span> <span class="s1">'&lt;SynBioHub URL&gt;/setNewPassword'</span>
+<span class="kd">var</span> <span class="nx">headers</span><span class="o">=</span><span class="p">{</span>
+    <span class="s2">"Accept"</span> <span class="p">:</span> <span class="s2">"text/plain; charset=UTF-8"</span>
+<span class="p">};</span>
+
+<span class="kr">const</span> <span class="nx">params</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">URLSearchParams</span><span class="p">();</span>
+<span class="nx">params</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'token'</span><span class="p">,</span> <span class="s1">'&lt;token&gt;'</span><span class="p">);</span>
+<span class="nx">params</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'password1'</span><span class="p">,</span> <span class="s1">'&lt;password1&gt;'</span><span class="p">);</span>
+<span class="nx">params</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'password2'</span><span class="p">,</span> <span class="s1">'&lt;password2&gt;'</span><span class="p">);</span>
+
+<span class="nx">fetch</span><span class="p">(</span><span class="nx">url</span><span class="p">,</span> <span class="p">{</span> <span class="na">method</span><span class="p">:</span> <span class="s1">'POST'</span><span class="p">,</span> <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span><span class="p">,</span> <span class="na">body</span><span class="p">:</span><span class="nx">params</span><span class="p">})</span>
+    <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">res</span> <span class="o">=&gt;</span> <span class="nx">res</span><span class="p">.</span><span class="nx">buffer</span><span class="p">()).</span><span class="nx">then</span><span class="p">(</span><span class="nx">buf</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">buf</span><span class="p">.</span><span class="nx">toString</span><span class="p">()))</span>
+    <span class="p">.</span><span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="o">=&gt;</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">error</span><span class="p">))</span>
+</code></pre>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>token</td>
+<td>Token received by email to reset a password</td>
+</tr>
+<tr>
+<td>password1</td>
+<td>New password</td>
+</tr>
+<tr>
+<td>password2</td>
+<td>Confirm new password</td>
+</tr>
+</tbody></table>
 <h2 id='view-profile'>View Profile</h2>
 <p><code>GET &lt;SynBioHub URL&gt;/profile</code></p>
 
 <p>View the user&#39;s profile.</p>
-<h2 id='update-profile'>Update Profile</h2>
+<pre class="highlight plaintext tab-plaintext"><code>curl -X GET -H "Accept: text/plain" -H "X-authorization: &lt;token&gt;" &lt;SynBioHub URL&gt;/profile
+</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+    <span class="s">'&lt;SynBioHub URL&gt;/profile'</span><span class="p">,</span>
+    <span class="n">headers</span><span class="o">=</span><span class="p">{</span>
+    <span class="s">'X-authorization'</span><span class="p">:</span> <span class="s">'&lt;token&gt;'</span><span class="p">,</span>
+    <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'text/plain'</span>
+    <span class="p">}</span>
+<span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
+</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">fetch</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"node-fetch"</span><span class="p">);</span>
+<span class="kr">const</span> <span class="nx">url</span> <span class="o">=</span> <span class="s1">'&lt;SynBioHub URL&gt;/profile'</span>   <span class="s1">'
+const headers={
+        "Accept" : "text/plain; charset=UTF-8",
+    "X-authorization" : "&lt;token&gt;"
+};
+fetch(url, { method: '</span><span class="nx">GET</span><span class="err">'</span><span class="p">,</span> <span class="nx">headers</span><span class="p">:</span> <span class="nx">headers</span><span class="p">})</span>
+    <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">res</span> <span class="o">=&gt;</span> <span class="nx">res</span><span class="p">.</span><span class="nx">buffer</span><span class="p">()).</span><span class="nx">then</span><span class="p">(</span><span class="nx">buf</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">buf</span><span class="p">.</span><span class="nx">toString</span><span class="p">()))</span>
+    <span class="p">.</span><span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="o">=&gt;</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">error</span><span class="p">))</span>
+</code></pre><h2 id='update-profile'>Update Profile</h2>
 <p><code>POST &lt;SynBioHub URL&gt;/profile</code></p>
 
 <p>Update the user&#39;s profile.</p>
+<pre class="highlight plaintext tab-plaintext"><code>curl -X POST -H "Accept: text/plain" -H "X-authorization:&lt;token&gt;" -d "name=&lt;name&gt;&amp;affiliation=&lt;affiliation&gt;&amp;email=&lt;email&gt;&amp;password1=&lt;password1&gt;&amp;password2=&lt;password2&gt;" &lt;SynBioHub URL&gt;/profile
+</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span>
+    <span class="s">'&lt;URI&gt;/makePublic'</span><span class="p">,</span>
+    <span class="n">headers</span><span class="o">=</span><span class="p">{</span>
+        <span class="s">'X-authorization'</span><span class="p">:</span> <span class="s">'&lt;token&gt;'</span><span class="p">,</span>
+        <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'text/plain'</span>
+    <span class="p">},</span>
+    <span class="n">data</span><span class="o">=</span><span class="p">{</span>
+        <span class="s">'id'</span><span class="p">:</span> <span class="s">'&lt;id&gt;'</span><span class="p">,</span>
+        <span class="s">'version'</span> <span class="p">:</span> <span class="s">'&lt;version&gt;'</span><span class="p">,</span>
+        <span class="s">'name'</span> <span class="p">:</span> <span class="s">'&lt;name&gt;'</span><span class="p">,</span>
+        <span class="s">'description'</span> <span class="p">:</span> <span class="s">'&lt;description&gt;'</span><span class="p">,</span>
+        <span class="s">'citations'</span> <span class="p">:</span> <span class="s">'&lt;citations&gt;'</span><span class="p">,</span>
+        <span class="s">'tabState'</span> <span class="p">:</span> <span class="s">'&lt;tabState&gt;'</span>
+        <span class="p">},</span>
+<span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
+
+</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">fetch</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"node-fetch"</span><span class="p">);</span>
+<span class="kr">const</span> <span class="p">{</span> <span class="nx">URLSearchParams</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'url'</span><span class="p">);</span>
+<span class="kr">const</span> <span class="nx">url</span> <span class="o">=</span> <span class="s1">'&lt;SynBioHub URL&gt;/profile'</span>
+<span class="kd">var</span> <span class="nx">headers</span><span class="o">=</span><span class="p">{</span>
+    <span class="s2">"Accept"</span> <span class="p">:</span> <span class="s2">"text/plain; charset=UTF-8"</span><span class="p">,</span>
+    <span class="s2">"X-authorization"</span> <span class="p">:</span> <span class="s2">"&lt;token&gt;"</span>
+<span class="p">};</span>
+
+<span class="kr">const</span> <span class="nx">params</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">URLSearchParams</span><span class="p">();</span>
+<span class="nx">params</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'name'</span><span class="p">,</span> <span class="s1">'&lt;name&gt;'</span><span class="p">);</span>
+<span class="nx">params</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'affiliation'</span><span class="p">,</span> <span class="s1">'&lt;affiliation&gt;'</span><span class="p">);</span>
+<span class="nx">params</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'email'</span><span class="p">,</span> <span class="s1">'&lt;email&gt;'</span><span class="p">);</span>
+<span class="nx">params</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'password1'</span><span class="p">,</span> <span class="s1">'&lt;password1&gt;'</span><span class="p">);</span>
+<span class="nx">params</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'password2'</span><span class="p">,</span> <span class="s1">'&lt;password2&gt;'</span><span class="p">);</span>
+
+<span class="nx">fetch</span><span class="p">(</span><span class="nx">url</span><span class="p">,</span> <span class="p">{</span> <span class="na">method</span><span class="p">:</span> <span class="s1">'POST'</span><span class="p">,</span> <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span><span class="p">,</span> <span class="na">body</span><span class="p">:</span><span class="nx">params</span><span class="p">})</span>
+    <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">res</span> <span class="o">=&gt;</span> <span class="nx">res</span><span class="p">.</span><span class="nx">buffer</span><span class="p">()).</span><span class="nx">then</span><span class="p">(</span><span class="nx">buf</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">buf</span><span class="p">.</span><span class="nx">toString</span><span class="p">()))</span>
+    <span class="p">.</span><span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="o">=&gt;</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">error</span><span class="p">))</span>
+
+</code></pre>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>name</td>
+<td>Name of the user</td>
+</tr>
+<tr>
+<td>affiliation</td>
+<td>Affilation of the user</td>
+</tr>
+<tr>
+<td>email</td>
+<td>Email address of the user</td>
+</tr>
+<tr>
+<td>password1</td>
+<td>Password of the user</td>
+</tr>
+<tr>
+<td>password2</td>
+<td>Password confirmation</td>
+</tr>
+</tbody></table>
 <h1 id='search-endpoints'>Search Endpoints</h1>
 <p>The following endpoints are used to search within SynBioHub.</p>
 
@@ -821,7 +1066,7 @@ server {
 
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
-</code></pre><pre class="highlight plaintext tab-plaintext"><code>curl -X GET -H "Accept: text/plain" -H "X-authorization: &lt;token&gt;" '&lt;SynBioHub URL&gt;/search/objectType%3DComponentDefinition%26role%3D%3Chttp%3A%2F%2Fidentifiers.org%2Fso%2FSO%3A0000316%3E%26GFP/?offset=0&amp;limit=50
+</code></pre><pre class="highlight plaintext tab-plaintext"><code>curl -X GET -H "Accept: text/plain" -H "X-authorization: &lt;token&gt;" '&lt;SynBioHub URL&gt;/search/objectType%3DComponentDefinition%26role%3D%3Chttp%3A%2F%2Fidentifiers.org%2Fso%2FSO%3A0000316%3E%26GFP/?offset=0&amp;limit=50'
 
 This endpoint returns JSON metadata of the form 
 [
@@ -873,7 +1118,7 @@ This endpoint returns JSON metadata of the form
 <p><code>GET &lt;SynBioHub URL&gt;/searchCount/&lt;key&gt;=&lt;value&gt;&amp;...&amp;&lt;search string&gt;/?offset=#&amp;limit=#</code></p>
 
 <p>Returns the number of items matching the search result.</p>
-<pre class="highlight plaintext tab-plaintext"><code>curl -X GET -H "Accept: text/plain" -H "X-authorization: &lt;token&gt;" &lt;SynBioHub URL&gt;/searchCount/&lt;key&gt;=&lt;value&gt;&amp;...&amp;&lt;search string&gt;/?offset=#&amp;limit=#
+<pre class="highlight plaintext tab-plaintext"><code>curl -X GET -H "Accept: text/plain" -H "X-authorization: &lt;token&gt;" '&lt;SynBioHub URL&gt;/searchCount/&lt;key&gt;=&lt;value&gt;&amp;...&amp;&lt;search string&gt;/?offset=#&amp;limit=#'
 </code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 
 <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
