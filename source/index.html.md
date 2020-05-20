@@ -321,7 +321,6 @@ response = requests.post(
 )
 print(response.status_code)
 print(response.content)
-
 ```
 
 ```javascript
@@ -361,13 +360,97 @@ password2 | Password confirmation
 
 Request a reset password token.
 
+```plaintext
+curl -X POST -H "Accept: text/plain" -d "email=<email>" <SynBioHub URL>/resetPassword
+```
+
+```python
+import requests
+response = requests.post(
+    '<SynBioHub URL>/resetpassword',
+    headers={
+        'Accept': 'text/plain'
+    },
+    data={
+        'email': '<email>'
+        },
+)
+print(response.status_code)
+print(response.content)
+
+```
+
+```javascript
+const fetch = require("node-fetch");
+const { URLSearchParams } = require('url');
+const url = '<SynBioHub URL>/resetPassword'
+var headers={
+    "Accept" : "text/plain; charset=UTF-8"
+};
+
+const params = new URLSearchParams();
+params.append('email', '<email>');
+
+fetch(url, { method: 'POST', headers: headers, body:params})
+    .then(res => res.buffer()).then(buf => console.log(buf.toString()))
+    .catch (error=>console.log(error))
+```
+
+Parameter | Description
+--------- | ------- | -----------
+email | Email address of the user to send password reset link
+
 ## Set New Password
 
 `POST <SynBioHub URL>/setNewPassword`
 
---->takes token and new password
-
 Resets the user's password with the provided token and two copies of the new password.
+
+```plaintext
+curl -X POST -H "Accept: text/plain" -d "token=<token>&password1=<password1>&password2=<password2>" <SynBioHub URL>/setNewPassword
+```
+
+```python
+import requests
+response = requests.post(
+    '<SynBioHub URL>/setNewPassword',
+    headers={
+        'Accept': 'text/plain'
+    },
+    data={
+        'token': '<token>',
+        'password1': '<password1>',
+        'password2': '<password2>'
+        },
+)
+print(response.status_code)
+print(response.content)
+
+```
+
+```javascript
+const fetch = require("node-fetch");
+const { URLSearchParams } = require('url');
+const url = '<SynBioHub URL>/setNewPassword'
+var headers={
+    "Accept" : "text/plain; charset=UTF-8"
+};
+
+const params = new URLSearchParams();
+params.append('token', '<token>');
+params.append('password1', '<password1>');
+params.append('password2', '<password2>');
+
+fetch(url, { method: 'POST', headers: headers, body:params})
+    .then(res => res.buffer()).then(buf => console.log(buf.toString()))
+    .catch (error=>console.log(error))
+```
+
+Parameter | Description
+--------- | ------- | -----------
+token | Token received by email to reset a password
+password1 | New password
+password2 | Confirm new password
 
 ## View Profile
 
