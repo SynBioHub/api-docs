@@ -23,7 +23,7 @@ search: true
 
 SynBioHub includes two projects:
 
-* An [open source software project](http://github.com/SynBioHub) providing a web interface for the storing and publishing of synthetic biology designs.
+* An [open source software project](https://github.com/SynBioHub/synbiohub) providing a web interface for the storing and publishing of synthetic biology designs.
 * A public instance of the aforementioned software project at [synbiohub.org](http://synbiohub.org), allowing users to upload and share designs.
 
 
@@ -443,13 +443,13 @@ After the key/value pairs, an optional search string can be provided that will b
 
 ## Search Root Collections
 
-`GET <URI>/rootCollections`
+`GET <SynBioHub URL>/rootCollections`
 
 Returns all root collections.
 
 ```plaintext
 
-curl -X GET -H "Accept: text/plain" -H "X-authorization: <token>" <URI>/rootCollections
+curl -X GET -H "Accept: text/plain" -H "X-authorization: <token>" <SynBioHub URL>/rootCollections
 
 This endpoint returns JSON metadata of the form:
 
@@ -471,7 +471,7 @@ This endpoint returns JSON metadata of the form:
 import requests
 
 response = requests.get(
-    '<URI>/rootCollections',
+    '<SynBioHub URL>/rootCollections',
     params={'X-authorization': 'token'},
     headers={'Accept': 'text/plain'},
 )
@@ -479,7 +479,7 @@ response = requests.get(
 
 ```javascript
 const fetch = require("node-fetch");
-const Url = '<URI>/rootCollections'
+const Url = '<SynBioHub URL>/rootCollections'
 const otherPram={
     headers:{
         "content-type" : "text/plain; charset=UTF-8"
