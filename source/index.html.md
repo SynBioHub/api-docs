@@ -299,6 +299,62 @@ fetch(url, { method: 'POST', headers: headers})
 
 Register a new user on SynBioHub.
 
+```plaintext
+curl -X POST -H "Accept: text/plain" -d "username=<username>&name=<name>&affiliation=<affiliation>&email=<email>&password1=<password1>&password2=<password2>" <SynBioHub URL>/register
+```
+
+```python
+import requests
+response = requests.post(
+    '<SynBioHub URL>/register',
+    headers={
+        'Accept': 'text/plain'
+    },
+    data={
+        'username': '<username>',
+        'name' : '<name>',
+        'affiliation' : '<affiliation>',
+        'email' : '<email>',
+        'password1' : '<password1>',
+        'password2' : '<password2>'
+        },
+)
+print(response.status_code)
+print(response.content)
+
+```
+
+```javascript
+const fetch = require("node-fetch");
+const { URLSearchParams } = require('url');
+const url = 'http://localhost:7777/register'
+var headers={
+    "Accept" : "text/plain; charset=UTF-8"
+};
+
+const params = new URLSearchParams();
+params.append('username', 'jimmy');
+params.append('name', 'jimmy');
+params.append('affiliation', 'amazon');
+params.append('email', 'ronnie33@utah.edu');
+params.append('password1', 'mika123');
+params.append('password2', 'mika123');
+
+fetch(url, { method: 'POST', headers: headers, body:params})
+    .then(res => res.buffer()).then(buf => console.log(buf.toString()))
+    .catch (error=>console.log(error))
+```
+
+Parameter | Description
+--------- | ------- | -----------
+username | Username of the user
+name | Name of the user
+affiliation | Affilation of the user
+email | Email address of the user
+password1 | Password of the user
+password2 | Password confirmation
+
+
 ## Request Reset Password Token
 
 `POST <SynBioHub URL>/resetPassword`
@@ -358,6 +414,28 @@ Update the user's profile.
 
 ```plaintext
 curl -X POST -H "Accept: text/plain" -H "X-authorization:<token>" -d "name=<name>&affiliation=<affiliation>&email=<email>&password1=<password1>&password2=<password2>" <SynBioHub URL>/profile
+```
+
+```python
+import requests
+response = requests.post(
+    '<URI>/makePublic',
+    headers={
+        'X-authorization': '<token>',
+        'Accept': 'text/plain'
+    },
+    data={
+        'id': '<id>',
+        'version' : '<version>',
+        'name' : '<name>',
+        'description' : '<description>',
+        'citations' : '<citations>',
+        'tabState' : '<tabState>'
+        },
+)
+print(response.status_code)
+print(response.content)
+
 ```
 
 ```javascript
