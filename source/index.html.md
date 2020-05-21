@@ -225,8 +225,8 @@ response = requests.post(
         'Accept': 'text/plain'
     },
     data={
-        'email': 'test@user.synbiohub',
-        'password' : 'test',
+        'email': '<email>',
+        'password' : '<password>',
         },
 )
 
@@ -271,26 +271,31 @@ curl -X POST -H "Accept: text/plain" -H "X-authorization: <token>" <SynBioHub UR
 ```python
 import requests
 
-url = '<SynBioHub URL>/logout'
+response = requests.post(
+    '<SynBioHub URL>/logout',
+    headers={
+    'X-authorization': '<token>',
+    'Accept': 'text/plain'
+    }
+)
 
-headers ={'Accept' : 'text/plain'}
+print(response.status_code)
+print(response.content)
 
-x = requests.post(url, headers = headers)
-
-print(x.status_code)
 ```
 
 ```javascript
 const fetch = require("node-fetch");
 const { URLSearchParams } = require('url');
-var url ='<SynBioHub URL>/logout';
-var headers = {
-    "Accept": "text/plain",
-}
+const url = '<SynBioHub URL>/logout'
+var headers={
+    "Accept" : "text/plain; charset=UTF-8",
+    "X-authorization" : "<token>"
+};
 
-fetch(url, { method: 'POST', headers: headers})
-    .then(res => res.text())
-    .then(body => console.log(body));
+fetch(url, { method: 'POST', headers: headers, body:params})
+    .then(res => res.buffer()).then(buf => console.log(buf.toString()))
+    .catch (error=>console.log(error))
 ```
 
 ## Register
@@ -326,18 +331,18 @@ print(response.content)
 ```javascript
 const fetch = require("node-fetch");
 const { URLSearchParams } = require('url');
-const url = 'http://localhost:7777/register'
+const url = '<SynBioHub URL>/register'
 var headers={
     "Accept" : "text/plain; charset=UTF-8"
 };
 
 const params = new URLSearchParams();
-params.append('username', 'jimmy');
-params.append('name', 'jimmy');
-params.append('affiliation', 'amazon');
-params.append('email', 'ronnie33@utah.edu');
-params.append('password1', 'mika123');
-params.append('password2', 'mika123');
+params.append('username', '<username>');
+params.append('name', '<name>');
+params.append('affiliation', '<affiliation>');
+params.append('email', '<email>');
+params.append('password1', '<password1>');
+params.append('password2', '<password2>');
 
 fetch(url, { method: 'POST', headers: headers, body:params})
     .then(res => res.buffer()).then(buf => console.log(buf.toString()))
@@ -348,7 +353,7 @@ Parameter | Description
 --------- | ------- | -----------
 username | Username of the user
 name | Name of the user
-affiliation | Affilation of the user
+affiliation | Affiliation of the user
 email | Email address of the user
 password1 | Password of the user
 password2 | Password confirmation
@@ -460,6 +465,24 @@ View the user's profile.
 
 ```plaintext
 curl -X GET -H "Accept: text/plain" -H "X-authorization: <token>" <SynBioHub URL>/profile
+
+This endpoint returns JSON metadata of the form 
+
+{
+	"id":1,
+	"name":"Test User",
+	"username":"testuser",
+	"email":"test@user.synbiohub",
+	"affiliation":"jimmy",
+	"password":"",
+	"graphUri":"http://localhost:7777/usertestuser",\
+	"isAdmin":true,\
+	"resetPasswordLink":"",\
+	"isCurator":true,\
+	"isMember":true,
+	"createdAt":"2020-05-19T14:44:44.204Z",
+	"updatedAt":"2020-05-20T21:11:21.934Z","user_external_profiles":[]
+}
 ```
 
 ```python
@@ -479,7 +502,7 @@ print(response.content)
 
 ```javascript
 const fetch = require("node-fetch");
-const url = '<SynBioHub URL>/profile'	'
+const url = '<SynBioHub URL>/profile'	
 const headers={
         "Accept" : "text/plain; charset=UTF-8",
 	"X-authorization" : "<token>"
@@ -488,6 +511,8 @@ fetch(url, { method: 'GET', headers: headers})
     .then(res => res.buffer()).then(buf => console.log(buf.toString()))
     .catch (error=>console.log(error))
 ```
+
+Note that the X-authorization header is required for this endpoint.
 
 ## Update Profile
 
@@ -546,10 +571,12 @@ fetch(url, { method: 'POST', headers: headers, body:params})
 Parameter | Description
 --------- | ------- | -----------
 name | Name of the user
-affiliation | Affilation of the user
+affiliation | Affiliation of the user
 email | Email address of the user
 password1 | Password of the user
 password2 | Password confirmation
+
+Note that the X-authorization header is required for this endpoint.
 
 # Search Endpoints
 
