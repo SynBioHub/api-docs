@@ -1477,7 +1477,7 @@ If creating a collection, provide the id, version, name, description, citations,
 Makes the collection specified by the URI public.
 
 ```plaintext
-curl -X POST -H "Accept: text/plain" -H "X-authorization:<token>" -d "id=<id>&version=<version>&name=<name>&description=<description>&citations=<citations>&tabState=<tabState>" URI/makePublic
+curl -X POST -H "Accept: text/plain" -H "X-authorization:<token>" -d "id=<id>&version=<version>&name=<name>&description=<description>&citations=<citations>&tabState=<tabState>" <URI>/makePublic
 ```
 
 ```python
@@ -2222,7 +2222,126 @@ Possible fields to remove:
 
 ## Add to Collection
 
+`POST <URI>/addToCollection`
+
+Add member to a collection.
+
+`POST <URI>/attachURL `
+
+Attach a specified URL to a given URI.
+
+```plaintext
+curl -X POST -H "Accept: text/plain" -H "X-authorization: <token>" -d "url=<url>&name=<name>&type=<type>" <URI>/addToCollection
+```
+
+```python
+import requests
+
+response = requests.post(
+    '<URI>/attachURL',
+    headers={
+        'X-authorization': '<token>',
+        'Accept': 'text/plain'
+    },
+    data={
+        'url': '<url>',
+        'name' : '<name>',
+        'type' : '<type>'
+        },
+)
+
+print(response.status_code)
+print(response.content)
+
+```
+
+```javascript
+const fetch = require("node-fetch");
+const { URLSearchParams } = require('url');
+const url = '<URI>/attachURL'
+var headers={
+    "Accept" : "text/plain; charset=UTF-8",
+    "X-authorization" : "<token>"
+};
+
+const params = new URLSearchParams();
+params.append('url', '<url>');
+params.append('name', '<name>');
+params.append('type', '<type>');
+
+
+fetch(url, { method: 'POST', headers: headers, body:params})
+    .then(res => res.buffer()).then(buf => console.log(buf.toString()))
+    .catch (error=>console.log(error))
+```
+
+Parameter | Description
+--------- | -----------
+url | The URL to attach.
+name | The name of the attachment.
+type | The format type of the object at the URL.
+
 ## Remove Membership
+
+`POST <URI>/removeMembership`
+
+Remove member of a collection.
+
+`POST <URI>/attachURL `
+
+Attach a specified URL to a given URI.
+
+```plaintext
+curl -X POST -H "Accept: text/plain" -H "X-authorization: <token>" -d "url=<url>&name=<name>&type=<type>" <URI>/attachURL
+```
+
+```python
+import requests
+
+response = requests.post(
+    '<URI>/attachURL',
+    headers={
+        'X-authorization': '<token>',
+        'Accept': 'text/plain'
+    },
+    data={
+        'url': '<url>',
+        'name' : '<name>',
+        'type' : '<type>'
+        },
+)
+
+print(response.status_code)
+print(response.content)
+
+```
+
+```javascript
+const fetch = require("node-fetch");
+const { URLSearchParams } = require('url');
+const url = '<URI>/attachURL'
+var headers={
+    "Accept" : "text/plain; charset=UTF-8",
+    "X-authorization" : "<token>"
+};
+
+const params = new URLSearchParams();
+params.append('url', '<url>');
+params.append('name', '<name>');
+params.append('type', '<type>');
+
+
+fetch(url, { method: 'POST', headers: headers, body:params})
+    .then(res => res.buffer()).then(buf => console.log(buf.toString()))
+    .catch (error=>console.log(error))
+```
+
+Parameter | Description
+--------- | -----------
+url | The URL to attach.
+name | The name of the attachment.
+type | The format type of the object at the URL.
+
 
 # Attachment Endpoints
 
@@ -2579,6 +2698,56 @@ fetch(url, { method: 'GET', headers: headers})
 
 Update the mail configuration.
 
+```plaintext
+curl -X POST -H "Accept: text/plain" -H "X-authorization:<token>" -d "key=<key>&fromEmail=<fromEmail>" <SynBioHub URL>/admin/mali
+```
+
+```python
+import requests
+
+response = requests.post(
+    '<SynBioHub URL>/admin/email',
+    headers={
+        'X-authorization': '<token>',
+        'Accept': 'text/plain'
+    },
+    data={
+        'key': '<key>',
+        'fromEmail' : '<fromEmail>',
+        },
+)
+
+print(response.status_code)
+print(response.content)
+
+```
+
+```javascript
+const fetch = require("node-fetch");
+const { URLSearchParams } = require('url');
+const url = '<SynBioHub URL>/admin/mail'
+var headers={
+    "Accept" : "text/plain; charset=UTF-8",
+    "X-authorization" : "<token>"
+};
+
+const params = new URLSearchParams();
+params.append('key', '<key>');
+params.append('fromEmail', '<fromEmail>');
+
+
+fetch(url, { method: 'POST', headers: headers, body:params})
+    .then(res => res.buffer()).then(buf => console.log(buf.toString()))
+    .catch (error=>console.log(error))
+
+```
+
+Parameter | Description
+--------- | ------- | -----------
+key| SendGrid API Key
+fromEmail | SendGrid from Email
+
+
 ## View Plugins
 
 `GET <SynBioHub URL>/admin/plugins`
@@ -2622,11 +2791,115 @@ fetch(url, { method: 'GET', headers: headers})
 
 Save a new plugin.
 
+```plaintext
+curl -X POST -H "Accept: text/plain" -H "X-authorization:<token>" -d "id=<id>&category=<category>&name=<name>&url=<url>" <SynBioHub URL>/admin/savePlugin
+```
+
+```python
+import requests
+
+response = requests.post(
+    '<SynBioHub URL>/admin/savePlugin',
+    headers={
+        'X-authorization': '<token>',
+        'Accept': 'text/plain'
+    },
+    data={
+        'id': '<id>',
+        'category' : '<category>',
+        'name' : '<name>',
+        'url' : '<url>',
+        },
+)
+
+print(response.status_code)
+print(response.content)
+
+```
+
+```javascript
+const fetch = require("node-fetch");
+const { URLSearchParams } = require('url');
+const url = '<SynBioHub URL>/admin/savePlugin'
+var headers={
+    "Accept" : "text/plain; charset=UTF-8",
+    "X-authorization" : "<token>"
+};
+
+const params = new URLSearchParams();
+params.append('id', '<id>');
+params.append('category', '<category>');
+params.append('name', '<name>');
+params.append('url', '<url>');
+
+fetch(url, { method: 'POST', headers: headers, body:params})
+    .then(res => res.buffer()).then(buf => console.log(buf.toString()))
+    .catch (error=>console.log(error))
+
+```
+
+Parameter | Description
+--------- | ------- | -----------
+id| Id of plugin, if adding a plugin, id should be New.
+category | Type of plugin (rendering, submit, download).
+name | Name of the plugin.
+url | URL for the plugin.
+
 ## Delete Plugin
 
 `POST <SynBioHub URL>/admin/deletePlugin`
 
 Delete a plugin.
+
+```plaintext
+curl -X POST -H "Accept: text/plain" -H "X-authorization:<token>" -d "id=<id>&category=<category>" <SynBioHub URL>/admin/deletePlugin
+```
+
+```python
+import requests
+
+response = requests.post(
+    '<SynBioHub URL>/admin/deletePlugin',
+    headers={
+        'X-authorization': '<token>',
+        'Accept': 'text/plain'
+    },
+    data={
+        'id': '<id>',
+        'category' : '<category>',
+        },
+)
+
+print(response.status_code)
+print(response.content)
+
+```
+
+```javascript
+const fetch = require("node-fetch");
+const { URLSearchParams } = require('url');
+const url = '<SynBioHub URL>/admin/deletePlugin'
+var headers={
+    "Accept" : "text/plain; charset=UTF-8",
+    "X-authorization" : "<token>"
+};
+
+const params = new URLSearchParams();
+params.append('id', '<id>');
+params.append('category', '<category>');
+
+
+fetch(url, { method: 'POST', headers: headers, body:params})
+    .then(res => res.buffer()).then(buf => console.log(buf.toString()))
+    .catch (error=>console.log(error))
+
+```
+
+Parameter | Description
+--------- | ------- | -----------
+id | The id of the plugin.
+category | The type of plugin (rendering, submit, download).
+
 
 ## View Registries
 
@@ -2671,11 +2944,133 @@ View current registries.
 
 Save a new registry.
 
+```plaintext
+curl -X POST -H "Accept: text/plain" -H "X-authorization:<token>" -d "id=<id>&version=<version>&name=<name>&description=<description>&citations=<citations>&tabState=<tabState>" URI/makePublic
+```
+
+```python
+import requests
+
+response = requests.post(
+    '<URI>/makePublic',
+    headers={
+        'X-authorization': '<token>',
+        'Accept': 'text/plain'
+    },
+    data={
+        'id': '<id>',
+        'version' : '<version>',
+        'name' : '<name>',
+        'description' : '<description>',
+        'citations' : '<citations>',
+        'tabState' : '<tabState>'
+        },
+)
+
+print(response.status_code)
+print(response.content)
+
+```
+
+```javascript
+const fetch = require("node-fetch");
+const { URLSearchParams } = require('url');
+const url = '<URI>/makePublic'
+var headers={
+    "Accept" : "text/plain; charset=UTF-8",
+    "X-authorization" : "<token>"
+};
+
+const params = new URLSearchParams();
+params.append('id', '<id>');
+params.append('version', '<version>');
+params.append('name', '<name>');
+params.append('description', '<description>');
+params.append('citations', '<citations>');
+params.append('tabState', '<tabState>');
+
+fetch(url, { method: 'POST', headers: headers, body:params})
+    .then(res => res.buffer()).then(buf => console.log(buf.toString()))
+    .catch (error=>console.log(error))
+```
+
+Parameter | Description
+--------- | ------- | -----------
+id | The id for the new collection.
+version | The version for the new collection.
+name | The name for the new collection (optional: default is existing name).
+description | The description for the new collection (optional: default is existing description).
+citations | The comma-separated listed of PubMed ids (optional: default is existing citations).
+tabState | Use "new" for moving to a new public collection, and "existing" if moving into an existing public collection.
+collections| If moving into an existing collection, collections is the URI of the collection
+
+
 ## Delete Registry
 
 `POST <SynBioHub URL>/admin/deleteRegistry`
 
 Delete a registry.
+
+```plaintext
+curl -X POST -H "Accept: text/plain" -H "X-authorization:<token>" -d "id=<id>&version=<version>&name=<name>&description=<description>&citations=<citations>&tabState=<tabState>" URI/makePublic
+```
+
+```python
+import requests
+
+response = requests.post(
+    '<URI>/makePublic',
+    headers={
+        'X-authorization': '<token>',
+        'Accept': 'text/plain'
+    },
+    data={
+        'id': '<id>',
+        'version' : '<version>',
+        'name' : '<name>',
+        'description' : '<description>',
+        'citations' : '<citations>',
+        'tabState' : '<tabState>'
+        },
+)
+
+print(response.status_code)
+print(response.content)
+
+```
+
+```javascript
+const fetch = require("node-fetch");
+const { URLSearchParams } = require('url');
+const url = '<URI>/makePublic'
+var headers={
+    "Accept" : "text/plain; charset=UTF-8",
+    "X-authorization" : "<token>"
+};
+
+const params = new URLSearchParams();
+params.append('id', '<id>');
+params.append('version', '<version>');
+params.append('name', '<name>');
+params.append('description', '<description>');
+params.append('citations', '<citations>');
+params.append('tabState', '<tabState>');
+
+fetch(url, { method: 'POST', headers: headers, body:params})
+    .then(res => res.buffer()).then(buf => console.log(buf.toString()))
+    .catch (error=>console.log(error))
+```
+
+Parameter | Description
+--------- | ------- | -----------
+id | The id for the new collection.
+version | The version for the new collection.
+name | The name for the new collection (optional: default is existing name).
+description | The description for the new collection (optional: default is existing description).
+citations | The comma-separated listed of PubMed ids (optional: default is existing citations).
+tabState | Use "new" for moving to a new public collection, and "existing" if moving into an existing public collection.
+collections| If moving into an existing collection, collections is the URI of the collection
+
 
 ## Set Administrator Email
 
@@ -2683,17 +3078,199 @@ Delete a registry.
 
 Update Web Of Registries administrator email.
 
+```plaintext
+curl -X POST -H "Accept: text/plain" -H "X-authorization:<token>" -d "id=<id>&version=<version>&name=<name>&description=<description>&citations=<citations>&tabState=<tabState>" URI/makePublic
+```
+
+```python
+import requests
+
+response = requests.post(
+    '<URI>/makePublic',
+    headers={
+        'X-authorization': '<token>',
+        'Accept': 'text/plain'
+    },
+    data={
+        'id': '<id>',
+        'version' : '<version>',
+        'name' : '<name>',
+        'description' : '<description>',
+        'citations' : '<citations>',
+        'tabState' : '<tabState>'
+        },
+)
+
+print(response.status_code)
+print(response.content)
+
+```
+
+```javascript
+const fetch = require("node-fetch");
+const { URLSearchParams } = require('url');
+const url = '<URI>/makePublic'
+var headers={
+    "Accept" : "text/plain; charset=UTF-8",
+    "X-authorization" : "<token>"
+};
+
+const params = new URLSearchParams();
+params.append('id', '<id>');
+params.append('version', '<version>');
+params.append('name', '<name>');
+params.append('description', '<description>');
+params.append('citations', '<citations>');
+params.append('tabState', '<tabState>');
+
+fetch(url, { method: 'POST', headers: headers, body:params})
+    .then(res => res.buffer()).then(buf => console.log(buf.toString()))
+    .catch (error=>console.log(error))
+```
+
+Parameter | Description
+--------- | ------- | -----------
+id | The id for the new collection.
+version | The version for the new collection.
+name | The name for the new collection (optional: default is existing name).
+description | The description for the new collection (optional: default is existing description).
+citations | The comma-separated listed of PubMed ids (optional: default is existing citations).
+tabState | Use "new" for moving to a new public collection, and "existing" if moving into an existing public collection.
+collections| If moving into an existing collection, collections is the URI of the collection
+
+
 ## Retrieve From Web Of Registries
 
 `POST <SynBioHub URL>/admin/retrieveFromWebOfRegistries`
 
 Update registries from Web-of-Registries.
 
+```plaintext
+curl -X POST -H "Accept: text/plain" -H "X-authorization:<token>" -d "id=<id>&version=<version>&name=<name>&description=<description>&citations=<citations>&tabState=<tabState>" URI/makePublic
+```
+
+```python
+import requests
+
+response = requests.post(
+    '<URI>/makePublic',
+    headers={
+        'X-authorization': '<token>',
+        'Accept': 'text/plain'
+    },
+    data={
+        'id': '<id>',
+        'version' : '<version>',
+        'name' : '<name>',
+        'description' : '<description>',
+        'citations' : '<citations>',
+        'tabState' : '<tabState>'
+        },
+)
+
+print(response.status_code)
+print(response.content)
+
+```
+
+```javascript
+const fetch = require("node-fetch");
+const { URLSearchParams } = require('url');
+const url = '<URI>/makePublic'
+var headers={
+    "Accept" : "text/plain; charset=UTF-8",
+    "X-authorization" : "<token>"
+};
+
+const params = new URLSearchParams();
+params.append('id', '<id>');
+params.append('version', '<version>');
+params.append('name', '<name>');
+params.append('description', '<description>');
+params.append('citations', '<citations>');
+params.append('tabState', '<tabState>');
+
+fetch(url, { method: 'POST', headers: headers, body:params})
+    .then(res => res.buffer()).then(buf => console.log(buf.toString()))
+    .catch (error=>console.log(error))
+```
+
+Parameter | Description
+--------- | ------- | -----------
+id | The id for the new collection.
+version | The version for the new collection.
+name | The name for the new collection (optional: default is existing name).
+description | The description for the new collection (optional: default is existing description).
+citations | The comma-separated listed of PubMed ids (optional: default is existing citations).
+tabState | Use "new" for moving to a new public collection, and "existing" if moving into an existing public collection.
+collections| If moving into an existing collection, collections is the URI of the collection
+
+
 ## Federate
 
 `POST <SynBioHub URL>/admin/federate`
 
 Send request to join Web-of-Registries for a SynBioHub.
+
+```plaintext
+curl -X POST -H "Accept: text/plain" -H "X-authorization:<token>" -d "id=<id>&version=<version>&name=<name>&description=<description>&citations=<citations>&tabState=<tabState>" URI/makePublic
+```
+
+```python
+import requests
+
+response = requests.post(
+    '<URI>/makePublic',
+    headers={
+        'X-authorization': '<token>',
+        'Accept': 'text/plain'
+    },
+    data={
+        'id': '<id>',
+        'version' : '<version>',
+        'name' : '<name>',
+        'description' : '<description>',
+        'citations' : '<citations>',
+        'tabState' : '<tabState>'
+        },
+)
+
+print(response.status_code)
+print(response.content)
+
+```
+
+```javascript
+const fetch = require("node-fetch");
+const { URLSearchParams } = require('url');
+const url = '<URI>/makePublic'
+var headers={
+    "Accept" : "text/plain; charset=UTF-8",
+    "X-authorization" : "<token>"
+};
+
+const params = new URLSearchParams();
+params.append('id', '<id>');
+params.append('version', '<version>');
+params.append('name', '<name>');
+params.append('description', '<description>');
+params.append('citations', '<citations>');
+params.append('tabState', '<tabState>');
+
+fetch(url, { method: 'POST', headers: headers, body:params})
+    .then(res => res.buffer()).then(buf => console.log(buf.toString()))
+    .catch (error=>console.log(error))
+```
+
+Parameter | Description
+--------- | ------- | -----------
+id | The id for the new collection.
+version | The version for the new collection.
+name | The name for the new collection (optional: default is existing name).
+description | The description for the new collection (optional: default is existing description).
+citations | The comma-separated listed of PubMed ids (optional: default is existing citations).
+tabState | Use "new" for moving to a new public collection, and "existing" if moving into an existing public collection.
+collections| If moving into an existing collection, collections is the URI of the collection
 
 ## View Remotes
 
@@ -2738,11 +3315,133 @@ fetch(url, { method: 'GET', headers: headers})
 
 Save a new remote.
 
+```plaintext
+curl -X POST -H "Accept: text/plain" -H "X-authorization:<token>" -d "id=<id>&version=<version>&name=<name>&description=<description>&citations=<citations>&tabState=<tabState>" URI/makePublic
+```
+
+```python
+import requests
+
+response = requests.post(
+    '<URI>/makePublic',
+    headers={
+        'X-authorization': '<token>',
+        'Accept': 'text/plain'
+    },
+    data={
+        'id': '<id>',
+        'version' : '<version>',
+        'name' : '<name>',
+        'description' : '<description>',
+        'citations' : '<citations>',
+        'tabState' : '<tabState>'
+        },
+)
+
+print(response.status_code)
+print(response.content)
+
+```
+
+```javascript
+const fetch = require("node-fetch");
+const { URLSearchParams } = require('url');
+const url = '<URI>/makePublic'
+var headers={
+    "Accept" : "text/plain; charset=UTF-8",
+    "X-authorization" : "<token>"
+};
+
+const params = new URLSearchParams();
+params.append('id', '<id>');
+params.append('version', '<version>');
+params.append('name', '<name>');
+params.append('description', '<description>');
+params.append('citations', '<citations>');
+params.append('tabState', '<tabState>');
+
+fetch(url, { method: 'POST', headers: headers, body:params})
+    .then(res => res.buffer()).then(buf => console.log(buf.toString()))
+    .catch (error=>console.log(error))
+```
+
+Parameter | Description
+--------- | ------- | -----------
+id | The id for the new collection.
+version | The version for the new collection.
+name | The name for the new collection (optional: default is existing name).
+description | The description for the new collection (optional: default is existing description).
+citations | The comma-separated listed of PubMed ids (optional: default is existing citations).
+tabState | Use "new" for moving to a new public collection, and "existing" if moving into an existing public collection.
+collections| If moving into an existing collection, collections is the URI of the collection
+
+
 ## Delete Remote
 
 `POST <SynBioHub URL>/admin/deleteRemote`
 
 Delete a remote.
+
+```plaintext
+curl -X POST -H "Accept: text/plain" -H "X-authorization:<token>" -d "id=<id>&version=<version>&name=<name>&description=<description>&citations=<citations>&tabState=<tabState>" URI/makePublic
+```
+
+```python
+import requests
+
+response = requests.post(
+    '<URI>/makePublic',
+    headers={
+        'X-authorization': '<token>',
+        'Accept': 'text/plain'
+    },
+    data={
+        'id': '<id>',
+        'version' : '<version>',
+        'name' : '<name>',
+        'description' : '<description>',
+        'citations' : '<citations>',
+        'tabState' : '<tabState>'
+        },
+)
+
+print(response.status_code)
+print(response.content)
+
+```
+
+```javascript
+const fetch = require("node-fetch");
+const { URLSearchParams } = require('url');
+const url = '<URI>/makePublic'
+var headers={
+    "Accept" : "text/plain; charset=UTF-8",
+    "X-authorization" : "<token>"
+};
+
+const params = new URLSearchParams();
+params.append('id', '<id>');
+params.append('version', '<version>');
+params.append('name', '<name>');
+params.append('description', '<description>');
+params.append('citations', '<citations>');
+params.append('tabState', '<tabState>');
+
+fetch(url, { method: 'POST', headers: headers, body:params})
+    .then(res => res.buffer()).then(buf => console.log(buf.toString()))
+    .catch (error=>console.log(error))
+```
+
+Parameter | Description
+--------- | ------- | -----------
+id | The id for the new collection.
+version | The version for the new collection.
+name | The name for the new collection (optional: default is existing name).
+description | The description for the new collection (optional: default is existing description).
+citations | The comma-separated listed of PubMed ids (optional: default is existing citations).
+tabState | Use "new" for moving to a new public collection, and "existing" if moving into an existing public collection.
+collections| If moving into an existing collection, collections is the URI of the collection
+
 
 ## View SBOLExplorer
 
@@ -2786,12 +3485,133 @@ fetch(url, { method: 'GET', headers: headers})
 `POST <SynBioHub URL>/admin/explorer`
 
 Update SBOLExplorer endpoint.
+```plaintext
+curl -X POST -H "Accept: text/plain" -H "X-authorization:<token>" -d "id=<id>&version=<version>&name=<name>&description=<description>&citations=<citations>&tabState=<tabState>" URI/makePublic
+```
+
+```python
+import requests
+
+response = requests.post(
+    '<URI>/makePublic',
+    headers={
+        'X-authorization': '<token>',
+        'Accept': 'text/plain'
+    },
+    data={
+        'id': '<id>',
+        'version' : '<version>',
+        'name' : '<name>',
+        'description' : '<description>',
+        'citations' : '<citations>',
+        'tabState' : '<tabState>'
+        },
+)
+
+print(response.status_code)
+print(response.content)
+
+```
+
+```javascript
+const fetch = require("node-fetch");
+const { URLSearchParams } = require('url');
+const url = '<URI>/makePublic'
+var headers={
+    "Accept" : "text/plain; charset=UTF-8",
+    "X-authorization" : "<token>"
+};
+
+const params = new URLSearchParams();
+params.append('id', '<id>');
+params.append('version', '<version>');
+params.append('name', '<name>');
+params.append('description', '<description>');
+params.append('citations', '<citations>');
+params.append('tabState', '<tabState>');
+
+fetch(url, { method: 'POST', headers: headers, body:params})
+    .then(res => res.buffer()).then(buf => console.log(buf.toString()))
+    .catch (error=>console.log(error))
+```
+
+Parameter | Description
+--------- | ------- | -----------
+id | The id for the new collection.
+version | The version for the new collection.
+name | The name for the new collection (optional: default is existing name).
+description | The description for the new collection (optional: default is existing description).
+citations | The comma-separated listed of PubMed ids (optional: default is existing citations).
+tabState | Use "new" for moving to a new public collection, and "existing" if moving into an existing public collection.
+collections| If moving into an existing collection, collections is the URI of the collection
+
 
 ## Update SBOLExplorer Index.
 
 `POST <SynBioHub URL>/admin/explorerUpdateIndex`
 
 Updates SBOLExplorer index.
+
+```plaintext
+curl -X POST -H "Accept: text/plain" -H "X-authorization:<token>" -d "id=<id>&version=<version>&name=<name>&description=<description>&citations=<citations>&tabState=<tabState>" URI/makePublic
+```
+
+```python
+import requests
+
+response = requests.post(
+    '<URI>/makePublic',
+    headers={
+        'X-authorization': '<token>',
+        'Accept': 'text/plain'
+    },
+    data={
+        'id': '<id>',
+        'version' : '<version>',
+        'name' : '<name>',
+        'description' : '<description>',
+        'citations' : '<citations>',
+        'tabState' : '<tabState>'
+        },
+)
+
+print(response.status_code)
+print(response.content)
+
+```
+
+```javascript
+const fetch = require("node-fetch");
+const { URLSearchParams } = require('url');
+const url = '<URI>/makePublic'
+var headers={
+    "Accept" : "text/plain; charset=UTF-8",
+    "X-authorization" : "<token>"
+};
+
+const params = new URLSearchParams();
+params.append('id', '<id>');
+params.append('version', '<version>');
+params.append('name', '<name>');
+params.append('description', '<description>');
+params.append('citations', '<citations>');
+params.append('tabState', '<tabState>');
+
+fetch(url, { method: 'POST', headers: headers, body:params})
+    .then(res => res.buffer()).then(buf => console.log(buf.toString()))
+    .catch (error=>console.log(error))
+```
+
+Parameter | Description
+--------- | ------- | -----------
+id | The id for the new collection.
+version | The version for the new collection.
+name | The name for the new collection (optional: default is existing name).
+description | The description for the new collection (optional: default is existing description).
+citations | The comma-separated listed of PubMed ids (optional: default is existing citations).
+tabState | Use "new" for moving to a new public collection, and "existing" if moving into an existing public collection.
+collections| If moving into an existing collection, collections is the URI of the collection
+
 
 ## View Theme
 
@@ -2836,6 +3656,67 @@ fetch(url, { method: 'GET', headers: headers})
 
 Update the theme.
 
+```plaintext
+curl -X POST -H "Accept: text/plain" -H "X-authorization:<token>" -d "id=<id>&version=<version>&name=<name>&description=<description>&citations=<citations>&tabState=<tabState>" URI/makePublic
+```
+
+```python
+import requests
+
+response = requests.post(
+    '<URI>/makePublic',
+    headers={
+        'X-authorization': '<token>',
+        'Accept': 'text/plain'
+    },
+    data={
+        'id': '<id>',
+        'version' : '<version>',
+        'name' : '<name>',
+        'description' : '<description>',
+        'citations' : '<citations>',
+        'tabState' : '<tabState>'
+        },
+)
+
+print(response.status_code)
+print(response.content)
+
+```
+
+```javascript
+const fetch = require("node-fetch");
+const { URLSearchParams } = require('url');
+const url = '<URI>/makePublic'
+var headers={
+    "Accept" : "text/plain; charset=UTF-8",
+    "X-authorization" : "<token>"
+};
+
+const params = new URLSearchParams();
+params.append('id', '<id>');
+params.append('version', '<version>');
+params.append('name', '<name>');
+params.append('description', '<description>');
+params.append('citations', '<citations>');
+params.append('tabState', '<tabState>');
+
+fetch(url, { method: 'POST', headers: headers, body:params})
+    .then(res => res.buffer()).then(buf => console.log(buf.toString()))
+    .catch (error=>console.log(error))
+```
+
+Parameter | Description
+--------- | ------- | -----------
+id | The id for the new collection.
+version | The version for the new collection.
+name | The name for the new collection (optional: default is existing name).
+description | The description for the new collection (optional: default is existing description).
+citations | The comma-separated listed of PubMed ids (optional: default is existing citations).
+tabState | Use "new" for moving to a new public collection, and "existing" if moving into an existing public collection.
+collections| If moving into an existing collection, collections is the URI of the collection
+
+
 ## View Users
 
 `GET <SynBioHub URL>/admin/users`
@@ -2879,11 +3760,133 @@ fetch(url, { method: 'GET', headers: headers})
 
 Update the user's settings.
 
+```plaintext
+curl -X POST -H "Accept: text/plain" -H "X-authorization:<token>" -d "id=<id>&version=<version>&name=<name>&description=<description>&citations=<citations>&tabState=<tabState>" URI/makePublic
+```
+
+```python
+import requests
+
+response = requests.post(
+    '<URI>/makePublic',
+    headers={
+        'X-authorization': '<token>',
+        'Accept': 'text/plain'
+    },
+    data={
+        'id': '<id>',
+        'version' : '<version>',
+        'name' : '<name>',
+        'description' : '<description>',
+        'citations' : '<citations>',
+        'tabState' : '<tabState>'
+        },
+)
+
+print(response.status_code)
+print(response.content)
+
+```
+
+```javascript
+const fetch = require("node-fetch");
+const { URLSearchParams } = require('url');
+const url = '<URI>/makePublic'
+var headers={
+    "Accept" : "text/plain; charset=UTF-8",
+    "X-authorization" : "<token>"
+};
+
+const params = new URLSearchParams();
+params.append('id', '<id>');
+params.append('version', '<version>');
+params.append('name', '<name>');
+params.append('description', '<description>');
+params.append('citations', '<citations>');
+params.append('tabState', '<tabState>');
+
+fetch(url, { method: 'POST', headers: headers, body:params})
+    .then(res => res.buffer()).then(buf => console.log(buf.toString()))
+    .catch (error=>console.log(error))
+```
+
+Parameter | Description
+--------- | ------- | -----------
+id | The id for the new collection.
+version | The version for the new collection.
+name | The name for the new collection (optional: default is existing name).
+description | The description for the new collection (optional: default is existing description).
+citations | The comma-separated listed of PubMed ids (optional: default is existing citations).
+tabState | Use "new" for moving to a new public collection, and "existing" if moving into an existing public collection.
+collections| If moving into an existing collection, collections is the URI of the collection
+
+
 ## New User
 
 `POST <SynBioHub URL>/admin/newUser`
 
 Create a new user.
+
+```plaintext
+curl -X POST -H "Accept: text/plain" -H "X-authorization:<token>" -d "id=<id>&version=<version>&name=<name>&description=<description>&citations=<citations>&tabState=<tabState>" URI/makePublic
+```
+
+```python
+import requests
+
+response = requests.post(
+    '<URI>/makePublic',
+    headers={
+        'X-authorization': '<token>',
+        'Accept': 'text/plain'
+    },
+    data={
+        'id': '<id>',
+        'version' : '<version>',
+        'name' : '<name>',
+        'description' : '<description>',
+        'citations' : '<citations>',
+        'tabState' : '<tabState>'
+        },
+)
+
+print(response.status_code)
+print(response.content)
+
+```
+
+```javascript
+const fetch = require("node-fetch");
+const { URLSearchParams } = require('url');
+const url = '<URI>/makePublic'
+var headers={
+    "Accept" : "text/plain; charset=UTF-8",
+    "X-authorization" : "<token>"
+};
+
+const params = new URLSearchParams();
+params.append('id', '<id>');
+params.append('version', '<version>');
+params.append('name', '<name>');
+params.append('description', '<description>');
+params.append('citations', '<citations>');
+params.append('tabState', '<tabState>');
+
+fetch(url, { method: 'POST', headers: headers, body:params})
+    .then(res => res.buffer()).then(buf => console.log(buf.toString()))
+    .catch (error=>console.log(error))
+```
+
+Parameter | Description
+--------- | ------- | -----------
+id | The id for the new collection.
+version | The version for the new collection.
+name | The name for the new collection (optional: default is existing name).
+description | The description for the new collection (optional: default is existing description).
+citations | The comma-separated listed of PubMed ids (optional: default is existing citations).
+tabState | Use "new" for moving to a new public collection, and "existing" if moving into an existing public collection.
+collections| If moving into an existing collection, collections is the URI of the collection
+
 
 ## Update User
 
@@ -2891,11 +3894,133 @@ Create a new user.
 
 Update a user's settings.
 
+```plaintext
+curl -X POST -H "Accept: text/plain" -H "X-authorization:<token>" -d "id=<id>&version=<version>&name=<name>&description=<description>&citations=<citations>&tabState=<tabState>" URI/makePublic
+```
+
+```python
+import requests
+
+response = requests.post(
+    '<URI>/makePublic',
+    headers={
+        'X-authorization': '<token>',
+        'Accept': 'text/plain'
+    },
+    data={
+        'id': '<id>',
+        'version' : '<version>',
+        'name' : '<name>',
+        'description' : '<description>',
+        'citations' : '<citations>',
+        'tabState' : '<tabState>'
+        },
+)
+
+print(response.status_code)
+print(response.content)
+
+```
+
+```javascript
+const fetch = require("node-fetch");
+const { URLSearchParams } = require('url');
+const url = '<URI>/makePublic'
+var headers={
+    "Accept" : "text/plain; charset=UTF-8",
+    "X-authorization" : "<token>"
+};
+
+const params = new URLSearchParams();
+params.append('id', '<id>');
+params.append('version', '<version>');
+params.append('name', '<name>');
+params.append('description', '<description>');
+params.append('citations', '<citations>');
+params.append('tabState', '<tabState>');
+
+fetch(url, { method: 'POST', headers: headers, body:params})
+    .then(res => res.buffer()).then(buf => console.log(buf.toString()))
+    .catch (error=>console.log(error))
+```
+
+Parameter | Description
+--------- | ------- | -----------
+id | The id for the new collection.
+version | The version for the new collection.
+name | The name for the new collection (optional: default is existing name).
+description | The description for the new collection (optional: default is existing description).
+citations | The comma-separated listed of PubMed ids (optional: default is existing citations).
+tabState | Use "new" for moving to a new public collection, and "existing" if moving into an existing public collection.
+collections| If moving into an existing collection, collections is the URI of the collection
+
+
 ## Delete User
 
 `POST <SynBioHub URL>/admin/deleteUser`
 
 Delete a user. 
+
+```plaintext
+curl -X POST -H "Accept: text/plain" -H "X-authorization:<token>" -d "id=<id>&version=<version>&name=<name>&description=<description>&citations=<citations>&tabState=<tabState>" URI/makePublic
+```
+
+```python
+import requests
+
+response = requests.post(
+    '<URI>/makePublic',
+    headers={
+        'X-authorization': '<token>',
+        'Accept': 'text/plain'
+    },
+    data={
+        'id': '<id>',
+        'version' : '<version>',
+        'name' : '<name>',
+        'description' : '<description>',
+        'citations' : '<citations>',
+        'tabState' : '<tabState>'
+        },
+)
+
+print(response.status_code)
+print(response.content)
+
+```
+
+```javascript
+const fetch = require("node-fetch");
+const { URLSearchParams } = require('url');
+const url = '<URI>/makePublic'
+var headers={
+    "Accept" : "text/plain; charset=UTF-8",
+    "X-authorization" : "<token>"
+};
+
+const params = new URLSearchParams();
+params.append('id', '<id>');
+params.append('version', '<version>');
+params.append('name', '<name>');
+params.append('description', '<description>');
+params.append('citations', '<citations>');
+params.append('tabState', '<tabState>');
+
+fetch(url, { method: 'POST', headers: headers, body:params})
+    .then(res => res.buffer()).then(buf => console.log(buf.toString()))
+    .catch (error=>console.log(error))
+```
+
+Parameter | Description
+--------- | ------- | -----------
+id | The id for the new collection.
+version | The version for the new collection.
+name | The name for the new collection (optional: default is existing name).
+description | The description for the new collection (optional: default is existing description).
+citations | The comma-separated listed of PubMed ids (optional: default is existing citations).
+tabState | Use "new" for moving to a new public collection, and "existing" if moving into an existing public collection.
+collections| If moving into an existing collection, collections is the URI of the collection
+
 
 # Plugins
 
