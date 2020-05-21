@@ -49,7 +49,7 @@ SynBioHub can be used to publish a library of synthetic parts and designs as a s
 An earlier version of SynBioHub known as SBOL Stack was developed by the following people:
 
 * [Dr. Curtis Madsen](http://sites.bu.edu/ckmadsen/) (Boston University)
-* [James Alastair McLaughlin](http://homepages.cs.ncl.ac.uk/j.a.mclaughlin) (Newcastle University) 
+* [Dr. James Alastair McLaughlin](http://homepages.cs.ncl.ac.uk/j.a.mclaughlin) (Newcastle University) 
 * [Dr. Goksel Misirli](http://homepages.cs.ncl.ac.uk/goksel.misirli/) (Newcastle University)
 * [Dr. Matthew Pocock](http://intbio.ncl.ac.uk/?people=matthew-pocock) (Turing Ate My Hamster Ltd.)
 * [Dr. Keith Flanagan](http://intbio.ncl.ac.uk/?people=dr-keith-flanagan) (Newcastle University) 
