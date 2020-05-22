@@ -3211,7 +3211,7 @@ fetch(url, { method: 'GET', headers: headers})
     .catch (error=>console.log(error))
 ```
 
-## Save Remote
+## Save Benchling Remote
 
 `POST <SynBioHub URL>/admin/saveRemote`
 
@@ -3248,7 +3248,7 @@ print(response.content)
 ```javascript
 const fetch = require("node-fetch");
 const { URLSearchParams } = require('url');
-const url = '<URI>/makePublic'
+const url = '<SynBioHub URL>/admin/saveRemote'
 var headers={
     "Accept" : "text/plain; charset=UTF-8",
     "X-authorization" : "<token>"
@@ -3277,6 +3277,108 @@ citations | The comma-separated listed of PubMed ids (optional: default is exist
 tabState | Use "new" for moving to a new public collection, and "existing" if moving into an existing public collection.
 collections| If moving into an existing collection, collections is the URI of the collection
 
+## Save ICE Remote
+
+`POST <SynBioHub URL>/admin/saveRemote`
+
+Save a new remote.
+
+```plaintext
+curl -X POST -H "Accept: text/plain" -H "X-authorization:<token>" -d "type=ice&id=<id>&url='<url>'&iceApiTokenClient=<iceApiTokenClient>&iceApiToken=<iceApiToken>&iceApiTokenOwner=<iceApiTokenOwner>&iceCollection&<iceCollection>&rejectUnauthorized=<rejectUnauthorized>&folderPrefix=<folderPrefix>&sequenceSuffix=<sequenceSuffix>&defaultFolderId=<defaultFolderId>&groupId=<groupId>&pi=<pi>&piEmail=<piEmail>&isPublic=<isPublic>&partNumberPrefix=<partNumberPrefix>&rootCollectionDisplayId=<rootCollectionDisplayId>&rootCollectionName=<rootCollectionName>&rootCollectionDescription=<rootCollectionDescription>" <SynBioHub URL>/admin/saveRemote
+```
+
+```python
+import requests
+
+response = requests.post(
+    '<SynBioHub URL>/admin/saveRemote',
+    headers={
+        'X-authorization': '<token>',
+        'Accept': 'text/plain'
+    },
+    data={
+        'type': 'ice',
+        'id' : '<id>',
+        'url' : '<url>',
+        'iceApiTokenClient' : '<iceApiTokenClient>',
+        'iceApiToken' : '<iceApiToken>',
+        'iceApiTokenOwner' : '<iceApiTokenOwner>',
+        'iceCollection' : '<iceCollection>',
+        'rejectUnauthorized' : '<rejectUnauthorized>',
+        'folderPrefix' : '<folderPrefix>',
+        'sequenceSuffix' : '<sequenceSuffix>',
+        'defaultFolderId' : '<defaultFolderId>',
+        'groupId' : '<groupId>',
+        'pi' : '<pi>',
+        'piEmail' : '<piEmail>',
+        'isPublic' : '<isPublic>',
+        'partNumberPrefix' : '<partNumberPrefix>',
+        'rootCollectionDisplayId' : '<rootCollectionDisplayId>',
+        'rootCollectionName' : '<rootCollectionName>',
+        'rootCollectionDescription' : '<rootCollectionDescription>'
+        },
+)
+
+print(response.status_code)
+print(response.content)
+
+```
+
+```javascript
+const fetch = require("node-fetch");
+const { URLSearchParams } = require('url');
+const url = '<SynBioHub URL>/admin/saveRemote'
+var headers={
+    "Accept" : "text/plain; charset=UTF-8",
+    "X-authorization" : "<token>"
+};
+
+const params = new URLSearchParams();
+params.append('type', 'ice');
+params.append('id', '<id>');
+params.append('url', '<url>');
+params.append('iceApiTokenClient', '<iceApiTokenClient>');
+params.append('iceApiToken', '<iceApiToken>');
+params.append('iceApiTokenOwner', '<iceApiTokenOwner>');
+params.append('iceCollection', '<iceCollection>');
+params.append('rejectUnauthorized', '<rejectUnauthorized>');
+params.append('folderPrefix', '<folderPrefix>');
+params.append('sequenceSuffix', '<sequenceSuffix>');
+params.append('defaultFolderId', '<defaultFolderId>');
+params.append('groupId', '<groupId>');
+params.append('pi', '<pi>');
+params.append('piEmail', '<piEmail>');
+params.append('isPublic', '<isPublic>');
+params.append('partNumberPrefix', '<partNumberPrefix>');
+params.append('rootCollectionDisplayId', '<rootCollectionDisplayId>');
+params.append('rootCollectionName', '<rootCollectionName>');
+params.append('rootCollectionDescription', '<rootCollectionDescription>');
+
+fetch(url, { method: 'POST', headers: headers, body:params})
+    .then(res => res.buffer()).then(buf => console.log(buf.toString()))
+    .catch (error=>console.log(error))
+```
+
+Parameter | Description
+--------- | ------- | ----------- 
+id | Id of the ICE remote
+url | URL for the ICE remote
+iceApiTokenClient | ICE API token client
+iceApiToken | ICE API token
+iceApiTokenOwner | ICE API token owner
+iceCollection | ICE collection
+rejectUnauthorized | Check SSL certificate?
+folderPrefix | Prefix to use for folders on ICE
+sequenceSuffix | Suffix to use for sequences found on Benchling
+defaultFolderId | Default folder on Benchling to access
+groupId | Group id on ICE
+pi | Principal Investigator name
+piEmail | Principal Investigator email
+isPublic | Should the remote be visible publicly? 
+partNumberPrefix | Prefix to use for parts
+rootCollectionDisplayId | Display id for the root collection on the remote
+rootCollectionName | Name for the root collection on the remote
+rootCollectionDescription | Description for the root collection on the remote
 
 ## Delete Remote
 
