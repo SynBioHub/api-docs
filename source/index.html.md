@@ -2226,27 +2226,21 @@ Possible fields to remove:
 
 Add member to a collection.
 
-`POST <URI>/attachURL `
-
-Attach a specified URL to a given URI.
-
 ```plaintext
-curl -X POST -H "Accept: text/plain" -H "X-authorization: <token>" -d "url=<url>&name=<name>&type=<type>" <URI>/addToCollection
+curl -X POST -H "Accept: text/plain" -H "X-authorization: <token>" -d "collections=<collections>" <URI>/addToCollection
 ```
 
 ```python
 import requests
 
 response = requests.post(
-    '<URI>/attachURL',
+    '<URI>/addToCollection',
     headers={
         'X-authorization': '<token>',
         'Accept': 'text/plain'
     },
     data={
-        'url': '<url>',
-        'name' : '<name>',
-        'type' : '<type>'
+        'collections': '<collections>',
         },
 )
 
@@ -2258,28 +2252,25 @@ print(response.content)
 ```javascript
 const fetch = require("node-fetch");
 const { URLSearchParams } = require('url');
-const url = '<URI>/attachURL'
+const url = '<URI>/addToCollection'
 var headers={
     "Accept" : "text/plain; charset=UTF-8",
     "X-authorization" : "<token>"
 };
 
 const params = new URLSearchParams();
-params.append('url', '<url>');
-params.append('name', '<name>');
-params.append('type', '<type>');
-
+params.append('collections', '<collections');
 
 fetch(url, { method: 'POST', headers: headers, body:params})
     .then(res => res.buffer()).then(buf => console.log(buf.toString()))
     .catch (error=>console.log(error))
+
+
 ```
 
 Parameter | Description
 --------- | -----------
-url | The URL to attach.
-name | The name of the attachment.
-type | The format type of the object at the URL.
+collections | The URI of collection to add a member to.
 
 ## Remove Membership
 
@@ -2287,27 +2278,21 @@ type | The format type of the object at the URL.
 
 Remove member of a collection.
 
-`POST <URI>/attachURL `
-
-Attach a specified URL to a given URI.
-
 ```plaintext
-curl -X POST -H "Accept: text/plain" -H "X-authorization: <token>" -d "url=<url>&name=<name>&type=<type>" <URI>/attachURL
+curl -X POST -H "Accept: text/plain" -H "X-authorization: <token>" -d "member=<member>" <URI>/removeMembership
 ```
 
 ```python
 import requests
 
 response = requests.post(
-    '<URI>/attachURL',
+    '<URI>/removeMembership',
     headers={
         'X-authorization': '<token>',
         'Accept': 'text/plain'
     },
     data={
-        'url': '<url>',
-        'name' : '<name>',
-        'type' : '<type>'
+        'member': '<member>',
         },
 )
 
@@ -2319,28 +2304,24 @@ print(response.content)
 ```javascript
 const fetch = require("node-fetch");
 const { URLSearchParams } = require('url');
-const url = '<URI>/attachURL'
+const url = '<URI>/removeMembership'
 var headers={
     "Accept" : "text/plain; charset=UTF-8",
     "X-authorization" : "<token>"
 };
 
 const params = new URLSearchParams();
-params.append('url', '<url>');
-params.append('name', '<name>');
-params.append('type', '<type>');
-
+params.append('member', '<member>');
 
 fetch(url, { method: 'POST', headers: headers, body:params})
     .then(res => res.buffer()).then(buf => console.log(buf.toString()))
     .catch (error=>console.log(error))
+
 ```
 
 Parameter | Description
 --------- | -----------
-url | The URL to attach.
-name | The name of the attachment.
-type | The format type of the object at the URL.
+member | The URI of the object to remove as a member.
 
 
 # Attachment Endpoints
