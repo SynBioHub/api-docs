@@ -3218,7 +3218,8 @@ fetch(url, { method: 'GET', headers: headers})
 Save a new Benchling remote.
 
 ```plaintext
-curl -X POST -H "Accept: text/plain" -H "X-authorization:<token>" -d "id=<id>&version=<version>&name=<name>&description=<description>&citations=<citations>&tabState=<tabState>" URI/makePublic
+curl -X POST -H "Accept: text/plain" -H "X-authorization:<token>" -d "
+type=benchling&id=<id>&benchlingApiToken=<BenchlingApitoken>&rejectUnauthorized=<rejectUnauthorizaed>&folderPrefix=<folderPrefix>&defaultFolderId=<defaultFolderId>&isPublic=<isPublic>&rootCollectionsDisplayId=<rootCollectionsDisplayId>&rootCollectionName=<rootCollectionName>&rootCollectionDesciption=root<CollectionDescription>" <SynBioHub URL>/admin/saveRemote 
 ```
 
 ```python
