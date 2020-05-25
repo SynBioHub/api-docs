@@ -3215,7 +3215,7 @@ fetch(url, { method: 'GET', headers: headers})
 
 `POST <SynBioHub URL>/admin/saveRemote`
 
-Save a new remote.
+Save a new Benchling remote.
 
 ```plaintext
 curl -X POST -H "Accept: text/plain" -H "X-authorization:<token>" -d "id=<id>&version=<version>&name=<name>&description=<description>&citations=<citations>&tabState=<tabState>" URI/makePublic
@@ -3225,19 +3225,23 @@ curl -X POST -H "Accept: text/plain" -H "X-authorization:<token>" -d "id=<id>&ve
 import requests
 
 response = requests.post(
-    '<URI>/makePublic',
+    '<SynBioHub URL>/admin/saveRemote',
     headers={
         'X-authorization': '<token>',
         'Accept': 'text/plain'
     },
     data={
-        'id': '<id>',
-        'version' : '<version>',
-        'name' : '<name>',
-        'description' : '<description>',
-        'citations' : '<citations>',
-        'tabState' : '<tabState>'
-        },
+	'type': 'benchling',
+	'id': '<id>',
+	'benchlingApiToken': 'benchlingApiToken',
+	'rejectUnauthorized': '<rejectUnauthorized>',
+	'folderprefix': '<folderprefix>',
+	'defaultFolderId': '<defaultFolderId',
+	'isPublic': '<isPublic>',
+	'rootCollectionsDisplayId': '<rootColelctionsDisplayId>',
+	'rootCollectionName': '<rootCollectionName>',
+	'rootCollectionDescription': '<rootCollectionDescription>'
+       },
 )
 
 print(response.status_code)
@@ -3255,27 +3259,37 @@ var headers={
 };
 
 const params = new URLSearchParams();
+params.append('type', 'benchling');
 params.append('id', '<id>');
-params.append('version', '<version>');
-params.append('name', '<name>');
-params.append('description', '<description>');
-params.append('citations', '<citations>');
-params.append('tabState', '<tabState>');
+params.append('benchlingApiToken', 'benchlingApiToken');
+params.append('rejectUnauthorized', '<rejectUnauthorized>');
+params.append('folderprefix', '<folderprefix>');
+params.append('defaultFolderId', '<defaultFolderId');
+params.append('isPublic', '<isPublic>');
+params.append('rootCollectionsDisplayId', '<rootColelctionsDisplayId>');
+params.append('rootCollectionName', '<rootCollectionName>');
+params.append('rootCollectionDescription', '<rootCollectionDescription>');
+
 
 fetch(url, { method: 'POST', headers: headers, body:params})
     .then(res => res.buffer()).then(buf => console.log(buf.toString()))
     .catch (error=>console.log(error))
 ```
 
+
 Parameter | Description
 --------- | ------- | -----------
-id | The id for the new collection.
-version | The version for the new collection.
-name | The name for the new collection (optional: default is existing name).
-description | The description for the new collection (optional: default is existing description).
-citations | The comma-separated listed of PubMed ids (optional: default is existing citations).
-tabState | Use "new" for moving to a new public collection, and "existing" if moving into an existing public collection.
-collections| If moving into an existing collection, collections is the URI of the collection
+id | Id of the Benchling remote.
+url | URL for the Benchling remote.
+benchlingApiToken | API token for the Benchling remote.
+rejectUnauthorized |Check SSL certificate?
+folderPrefix | Prefix to use for folders on Benchling.
+sequenceSuffix | Suffix to use for sequences found on Benchling.
+defaultFolderId | Default folder on Benchling to access.
+isPublic | Should the remote be visible publicly? 
+rootCollectionDisplayId | Display id for the root collection on the remote.
+rootCollectionName |Name for the root collection on the remote.
+rootCollectionDescription | Description for the root collection on the remote.
 
 ## Save ICE Remote
 
