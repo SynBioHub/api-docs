@@ -2264,8 +2264,6 @@ params.append('collections', '<collections');
 fetch(url, { method: 'POST', headers: headers, body:params})
     .then(res => res.buffer()).then(buf => console.log(buf.toString()))
     .catch (error=>console.log(error))
-
-
 ```
 
 Parameter | Description
