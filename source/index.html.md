@@ -3551,7 +3551,7 @@ tabState | Use "new" for moving to a new public collection, and "existing" if mo
 collections| If moving into an existing collection, collections is the URI of the collection
 
 
-## Update SBOLExplorer Index.
+## Update SBOLExplorer Index
 
 `POST <SynBioHub URL>/admin/explorerUpdateIndex`
 
@@ -3967,25 +3967,20 @@ collections| If moving into an existing collection, collections is the URI of th
 Delete a user. 
 
 ```plaintext
-curl -X POST -H "Accept: text/plain" -H "X-authorization:<token>" -d "id=<id>&version=<version>&name=<name>&description=<description>&citations=<citations>&tabState=<tabState>" URI/makePublic
+curl -X POST -H "Accept: text/plain" -H "X-authorization:<token>" -d "id=<id>" <SynBioHub URL>/admin/deleteUser
 ```
 
 ```python
 import requests
 
 response = requests.post(
-    '<URI>/makePublic',
+    '<SynBioHub URL>/admin/deleteUser',
     headers={
         'X-authorization': '<token>',
         'Accept': 'text/plain'
     },
     data={
         'id': '<id>',
-        'version' : '<version>',
-        'name' : '<name>',
-        'description' : '<description>',
-        'citations' : '<citations>',
-        'tabState' : '<tabState>'
         },
 )
 
@@ -3997,7 +3992,7 @@ print(response.content)
 ```javascript
 const fetch = require("node-fetch");
 const { URLSearchParams } = require('url');
-const url = '<URI>/makePublic'
+const url = '<SynBioHub URL>/admin/deleteUser'
 var headers={
     "Accept" : "text/plain; charset=UTF-8",
     "X-authorization" : "<token>"
@@ -4005,26 +4000,19 @@ var headers={
 
 const params = new URLSearchParams();
 params.append('id', '<id>');
-params.append('version', '<version>');
-params.append('name', '<name>');
-params.append('description', '<description>');
-params.append('citations', '<citations>');
-params.append('tabState', '<tabState>');
+
+
 
 fetch(url, { method: 'POST', headers: headers, body:params})
     .then(res => res.buffer()).then(buf => console.log(buf.toString()))
     .catch (error=>console.log(error))
+
 ```
+
 
 Parameter | Description
 --------- | ------- | -----------
-id | The id for the new collection.
-version | The version for the new collection.
-name | The name for the new collection (optional: default is existing name).
-description | The description for the new collection (optional: default is existing description).
-citations | The comma-separated listed of PubMed ids (optional: default is existing citations).
-tabState | Use "new" for moving to a new public collection, and "existing" if moving into an existing public collection.
-collections| If moving into an existing collection, collections is the URI of the collection
+id | The Id of user to delete.
 
 
 # Plugins
