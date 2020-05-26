@@ -2224,7 +2224,7 @@ Possible fields to remove:
 
 `POST <URI>/addToCollection`
 
-Add member to a collection.
+Add member specified by the URI to a collection specified by the collections parameter.
 
 ```plaintext
 curl -X POST -H "Accept: text/plain" -H "X-authorization: <token>" -d "collections=<collections>" <URI>/addToCollection
@@ -2276,7 +2276,7 @@ collections | The URI of collection to add a member to.
 
 `POST <URI>/removeMembership`
 
-Remove member of a collection.
+Remove a member specified by the member parameter of a collection specified by the URI.
 
 ```plaintext
 curl -X POST -H "Accept: text/plain" -H "X-authorization: <token>" -d "member=<member>" <URI>/removeMembership
