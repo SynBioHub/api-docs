@@ -2526,7 +2526,7 @@ This endpoint returns JSON metadata of the form:
 <h2 id='add-to-collection'>Add to Collection</h2>
 <p><code>POST &lt;URI&gt;/addToCollection</code></p>
 
-<p>Add member to a collection.</p>
+<p>Add member specified by the URI to a collection specified by the collections parameter.</p>
 <pre class="highlight plaintext tab-plaintext"><code>curl -X POST -H "Accept: text/plain" -H "X-authorization: &lt;token&gt;" -d "collections=&lt;collections&gt;" &lt;URI&gt;/addToCollection
 </code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 
@@ -2558,8 +2558,6 @@ This endpoint returns JSON metadata of the form:
 <span class="nx">fetch</span><span class="p">(</span><span class="nx">url</span><span class="p">,</span> <span class="p">{</span> <span class="na">method</span><span class="p">:</span> <span class="s1">'POST'</span><span class="p">,</span> <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span><span class="p">,</span> <span class="na">body</span><span class="p">:</span><span class="nx">params</span><span class="p">})</span>
     <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">res</span> <span class="o">=&gt;</span> <span class="nx">res</span><span class="p">.</span><span class="nx">buffer</span><span class="p">()).</span><span class="nx">then</span><span class="p">(</span><span class="nx">buf</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">buf</span><span class="p">.</span><span class="nx">toString</span><span class="p">()))</span>
     <span class="p">.</span><span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="o">=&gt;</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">error</span><span class="p">))</span>
-
-
 </code></pre>
 <table><thead>
 <tr>
@@ -2575,7 +2573,7 @@ This endpoint returns JSON metadata of the form:
 <h2 id='remove-membership'>Remove Membership</h2>
 <p><code>POST &lt;URI&gt;/removeMembership</code></p>
 
-<p>Remove member of a collection.</p>
+<p>Remove a member specified by the member parameter of a collection specified by the URI.</p>
 <pre class="highlight plaintext tab-plaintext"><code>curl -X POST -H "Accept: text/plain" -H "X-authorization: &lt;token&gt;" -d "member=&lt;member&gt;" &lt;URI&gt;/removeMembership
 </code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 
