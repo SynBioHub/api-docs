@@ -474,7 +474,10 @@
                     <a href="#view-remotes" class="toc-h2 toc-link" data-title="View Remotes">View Remotes</a>
                   </li>
                   <li>
-                    <a href="#save-remote" class="toc-h2 toc-link" data-title="Save Remote">Save Remote</a>
+                    <a href="#save-benchling-remote" class="toc-h2 toc-link" data-title="Save Benchling Remote">Save Benchling Remote</a>
+                  </li>
+                  <li>
+                    <a href="#save-ice-remote" class="toc-h2 toc-link" data-title="Save ICE Remote">Save ICE Remote</a>
                   </li>
                   <li>
                     <a href="#delete-remote" class="toc-h2 toc-link" data-title="Delete Remote">Delete Remote</a>
@@ -486,7 +489,7 @@
                     <a href="#update-sbolexplorer" class="toc-h2 toc-link" data-title="Update SBOLExplorer">Update SBOLExplorer</a>
                   </li>
                   <li>
-                    <a href="#update-sbolexplorer-index" class="toc-h2 toc-link" data-title="Update SBOLExplorer Index.">Update SBOLExplorer Index.</a>
+                    <a href="#update-sbolexplorer-index" class="toc-h2 toc-link" data-title="Update SBOLExplorer Index">Update SBOLExplorer Index</a>
                   </li>
                   <li>
                     <a href="#view-theme" class="toc-h2 toc-link" data-title="View Theme">View Theme</a>
@@ -3385,27 +3388,32 @@ This endpoint returns JSON metadata of the form:
 <span class="nx">fetch</span><span class="p">(</span><span class="nx">url</span><span class="p">,</span> <span class="p">{</span> <span class="na">method</span><span class="p">:</span> <span class="s1">'GET'</span><span class="p">,</span> <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span><span class="p">})</span>
     <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">res</span> <span class="o">=&gt;</span> <span class="nx">res</span><span class="p">.</span><span class="nx">buffer</span><span class="p">()).</span><span class="nx">then</span><span class="p">(</span><span class="nx">buf</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">buf</span><span class="p">.</span><span class="nx">toString</span><span class="p">()))</span>
     <span class="p">.</span><span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="o">=&gt;</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">error</span><span class="p">))</span>
-</code></pre><h2 id='save-remote'>Save Remote</h2>
+</code></pre><h2 id='save-benchling-remote'>Save Benchling Remote</h2>
 <p><code>POST &lt;SynBioHub URL&gt;/admin/saveRemote</code></p>
 
-<p>Save a new remote.</p>
-<pre class="highlight plaintext tab-plaintext"><code>curl -X POST -H "Accept: text/plain" -H "X-authorization:&lt;token&gt;" -d "id=&lt;id&gt;&amp;version=&lt;version&gt;&amp;name=&lt;name&gt;&amp;description=&lt;description&gt;&amp;citations=&lt;citations&gt;&amp;tabState=&lt;tabState&gt;" URI/makePublic
+<p>Save a new Benchling remote.</p>
+<pre class="highlight plaintext tab-plaintext"><code>curl -X POST -H "Accept: text/plain" -H "X-authorization:&lt;token&gt;" -d "
+type=benchling&amp;id=&lt;id&gt;&amp;benchlingApiToken=&lt;BenchlingApitoken&gt;&amp;rejectUnauthorized=&lt;rejectUnauthorizaed&gt;&amp;folderPrefix=&lt;folderPrefix&gt;&amp;defaultFolderId=&lt;defaultFolderId&gt;&amp;isPublic=&lt;isPublic&gt;&amp;rootCollectionsDisplayId=&lt;rootCollectionsDisplayId&gt;&amp;rootCollectionName=&lt;rootCollectionName&gt;&amp;rootCollectionDesciption=root&lt;CollectionDescription&gt;" &lt;SynBioHub URL&gt;/admin/saveRemote 
 </code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 
 <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span>
-    <span class="s">'&lt;URI&gt;/makePublic'</span><span class="p">,</span>
+    <span class="s">'&lt;SynBioHub URL&gt;/admin/saveRemote'</span><span class="p">,</span>
     <span class="n">headers</span><span class="o">=</span><span class="p">{</span>
         <span class="s">'X-authorization'</span><span class="p">:</span> <span class="s">'&lt;token&gt;'</span><span class="p">,</span>
         <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'text/plain'</span>
     <span class="p">},</span>
     <span class="n">data</span><span class="o">=</span><span class="p">{</span>
-        <span class="s">'id'</span><span class="p">:</span> <span class="s">'&lt;id&gt;'</span><span class="p">,</span>
-        <span class="s">'version'</span> <span class="p">:</span> <span class="s">'&lt;version&gt;'</span><span class="p">,</span>
-        <span class="s">'name'</span> <span class="p">:</span> <span class="s">'&lt;name&gt;'</span><span class="p">,</span>
-        <span class="s">'description'</span> <span class="p">:</span> <span class="s">'&lt;description&gt;'</span><span class="p">,</span>
-        <span class="s">'citations'</span> <span class="p">:</span> <span class="s">'&lt;citations&gt;'</span><span class="p">,</span>
-        <span class="s">'tabState'</span> <span class="p">:</span> <span class="s">'&lt;tabState&gt;'</span>
-        <span class="p">},</span>
+    <span class="s">'type'</span><span class="p">:</span> <span class="s">'benchling'</span><span class="p">,</span>
+    <span class="s">'id'</span><span class="p">:</span> <span class="s">'&lt;id&gt;'</span><span class="p">,</span>
+    <span class="s">'benchlingApiToken'</span><span class="p">:</span> <span class="s">'benchlingApiToken'</span><span class="p">,</span>
+    <span class="s">'rejectUnauthorized'</span><span class="p">:</span> <span class="s">'&lt;rejectUnauthorized&gt;'</span><span class="p">,</span>
+    <span class="s">'folderprefix'</span><span class="p">:</span> <span class="s">'&lt;folderprefix&gt;'</span><span class="p">,</span>
+    <span class="s">'defaultFolderId'</span><span class="p">:</span> <span class="s">'&lt;defaultFolderId'</span><span class="p">,</span>
+    <span class="s">'isPublic'</span><span class="p">:</span> <span class="s">'&lt;isPublic&gt;'</span><span class="p">,</span>
+    <span class="s">'rootCollectionsDisplayId'</span><span class="p">:</span> <span class="s">'&lt;rootColelctionsDisplayId&gt;'</span><span class="p">,</span>
+    <span class="s">'rootCollectionName'</span><span class="p">:</span> <span class="s">'&lt;rootCollectionName&gt;'</span><span class="p">,</span>
+    <span class="s">'rootCollectionDescription'</span><span class="p">:</span> <span class="s">'&lt;rootCollectionDescription&gt;'</span>
+       <span class="p">},</span>
 <span class="p">)</span>
 
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
@@ -3413,19 +3421,24 @@ This endpoint returns JSON metadata of the form:
 
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">fetch</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"node-fetch"</span><span class="p">);</span>
 <span class="kr">const</span> <span class="p">{</span> <span class="nx">URLSearchParams</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'url'</span><span class="p">);</span>
-<span class="kr">const</span> <span class="nx">url</span> <span class="o">=</span> <span class="s1">'&lt;URI&gt;/makePublic'</span>
+<span class="kr">const</span> <span class="nx">url</span> <span class="o">=</span> <span class="s1">'&lt;SynBioHub URL&gt;/admin/saveRemote'</span>
 <span class="kd">var</span> <span class="nx">headers</span><span class="o">=</span><span class="p">{</span>
     <span class="s2">"Accept"</span> <span class="p">:</span> <span class="s2">"text/plain; charset=UTF-8"</span><span class="p">,</span>
     <span class="s2">"X-authorization"</span> <span class="p">:</span> <span class="s2">"&lt;token&gt;"</span>
 <span class="p">};</span>
 
 <span class="kr">const</span> <span class="nx">params</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">URLSearchParams</span><span class="p">();</span>
+<span class="nx">params</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'type'</span><span class="p">,</span> <span class="s1">'benchling'</span><span class="p">);</span>
 <span class="nx">params</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'id'</span><span class="p">,</span> <span class="s1">'&lt;id&gt;'</span><span class="p">);</span>
-<span class="nx">params</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'version'</span><span class="p">,</span> <span class="s1">'&lt;version&gt;'</span><span class="p">);</span>
-<span class="nx">params</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'name'</span><span class="p">,</span> <span class="s1">'&lt;name&gt;'</span><span class="p">);</span>
-<span class="nx">params</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'description'</span><span class="p">,</span> <span class="s1">'&lt;description&gt;'</span><span class="p">);</span>
-<span class="nx">params</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'citations'</span><span class="p">,</span> <span class="s1">'&lt;citations&gt;'</span><span class="p">);</span>
-<span class="nx">params</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'tabState'</span><span class="p">,</span> <span class="s1">'&lt;tabState&gt;'</span><span class="p">);</span>
+<span class="nx">params</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'benchlingApiToken'</span><span class="p">,</span> <span class="s1">'benchlingApiToken'</span><span class="p">);</span>
+<span class="nx">params</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'rejectUnauthorized'</span><span class="p">,</span> <span class="s1">'&lt;rejectUnauthorized&gt;'</span><span class="p">);</span>
+<span class="nx">params</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'folderprefix'</span><span class="p">,</span> <span class="s1">'&lt;folderprefix&gt;'</span><span class="p">);</span>
+<span class="nx">params</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'defaultFolderId'</span><span class="p">,</span> <span class="s1">'&lt;defaultFolderId'</span><span class="p">);</span>
+<span class="nx">params</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'isPublic'</span><span class="p">,</span> <span class="s1">'&lt;isPublic&gt;'</span><span class="p">);</span>
+<span class="nx">params</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'rootCollectionsDisplayId'</span><span class="p">,</span> <span class="s1">'&lt;rootColelctionsDisplayId&gt;'</span><span class="p">);</span>
+<span class="nx">params</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'rootCollectionName'</span><span class="p">,</span> <span class="s1">'&lt;rootCollectionName&gt;'</span><span class="p">);</span>
+<span class="nx">params</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'rootCollectionDescription'</span><span class="p">,</span> <span class="s1">'&lt;rootCollectionDescription&gt;'</span><span class="p">);</span>
+
 
 <span class="nx">fetch</span><span class="p">(</span><span class="nx">url</span><span class="p">,</span> <span class="p">{</span> <span class="na">method</span><span class="p">:</span> <span class="s1">'POST'</span><span class="p">,</span> <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span><span class="p">,</span> <span class="na">body</span><span class="p">:</span><span class="nx">params</span><span class="p">})</span>
     <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">res</span> <span class="o">=&gt;</span> <span class="nx">res</span><span class="p">.</span><span class="nx">buffer</span><span class="p">()).</span><span class="nx">then</span><span class="p">(</span><span class="nx">buf</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">buf</span><span class="p">.</span><span class="nx">toString</span><span class="p">()))</span>
@@ -3439,38 +3452,205 @@ This endpoint returns JSON metadata of the form:
 </thead><tbody>
 <tr>
 <td>id</td>
-<td>The id for the new collection.</td>
+<td>Id of the Benchling remote.</td>
 </tr>
 <tr>
-<td>version</td>
-<td>The version for the new collection.</td>
+<td>url</td>
+<td>URL for the Benchling remote.</td>
 </tr>
 <tr>
-<td>name</td>
-<td>The name for the new collection (optional: default is existing name).</td>
+<td>benchlingApiToken</td>
+<td>API token for the Benchling remote.</td>
 </tr>
 <tr>
-<td>description</td>
-<td>The description for the new collection (optional: default is existing description).</td>
+<td>rejectUnauthorized</td>
+<td>Check SSL certificate?</td>
 </tr>
 <tr>
-<td>citations</td>
-<td>The comma-separated listed of PubMed ids (optional: default is existing citations).</td>
+<td>folderPrefix</td>
+<td>Prefix to use for folders on Benchling.</td>
 </tr>
 <tr>
-<td>tabState</td>
-<td>Use &quot;new&quot; for moving to a new public collection, and &quot;existing&quot; if moving into an existing public collection.</td>
+<td>sequenceSuffix</td>
+<td>Suffix to use for sequences found on Benchling.</td>
 </tr>
 <tr>
-<td>collections</td>
-<td>If moving into an existing collection, collections is the URI of the collection</td>
+<td>defaultFolderId</td>
+<td>Default folder on Benchling to access.</td>
+</tr>
+<tr>
+<td>isPublic</td>
+<td>Should the remote be visible publicly?</td>
+</tr>
+<tr>
+<td>rootCollectionDisplayId</td>
+<td>Display id for the root collection on the remote.</td>
+</tr>
+<tr>
+<td>rootCollectionName</td>
+<td>Name for the root collection on the remote.</td>
+</tr>
+<tr>
+<td>rootCollectionDescription</td>
+<td>Description for the root collection on the remote.</td>
+</tr>
+</tbody></table>
+<h2 id='save-ice-remote'>Save ICE Remote</h2>
+<p><code>POST &lt;SynBioHub URL&gt;/admin/saveRemote</code></p>
+
+<p>Save a new remote.</p>
+<pre class="highlight plaintext tab-plaintext"><code>curl -X POST -H "Accept: text/plain" -H "X-authorization:&lt;token&gt;" -d "type=ice&amp;id=&lt;id&gt;&amp;url='&lt;url&gt;'&amp;iceApiTokenClient=&lt;iceApiTokenClient&gt;&amp;iceApiToken=&lt;iceApiToken&gt;&amp;iceApiTokenOwner=&lt;iceApiTokenOwner&gt;&amp;iceCollection&amp;&lt;iceCollection&gt;&amp;rejectUnauthorized=&lt;rejectUnauthorized&gt;&amp;folderPrefix=&lt;folderPrefix&gt;&amp;sequenceSuffix=&lt;sequenceSuffix&gt;&amp;defaultFolderId=&lt;defaultFolderId&gt;&amp;groupId=&lt;groupId&gt;&amp;pi=&lt;pi&gt;&amp;piEmail=&lt;piEmail&gt;&amp;isPublic=&lt;isPublic&gt;&amp;partNumberPrefix=&lt;partNumberPrefix&gt;&amp;rootCollectionDisplayId=&lt;rootCollectionDisplayId&gt;&amp;rootCollectionName=&lt;rootCollectionName&gt;&amp;rootCollectionDescription=&lt;rootCollectionDescription&gt;" &lt;SynBioHub URL&gt;/admin/saveRemote
+</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span>
+    <span class="s">'&lt;SynBioHub URL&gt;/admin/saveRemote'</span><span class="p">,</span>
+    <span class="n">headers</span><span class="o">=</span><span class="p">{</span>
+        <span class="s">'X-authorization'</span><span class="p">:</span> <span class="s">'&lt;token&gt;'</span><span class="p">,</span>
+        <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'text/plain'</span>
+    <span class="p">},</span>
+    <span class="n">data</span><span class="o">=</span><span class="p">{</span>
+        <span class="s">'type'</span><span class="p">:</span> <span class="s">'ice'</span><span class="p">,</span>
+        <span class="s">'id'</span> <span class="p">:</span> <span class="s">'&lt;id&gt;'</span><span class="p">,</span>
+        <span class="s">'url'</span> <span class="p">:</span> <span class="s">'&lt;url&gt;'</span><span class="p">,</span>
+        <span class="s">'iceApiTokenClient'</span> <span class="p">:</span> <span class="s">'&lt;iceApiTokenClient&gt;'</span><span class="p">,</span>
+        <span class="s">'iceApiToken'</span> <span class="p">:</span> <span class="s">'&lt;iceApiToken&gt;'</span><span class="p">,</span>
+        <span class="s">'iceApiTokenOwner'</span> <span class="p">:</span> <span class="s">'&lt;iceApiTokenOwner&gt;'</span><span class="p">,</span>
+        <span class="s">'iceCollection'</span> <span class="p">:</span> <span class="s">'&lt;iceCollection&gt;'</span><span class="p">,</span>
+        <span class="s">'rejectUnauthorized'</span> <span class="p">:</span> <span class="s">'&lt;rejectUnauthorized&gt;'</span><span class="p">,</span>
+        <span class="s">'folderPrefix'</span> <span class="p">:</span> <span class="s">'&lt;folderPrefix&gt;'</span><span class="p">,</span>
+        <span class="s">'sequenceSuffix'</span> <span class="p">:</span> <span class="s">'&lt;sequenceSuffix&gt;'</span><span class="p">,</span>
+        <span class="s">'defaultFolderId'</span> <span class="p">:</span> <span class="s">'&lt;defaultFolderId&gt;'</span><span class="p">,</span>
+        <span class="s">'groupId'</span> <span class="p">:</span> <span class="s">'&lt;groupId&gt;'</span><span class="p">,</span>
+        <span class="s">'pi'</span> <span class="p">:</span> <span class="s">'&lt;pi&gt;'</span><span class="p">,</span>
+        <span class="s">'piEmail'</span> <span class="p">:</span> <span class="s">'&lt;piEmail&gt;'</span><span class="p">,</span>
+        <span class="s">'isPublic'</span> <span class="p">:</span> <span class="s">'&lt;isPublic&gt;'</span><span class="p">,</span>
+        <span class="s">'partNumberPrefix'</span> <span class="p">:</span> <span class="s">'&lt;partNumberPrefix&gt;'</span><span class="p">,</span>
+        <span class="s">'rootCollectionDisplayId'</span> <span class="p">:</span> <span class="s">'&lt;rootCollectionDisplayId&gt;'</span><span class="p">,</span>
+        <span class="s">'rootCollectionName'</span> <span class="p">:</span> <span class="s">'&lt;rootCollectionName&gt;'</span><span class="p">,</span>
+        <span class="s">'rootCollectionDescription'</span> <span class="p">:</span> <span class="s">'&lt;rootCollectionDescription&gt;'</span>
+        <span class="p">},</span>
+<span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
+
+</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">fetch</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"node-fetch"</span><span class="p">);</span>
+<span class="kr">const</span> <span class="p">{</span> <span class="nx">URLSearchParams</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'url'</span><span class="p">);</span>
+<span class="kr">const</span> <span class="nx">url</span> <span class="o">=</span> <span class="s1">'&lt;SynBioHub URL&gt;/admin/saveRemote'</span>
+<span class="kd">var</span> <span class="nx">headers</span><span class="o">=</span><span class="p">{</span>
+    <span class="s2">"Accept"</span> <span class="p">:</span> <span class="s2">"text/plain; charset=UTF-8"</span><span class="p">,</span>
+    <span class="s2">"X-authorization"</span> <span class="p">:</span> <span class="s2">"&lt;token&gt;"</span>
+<span class="p">};</span>
+
+<span class="kr">const</span> <span class="nx">params</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">URLSearchParams</span><span class="p">();</span>
+<span class="nx">params</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'type'</span><span class="p">,</span> <span class="s1">'ice'</span><span class="p">);</span>
+<span class="nx">params</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'id'</span><span class="p">,</span> <span class="s1">'&lt;id&gt;'</span><span class="p">);</span>
+<span class="nx">params</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'url'</span><span class="p">,</span> <span class="s1">'&lt;url&gt;'</span><span class="p">);</span>
+<span class="nx">params</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'iceApiTokenClient'</span><span class="p">,</span> <span class="s1">'&lt;iceApiTokenClient&gt;'</span><span class="p">);</span>
+<span class="nx">params</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'iceApiToken'</span><span class="p">,</span> <span class="s1">'&lt;iceApiToken&gt;'</span><span class="p">);</span>
+<span class="nx">params</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'iceApiTokenOwner'</span><span class="p">,</span> <span class="s1">'&lt;iceApiTokenOwner&gt;'</span><span class="p">);</span>
+<span class="nx">params</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'iceCollection'</span><span class="p">,</span> <span class="s1">'&lt;iceCollection&gt;'</span><span class="p">);</span>
+<span class="nx">params</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'rejectUnauthorized'</span><span class="p">,</span> <span class="s1">'&lt;rejectUnauthorized&gt;'</span><span class="p">);</span>
+<span class="nx">params</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'folderPrefix'</span><span class="p">,</span> <span class="s1">'&lt;folderPrefix&gt;'</span><span class="p">);</span>
+<span class="nx">params</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'sequenceSuffix'</span><span class="p">,</span> <span class="s1">'&lt;sequenceSuffix&gt;'</span><span class="p">);</span>
+<span class="nx">params</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'defaultFolderId'</span><span class="p">,</span> <span class="s1">'&lt;defaultFolderId&gt;'</span><span class="p">);</span>
+<span class="nx">params</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'groupId'</span><span class="p">,</span> <span class="s1">'&lt;groupId&gt;'</span><span class="p">);</span>
+<span class="nx">params</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'pi'</span><span class="p">,</span> <span class="s1">'&lt;pi&gt;'</span><span class="p">);</span>
+<span class="nx">params</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'piEmail'</span><span class="p">,</span> <span class="s1">'&lt;piEmail&gt;'</span><span class="p">);</span>
+<span class="nx">params</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'isPublic'</span><span class="p">,</span> <span class="s1">'&lt;isPublic&gt;'</span><span class="p">);</span>
+<span class="nx">params</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'partNumberPrefix'</span><span class="p">,</span> <span class="s1">'&lt;partNumberPrefix&gt;'</span><span class="p">);</span>
+<span class="nx">params</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'rootCollectionDisplayId'</span><span class="p">,</span> <span class="s1">'&lt;rootCollectionDisplayId&gt;'</span><span class="p">);</span>
+<span class="nx">params</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'rootCollectionName'</span><span class="p">,</span> <span class="s1">'&lt;rootCollectionName&gt;'</span><span class="p">);</span>
+<span class="nx">params</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'rootCollectionDescription'</span><span class="p">,</span> <span class="s1">'&lt;rootCollectionDescription&gt;'</span><span class="p">);</span>
+
+<span class="nx">fetch</span><span class="p">(</span><span class="nx">url</span><span class="p">,</span> <span class="p">{</span> <span class="na">method</span><span class="p">:</span> <span class="s1">'POST'</span><span class="p">,</span> <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span><span class="p">,</span> <span class="na">body</span><span class="p">:</span><span class="nx">params</span><span class="p">})</span>
+    <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">res</span> <span class="o">=&gt;</span> <span class="nx">res</span><span class="p">.</span><span class="nx">buffer</span><span class="p">()).</span><span class="nx">then</span><span class="p">(</span><span class="nx">buf</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">buf</span><span class="p">.</span><span class="nx">toString</span><span class="p">()))</span>
+    <span class="p">.</span><span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="o">=&gt;</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">error</span><span class="p">))</span>
+</code></pre>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>Id of the ICE remote</td>
+</tr>
+<tr>
+<td>url</td>
+<td>URL for the ICE remote</td>
+</tr>
+<tr>
+<td>iceApiTokenClient</td>
+<td>ICE API token client</td>
+</tr>
+<tr>
+<td>iceApiToken</td>
+<td>ICE API token</td>
+</tr>
+<tr>
+<td>iceApiTokenOwner</td>
+<td>ICE API token owner</td>
+</tr>
+<tr>
+<td>iceCollection</td>
+<td>ICE collection</td>
+</tr>
+<tr>
+<td>rejectUnauthorized</td>
+<td>Check SSL certificate?</td>
+</tr>
+<tr>
+<td>folderPrefix</td>
+<td>Prefix to use for folders on ICE</td>
+</tr>
+<tr>
+<td>sequenceSuffix</td>
+<td>Suffix to use for sequences found on Benchling</td>
+</tr>
+<tr>
+<td>defaultFolderId</td>
+<td>Default folder on Benchling to access</td>
+</tr>
+<tr>
+<td>groupId</td>
+<td>Group id on ICE</td>
+</tr>
+<tr>
+<td>pi</td>
+<td>Principal Investigator name</td>
+</tr>
+<tr>
+<td>piEmail</td>
+<td>Principal Investigator email</td>
+</tr>
+<tr>
+<td>isPublic</td>
+<td>Should the remote be visible publicly?</td>
+</tr>
+<tr>
+<td>partNumberPrefix</td>
+<td>Prefix to use for parts</td>
+</tr>
+<tr>
+<td>rootCollectionDisplayId</td>
+<td>Display id for the root collection on the remote</td>
+</tr>
+<tr>
+<td>rootCollectionName</td>
+<td>Name for the root collection on the remote</td>
+</tr>
+<tr>
+<td>rootCollectionDescription</td>
+<td>Description for the root collection on the remote</td>
 </tr>
 </tbody></table>
 <h2 id='delete-remote'>Delete Remote</h2>
 <p><code>POST &lt;SynBioHub URL&gt;/admin/deleteRemote</code></p>
 
 <p>Delete a remote.</p>
-<pre class="highlight plaintext tab-plaintext"><code>curl -X POST -H "Accept: text/plain" -H "X-authorization:&lt;token&gt;" -d "id=&lt;id&gt;&amp;version=&lt;version&gt;&amp;name=&lt;name&gt;&amp;description=&lt;description&gt;&amp;citations=&lt;citations&gt;&amp;tabState=&lt;tabState&gt;" URI/makePublic
+<pre class="highlight plaintext tab-plaintext"><code>curl -X POST -H "Accept: text/plain" -H "X-authorization:&lt;token&gt;" -d "id=&lt;id&gt;" &lt;SynBioHub&gt;/admin/deleteRemote
 </code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 
 <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span>
@@ -3481,11 +3661,6 @@ This endpoint returns JSON metadata of the form:
     <span class="p">},</span>
     <span class="n">data</span><span class="o">=</span><span class="p">{</span>
         <span class="s">'id'</span><span class="p">:</span> <span class="s">'&lt;id&gt;'</span><span class="p">,</span>
-        <span class="s">'version'</span> <span class="p">:</span> <span class="s">'&lt;version&gt;'</span><span class="p">,</span>
-        <span class="s">'name'</span> <span class="p">:</span> <span class="s">'&lt;name&gt;'</span><span class="p">,</span>
-        <span class="s">'description'</span> <span class="p">:</span> <span class="s">'&lt;description&gt;'</span><span class="p">,</span>
-        <span class="s">'citations'</span> <span class="p">:</span> <span class="s">'&lt;citations&gt;'</span><span class="p">,</span>
-        <span class="s">'tabState'</span> <span class="p">:</span> <span class="s">'&lt;tabState&gt;'</span>
         <span class="p">},</span>
 <span class="p">)</span>
 
@@ -3494,7 +3669,7 @@ This endpoint returns JSON metadata of the form:
 
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">fetch</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"node-fetch"</span><span class="p">);</span>
 <span class="kr">const</span> <span class="p">{</span> <span class="nx">URLSearchParams</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'url'</span><span class="p">);</span>
-<span class="kr">const</span> <span class="nx">url</span> <span class="o">=</span> <span class="s1">'&lt;URI&gt;/makePublic'</span>
+<span class="kr">const</span> <span class="nx">url</span> <span class="o">=</span> <span class="s1">'&lt;SynBioHub&gt;/admin/deleteRemote'</span>
 <span class="kd">var</span> <span class="nx">headers</span><span class="o">=</span><span class="p">{</span>
     <span class="s2">"Accept"</span> <span class="p">:</span> <span class="s2">"text/plain; charset=UTF-8"</span><span class="p">,</span>
     <span class="s2">"X-authorization"</span> <span class="p">:</span> <span class="s2">"&lt;token&gt;"</span>
@@ -3502,11 +3677,7 @@ This endpoint returns JSON metadata of the form:
 
 <span class="kr">const</span> <span class="nx">params</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">URLSearchParams</span><span class="p">();</span>
 <span class="nx">params</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'id'</span><span class="p">,</span> <span class="s1">'&lt;id&gt;'</span><span class="p">);</span>
-<span class="nx">params</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'version'</span><span class="p">,</span> <span class="s1">'&lt;version&gt;'</span><span class="p">);</span>
-<span class="nx">params</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'name'</span><span class="p">,</span> <span class="s1">'&lt;name&gt;'</span><span class="p">);</span>
-<span class="nx">params</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'description'</span><span class="p">,</span> <span class="s1">'&lt;description&gt;'</span><span class="p">);</span>
-<span class="nx">params</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'citations'</span><span class="p">,</span> <span class="s1">'&lt;citations&gt;'</span><span class="p">);</span>
-<span class="nx">params</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'tabState'</span><span class="p">,</span> <span class="s1">'&lt;tabState&gt;'</span><span class="p">);</span>
+
 
 <span class="nx">fetch</span><span class="p">(</span><span class="nx">url</span><span class="p">,</span> <span class="p">{</span> <span class="na">method</span><span class="p">:</span> <span class="s1">'POST'</span><span class="p">,</span> <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span><span class="p">,</span> <span class="na">body</span><span class="p">:</span><span class="nx">params</span><span class="p">})</span>
     <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">res</span> <span class="o">=&gt;</span> <span class="nx">res</span><span class="p">.</span><span class="nx">buffer</span><span class="p">()).</span><span class="nx">then</span><span class="p">(</span><span class="nx">buf</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">buf</span><span class="p">.</span><span class="nx">toString</span><span class="p">()))</span>
@@ -3520,31 +3691,7 @@ This endpoint returns JSON metadata of the form:
 </thead><tbody>
 <tr>
 <td>id</td>
-<td>The id for the new collection.</td>
-</tr>
-<tr>
-<td>version</td>
-<td>The version for the new collection.</td>
-</tr>
-<tr>
-<td>name</td>
-<td>The name for the new collection (optional: default is existing name).</td>
-</tr>
-<tr>
-<td>description</td>
-<td>The description for the new collection (optional: default is existing description).</td>
-</tr>
-<tr>
-<td>citations</td>
-<td>The comma-separated listed of PubMed ids (optional: default is existing citations).</td>
-</tr>
-<tr>
-<td>tabState</td>
-<td>Use &quot;new&quot; for moving to a new public collection, and &quot;existing&quot; if moving into an existing public collection.</td>
-</tr>
-<tr>
-<td>collections</td>
-<td>If moving into an existing collection, collections is the URI of the collection</td>
+<td>Id of the remote configuration to remove.</td>
 </tr>
 </tbody></table>
 <h2 id='view-sbolexplorer'>View SBOLExplorer</h2>
@@ -3656,7 +3803,7 @@ curl -X POST -H &quot;Accept: text/plain&quot; -H &quot;X-authorization:&lt;toke
 <td>If moving into an existing collection, collections is the URI of the collection</td>
 </tr>
 </tbody></table>
-<h2 id='update-sbolexplorer-index'>Update SBOLExplorer Index.</h2>
+<h2 id='update-sbolexplorer-index'>Update SBOLExplorer Index</h2>
 <p><code>POST &lt;SynBioHub URL&gt;/admin/explorerUpdateIndex</code></p>
 
 <p>Updates SBOLExplorer index.</p>
@@ -4117,22 +4264,17 @@ curl -X POST -H &quot;Accept: text/plain&quot; -H &quot;X-authorization:&lt;toke
 <p><code>POST &lt;SynBioHub URL&gt;/admin/deleteUser</code></p>
 
 <p>Delete a user. </p>
-<pre class="highlight plaintext tab-plaintext"><code>curl -X POST -H "Accept: text/plain" -H "X-authorization:&lt;token&gt;" -d "id=&lt;id&gt;&amp;version=&lt;version&gt;&amp;name=&lt;name&gt;&amp;description=&lt;description&gt;&amp;citations=&lt;citations&gt;&amp;tabState=&lt;tabState&gt;" URI/makePublic
+<pre class="highlight plaintext tab-plaintext"><code>curl -X POST -H "Accept: text/plain" -H "X-authorization:&lt;token&gt;" -d "id=&lt;id&gt;" &lt;SynBioHub URL&gt;/admin/deleteUser
 </code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 
 <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span>
-    <span class="s">'&lt;URI&gt;/makePublic'</span><span class="p">,</span>
+    <span class="s">'&lt;SynBioHub URL&gt;/admin/deleteUser'</span><span class="p">,</span>
     <span class="n">headers</span><span class="o">=</span><span class="p">{</span>
         <span class="s">'X-authorization'</span><span class="p">:</span> <span class="s">'&lt;token&gt;'</span><span class="p">,</span>
         <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'text/plain'</span>
     <span class="p">},</span>
     <span class="n">data</span><span class="o">=</span><span class="p">{</span>
         <span class="s">'id'</span><span class="p">:</span> <span class="s">'&lt;id&gt;'</span><span class="p">,</span>
-        <span class="s">'version'</span> <span class="p">:</span> <span class="s">'&lt;version&gt;'</span><span class="p">,</span>
-        <span class="s">'name'</span> <span class="p">:</span> <span class="s">'&lt;name&gt;'</span><span class="p">,</span>
-        <span class="s">'description'</span> <span class="p">:</span> <span class="s">'&lt;description&gt;'</span><span class="p">,</span>
-        <span class="s">'citations'</span> <span class="p">:</span> <span class="s">'&lt;citations&gt;'</span><span class="p">,</span>
-        <span class="s">'tabState'</span> <span class="p">:</span> <span class="s">'&lt;tabState&gt;'</span>
         <span class="p">},</span>
 <span class="p">)</span>
 
@@ -4141,7 +4283,7 @@ curl -X POST -H &quot;Accept: text/plain&quot; -H &quot;X-authorization:&lt;toke
 
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">fetch</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"node-fetch"</span><span class="p">);</span>
 <span class="kr">const</span> <span class="p">{</span> <span class="nx">URLSearchParams</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'url'</span><span class="p">);</span>
-<span class="kr">const</span> <span class="nx">url</span> <span class="o">=</span> <span class="s1">'&lt;URI&gt;/makePublic'</span>
+<span class="kr">const</span> <span class="nx">url</span> <span class="o">=</span> <span class="s1">'&lt;SynBioHub URL&gt;/admin/deleteUser'</span>
 <span class="kd">var</span> <span class="nx">headers</span><span class="o">=</span><span class="p">{</span>
     <span class="s2">"Accept"</span> <span class="p">:</span> <span class="s2">"text/plain; charset=UTF-8"</span><span class="p">,</span>
     <span class="s2">"X-authorization"</span> <span class="p">:</span> <span class="s2">"&lt;token&gt;"</span>
@@ -4149,15 +4291,13 @@ curl -X POST -H &quot;Accept: text/plain&quot; -H &quot;X-authorization:&lt;toke
 
 <span class="kr">const</span> <span class="nx">params</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">URLSearchParams</span><span class="p">();</span>
 <span class="nx">params</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'id'</span><span class="p">,</span> <span class="s1">'&lt;id&gt;'</span><span class="p">);</span>
-<span class="nx">params</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'version'</span><span class="p">,</span> <span class="s1">'&lt;version&gt;'</span><span class="p">);</span>
-<span class="nx">params</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'name'</span><span class="p">,</span> <span class="s1">'&lt;name&gt;'</span><span class="p">);</span>
-<span class="nx">params</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'description'</span><span class="p">,</span> <span class="s1">'&lt;description&gt;'</span><span class="p">);</span>
-<span class="nx">params</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'citations'</span><span class="p">,</span> <span class="s1">'&lt;citations&gt;'</span><span class="p">);</span>
-<span class="nx">params</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'tabState'</span><span class="p">,</span> <span class="s1">'&lt;tabState&gt;'</span><span class="p">);</span>
+
+
 
 <span class="nx">fetch</span><span class="p">(</span><span class="nx">url</span><span class="p">,</span> <span class="p">{</span> <span class="na">method</span><span class="p">:</span> <span class="s1">'POST'</span><span class="p">,</span> <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span><span class="p">,</span> <span class="na">body</span><span class="p">:</span><span class="nx">params</span><span class="p">})</span>
     <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">res</span> <span class="o">=&gt;</span> <span class="nx">res</span><span class="p">.</span><span class="nx">buffer</span><span class="p">()).</span><span class="nx">then</span><span class="p">(</span><span class="nx">buf</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">buf</span><span class="p">.</span><span class="nx">toString</span><span class="p">()))</span>
     <span class="p">.</span><span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="o">=&gt;</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">error</span><span class="p">))</span>
+
 </code></pre>
 <table><thead>
 <tr>
@@ -4167,31 +4307,7 @@ curl -X POST -H &quot;Accept: text/plain&quot; -H &quot;X-authorization:&lt;toke
 </thead><tbody>
 <tr>
 <td>id</td>
-<td>The id for the new collection.</td>
-</tr>
-<tr>
-<td>version</td>
-<td>The version for the new collection.</td>
-</tr>
-<tr>
-<td>name</td>
-<td>The name for the new collection (optional: default is existing name).</td>
-</tr>
-<tr>
-<td>description</td>
-<td>The description for the new collection (optional: default is existing description).</td>
-</tr>
-<tr>
-<td>citations</td>
-<td>The comma-separated listed of PubMed ids (optional: default is existing citations).</td>
-</tr>
-<tr>
-<td>tabState</td>
-<td>Use &quot;new&quot; for moving to a new public collection, and &quot;existing&quot; if moving into an existing public collection.</td>
-</tr>
-<tr>
-<td>collections</td>
-<td>If moving into an existing collection, collections is the URI of the collection</td>
+<td>The Id of user to delete.</td>
 </tr>
 </tbody></table>
 <h1 id='plugins'>Plugins</h1><h3 id='plugin-specification'>Plugin Specification</h3>
