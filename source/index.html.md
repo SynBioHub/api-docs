@@ -3294,7 +3294,7 @@ rootCollectionDescription | Description for the root collection on the remote.
 
 `POST <SynBioHub URL>/admin/saveRemote`
 
-Save a new remote.
+Save a new ICE remote.
 
 ```plaintext
 curl -X POST -H "Accept: text/plain" -H "X-authorization:<token>" -d "type=ice&id=<id>&url='<url>'&iceApiTokenClient=<iceApiTokenClient>&iceApiToken=<iceApiToken>&iceApiTokenOwner=<iceApiTokenOwner>&iceCollection&<iceCollection>&rejectUnauthorized=<rejectUnauthorized>&folderPrefix=<folderPrefix>&sequenceSuffix=<sequenceSuffix>&defaultFolderId=<defaultFolderId>&groupId=<groupId>&pi=<pi>&piEmail=<piEmail>&isPublic=<isPublic>&partNumberPrefix=<partNumberPrefix>&rootCollectionDisplayId=<rootCollectionDisplayId>&rootCollectionName=<rootCollectionName>&rootCollectionDescription=<rootCollectionDescription>" <SynBioHub URL>/admin/saveRemote
