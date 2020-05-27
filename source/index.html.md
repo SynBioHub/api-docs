@@ -3446,11 +3446,11 @@ id | Id of the remote configuration to remove.
 
 
 
-## View SBOLExplorer
+## View SBOLExplorer Config 
 
 `GET <SynBioHub URL>/admin/explorer`
 
-View current SBOLExplorer Endpoint
+View the current SBOLExplorer config.
 
 ```plaintext
 curl -X GET -H "Accept: text/plain" -H "X-authorization: <token>" <SynBioHub URL>/admin/explorer
@@ -3483,11 +3483,12 @@ fetch(url, { method: 'GET', headers: headers})
     .catch (error=>console.log(error))
 ```
 
-## Update SBOLExplorer
+## Update SBOLExplorer Config
 
 `POST <SynBioHub URL>/admin/explorer`
 
-Update SBOLExplorer endpoint.
+Update the SBOLExplorer config.
+
 ```plaintext
 curl -X POST -H "Accept: text/plain" -H "X-authorization:<token>" -d "id=<id>&version=<version>&name=<name>&description=<description>&citations=<citations>&tabState=<tabState>" URI/makePublic
 ```
@@ -3549,7 +3550,7 @@ tabState | Use "new" for moving to a new public collection, and "existing" if mo
 collections| If moving into an existing collection, collections is the URI of the collection
 
 
-## Update SBOLExplorer Index
+## Update SBOLExplorer Index 
 
 `POST <SynBioHub URL>/admin/explorerUpdateIndex`
 
@@ -3720,7 +3721,7 @@ tabState | Use "new" for moving to a new public collection, and "existing" if mo
 collections| If moving into an existing collection, collections is the URI of the collection
 
 
-## View Users
+## View Users Config
 
 `GET <SynBioHub URL>/admin/users`
 
@@ -3757,11 +3758,11 @@ fetch(url, { method: 'GET', headers: headers})
     .catch (error=>console.log(error))
 ```
 
-## Update Users
+## Update Users Config
 
 `POST <SynBioHub URL>/admin/users`
 
-Update the user's settings.
+Update the user config.
 
 ```plaintext
 curl -X POST -H "Accept: text/plain" -H "X-authorization:<token>" -d "id=<id>&version=<version>&name=<name>&description=<description>&citations=<citations>&tabState=<tabState>" URI/makePublic
