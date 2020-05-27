@@ -3825,32 +3825,33 @@ tabState | Use "new" for moving to a new public collection, and "existing" if mo
 collections| If moving into an existing collection, collections is the URI of the collection
 
 
-## New User
+## Create New User
 
 `POST <SynBioHub URL>/admin/newUser`
 
 Create a new user.
 
 ```plaintext
-curl -X POST -H "Accept: text/plain" -H "X-authorization:<token>" -d "id=<id>&version=<version>&name=<name>&description=<description>&citations=<citations>&tabState=<tabState>" URI/makePublic
+curl -X POST -H "Accept: text/plain" -H "X-authorization:<token>" -d "username=<token>&name=<name>&email=<email>&affiliation=<affiliation>&isMember=1&isCurator=1&isAdmin=1" <SynBioHub URL>/admin/newUser
 ```
 
 ```python
 import requests
 
 response = requests.post(
-    '<URI>/makePublic',
+    '<SynBioHub URL>/admin/newUser',
     headers={
         'X-authorization': '<token>',
         'Accept': 'text/plain'
     },
     data={
-        'id': '<id>',
-        'version' : '<version>',
+        'username': '<username>',
         'name' : '<name>',
-        'description' : '<description>',
-        'citations' : '<citations>',
-        'tabState' : '<tabState>'
+        'email' : '<email>',
+        'affiliation' : '<affiliation>',
+        'isMember' : '1',
+        'isCurator' : '1',
+	'isAdmin' : '1',
         },
 )
 
@@ -3862,35 +3863,40 @@ print(response.content)
 ```javascript
 const fetch = require("node-fetch");
 const { URLSearchParams } = require('url');
-const url = '<URI>/makePublic'
+const url = '<SynBioHub URL>/admin/newUser'
 var headers={
     "Accept" : "text/plain; charset=UTF-8",
     "X-authorization" : "<token>"
 };
 
 const params = new URLSearchParams();
-params.append('id', '<id>');
-params.append('version', '<version>');
+params.append('username', '<username>');
 params.append('name', '<name>');
-params.append('description', '<description>');
-params.append('citations', '<citations>');
-params.append('tabState', '<tabState>');
+params.append('email', '<email>');
+params.append('affiliation', '<affiliation>');
+params.append('isMember', '1');
+params.append('isCurator', '1');
+params.append('isAdmin', '1');
 
 fetch(url, { method: 'POST', headers: headers, body:params})
     .then(res => res.buffer()).then(buf => console.log(buf.toString()))
     .catch (error=>console.log(error))
+
 ```
 
 Parameter | Description
 --------- | ------- | -----------
-id | The id for the new collection.
-version | The version for the new collection.
-name | The name for the new collection (optional: default is existing name).
-description | The description for the new collection (optional: default is existing description).
-citations | The comma-separated listed of PubMed ids (optional: default is existing citations).
-tabState | Use "new" for moving to a new public collection, and "existing" if moving into an existing public collection.
-collections| If moving into an existing collection, collections is the URI of the collection
+username |The username of new user.
+name | The name of the new user.
+email | The email of the new user.
+affiliation | The affiliation of the new user.
+isMember | Is the new user a member of the team?
+isCurator | Is the new user a curator?
+isAdmin | Is the new user an admin?
 
+*Note that isMember, isCurator, and isAdmin are set to true by defeault. If the new user isn't one of these, please remove the parameter completely from the request.
+
+Note that this endpoint also requires SendGrid to be setup.
 
 ## Update User
 
