@@ -3905,25 +3905,27 @@ Note that this endpoint also requires SendGrid to be setup.
 Update a user's settings.
 
 ```plaintext
-curl -X POST -H "Accept: text/plain" -H "X-authorization:<token>" -d "id=<id>&version=<version>&name=<name>&description=<description>&citations=<citations>&tabState=<tabState>" URI/makePublic
+curl -X POST -H "Accept: text/plain" -H "X-authorization:<token>" -d "id=<id>&username=<username>&name=<name>&email=<email>&affiliation=<affiliation>&isMember=1&isCurator=1&isAdmin=1" <SynBioHub URL>/admin/updateUser
 ```
 
 ```python
 import requests
 
 response = requests.post(
-    '<URI>/makePublic',
+    '<SynBioHub URL>/admin/updateUser',
     headers={
         'X-authorization': '<token>',
         'Accept': 'text/plain'
     },
     data={
         'id': '<id>',
-        'version' : '<version>',
+        'username' : '<username>',
         'name' : '<name>',
-        'description' : '<description>',
-        'citations' : '<citations>',
-        'tabState' : '<tabState>'
+        'email' : '<email>',
+        'affiliation' : '<affilition>',
+        'isMember' : '1',
+	'isCurator' : '1',
+	'isAdmin' : '1'
         },
 )
 
@@ -3935,7 +3937,7 @@ print(response.content)
 ```javascript
 const fetch = require("node-fetch");
 const { URLSearchParams } = require('url');
-const url = '<URI>/makePublic'
+const url = '<SynBioHub URL>/admin/updateUser'
 var headers={
     "Accept" : "text/plain; charset=UTF-8",
     "X-authorization" : "<token>"
@@ -3943,27 +3945,32 @@ var headers={
 
 const params = new URLSearchParams();
 params.append('id', '<id>');
-params.append('version', '<version>');
+params.append('username', '<username>');
 params.append('name', '<name>');
-params.append('description', '<description>');
-params.append('citations', '<citations>');
-params.append('tabState', '<tabState>');
+params.append('email', '<email>');
+params.append('affiliation', '<affiliation>');
+params.append('isMember', '1');
+params.append('isCurator', '1');
+params.append('isAdmin', '1');
 
 fetch(url, { method: 'POST', headers: headers, body:params})
     .then(res => res.buffer()).then(buf => console.log(buf.toString()))
     .catch (error=>console.log(error))
+
 ```
 
 Parameter | Description
 --------- | ------- | -----------
-id | The id for the new collection.
-version | The version for the new collection.
-name | The name for the new collection (optional: default is existing name).
-description | The description for the new collection (optional: default is existing description).
-citations | The comma-separated listed of PubMed ids (optional: default is existing citations).
-tabState | Use "new" for moving to a new public collection, and "existing" if moving into an existing public collection.
-collections| If moving into an existing collection, collections is the URI of the collection
+id | The ID of the user to update.
+username | The username of the user to update to.
+name | The name of the user to update to.
+email | The email of the user to update to.
+affiliation | The affiliation of the user to update to.
+isMember | Is this user a member?
+isCurator | Is this user a curator?
+isAdmin | Is this user an admin?
 
+Note that isMember, isCurator, and isAdmin are set to true by defeault. If the new user isn't one of these, please remove the parameter completely from the request.
 
 ## Delete User
 
