@@ -3690,24 +3690,26 @@ print(response.content)
 
 ```javascript
 const fetch = require("node-fetch");
-const { URLSearchParams } = require('url');
-const url = '<URI>/makePublic'
+const { createReadStream } = require('fs');
+const FormData = require('form-data');
+const url = '<SynBioHub URL>/admin/theme'
+const stream = createReadStream('<logo>');
 var headers={
     "Accept" : "text/plain; charset=UTF-8",
     "X-authorization" : "<token>"
 };
 
-const params = new URLSearchParams();
-params.append('id', '<id>');
-params.append('version', '<version>');
-params.append('name', '<name>');
-params.append('description', '<description>');
-params.append('citations', '<citations>');
-params.append('tabState', '<tabState>');
+const params = new FormData();
+params.append('instanceName', '<instanceName>');
+params.append('frontPageText', '<frontPageText>');
+params.append('baseColor', '<#baseColor>');
+params.append('showModuleInteractions', 'yes');
+params.append('logo', stream);
 
 fetch(url, { method: 'POST', headers: headers, body:params})
     .then(res => res.buffer()).then(buf => console.log(buf.toString()))
     .catch (error=>console.log(error))
+
 ```
 
 Parameter | Description
