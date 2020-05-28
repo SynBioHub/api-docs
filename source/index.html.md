@@ -3272,6 +3272,7 @@ params.append('rootCollectionDescription', '<rootCollectionDescription>');
 
 fetch(url, { method: 'POST', headers: headers, body:params})
     .then(res => res.buffer()).then(buf => console.log(buf.toString()))
+
     .catch (error=>console.log(error))
 ```
 
@@ -3289,6 +3290,8 @@ isPublic | Should the remote be visible publicly?
 rootCollectionDisplayId | Display id for the root collection on the remote.
 rootCollectionName |Name for the root collection on the remote.
 rootCollectionDescription | Description for the root collection on the remote.
+
+*Note that rejectUnauthorized and isPublic are set to true by defeault. If the new remote isn't one of these, please remove the parameter completely from the request.
 
 ## Save ICE Remote
 
@@ -3393,6 +3396,7 @@ rootCollectionDisplayId | Display id for the root collection on the remote
 rootCollectionName | Name for the root collection on the remote
 rootCollectionDescription | Description for the root collection on the remote
 
+*Note that rejectUnauthorized and isPublic are set to true by defeault. If the new remote isn't one of these, please remove the parameter completely from the request.
 ## Delete Remote
 
 `POST <SynBioHub URL>/admin/deleteRemote`
