@@ -3665,26 +3665,32 @@ fetch(url, { method: 'GET', headers: headers})
 Update the theme.
 
 ```plaintext
-curl -X POST -H "Accept: text/plain" -H "X-authorization:<token>" -d "id=<id>&version=<version>&name=<name>&description=<description>&citations=<citations>&tabState=<tabState>" URI/makePublic
+curl -X POST -H "Accept: text/plain" -H "X-authorization:f18b4c9b-edb6-44d9-93c9-00c1a737fc03" -F instanceName=milfgang -F frontPageText=sendemmyway -F color=#666666 -F showModuleInteractions=1 -F logo=@/home/j/Desktop/icon.png localhost:7777/admin/theme 
 ```
 
 ```python
 import requests
+import os
+
+image_filename = os.path.basename('<path>');
 
 response = requests.post(
-    '<URI>/makePublic',
+    '<SynBioHub URL>/admin/theme',
     headers={
         'X-authorization': '<token>',
         'Accept': 'text/plain'
     },
     data={
-        'id': '<id>',
-        'version' : '<version>',
-        'name' : '<name>',
-        'description' : '<description>',
-        'citations' : '<citations>',
-        'tabState' : '<tabState>'
-        },
+        'instanceName': '<instanceName>',
+        'frontPageText' : '<frontPageText>',
+        'baseColor' : '#<basecolor>',
+        'showModuleInteractions' : 'ok',
+   },
+    files={
+        'logo' : (image_filename, open('<path>', 'rb')),
+
+}
+
 )
 
 print(response.status_code)
@@ -3718,14 +3724,12 @@ fetch(url, { method: 'POST', headers: headers, body:params})
 
 Parameter | Description
 --------- | ------- | -----------
-id | The id for the new collection.
-version | The version for the new collection.
-name | The name for the new collection (optional: default is existing name).
-description | The description for the new collection (optional: default is existing description).
-citations | The comma-separated listed of PubMed ids (optional: default is existing citations).
-tabState | Use "new" for moving to a new public collection, and "existing" if moving into an existing public collection.
-collections| If moving into an existing collection, collections is the URI of the collection
+instanceName | Name of the SynBioHub instance
+frontPageText | Text to show on front page of the SynBioHub intance
+baseColor | Base color to use fo this SynBioHub instance
+showModuleInteractions | Should module interactions be shown using VisBol?
 
+*Note that showModuleInteractions are set to true by defeault. If the SynBioHub instance shouldn't have this, please remove the parameter completely from the request.
 
 ## View Users Config
 
