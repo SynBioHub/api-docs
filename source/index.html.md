@@ -3505,6 +3505,42 @@ fetch(url, { method: 'GET', headers: headers})
     .then(res => res.buffer()).then(buf => console.log(buf.toString()))
     .catch (error=>console.log(error))
 ```
+## View SBOLExplorer Log 
+
+`GET <SynBioHub URL>/admin/explorerlog`
+
+View the SBOLExplorer log.
+
+```plaintext
+curl -X GET -H "Accept: text/plain" -H "X-authorization: <token>" <SynBioHub URL>/admin/explorerlog
+```
+
+```python
+import requests
+
+response = requests.get(
+    '<SynBioHub URL>/admin/explorerlog',
+    params={'X-authorization': '<token>'},
+    headers={'Accept': 'application/json'},
+)
+
+print(response.status_code)
+
+print(response.json())
+`
+```
+
+```javascript
+const fetch = require("node-fetch");
+const url = '<SynBioHub URL>/admin/explorerlog'
+const headers={
+        "Accept" : "text/plain; charset=UTF-8",
+	"X-authorization" : "<token>"
+};
+fetch(url, { method: 'GET', headers: headers})
+    .then(res => res.buffer()).then(buf => console.log(buf.toString()))
+    .catch (error=>console.log(error))
+```
 
 ## Update SBOLExplorer Config
 
