@@ -2500,13 +2500,14 @@ import requests
 
 response = requests.get(
     '<SynBioHub URL>/admin/sparql?query=<SPARQL query>',
-    params={'X-authorization': '<token>'},
-    headers={'Accept': 'application/json'},
+    headers={
+        'Accept': 'text/plain',
+        'X-authorization': '<token>'
+        },
 )
 
 print(response.status_code)
-
-print(response.json())
+print(response.content)
 ```
 
 ```javascript
@@ -2539,12 +2540,15 @@ import requests
 
 response = requests.get(
     '<SynBioHub URL>/admin',
-    params={'X-authorization': 'token'},
-    headers={'Accept': 'text/plain'},
+    headers={
+        'Accept': 'text/plain',
+        'X-authorization': '<token>'
+        },
 )
 
 print(response.status_code)
 print(response.content)
+
 ```
 
 ```javascript
@@ -2570,7 +2574,18 @@ curl -X GET -H "Accept: text/plain" -H "X-authorization: <token>" <SynBioHub URL
 ```
 
 ```python
+import requests
 
+response = requests.get(
+    '<SynBioHub URL>/admin/virtuoso',
+    headers={
+        'Accept': 'text/plain',
+        'X-authorization': '<token>'
+        },
+)
+
+print(response.status_code)
+print(response.content)
 ```
 
 ```javascript
@@ -2593,14 +2608,15 @@ import requests
 
 response = requests.get(
     '<SynBioHub URL>/admin/graphs',
-    params={'X-authorization': '<token>'},
-    headers={'Accept': 'application/json'},
+    headers={
+        'Accept': 'text/plain',
+        'X-authorization': '<token>'
+        },
 )
 
 print(response.status_code)
+print(response.content)
 
-print(response.json())
-`
 ```
 
 ```javascript
@@ -2629,14 +2645,15 @@ import requests
 
 response = requests.get(
     '<SynBioHub URL>/admin/log',
-    params={'X-authorization': '<token>'},
-    headers={'Accept': 'application/json'},
+    headers={
+        'Accept': 'text/plain',
+        'X-authorization': '<token>'
+        },
 )
 
 print(response.status_code)
+print(response.content)
 
-print(response.json())
-`
 ```
 
 ```javascript
@@ -2667,14 +2684,15 @@ import requests
 
 response = requests.get(
     '<SynBioHub URL>/admin/mail',
-    params={'X-authorization': '<token>'},
-    headers={'Accept': 'application/json'},
+    headers={
+        'Accept': 'text/plain',
+        'X-authorization': '<token>'
+        },
 )
 
 print(response.status_code)
+print(response.content)
 
-print(response.json())
-`
 ```
 
 ```javascript
@@ -2761,14 +2779,15 @@ import requests
 
 response = requests.get(
     '<SynBioHub URL>/admin/plugins',
-    params={'X-authorization': '<token>'},
-    headers={'Accept': 'application/json'},
+    headers={
+        'Accept': 'text/plain',
+        'X-authorization': '<token>'
+        },
 )
 
 print(response.status_code)
+print(response.content)
 
-print(response.json())
-`
 ```
 
 ```javascript
@@ -2912,14 +2931,14 @@ import requests
 
 response = requests.get(
     '<SynBioHub URL>/admin/registries',
-    params={'X-authorization': '<token>'},
-    headers={'Accept': 'application/json'},
+    headers={
+        'Accept': 'text/plain',
+        'X-authorization': '<token>'
+        },
 )
 
 print(response.status_code)
-
-print(response.json())
-`
+print(response.content)
 ```
 
 ```javascript
@@ -3206,14 +3225,15 @@ import requests
 
 response = requests.get(
     '<SynBioHub URL>/admin/remotes',
-    params={'X-authorization': '<token>'},
-    headers={'Accept': 'application/json'},
+    headers={
+        'Accept': 'text/plain',
+        'X-authorization': '<token>'
+        },
 )
 
 print(response.status_code)
+print(response.content)
 
-print(response.json())
-`
 ```
 
 ```javascript
@@ -3484,14 +3504,15 @@ import requests
 
 response = requests.get(
     '<SynBioHub URL>/admin/explorer',
-    params={'X-authorization': '<token>'},
-    headers={'Accept': 'application/json'},
+    headers={
+        'Accept': 'text/plain',
+        'X-authorization': '<token>'
+        },
 )
 
 print(response.status_code)
+print(response.content)
 
-print(response.json())
-`
 ```
 
 ```javascript
@@ -3520,14 +3541,15 @@ import requests
 
 response = requests.get(
     '<SynBioHub URL>/admin/explorerlog',
-    params={'X-authorization': '<token>'},
-    headers={'Accept': 'application/json'},
+    headers={
+        'Accept': 'text/plain',
+        'X-authorization': '<token>'
+        },
 )
 
 print(response.status_code)
+print(response.content)
 
-print(response.json())
-`
 ```
 
 ```javascript
@@ -3691,14 +3713,15 @@ import requests
 
 response = requests.get(
     '<SynBioHub URL>/admin/theme',
-    params={'X-authorization': '<token>'},
-    headers={'Accept': 'application/json'},
+    headers={
+        'Accept': 'text/plain',
+        'X-authorization': '<token>'
+        },
 )
 
 print(response.status_code)
+print(response.content)
 
-print(response.json())
-`
 ```
 
 ```javascript
@@ -3801,14 +3824,15 @@ import requests
 
 response = requests.get(
     '<SynBioHub URL>/admin/users',
-    params={'X-authorization': '<token>'},
-    headers={'Accept': 'application/json'},
+    headers={
+        'Accept': 'text/plain',
+        'X-authorization': '<token>'
+        },
 )
 
 print(response.status_code)
+print(response.content)
 
-print(response.json())
-`
 ```
 
 ```javascript
