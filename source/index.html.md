@@ -3665,7 +3665,7 @@ fetch(url, { method: 'GET', headers: headers})
 Update the theme.
 
 ```plaintext
-curl -X POST -H "Accept: text/plain" -H "X-authorization:f18b4c9b-edb6-44d9-93c9-00c1a737fc03" -F instanceName=milfgang -F frontPageText=sendemmyway -F color=#666666 -F showModuleInteractions=1 -F logo=@/home/j/Desktop/icon.png localhost:7777/admin/theme 
+curl -X POST -H "Accept: text/plain" -H "X-authorization:<token>" -F instanceName=<instanceName> -F frontPageText=<frontPageText> -F baseColor=<baseColor> -F showModuleInteractions=<showModuleInteractions> -F logo=@<path> <SynBioHub URL>/admin/theme 
 ```
 
 ```python
@@ -3683,7 +3683,7 @@ response = requests.post(
     data={
         'instanceName': '<instanceName>',
         'frontPageText' : '<frontPageText>',
-        'baseColor' : '#<basecolor>',
+        'baseColor' : '<basecolor>',
         'showModuleInteractions' : 'ok',
    },
     files={
@@ -3712,7 +3712,7 @@ var headers={
 const params = new FormData();
 params.append('instanceName', '<instanceName>');
 params.append('frontPageText', '<frontPageText>');
-params.append('baseColor', '<#baseColor>');
+params.append('baseColor', '<baseColor>');
 params.append('showModuleInteractions', 'yes');
 params.append('logo', stream);
 
