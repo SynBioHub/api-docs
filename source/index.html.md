@@ -3450,7 +3450,7 @@ curl -X POST -H "Accept: text/plain" -H "X-authorization:<token>" -d "id=<id>" <
 import requests
 
 response = requests.post(
-    '<URI>/makePublic',
+    '<SynBioHub URL>/admin/deleteRemote',
     headers={
         'X-authorization': '<token>',
         'Accept': 'text/plain'
@@ -3638,25 +3638,19 @@ collections| If moving into an existing collection, collections is the URI of th
 Updates SBOLExplorer index.
 
 ```plaintext
-curl -X POST -H "Accept: text/plain" -H "X-authorization:<token>" -d "id=<id>&version=<version>&name=<name>&description=<description>&citations=<citations>&tabState=<tabState>" URI/makePublic
+curl -X POST -H "Accept: text/plain" -H "X-authorization:<token>" <SynBioHub URL>/admin/explorerUpdateIndex 
 ```
 
 ```python
 import requests
 
 response = requests.post(
-    '<URI>/makePublic',
+    '<SynBioHub URL>/admin/explorerUpdateIndex',
     headers={
         'X-authorization': '<token>',
         'Accept': 'text/plain'
     },
     data={
-        'id': '<id>',
-        'version' : '<version>',
-        'name' : '<name>',
-        'description' : '<description>',
-        'citations' : '<citations>',
-        'tabState' : '<tabState>'
         },
 )
 
@@ -3668,35 +3662,19 @@ print(response.content)
 ```javascript
 const fetch = require("node-fetch");
 const { URLSearchParams } = require('url');
-const url = '<URI>/makePublic'
+const url = '<SynBioHub URL>/admin/explorerUpdateIndex'
 var headers={
     "Accept" : "text/plain; charset=UTF-8",
     "X-authorization" : "<token>"
 };
 
 const params = new URLSearchParams();
-params.append('id', '<id>');
-params.append('version', '<version>');
-params.append('name', '<name>');
-params.append('description', '<description>');
-params.append('citations', '<citations>');
-params.append('tabState', '<tabState>');
 
 fetch(url, { method: 'POST', headers: headers, body:params})
     .then(res => res.buffer()).then(buf => console.log(buf.toString()))
     .catch (error=>console.log(error))
+
 ```
-
-Parameter | Description
---------- | ------- | -----------
-id | The id for the new collection.
-version | The version for the new collection.
-name | The name for the new collection (optional: default is existing name).
-description | The description for the new collection (optional: default is existing description).
-citations | The comma-separated listed of PubMed ids (optional: default is existing citations).
-tabState | Use "new" for moving to a new public collection, and "existing" if moving into an existing public collection.
-collections| If moving into an existing collection, collections is the URI of the collection
-
 
 ## View Theme
 
@@ -3707,7 +3685,6 @@ View the current theme.
 ```plaintext
 curl -X GET -H "Accept: text/plain" -H "X-authorization: <token>" <SynBioHub URL>/admin/theme
 ```
-
 ```python
 import requests
 
