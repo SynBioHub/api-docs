@@ -232,7 +232,6 @@ response = requests.post(
 
 print(response.status_code)
 print(response.content)
-
 ```
 
 ```javascript
@@ -281,7 +280,6 @@ response = requests.post(
 
 print(response.status_code)
 print(response.content)
-
 ```
 
 ```javascript
@@ -430,7 +428,6 @@ response = requests.post(
 )
 print(response.status_code)
 print(response.content)
-
 ```
 
 ```javascript
@@ -527,7 +524,7 @@ curl -X POST -H "Accept: text/plain" -H "X-authorization:<token>" -d "name=<name
 ```python
 import requests
 response = requests.post(
-    '<URI>/profile',
+    '<SynBioHub URL>/profile',
     headers={
         'X-authorization': '<token>',
         'Accept': 'text/plain'
@@ -543,7 +540,6 @@ response = requests.post(
 )
 print(response.status_code)
 print(response.content)
-
 ```
 
 ```javascript
@@ -565,7 +561,6 @@ params.append('password2', '<password2>');
 fetch(url, { method: 'POST', headers: headers, body:params})
     .then(res => res.buffer()).then(buf => console.log(buf.toString()))
     .catch (error=>console.log(error))
-
 ```
 
 Parameter | Description
@@ -607,8 +602,10 @@ import requests
 
 response = requests.get(
     '<SynBioHub URL>/search/<key>=<value>&...&<search string>/?offset=#&limit=#',
-    params={'X-authorization': '<token>'},
-    headers={'Accept': 'text/plain'},
+    headers={
+        'Accept': 'text/plain',
+        'X-authorization': '<token>'
+        },
 )
 
 print(response.status_code)
@@ -616,7 +613,7 @@ print(response.content)
 ```
 
 ```plaintext
-curl -X GET -H "Accept: text/plain" -H "X-authorization: <token>" '<SynBioHub URL>/search/objectType%3DComponentDefinition%26role%3D%3Chttp%3A%2F%2Fidentifiers.org%2Fso%2FSO%3A0000316%3E%26GFP/?offset=0&limit=50'
+curl -X GET -H "Accept: text/plain" -H "X-authorization: <token>" '<SynBioHub URL>/search/<key>=<value>&...&<search string>/?offset=#&limit=#
 
 This endpoint returns JSON metadata of the form 
 [
@@ -661,8 +658,10 @@ import requests
 
 response = requests.get(
     '<SynBioHub URL>/searchCount/<key>=<value>&...&<search string>/?offset=#&limit=#',
-    params={'X-authorization': 'token'},
-    headers={'Accept': 'text/plain'},
+    headers={
+        'Accept': 'text/plain',
+        'X-authorization': '<token>'
+        },
 )
 
 print(response.status_code)
@@ -725,9 +724,14 @@ import requests
 
 response = requests.get(
     '<SynBioHub URL>/rootCollections',
-    params={'X-authorization': 'token'},
-    headers={'Accept': 'text/plain'},
+    headers={
+        'Accept': 'text/plain',
+        'X-authorization': '<token>'
+        },
 )
+
+print(response.status_code)
+print(response.content)
 ```
 
 ```javascript
@@ -776,13 +780,14 @@ import requests
 
 response = requests.get(
     '<SynBioHub URL>/manage',
-    headers={'X-authorization': '<token>',
-    'Accept': 'text/plain'}
+    headers={
+        'Accept': 'text/plain',
+        'X-authorization': '<token>'
+        },
 )
 
 print(response.status_code)
 print(response.content)
-
 ```
 
 ```javascript
@@ -829,13 +834,14 @@ import requests
 
 response = requests.get(
     '<SynBioHub URL>/shared',
-    headers={'X-authorization': '<token>',
-    'Accept': 'text/plain'}
+    headers={
+        'Accept': 'text/plain',
+        'X-authorization': '<token>'
+        },
 )
 
 print(response.status_code)
 print(response.content)
-
 ```
 
 ```javascript
@@ -861,8 +867,10 @@ import requests
 
 response = requests.get(
     '<URI>/subcollections',
-    params={'X-authorization': 'token'},
-    headers={'Accept': 'text/plain'},
+    headers={
+        'Accept': 'text/plain',
+        'X-authorization': '<token>'
+        },
 )
 
 print(response.status_code)
@@ -910,8 +918,10 @@ import requests
 
 response = requests.get(
     '<URI>/twins',
-    params={'X-authorization': '<token>'},
-    headers={'Accept': 'text/plain'},
+    headers={
+        'Accept': 'text/plain',
+        'X-authorization': '<token>'
+        },
 )
 
 print(response.status_code)
@@ -953,8 +963,10 @@ import requests
 
 response = requests.get(
     '<URI>/similar',
-    params={'X-authorization': '<token>'},
-    headers={'Accept': 'text/plain'},
+    headers={
+        'Accept': 'text/plain',
+        'X-authorization': '<token>'
+        },
 )
 
 print(response.status_code)
@@ -995,7 +1007,6 @@ This endpoint returns JSON metadata of the form:
 		"version":"1"
 	}
 ]
-
 ```
 
 ```python
@@ -1003,8 +1014,10 @@ import requests
 
 response = requests.get(
     '<URI>/uses',
-    params={'X-authorization': '<token>'},
-    headers={'Accept': 'text/plain'},
+    headers={
+        'Accept': 'text/plain',
+        'X-authorization': '<token>'
+        },
 )
 
 print(response.status_code)
@@ -1040,8 +1053,10 @@ import requests
 
 response = requests.get(
     '<SynBioHub URL>/<ObjectType>/Count',
-    params={'X-authorization': '<token>'},
-    headers={'Accept': 'text/plain'},
+    headers={
+        'Accept': 'text/plain',
+        'X-authorization': '<token>'
+        },
 )
 
 print(response.status_code)
@@ -1054,7 +1069,8 @@ const fetch = require("node-fetch");
 const Url = '<SynBioHub URL>/<ObjectType>/Count'
 const otherPram={
     headers:{
-        "content-type" : "text/plain; charset=UTF-8"
+        "content-type" : "text/plain; charset=UTF-8",
+	"X-authorization" : "<token>"
     },
     method:"GET"
 };
@@ -1090,13 +1106,14 @@ import requests
 
 response = requests.get(
     '<SynBioHub URL>/sparql?query=<SPARQL query>',
-    params={'X-authorization': '<token>'},
-    headers={'Accept': 'application/json'},
+    headers={
+        'Accept': 'text/plain',
+        'X-authorization': '<token>'
+        },
 )
 
 print(response.status_code)
-
-print(response.json())
+print(response.content)
 ```
 
 
@@ -1136,13 +1153,14 @@ import requests
 
 response = requests.get(
     '<URI>/sbol',
-    params={'X-authorization': '<token>'},
-    headers={'Accept': 'text/plain'},
+    headers={
+        'Accept': 'text/plain',
+        'X-authorization': '<token>'
+        },
 )
 
 print(response.status_code)
 print(response.content)
-
 ```
 
 ```javascript
@@ -1174,13 +1192,14 @@ import requests
 
 response = requests.get(
     '<URI>/sbolnr',
-    params={'X-authorization': '<token>'},
-    headers={'Accept': 'text/plain'},
+    headers={
+        'Accept': 'text/plain',
+        'X-authorization': '<token>'
+        },
 )
 
 print(response.status_code)
 print(response.content)
-
 ```
 
 ```javascript
@@ -1213,13 +1232,14 @@ import requests
 
 response = requests.get(
     '<URI>/metadata',
-    params={'X-authorization': '<token>'},
-    headers={'Accept': 'text/plain'},
+    headers={
+        'Accept': 'text/plain',
+        'X-authorization': '<token>'
+        },
 )
 
 print(response.status_code)
 print(response.content)
-
 ```
 
 ```javascript
@@ -1251,13 +1271,14 @@ import requests
 
 response = requests.get(
     '<URI>/gb',
-    params={'X-authorization': '<token>'},
-    headers={'Accept': 'text/plain'},
+    headers={
+        'Accept': 'text/plain',
+        'X-authorization': '<token>'
+        },
 )
 
 print(response.status_code)
 print(response.content)
-
 ```
 
 ```javascript
@@ -1289,13 +1310,14 @@ import requests
 
 response = requests.get(
     '<URI>/fasta',
-    params={'X-authorization': '<token>'},
-    headers={'Accept': 'text/plain'},
+    headers={
+        'Accept': 'text/plain',
+        'X-authorization': '<token>'
+        },
 )
 
 print(response.status_code)
 print(response.content)
-
 ```
 
 ```javascript
@@ -1327,13 +1349,14 @@ import requests
 
 response = requests.get(
     '<URI>/gff',
-    params={'X-authorization': '<token>'},
-    headers={'Accept': 'text/plain'},
+    headers={
+        'Accept': 'text/plain',
+        'X-authorization': '<token>'
+        },
 )
 
 print(response.status_code)
 print(response.content)
-
 ```
 
 ```javascript
@@ -1378,9 +1401,11 @@ fetch(Url,otherPram)
 import requests
 
 response = requests.get(
-    '<URI>/download',
-    params={'X-authorization': 'token'},
-    headers={'Accept': 'text/plain'},
+    '<URI>/sbolnr',
+    headers={
+        'Accept': 'text/plain',
+        'X-authorization': '<token>'
+        },
 )
 
 print(response.status_code)
@@ -1428,7 +1453,6 @@ response = requests.post(
 
 print(response.status_code)
 print(response.content)
-
 ```
 
 ```javascript
@@ -1450,7 +1474,6 @@ form.append('description', '<description>');
 form.append('citations', '<citations>');
 form.append('overwrite_merge', '<overwrite_merge>');
 form.append('file', stream);
-
 
 fetch(url, { method: 'POST', headers: headers, body:form})
     .then(res => res.buffer()).then(buf => console.log(buf.toString()))
@@ -1501,7 +1524,6 @@ response = requests.post(
 
 print(response.status_code)
 print(response.content)
-
 ```
 
 ```javascript
@@ -1552,13 +1574,14 @@ import requests
 
 response = requests.get(
     '<URI>/removeCollection',
-    params={'X-authorization': '<token>'},
-    headers={'Accept': 'text/plain'},
+    headers={
+        'Accept': 'text/plain',
+        'X-authorization': '<token>'
+        },
 )
 
 print(response.status_code)
 print(response.content)
-
 ```
 
 ```javascript
@@ -1590,13 +1613,14 @@ import requests
 
 response = requests.get(
     '<URI>/remove',
-    params={'X-authorization': '<token>'},
-    headers={'Accept': 'text/plain'},
+    headers={
+        'Accept': 'text/plain',
+        'X-authorization': '<token>'
+        },
 )
 
 print(response.status_code)
 print(response.content)
-
 ```
 
 
@@ -1629,13 +1653,14 @@ import requests
 
 response = requests.get(
     '<URI>/replace',
-    params={'X-authorization': '<token>'},
-    headers={'Accept': 'text/plain'},
+    headers={
+        'Accept': 'text/plain',
+        'X-authorization': '<token>'
+        },
 )
 
 print(response.status_code)
 print(response.content)
-
 ```
 
 ```javascript
@@ -1659,20 +1684,20 @@ fetch(Url,otherPram)
 Updates the collection's icon.
 
 ```plaintext
-curl -X POST -H "Accept: text/plain" -H "X-authorization:<token>" -F "collectionIcon=<icon>" <URI>/icon
+curl -X POST -H "Accept: text/plain" -H "X-authorization:<token>" -F "collectionIcon=@<icon>" <URI>/icon
 ```
 
 ```python
 import requests
 
 response = requests.post(
-    'localhost:7777/public/testid0/testid0_collection/1/icon',
+    '<URI>/icon',
     headers={
-        'X-authorization': '88472249-ee84-49c6-8f81-0b7a6b9dce64',
+        'X-authorization': '<token>',
         'Accept': 'text/plain'
     },
     files={
-        'collectionIcon': open('icon.png', 'rb'),
+        'collectionIcon': open('<icon.png>', 'rb'),
         },
 )
 
@@ -1682,17 +1707,17 @@ print(response.content)
 
 ```javascript
 const fetch = require("node-fetch");
-const { URLSearchParams } = require('url');
-const url = '<URI>/addOwner'
+const { createReadStream } = require('fs');
+const FormData = require('form-data');
+const url = '<SynBioHub URL>/icon'
+const stream = createReadStream('<icon path>');
 var headers={
     "Accept" : "text/plain; charset=UTF-8",
     "X-authorization" : "<token>"
 };
 
-const params = new URLSearchParams();
-params.append('user', '<id>');
-params.append('uri', '<version>');
-
+const params = new FormData();
+params.append('collectionIcon', stream);
 
 fetch(url, { method: 'POST', headers: headers, body:params})
     .then(res => res.buffer()).then(buf => console.log(buf.toString()))
@@ -1753,7 +1778,6 @@ const params = new URLSearchParams();
 params.append('user', '<user>');
 params.append('uri', '<uri>');
 
-
 fetch(url, { method: 'POST', headers: headers, body:params})
     .then(res => res.buffer()).then(buf => console.log(buf.toString()))
     .catch (error=>console.log(error))
@@ -1803,8 +1827,6 @@ var headers={
 
 const params = new URLSearchParams();
 params.append('userUri', '<userUri>');
-
-
 
 fetch(url, { method: 'POST', headers: headers, body:params})
     .then(res => res.buffer()).then(buf => console.log(buf.toString()))
@@ -1861,17 +1883,13 @@ var headers={
     "X-authorization" : "<token>"
 };
 
-
 const params = new URLSearchParams();
 params.append('uri', '<uri>');
 params.append('value', '<value>');
 
-
 fetch(url, { method: 'POST', headers: headers, body:params})
     .then(res => res.buffer()).then(buf => console.log(buf.toString()))
     .catch (error=>console.log(error))
-
-
 ```
 
 Parameter | Description
@@ -1891,7 +1909,6 @@ curl -X POST -H "Accept: text/plain" -H "X-authorization:<token>" -d "uri=<uri>&
 ```
 
 ```python
-
 import requests
 
 response = requests.post(
@@ -1908,11 +1925,9 @@ response = requests.post(
 
 print(response.status_code)
 print(response.content)
-
 ```
 
 ```javascript
-
 const fetch = require("node-fetch");
 const { URLSearchParams } = require('url');
 const url = '<SynBioHub URL>/updateMutableNotes'
@@ -1930,8 +1945,6 @@ params.append('value', '<value>');
 fetch(url, { method: 'POST', headers: headers, body:params})
     .then(res => res.buffer()).then(buf => console.log(buf.toString()))
     .catch (error=>console.log(error))
-
-
 ```
 
 Parameter | Description
@@ -1950,7 +1963,6 @@ curl -X POST -H "Accept: text/plain" -H "X-authorization:<token>" -d "uri=<uri>&
 ```
 
 ```python
-
 import requests
 
 response = requests.post(
@@ -1967,11 +1979,9 @@ response = requests.post(
 
 print(response.status_code)
 print(response.content)
-
 ```
 
 ```javascript
-
 const fetch = require("node-fetch");
 const { URLSearchParams } = require('url');
 const url = '<SynBioHub URL>/updateMutableSource'
@@ -1980,17 +1990,13 @@ var headers={
     "X-authorization" : "<token>"
 };
 
-
 const params = new URLSearchParams();
 params.append('uri', '<uri>');
 params.append('value', '<value>');
 
-
 fetch(url, { method: 'POST', headers: headers, body:params})
     .then(res => res.buffer()).then(buf => console.log(buf.toString()))
     .catch (error=>console.log(error))
-
-
 ```
 
 Parameter | Description
@@ -2009,7 +2015,6 @@ curl -X POST -H "Accept: text/plain" -H "X-authorization:<token>" -d "uri=<uri>&
 ```
 
 ```python
-
 import requests
 
 response = requests.post(
@@ -2026,11 +2031,9 @@ response = requests.post(
 
 print(response.status_code)
 print(response.content)
-
 ```
 
 ```javascript
-
 const fetch = require("node-fetch");
 const { URLSearchParams } = require('url');
 const url = '<SynBioHub URL>/updateCitations'
@@ -2039,17 +2042,13 @@ var headers={
     "X-authorization" : "<token>"
 };
 
-
 const params = new URLSearchParams();
 params.append('uri', '<uri>');
 params.append('value', '<value>');
 
-
 fetch(url, { method: 'POST', headers: headers, body:params})
     .then(res => res.buffer()).then(buf => console.log(buf.toString()))
     .catch (error=>console.log(error))
-
-
 ```
 
 Parameter | Description
@@ -2246,7 +2245,6 @@ response = requests.post(
 
 print(response.status_code)
 print(response.content)
-
 ```
 
 ```javascript
@@ -2296,7 +2294,6 @@ response = requests.post(
 
 print(response.status_code)
 print(response.content)
-
 ```
 
 ```javascript
@@ -2314,7 +2311,6 @@ params.append('member', '<member>');
 fetch(url, { method: 'POST', headers: headers, body:params})
     .then(res => res.buffer()).then(buf => console.log(buf.toString()))
     .catch (error=>console.log(error))
-
 ```
 
 Parameter | Description
@@ -2355,7 +2351,6 @@ response = requests.post(
 
 print(response.status_code)
 print(response.content)
-
 ```
 
 ```javascript
@@ -2371,7 +2366,6 @@ var headers={
 
 const form = new FormData();
 form.append('file', stream);
-
 
 fetch(url, { method: 'POST', headers: headers, body:form})
     .then(res => res.buffer()).then(buf => console.log(buf.toString()))
@@ -2410,7 +2404,6 @@ response = requests.post(
 
 print(response.status_code)
 print(response.content)
-
 ```
 
 ```javascript
@@ -2426,7 +2419,6 @@ const params = new URLSearchParams();
 params.append('url', '<url>');
 params.append('name', '<name>');
 params.append('type', '<type>');
-
 
 fetch(url, { method: 'POST', headers: headers, body:params})
     .then(res => res.buffer()).then(buf => console.log(buf.toString()))
@@ -2474,8 +2466,6 @@ response = requests.get(
 
 print(response.status_code)
 print(response.content)
-
-
 ```
 
 
@@ -2548,7 +2538,6 @@ response = requests.get(
 
 print(response.status_code)
 print(response.content)
-
 ```
 
 ```javascript
@@ -2589,8 +2578,15 @@ print(response.content)
 ```
 
 ```javascript
-
-
+const fetch = require("node-fetch");
+const url = '<SynBioHub URL>/admin/virtuoso'
+const headers={
+        "Accept" : "text/plain; charset=UTF-8",
+	"X-authorization" : "<token>"
+};
+fetch(url, { method: 'GET', headers: headers})
+    .then(res => res.buffer()).then(buf => console.log(buf.toString()))
+    .catch (error=>console.log(error))
 ```
 
 ## View Graphs
@@ -2616,7 +2612,6 @@ response = requests.get(
 
 print(response.status_code)
 print(response.content)
-
 ```
 
 ```javascript
@@ -2653,7 +2648,6 @@ response = requests.get(
 
 print(response.status_code)
 print(response.content)
-
 ```
 
 ```javascript
@@ -2692,7 +2686,6 @@ response = requests.get(
 
 print(response.status_code)
 print(response.content)
-
 ```
 
 ```javascript
@@ -2735,7 +2728,6 @@ response = requests.post(
 
 print(response.status_code)
 print(response.content)
-
 ```
 
 ```javascript
@@ -2755,7 +2747,6 @@ params.append('fromEmail', '<fromEmail>');
 fetch(url, { method: 'POST', headers: headers, body:params})
     .then(res => res.buffer()).then(buf => console.log(buf.toString()))
     .catch (error=>console.log(error))
-
 ```
 
 Parameter | Description
@@ -2787,7 +2778,6 @@ response = requests.get(
 
 print(response.status_code)
 print(response.content)
-
 ```
 
 ```javascript
@@ -2831,7 +2821,6 @@ response = requests.post(
 
 print(response.status_code)
 print(response.content)
-
 ```
 
 ```javascript
@@ -2852,7 +2841,6 @@ params.append('url', '<url>');
 fetch(url, { method: 'POST', headers: headers, body:params})
     .then(res => res.buffer()).then(buf => console.log(buf.toString()))
     .catch (error=>console.log(error))
-
 ```
 
 Parameter | Description
@@ -2889,7 +2877,6 @@ response = requests.post(
 
 print(response.status_code)
 print(response.content)
-
 ```
 
 ```javascript
@@ -2904,7 +2891,6 @@ var headers={
 const params = new URLSearchParams();
 params.append('id', '<id>');
 params.append('category', '<category>');
-
 
 fetch(url, { method: 'POST', headers: headers, body:params})
     .then(res => res.buffer()).then(buf => console.log(buf.toString()))
@@ -2952,7 +2938,6 @@ fetch(url, { method: 'GET', headers: headers})
     .then(res => res.buffer()).then(buf => console.log(buf.toString()))
     .catch (error=>console.log(error))
 ```
-
 View current registries.
 
 ## Save Registry
@@ -2983,7 +2968,6 @@ response = requests.post(
 
 print(response.status_code)
 print(response.content)
-
 ```
 
 ```javascript
@@ -3002,7 +2986,6 @@ params.append('url', '<url>');
 fetch(url, { method: 'POST', headers: headers, body:params})
     .then(res => res.buffer()).then(buf => console.log(buf.toString()))
     .catch (error=>console.log(error))
-
 ```
 
 Parameter | Description
@@ -3038,7 +3021,6 @@ response = requests.post(
 
 print(response.status_code)
 print(response.content)
-
 ```
 
 ```javascript
@@ -3056,7 +3038,6 @@ params.append('uri', '<uri>');
 fetch(url, { method: 'POST', headers: headers, body:params})
     .then(res => res.buffer()).then(buf => console.log(buf.toString()))
     .catch (error=>console.log(error))
-
 ```
 
 Parameter | Description
@@ -3090,7 +3071,6 @@ response = requests.post(
 
 print(response.status_code)
 print(response.content)
-
 ```
 
 ```javascript
@@ -3108,7 +3088,6 @@ params.append('administratorEmail', '<administratorEmail>');
 fetch(url, { method: 'POST', headers: headers, body:params})
     .then(res => res.buffer()).then(buf => console.log(buf.toString()))
     .catch (error=>console.log(error))
-
 ```
 
 Parameter | Description
@@ -3138,7 +3117,6 @@ response = requests.post(
 
 print(response.status_code)
 print(response.content)
-
 ```
 
 ```javascript
@@ -3184,7 +3162,6 @@ response = requests.post(
 
 print(response.status_code)
 print(response.content)
-
 ```
 
 ```javascript
@@ -3233,7 +3210,6 @@ response = requests.get(
 
 print(response.status_code)
 print(response.content)
-
 ```
 
 ```javascript
@@ -3284,7 +3260,6 @@ response = requests.post(
 
 print(response.status_code)
 print(response.content)
-
 ```
 
 ```javascript
@@ -3299,7 +3274,7 @@ var headers={
 const params = new URLSearchParams();
 params.append('type', 'benchling');
 params.append('id', '<id>');
-params.append('benchlingApiToken', 'benchlingApiToken');
+params.append('benchlingApiToken', '<benchlingApiToken>');
 params.append('rejectUnauthorized', '<rejectUnauthorized>');
 params.append('folderprefix', '<folderprefix>');
 params.append('defaultFolderId', '<defaultFolderId');
@@ -3307,7 +3282,6 @@ params.append('isPublic', '<isPublic>');
 params.append('rootCollectionsDisplayId', '<rootColelctionsDisplayId>');
 params.append('rootCollectionName', '<rootCollectionName>');
 params.append('rootCollectionDescription', '<rootCollectionDescription>');
-
 
 fetch(url, { method: 'POST', headers: headers, body:params})
     .then(res => res.buffer()).then(buf => console.log(buf.toString()))
@@ -3376,7 +3350,6 @@ response = requests.post(
 
 print(response.status_code)
 print(response.content)
-
 ```
 
 ```javascript
@@ -3462,7 +3435,6 @@ response = requests.post(
 
 print(response.status_code)
 print(response.content)
-
 ```
 
 ```javascript
@@ -3476,7 +3448,6 @@ var headers={
 
 const params = new URLSearchParams();
 params.append('id', '<id>');
-
 
 fetch(url, { method: 'POST', headers: headers, body:params})
     .then(res => res.buffer()).then(buf => console.log(buf.toString()))
@@ -3512,7 +3483,6 @@ response = requests.get(
 
 print(response.status_code)
 print(response.content)
-
 ```
 
 ```javascript
@@ -3549,7 +3519,6 @@ response = requests.get(
 
 print(response.status_code)
 print(response.content)
-
 ```
 
 ```javascript
@@ -3595,7 +3564,6 @@ response = requests.post(
 
 print(response.status_code)
 print(response.content)
-
 ```
 
 ```javascript
@@ -3622,14 +3590,15 @@ fetch(url, { method: 'POST', headers: headers, body:params})
 
 Parameter | Description
 --------- | ------- | -----------
-id | The id for the new collection.
-version | The version for the new collection.
-name | The name for the new collection (optional: default is existing name).
-description | The description for the new collection (optional: default is existing description).
-citations | The comma-separated listed of PubMed ids (optional: default is existing citations).
-tabState | Use "new" for moving to a new public collection, and "existing" if moving into an existing public collection.
-collections| If moving into an existing collection, collections is the URI of the collection
-
+useSBOLExplorer |  Boolean indicating whether SBOLExplorer is to be used or not
+SBOLExplorerEndpoint | The endpoint where SBOLExplorer can be found
+useDistributedSearch | Boolean indicating whether distributed search should be used
+pagerankTolerance | The Pagerank tolerance factor
+uclustIdentity | The UClust clustering identity 
+synbiohubPublicGraph | The SynBioHub public graph for this instance
+elasticsearchEndpoint | The endpoint where Elasticsearch can be found
+elasticsearchIndexName | The Elasticsearch index name
+sparqlEndpoint | The Virtuoso SPARQL endpoint
 
 ## Update SBOLExplorer Index 
 
@@ -3656,7 +3625,6 @@ response = requests.post(
 
 print(response.status_code)
 print(response.content)
-
 ```
 
 ```javascript
@@ -3673,7 +3641,6 @@ const params = new URLSearchParams();
 fetch(url, { method: 'POST', headers: headers, body:params})
     .then(res => res.buffer()).then(buf => console.log(buf.toString()))
     .catch (error=>console.log(error))
-
 ```
 
 ## View Theme
@@ -3698,7 +3665,6 @@ response = requests.get(
 
 print(response.status_code)
 print(response.content)
-
 ```
 
 ```javascript
@@ -3743,14 +3709,11 @@ response = requests.post(
    },
     files={
         'logo' : (image_filename, open('<path>', 'rb')),
-
 }
-
 )
 
 print(response.status_code)
 print(response.content)
-
 ```
 
 ```javascript
@@ -3774,7 +3737,6 @@ params.append('logo', stream);
 fetch(url, { method: 'POST', headers: headers, body:params})
     .then(res => res.buffer()).then(buf => console.log(buf.toString()))
     .catch (error=>console.log(error))
-
 ```
 
 Parameter | Description
@@ -3809,7 +3771,6 @@ response = requests.get(
 
 print(response.status_code)
 print(response.content)
-
 ```
 
 ```javascript
@@ -3850,7 +3811,6 @@ response = requests.post(
 
 print(response.status_code)
 print(response.content)
-
 ```
 
 ```javascript
@@ -3865,11 +3825,9 @@ var headers={
 const params = new URLSearchParams();
 params.append('allowPublicSignup', 'true');
 
-
 fetch(url, { method: 'POST', headers: headers, body:params})
     .then(res => res.buffer()).then(buf => console.log(buf.toString()))
     .catch (error=>console.log(error))
-
 ```
 
 Parameter | Description
@@ -3910,7 +3868,6 @@ response = requests.post(
 
 print(response.status_code)
 print(response.content)
-
 ```
 
 ```javascript
@@ -3934,7 +3891,6 @@ params.append('isAdmin', '1');
 fetch(url, { method: 'POST', headers: headers, body:params})
     .then(res => res.buffer()).then(buf => console.log(buf.toString()))
     .catch (error=>console.log(error))
-
 ```
 
 Parameter | Description
@@ -3984,7 +3940,6 @@ response = requests.post(
 
 print(response.status_code)
 print(response.content)
-
 ```
 
 ```javascript
@@ -4009,7 +3964,6 @@ params.append('isAdmin', '1');
 fetch(url, { method: 'POST', headers: headers, body:params})
     .then(res => res.buffer()).then(buf => console.log(buf.toString()))
     .catch (error=>console.log(error))
-
 ```
 
 Parameter | Description
@@ -4051,7 +4005,6 @@ response = requests.post(
 
 print(response.status_code)
 print(response.content)
-
 ```
 
 ```javascript
@@ -4066,14 +4019,10 @@ var headers={
 const params = new URLSearchParams();
 params.append('id', '<id>');
 
-
-
 fetch(url, { method: 'POST', headers: headers, body:params})
     .then(res => res.buffer()).then(buf => console.log(buf.toString()))
     .catch (error=>console.log(error))
-
 ```
-
 
 Parameter | Description
 --------- | ------- | -----------
