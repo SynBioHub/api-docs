@@ -726,7 +726,6 @@ server {
 
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
-
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">fetch</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"node-fetch"</span><span class="p">);</span>
 <span class="kr">const</span> <span class="p">{</span> <span class="nx">URLSearchParams</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'url'</span><span class="p">);</span>
 <span class="kd">var</span> <span class="nx">url</span> <span class="o">=</span><span class="s1">'&lt;SynBioHub URL&gt;/login'</span><span class="p">;</span>
@@ -774,7 +773,6 @@ server {
 
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
-
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">fetch</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"node-fetch"</span><span class="p">);</span>
 <span class="kr">const</span> <span class="p">{</span> <span class="nx">URLSearchParams</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'url'</span><span class="p">);</span>
 <span class="kr">const</span> <span class="nx">url</span> <span class="o">=</span> <span class="s1">'&lt;SynBioHub URL&gt;/logout'</span>
@@ -920,7 +918,6 @@ server {
 <span class="p">)</span>
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
-
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">fetch</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"node-fetch"</span><span class="p">);</span>
 <span class="kr">const</span> <span class="p">{</span> <span class="nx">URLSearchParams</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'url'</span><span class="p">);</span>
 <span class="kr">const</span> <span class="nx">url</span> <span class="o">=</span> <span class="s1">'&lt;SynBioHub URL&gt;/setNewPassword'</span>
@@ -1009,7 +1006,7 @@ This endpoint returns JSON metadata of the form
 <pre class="highlight plaintext tab-plaintext"><code>curl -X POST -H "Accept: text/plain" -H "X-authorization:&lt;token&gt;" -d "name=&lt;name&gt;&amp;affiliation=&lt;affiliation&gt;&amp;email=&lt;email&gt;&amp;password1=&lt;password1&gt;&amp;password2=&lt;password2&gt;" &lt;SynBioHub URL&gt;/profile
 </code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span>
-    <span class="s">'&lt;URI&gt;/profile'</span><span class="p">,</span>
+    <span class="s">'&lt;SynBioHub URL&gt;/profile'</span><span class="p">,</span>
     <span class="n">headers</span><span class="o">=</span><span class="p">{</span>
         <span class="s">'X-authorization'</span><span class="p">:</span> <span class="s">'&lt;token&gt;'</span><span class="p">,</span>
         <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'text/plain'</span>
@@ -1025,7 +1022,6 @@ This endpoint returns JSON metadata of the form
 <span class="p">)</span>
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
-
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">fetch</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"node-fetch"</span><span class="p">);</span>
 <span class="kr">const</span> <span class="p">{</span> <span class="nx">URLSearchParams</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'url'</span><span class="p">);</span>
 <span class="kr">const</span> <span class="nx">url</span> <span class="o">=</span> <span class="s1">'&lt;SynBioHub URL&gt;/profile'</span>
@@ -1044,7 +1040,6 @@ This endpoint returns JSON metadata of the form
 <span class="nx">fetch</span><span class="p">(</span><span class="nx">url</span><span class="p">,</span> <span class="p">{</span> <span class="na">method</span><span class="p">:</span> <span class="s1">'POST'</span><span class="p">,</span> <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span><span class="p">,</span> <span class="na">body</span><span class="p">:</span><span class="nx">params</span><span class="p">})</span>
     <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">res</span> <span class="o">=&gt;</span> <span class="nx">res</span><span class="p">.</span><span class="nx">buffer</span><span class="p">()).</span><span class="nx">then</span><span class="p">(</span><span class="nx">buf</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">buf</span><span class="p">.</span><span class="nx">toString</span><span class="p">()))</span>
     <span class="p">.</span><span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="o">=&gt;</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">error</span><span class="p">))</span>
-
 </code></pre>
 <table><thead>
 <tr>
@@ -1096,13 +1091,15 @@ This endpoint returns JSON metadata of the form
 
 <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
     <span class="s">'&lt;SynBioHub URL&gt;/search/&lt;key&gt;=&lt;value&gt;&amp;...&amp;&lt;search string&gt;/?offset=#&amp;limit=#'</span><span class="p">,</span>
-    <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s">'X-authorization'</span><span class="p">:</span> <span class="s">'&lt;token&gt;'</span><span class="p">},</span>
-    <span class="n">headers</span><span class="o">=</span><span class="p">{</span><span class="s">'Accept'</span><span class="p">:</span> <span class="s">'text/plain'</span><span class="p">},</span>
+    <span class="n">headers</span><span class="o">=</span><span class="p">{</span>
+        <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'text/plain'</span><span class="p">,</span>
+        <span class="s">'X-authorization'</span><span class="p">:</span> <span class="s">'&lt;token&gt;'</span>
+        <span class="p">},</span>
 <span class="p">)</span>
 
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
-</code></pre><pre class="highlight plaintext tab-plaintext"><code>curl -X GET -H "Accept: text/plain" -H "X-authorization: &lt;token&gt;" '&lt;SynBioHub URL&gt;/search/objectType%3DComponentDefinition%26role%3D%3Chttp%3A%2F%2Fidentifiers.org%2Fso%2FSO%3A0000316%3E%26GFP/?offset=0&amp;limit=50'
+</code></pre><pre class="highlight plaintext tab-plaintext"><code>curl -X GET -H "Accept: text/plain" -H "X-authorization: &lt;token&gt;" '&lt;SynBioHub URL&gt;/search/&lt;key&gt;=&lt;value&gt;&amp;...&amp;&lt;search string&gt;/?offset=#&amp;limit=#
 
 This endpoint returns JSON metadata of the form 
 [
@@ -1159,8 +1156,10 @@ This endpoint returns JSON metadata of the form
 
 <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
     <span class="s">'&lt;SynBioHub URL&gt;/searchCount/&lt;key&gt;=&lt;value&gt;&amp;...&amp;&lt;search string&gt;/?offset=#&amp;limit=#'</span><span class="p">,</span>
-    <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s">'X-authorization'</span><span class="p">:</span> <span class="s">'token'</span><span class="p">},</span>
-    <span class="n">headers</span><span class="o">=</span><span class="p">{</span><span class="s">'Accept'</span><span class="p">:</span> <span class="s">'text/plain'</span><span class="p">},</span>
+    <span class="n">headers</span><span class="o">=</span><span class="p">{</span>
+        <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'text/plain'</span><span class="p">,</span>
+        <span class="s">'X-authorization'</span><span class="p">:</span> <span class="s">'&lt;token&gt;'</span>
+        <span class="p">},</span>
 <span class="p">)</span>
 
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
@@ -1231,9 +1230,14 @@ This endpoint returns JSON metadata of the form:
 
 <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
     <span class="s">'&lt;SynBioHub URL&gt;/rootCollections'</span><span class="p">,</span>
-    <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s">'X-authorization'</span><span class="p">:</span> <span class="s">'token'</span><span class="p">},</span>
-    <span class="n">headers</span><span class="o">=</span><span class="p">{</span><span class="s">'Accept'</span><span class="p">:</span> <span class="s">'text/plain'</span><span class="p">},</span>
+    <span class="n">headers</span><span class="o">=</span><span class="p">{</span>
+        <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'text/plain'</span><span class="p">,</span>
+        <span class="s">'X-authorization'</span><span class="p">:</span> <span class="s">'&lt;token&gt;'</span>
+        <span class="p">},</span>
 <span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">fetch</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"node-fetch"</span><span class="p">);</span>
 <span class="kr">const</span> <span class="nx">Url</span> <span class="o">=</span> <span class="s1">'&lt;SynBioHub URL&gt;/rootCollections'</span>
 <span class="kr">const</span> <span class="nx">otherPram</span><span class="o">=</span><span class="p">{</span>
@@ -1271,13 +1275,14 @@ This endpoint returns JSON metadata of the form:
 
 <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
     <span class="s">'&lt;SynBioHub URL&gt;/manage'</span><span class="p">,</span>
-    <span class="n">headers</span><span class="o">=</span><span class="p">{</span><span class="s">'X-authorization'</span><span class="p">:</span> <span class="s">'&lt;token&gt;'</span><span class="p">,</span>
-    <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'text/plain'</span><span class="p">}</span>
+    <span class="n">headers</span><span class="o">=</span><span class="p">{</span>
+        <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'text/plain'</span><span class="p">,</span>
+        <span class="s">'X-authorization'</span><span class="p">:</span> <span class="s">'&lt;token&gt;'</span>
+        <span class="p">},</span>
 <span class="p">)</span>
 
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
-
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">fetch</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"node-fetch"</span><span class="p">);</span>
 <span class="kr">const</span> <span class="nx">url</span> <span class="o">=</span> <span class="s1">'&lt;SynBioHub URL&gt;/manage'</span>
 <span class="kr">const</span> <span class="nx">headers</span><span class="o">=</span><span class="p">{</span>
@@ -1313,13 +1318,14 @@ This endpoint returns JSON metadata of the form:
 
 <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
     <span class="s">'&lt;SynBioHub URL&gt;/shared'</span><span class="p">,</span>
-    <span class="n">headers</span><span class="o">=</span><span class="p">{</span><span class="s">'X-authorization'</span><span class="p">:</span> <span class="s">'&lt;token&gt;'</span><span class="p">,</span>
-    <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'text/plain'</span><span class="p">}</span>
+    <span class="n">headers</span><span class="o">=</span><span class="p">{</span>
+        <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'text/plain'</span><span class="p">,</span>
+        <span class="s">'X-authorization'</span><span class="p">:</span> <span class="s">'&lt;token&gt;'</span>
+        <span class="p">},</span>
 <span class="p">)</span>
 
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
-
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">fetch</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"node-fetch"</span><span class="p">);</span>
 <span class="kr">const</span> <span class="nx">url</span> <span class="o">=</span> <span class="s1">'&lt;SynBioHub URL&gt;/shared'</span>
 <span class="kr">const</span> <span class="nx">headers</span><span class="o">=</span><span class="p">{</span>
@@ -1337,8 +1343,10 @@ This endpoint returns JSON metadata of the form:
 
 <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
     <span class="s">'&lt;URI&gt;/subcollections'</span><span class="p">,</span>
-    <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s">'X-authorization'</span><span class="p">:</span> <span class="s">'token'</span><span class="p">},</span>
-    <span class="n">headers</span><span class="o">=</span><span class="p">{</span><span class="s">'Accept'</span><span class="p">:</span> <span class="s">'text/plain'</span><span class="p">},</span>
+    <span class="n">headers</span><span class="o">=</span><span class="p">{</span>
+        <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'text/plain'</span><span class="p">,</span>
+        <span class="s">'X-authorization'</span><span class="p">:</span> <span class="s">'&lt;token&gt;'</span>
+        <span class="p">},</span>
 <span class="p">)</span>
 
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
@@ -1374,8 +1382,10 @@ This endpoint returns JSON metadata of the form:
 
 <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
     <span class="s">'&lt;URI&gt;/twins'</span><span class="p">,</span>
-    <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s">'X-authorization'</span><span class="p">:</span> <span class="s">'&lt;token&gt;'</span><span class="p">},</span>
-    <span class="n">headers</span><span class="o">=</span><span class="p">{</span><span class="s">'Accept'</span><span class="p">:</span> <span class="s">'text/plain'</span><span class="p">},</span>
+    <span class="n">headers</span><span class="o">=</span><span class="p">{</span>
+        <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'text/plain'</span><span class="p">,</span>
+        <span class="s">'X-authorization'</span><span class="p">:</span> <span class="s">'&lt;token&gt;'</span>
+        <span class="p">},</span>
 <span class="p">)</span>
 
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
@@ -1403,8 +1413,10 @@ This endpoint returns JSON metadata of the form:
 
 <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
     <span class="s">'&lt;URI&gt;/similar'</span><span class="p">,</span>
-    <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s">'X-authorization'</span><span class="p">:</span> <span class="s">'&lt;token&gt;'</span><span class="p">},</span>
-    <span class="n">headers</span><span class="o">=</span><span class="p">{</span><span class="s">'Accept'</span><span class="p">:</span> <span class="s">'text/plain'</span><span class="p">},</span>
+    <span class="n">headers</span><span class="o">=</span><span class="p">{</span>
+        <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'text/plain'</span><span class="p">,</span>
+        <span class="s">'X-authorization'</span><span class="p">:</span> <span class="s">'&lt;token&gt;'</span>
+        <span class="p">},</span>
 <span class="p">)</span>
 
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
@@ -1438,13 +1450,14 @@ This endpoint returns JSON metadata of the form:
         "version":"1"
     }
 ]
-
 </code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 
 <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
     <span class="s">'&lt;URI&gt;/uses'</span><span class="p">,</span>
-    <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s">'X-authorization'</span><span class="p">:</span> <span class="s">'&lt;token&gt;'</span><span class="p">},</span>
-    <span class="n">headers</span><span class="o">=</span><span class="p">{</span><span class="s">'Accept'</span><span class="p">:</span> <span class="s">'text/plain'</span><span class="p">},</span>
+    <span class="n">headers</span><span class="o">=</span><span class="p">{</span>
+        <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'text/plain'</span><span class="p">,</span>
+        <span class="s">'X-authorization'</span><span class="p">:</span> <span class="s">'&lt;token&gt;'</span>
+        <span class="p">},</span>
 <span class="p">)</span>
 
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
@@ -1469,8 +1482,10 @@ This endpoint returns JSON metadata of the form:
 
 <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
     <span class="s">'&lt;SynBioHub URL&gt;/&lt;ObjectType&gt;/Count'</span><span class="p">,</span>
-    <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s">'X-authorization'</span><span class="p">:</span> <span class="s">'&lt;token&gt;'</span><span class="p">},</span>
-    <span class="n">headers</span><span class="o">=</span><span class="p">{</span><span class="s">'Accept'</span><span class="p">:</span> <span class="s">'text/plain'</span><span class="p">},</span>
+    <span class="n">headers</span><span class="o">=</span><span class="p">{</span>
+        <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'text/plain'</span><span class="p">,</span>
+        <span class="s">'X-authorization'</span><span class="p">:</span> <span class="s">'&lt;token&gt;'</span>
+        <span class="p">},</span>
 <span class="p">)</span>
 
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
@@ -1479,7 +1494,8 @@ This endpoint returns JSON metadata of the form:
 <span class="kr">const</span> <span class="nx">Url</span> <span class="o">=</span> <span class="s1">'&lt;SynBioHub URL&gt;/&lt;ObjectType&gt;/Count'</span>
 <span class="kr">const</span> <span class="nx">otherPram</span><span class="o">=</span><span class="p">{</span>
     <span class="na">headers</span><span class="p">:{</span>
-        <span class="s2">"content-type"</span> <span class="p">:</span> <span class="s2">"text/plain; charset=UTF-8"</span>
+        <span class="s2">"content-type"</span> <span class="p">:</span> <span class="s2">"text/plain; charset=UTF-8"</span><span class="p">,</span>
+    <span class="s2">"X-authorization"</span> <span class="p">:</span> <span class="s2">"&lt;token&gt;"</span>
     <span class="p">},</span>
     <span class="na">method</span><span class="p">:</span><span class="s2">"GET"</span>
 <span class="p">};</span>
@@ -1507,13 +1523,14 @@ This endpoint returns JSON metadata of the form:
 
 <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
     <span class="s">'&lt;SynBioHub URL&gt;/sparql?query=&lt;SPARQL query&gt;'</span><span class="p">,</span>
-    <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s">'X-authorization'</span><span class="p">:</span> <span class="s">'&lt;token&gt;'</span><span class="p">},</span>
-    <span class="n">headers</span><span class="o">=</span><span class="p">{</span><span class="s">'Accept'</span><span class="p">:</span> <span class="s">'application/json'</span><span class="p">},</span>
+    <span class="n">headers</span><span class="o">=</span><span class="p">{</span>
+        <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'text/plain'</span><span class="p">,</span>
+        <span class="s">'X-authorization'</span><span class="p">:</span> <span class="s">'&lt;token&gt;'</span>
+        <span class="p">},</span>
 <span class="p">)</span>
 
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
-
-<span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">())</span>
+<span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">fetch</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"node-fetch"</span><span class="p">);</span>
 <span class="kr">const</span> <span class="nx">Url</span> <span class="o">=</span> <span class="s1">'&lt;SynBioHub URL&gt;/sparql?query=&lt;SPARQL query&gt;'</span>
 <span class="kr">const</span> <span class="nx">otherPram</span><span class="o">=</span><span class="p">{</span>
@@ -1538,13 +1555,14 @@ This endpoint returns JSON metadata of the form:
 
 <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
     <span class="s">'&lt;URI&gt;/sbol'</span><span class="p">,</span>
-    <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s">'X-authorization'</span><span class="p">:</span> <span class="s">'&lt;token&gt;'</span><span class="p">},</span>
-    <span class="n">headers</span><span class="o">=</span><span class="p">{</span><span class="s">'Accept'</span><span class="p">:</span> <span class="s">'text/plain'</span><span class="p">},</span>
+    <span class="n">headers</span><span class="o">=</span><span class="p">{</span>
+        <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'text/plain'</span><span class="p">,</span>
+        <span class="s">'X-authorization'</span><span class="p">:</span> <span class="s">'&lt;token&gt;'</span>
+        <span class="p">},</span>
 <span class="p">)</span>
 
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
-
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">fetch</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"node-fetch"</span><span class="p">);</span>
 <span class="kr">const</span> <span class="nx">Url</span> <span class="o">=</span> <span class="s1">'&lt;URI&gt;/sbol'</span>
 <span class="kr">const</span> <span class="nx">otherPram</span><span class="o">=</span><span class="p">{</span>
@@ -1565,13 +1583,14 @@ This endpoint returns JSON metadata of the form:
 
 <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
     <span class="s">'&lt;URI&gt;/sbolnr'</span><span class="p">,</span>
-    <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s">'X-authorization'</span><span class="p">:</span> <span class="s">'&lt;token&gt;'</span><span class="p">},</span>
-    <span class="n">headers</span><span class="o">=</span><span class="p">{</span><span class="s">'Accept'</span><span class="p">:</span> <span class="s">'text/plain'</span><span class="p">},</span>
+    <span class="n">headers</span><span class="o">=</span><span class="p">{</span>
+        <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'text/plain'</span><span class="p">,</span>
+        <span class="s">'X-authorization'</span><span class="p">:</span> <span class="s">'&lt;token&gt;'</span>
+        <span class="p">},</span>
 <span class="p">)</span>
 
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
-
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">fetch</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"node-fetch"</span><span class="p">);</span>
 <span class="kr">const</span> <span class="nx">Url</span> <span class="o">=</span> <span class="s1">'&lt;URI&gt;/sbolnr'</span>
 <span class="kr">const</span> <span class="nx">otherPram</span><span class="o">=</span><span class="p">{</span>
@@ -1592,13 +1611,14 @@ This endpoint returns JSON metadata of the form:
 
 <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
     <span class="s">'&lt;URI&gt;/metadata'</span><span class="p">,</span>
-    <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s">'X-authorization'</span><span class="p">:</span> <span class="s">'&lt;token&gt;'</span><span class="p">},</span>
-    <span class="n">headers</span><span class="o">=</span><span class="p">{</span><span class="s">'Accept'</span><span class="p">:</span> <span class="s">'text/plain'</span><span class="p">},</span>
+    <span class="n">headers</span><span class="o">=</span><span class="p">{</span>
+        <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'text/plain'</span><span class="p">,</span>
+        <span class="s">'X-authorization'</span><span class="p">:</span> <span class="s">'&lt;token&gt;'</span>
+        <span class="p">},</span>
 <span class="p">)</span>
 
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
-
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">fetch</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"node-fetch"</span><span class="p">);</span>
 <span class="kr">const</span> <span class="nx">Url</span> <span class="o">=</span> <span class="s1">'&lt;URI&gt;/metadata'</span>
 <span class="kr">const</span> <span class="nx">otherPram</span><span class="o">=</span><span class="p">{</span>
@@ -1619,13 +1639,14 @@ This endpoint returns JSON metadata of the form:
 
 <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
     <span class="s">'&lt;URI&gt;/gb'</span><span class="p">,</span>
-    <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s">'X-authorization'</span><span class="p">:</span> <span class="s">'&lt;token&gt;'</span><span class="p">},</span>
-    <span class="n">headers</span><span class="o">=</span><span class="p">{</span><span class="s">'Accept'</span><span class="p">:</span> <span class="s">'text/plain'</span><span class="p">},</span>
+    <span class="n">headers</span><span class="o">=</span><span class="p">{</span>
+        <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'text/plain'</span><span class="p">,</span>
+        <span class="s">'X-authorization'</span><span class="p">:</span> <span class="s">'&lt;token&gt;'</span>
+        <span class="p">},</span>
 <span class="p">)</span>
 
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
-
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">fetch</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"node-fetch"</span><span class="p">);</span>
 <span class="kr">const</span> <span class="nx">Url</span> <span class="o">=</span> <span class="s1">'&lt;URI&gt;/gb'</span>
 <span class="kr">const</span> <span class="nx">otherPram</span><span class="o">=</span><span class="p">{</span>
@@ -1646,13 +1667,14 @@ This endpoint returns JSON metadata of the form:
 
 <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
     <span class="s">'&lt;URI&gt;/fasta'</span><span class="p">,</span>
-    <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s">'X-authorization'</span><span class="p">:</span> <span class="s">'&lt;token&gt;'</span><span class="p">},</span>
-    <span class="n">headers</span><span class="o">=</span><span class="p">{</span><span class="s">'Accept'</span><span class="p">:</span> <span class="s">'text/plain'</span><span class="p">},</span>
+    <span class="n">headers</span><span class="o">=</span><span class="p">{</span>
+        <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'text/plain'</span><span class="p">,</span>
+        <span class="s">'X-authorization'</span><span class="p">:</span> <span class="s">'&lt;token&gt;'</span>
+        <span class="p">},</span>
 <span class="p">)</span>
 
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
-
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">fetch</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"node-fetch"</span><span class="p">);</span>
 <span class="kr">const</span> <span class="nx">Url</span> <span class="o">=</span> <span class="s1">'&lt;URI&gt;/fasta'</span>
 <span class="kr">const</span> <span class="nx">otherPram</span><span class="o">=</span><span class="p">{</span>
@@ -1673,13 +1695,14 @@ This endpoint returns JSON metadata of the form:
 
 <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
     <span class="s">'&lt;URI&gt;/gff'</span><span class="p">,</span>
-    <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s">'X-authorization'</span><span class="p">:</span> <span class="s">'&lt;token&gt;'</span><span class="p">},</span>
-    <span class="n">headers</span><span class="o">=</span><span class="p">{</span><span class="s">'Accept'</span><span class="p">:</span> <span class="s">'text/plain'</span><span class="p">},</span>
+    <span class="n">headers</span><span class="o">=</span><span class="p">{</span>
+        <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'text/plain'</span><span class="p">,</span>
+        <span class="s">'X-authorization'</span><span class="p">:</span> <span class="s">'&lt;token&gt;'</span>
+        <span class="p">},</span>
 <span class="p">)</span>
 
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
-
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">fetch</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"node-fetch"</span><span class="p">);</span>
 <span class="kr">const</span> <span class="nx">Url</span> <span class="o">=</span> <span class="s1">'&lt;URI&gt;/gff'</span>
 <span class="kr">const</span> <span class="nx">otherPram</span><span class="o">=</span><span class="p">{</span>
@@ -1710,9 +1733,11 @@ This endpoint returns JSON metadata of the form:
 </code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 
 <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
-    <span class="s">'&lt;URI&gt;/download'</span><span class="p">,</span>
-    <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s">'X-authorization'</span><span class="p">:</span> <span class="s">'token'</span><span class="p">},</span>
-    <span class="n">headers</span><span class="o">=</span><span class="p">{</span><span class="s">'Accept'</span><span class="p">:</span> <span class="s">'text/plain'</span><span class="p">},</span>
+    <span class="s">'&lt;URI&gt;/sbolnr'</span><span class="p">,</span>
+    <span class="n">headers</span><span class="o">=</span><span class="p">{</span>
+        <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'text/plain'</span><span class="p">,</span>
+        <span class="s">'X-authorization'</span><span class="p">:</span> <span class="s">'&lt;token&gt;'</span>
+        <span class="p">},</span>
 <span class="p">)</span>
 
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
@@ -1750,7 +1775,6 @@ This endpoint returns JSON metadata of the form:
 
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
-
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">fetch</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"node-fetch"</span><span class="p">);</span>
 <span class="kr">const</span> <span class="nx">FormData</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'form-data'</span><span class="p">);</span>
 <span class="kr">const</span> <span class="p">{</span> <span class="nx">createReadStream</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'fs'</span><span class="p">);</span>
@@ -1769,7 +1793,6 @@ This endpoint returns JSON metadata of the form:
 <span class="nx">form</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'citations'</span><span class="p">,</span> <span class="s1">'&lt;citations&gt;'</span><span class="p">);</span>
 <span class="nx">form</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'overwrite_merge'</span><span class="p">,</span> <span class="s1">'&lt;overwrite_merge&gt;'</span><span class="p">);</span>
 <span class="nx">form</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'file'</span><span class="p">,</span> <span class="nx">stream</span><span class="p">);</span>
-
 
 <span class="nx">fetch</span><span class="p">(</span><span class="nx">url</span><span class="p">,</span> <span class="p">{</span> <span class="na">method</span><span class="p">:</span> <span class="s1">'POST'</span><span class="p">,</span> <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span><span class="p">,</span> <span class="na">body</span><span class="p">:</span><span class="nx">form</span><span class="p">})</span>
     <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">res</span> <span class="o">=&gt;</span> <span class="nx">res</span><span class="p">.</span><span class="nx">buffer</span><span class="p">()).</span><span class="nx">then</span><span class="p">(</span><span class="nx">buf</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">buf</span><span class="p">.</span><span class="nx">toString</span><span class="p">()))</span>
@@ -1841,7 +1864,6 @@ This endpoint returns JSON metadata of the form:
 
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
-
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">fetch</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"node-fetch"</span><span class="p">);</span>
 <span class="kr">const</span> <span class="p">{</span> <span class="nx">URLSearchParams</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'url'</span><span class="p">);</span>
 <span class="kr">const</span> <span class="nx">url</span> <span class="o">=</span> <span class="s1">'&lt;URI&gt;/makePublic'</span>
@@ -1906,13 +1928,14 @@ This endpoint returns JSON metadata of the form:
 
 <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
     <span class="s">'&lt;URI&gt;/removeCollection'</span><span class="p">,</span>
-    <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s">'X-authorization'</span><span class="p">:</span> <span class="s">'&lt;token&gt;'</span><span class="p">},</span>
-    <span class="n">headers</span><span class="o">=</span><span class="p">{</span><span class="s">'Accept'</span><span class="p">:</span> <span class="s">'text/plain'</span><span class="p">},</span>
+    <span class="n">headers</span><span class="o">=</span><span class="p">{</span>
+        <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'text/plain'</span><span class="p">,</span>
+        <span class="s">'X-authorization'</span><span class="p">:</span> <span class="s">'&lt;token&gt;'</span>
+        <span class="p">},</span>
 <span class="p">)</span>
 
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
-
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">fetch</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"node-fetch"</span><span class="p">);</span>
 <span class="kr">const</span> <span class="nx">Url</span> <span class="o">=</span> <span class="s1">'&lt;URI&gt;/removeCollection'</span>
 <span class="kr">const</span> <span class="nx">otherPram</span><span class="o">=</span><span class="p">{</span>
@@ -1933,13 +1956,14 @@ This endpoint returns JSON metadata of the form:
 
 <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
     <span class="s">'&lt;URI&gt;/remove'</span><span class="p">,</span>
-    <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s">'X-authorization'</span><span class="p">:</span> <span class="s">'&lt;token&gt;'</span><span class="p">},</span>
-    <span class="n">headers</span><span class="o">=</span><span class="p">{</span><span class="s">'Accept'</span><span class="p">:</span> <span class="s">'text/plain'</span><span class="p">},</span>
+    <span class="n">headers</span><span class="o">=</span><span class="p">{</span>
+        <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'text/plain'</span><span class="p">,</span>
+        <span class="s">'X-authorization'</span><span class="p">:</span> <span class="s">'&lt;token&gt;'</span>
+        <span class="p">},</span>
 <span class="p">)</span>
 
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
-
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">fetch</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"node-fetch"</span><span class="p">);</span>
 <span class="kr">const</span> <span class="nx">Url</span> <span class="o">=</span> <span class="s1">'&lt;URI&gt;/remove'</span>
 <span class="kr">const</span> <span class="nx">otherPram</span><span class="o">=</span><span class="p">{</span>
@@ -1960,13 +1984,14 @@ This endpoint returns JSON metadata of the form:
 
 <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
     <span class="s">'&lt;URI&gt;/replace'</span><span class="p">,</span>
-    <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s">'X-authorization'</span><span class="p">:</span> <span class="s">'&lt;token&gt;'</span><span class="p">},</span>
-    <span class="n">headers</span><span class="o">=</span><span class="p">{</span><span class="s">'Accept'</span><span class="p">:</span> <span class="s">'text/plain'</span><span class="p">},</span>
+    <span class="n">headers</span><span class="o">=</span><span class="p">{</span>
+        <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'text/plain'</span><span class="p">,</span>
+        <span class="s">'X-authorization'</span><span class="p">:</span> <span class="s">'&lt;token&gt;'</span>
+        <span class="p">},</span>
 <span class="p">)</span>
 
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
-
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">fetch</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"node-fetch"</span><span class="p">);</span>
 <span class="kr">const</span> <span class="nx">Url</span> <span class="o">=</span> <span class="s1">'&lt;URI&gt;/replace'</span>
 <span class="kr">const</span> <span class="nx">otherPram</span><span class="o">=</span><span class="p">{</span>
@@ -1982,34 +2007,34 @@ This endpoint returns JSON metadata of the form:
 <p><code>POST &lt;URI&gt;/icon</code></p>
 
 <p>Updates the collection&#39;s icon.</p>
-<pre class="highlight plaintext tab-plaintext"><code>curl -X POST -H "Accept: text/plain" -H "X-authorization:&lt;token&gt;" -F "collectionIcon=&lt;icon&gt;" &lt;URI&gt;/icon
+<pre class="highlight plaintext tab-plaintext"><code>curl -X POST -H "Accept: text/plain" -H "X-authorization:&lt;token&gt;" -F "collectionIcon=@&lt;icon&gt;" &lt;URI&gt;/icon
 </code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 
 <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span>
-    <span class="s">'localhost:7777/public/testid0/testid0_collection/1/icon'</span><span class="p">,</span>
+    <span class="s">'&lt;URI&gt;/icon'</span><span class="p">,</span>
     <span class="n">headers</span><span class="o">=</span><span class="p">{</span>
-        <span class="s">'X-authorization'</span><span class="p">:</span> <span class="s">'88472249-ee84-49c6-8f81-0b7a6b9dce64'</span><span class="p">,</span>
+        <span class="s">'X-authorization'</span><span class="p">:</span> <span class="s">'&lt;token&gt;'</span><span class="p">,</span>
         <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'text/plain'</span>
     <span class="p">},</span>
     <span class="n">files</span><span class="o">=</span><span class="p">{</span>
-        <span class="s">'collectionIcon'</span><span class="p">:</span> <span class="nb">open</span><span class="p">(</span><span class="s">'icon.png'</span><span class="p">,</span> <span class="s">'rb'</span><span class="p">),</span>
+        <span class="s">'collectionIcon'</span><span class="p">:</span> <span class="nb">open</span><span class="p">(</span><span class="s">'&lt;icon.png&gt;'</span><span class="p">,</span> <span class="s">'rb'</span><span class="p">),</span>
         <span class="p">},</span>
 <span class="p">)</span>
 
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">fetch</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"node-fetch"</span><span class="p">);</span>
-<span class="kr">const</span> <span class="p">{</span> <span class="nx">URLSearchParams</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'url'</span><span class="p">);</span>
-<span class="kr">const</span> <span class="nx">url</span> <span class="o">=</span> <span class="s1">'&lt;URI&gt;/addOwner'</span>
+<span class="kr">const</span> <span class="p">{</span> <span class="nx">createReadStream</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'fs'</span><span class="p">);</span>
+<span class="kr">const</span> <span class="nx">FormData</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'form-data'</span><span class="p">);</span>
+<span class="kr">const</span> <span class="nx">url</span> <span class="o">=</span> <span class="s1">'&lt;SynBioHub URL&gt;/icon'</span>
+<span class="kr">const</span> <span class="nx">stream</span> <span class="o">=</span> <span class="nx">createReadStream</span><span class="p">(</span><span class="s1">'&lt;icon path&gt;'</span><span class="p">);</span>
 <span class="kd">var</span> <span class="nx">headers</span><span class="o">=</span><span class="p">{</span>
     <span class="s2">"Accept"</span> <span class="p">:</span> <span class="s2">"text/plain; charset=UTF-8"</span><span class="p">,</span>
     <span class="s2">"X-authorization"</span> <span class="p">:</span> <span class="s2">"&lt;token&gt;"</span>
 <span class="p">};</span>
 
-<span class="kr">const</span> <span class="nx">params</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">URLSearchParams</span><span class="p">();</span>
-<span class="nx">params</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'user'</span><span class="p">,</span> <span class="s1">'&lt;id&gt;'</span><span class="p">);</span>
-<span class="nx">params</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'uri'</span><span class="p">,</span> <span class="s1">'&lt;version&gt;'</span><span class="p">);</span>
-
+<span class="kr">const</span> <span class="nx">params</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">FormData</span><span class="p">();</span>
+<span class="nx">params</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'collectionIcon'</span><span class="p">,</span> <span class="nx">stream</span><span class="p">);</span>
 
 <span class="nx">fetch</span><span class="p">(</span><span class="nx">url</span><span class="p">,</span> <span class="p">{</span> <span class="na">method</span><span class="p">:</span> <span class="s1">'POST'</span><span class="p">,</span> <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span><span class="p">,</span> <span class="na">body</span><span class="p">:</span><span class="nx">params</span><span class="p">})</span>
     <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">res</span> <span class="o">=&gt;</span> <span class="nx">res</span><span class="p">.</span><span class="nx">buffer</span><span class="p">()).</span><span class="nx">then</span><span class="p">(</span><span class="nx">buf</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">buf</span><span class="p">.</span><span class="nx">toString</span><span class="p">()))</span>
@@ -2063,7 +2088,6 @@ This endpoint returns JSON metadata of the form:
 <span class="nx">params</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'user'</span><span class="p">,</span> <span class="s1">'&lt;user&gt;'</span><span class="p">);</span>
 <span class="nx">params</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'uri'</span><span class="p">,</span> <span class="s1">'&lt;uri&gt;'</span><span class="p">);</span>
 
-
 <span class="nx">fetch</span><span class="p">(</span><span class="nx">url</span><span class="p">,</span> <span class="p">{</span> <span class="na">method</span><span class="p">:</span> <span class="s1">'POST'</span><span class="p">,</span> <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span><span class="p">,</span> <span class="na">body</span><span class="p">:</span><span class="nx">params</span><span class="p">})</span>
     <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">res</span> <span class="o">=&gt;</span> <span class="nx">res</span><span class="p">.</span><span class="nx">buffer</span><span class="p">()).</span><span class="nx">then</span><span class="p">(</span><span class="nx">buf</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">buf</span><span class="p">.</span><span class="nx">toString</span><span class="p">()))</span>
     <span class="p">.</span><span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="o">=&gt;</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">error</span><span class="p">))</span>
@@ -2113,8 +2137,6 @@ This endpoint returns JSON metadata of the form:
 
 <span class="kr">const</span> <span class="nx">params</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">URLSearchParams</span><span class="p">();</span>
 <span class="nx">params</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'userUri'</span><span class="p">,</span> <span class="s1">'&lt;userUri&gt;'</span><span class="p">);</span>
-
-
 
 <span class="nx">fetch</span><span class="p">(</span><span class="nx">url</span><span class="p">,</span> <span class="p">{</span> <span class="na">method</span><span class="p">:</span> <span class="s1">'POST'</span><span class="p">,</span> <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span><span class="p">,</span> <span class="na">body</span><span class="p">:</span><span class="nx">params</span><span class="p">})</span>
     <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">res</span> <span class="o">=&gt;</span> <span class="nx">res</span><span class="p">.</span><span class="nx">buffer</span><span class="p">()).</span><span class="nx">then</span><span class="p">(</span><span class="nx">buf</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">buf</span><span class="p">.</span><span class="nx">toString</span><span class="p">()))</span>
@@ -2166,17 +2188,13 @@ This endpoint returns JSON metadata of the form:
     <span class="s2">"X-authorization"</span> <span class="p">:</span> <span class="s2">"&lt;token&gt;"</span>
 <span class="p">};</span>
 
-
 <span class="kr">const</span> <span class="nx">params</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">URLSearchParams</span><span class="p">();</span>
 <span class="nx">params</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'uri'</span><span class="p">,</span> <span class="s1">'&lt;uri&gt;'</span><span class="p">);</span>
 <span class="nx">params</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'value'</span><span class="p">,</span> <span class="s1">'&lt;value&gt;'</span><span class="p">);</span>
 
-
 <span class="nx">fetch</span><span class="p">(</span><span class="nx">url</span><span class="p">,</span> <span class="p">{</span> <span class="na">method</span><span class="p">:</span> <span class="s1">'POST'</span><span class="p">,</span> <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span><span class="p">,</span> <span class="na">body</span><span class="p">:</span><span class="nx">params</span><span class="p">})</span>
     <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">res</span> <span class="o">=&gt;</span> <span class="nx">res</span><span class="p">.</span><span class="nx">buffer</span><span class="p">()).</span><span class="nx">then</span><span class="p">(</span><span class="nx">buf</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">buf</span><span class="p">.</span><span class="nx">toString</span><span class="p">()))</span>
     <span class="p">.</span><span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="o">=&gt;</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">error</span><span class="p">))</span>
-
-
 </code></pre>
 <table><thead>
 <tr>
@@ -2198,8 +2216,7 @@ This endpoint returns JSON metadata of the form:
 
 <p>Edit the mutable notes of an object specified by the URI.</p>
 <pre class="highlight plaintext tab-plaintext"><code>curl -X POST -H "Accept: text/plain" -H "X-authorization:&lt;token&gt;" -d "uri=&lt;uri&gt;&amp;value=&lt;value&gt;" &lt;SynBioHub URL&gt;/updateMutableNotes
-</code></pre><pre class="highlight python tab-python"><code>
-<span class="kn">import</span> <span class="nn">requests</span>
+</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 
 <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span>
     <span class="s">'&lt;SynBioHub URL&gt;/updateMutableNotes'</span><span class="p">,</span>
@@ -2215,9 +2232,7 @@ This endpoint returns JSON metadata of the form:
 
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
-
-</code></pre><pre class="highlight javascript tab-javascript"><code>
-<span class="kr">const</span> <span class="nx">fetch</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"node-fetch"</span><span class="p">);</span>
+</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">fetch</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"node-fetch"</span><span class="p">);</span>
 <span class="kr">const</span> <span class="p">{</span> <span class="nx">URLSearchParams</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'url'</span><span class="p">);</span>
 <span class="kr">const</span> <span class="nx">url</span> <span class="o">=</span> <span class="s1">'&lt;SynBioHub URL&gt;/updateMutableNotes'</span>
 <span class="kd">var</span> <span class="nx">headers</span><span class="o">=</span><span class="p">{</span>
@@ -2234,8 +2249,6 @@ This endpoint returns JSON metadata of the form:
 <span class="nx">fetch</span><span class="p">(</span><span class="nx">url</span><span class="p">,</span> <span class="p">{</span> <span class="na">method</span><span class="p">:</span> <span class="s1">'POST'</span><span class="p">,</span> <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span><span class="p">,</span> <span class="na">body</span><span class="p">:</span><span class="nx">params</span><span class="p">})</span>
     <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">res</span> <span class="o">=&gt;</span> <span class="nx">res</span><span class="p">.</span><span class="nx">buffer</span><span class="p">()).</span><span class="nx">then</span><span class="p">(</span><span class="nx">buf</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">buf</span><span class="p">.</span><span class="nx">toString</span><span class="p">()))</span>
     <span class="p">.</span><span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="o">=&gt;</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">error</span><span class="p">))</span>
-
-
 </code></pre>
 <table><thead>
 <tr>
@@ -2257,8 +2270,7 @@ This endpoint returns JSON metadata of the form:
 
 <p>Edit the mutable source of an object specified by the URI.</p>
 <pre class="highlight plaintext tab-plaintext"><code>curl -X POST -H "Accept: text/plain" -H "X-authorization:&lt;token&gt;" -d "uri=&lt;uri&gt;&amp;value=&lt;value&gt;" &lt;SynBioHub URL&gt;/updateMutableSource
-</code></pre><pre class="highlight python tab-python"><code>
-<span class="kn">import</span> <span class="nn">requests</span>
+</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 
 <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span>
     <span class="s">'&lt;SynBioHub URL&gt;/updateMutableSource'</span><span class="p">,</span>
@@ -2274,9 +2286,7 @@ This endpoint returns JSON metadata of the form:
 
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
-
-</code></pre><pre class="highlight javascript tab-javascript"><code>
-<span class="kr">const</span> <span class="nx">fetch</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"node-fetch"</span><span class="p">);</span>
+</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">fetch</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"node-fetch"</span><span class="p">);</span>
 <span class="kr">const</span> <span class="p">{</span> <span class="nx">URLSearchParams</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'url'</span><span class="p">);</span>
 <span class="kr">const</span> <span class="nx">url</span> <span class="o">=</span> <span class="s1">'&lt;SynBioHub URL&gt;/updateMutableSource'</span>
 <span class="kd">var</span> <span class="nx">headers</span><span class="o">=</span><span class="p">{</span>
@@ -2284,17 +2294,13 @@ This endpoint returns JSON metadata of the form:
     <span class="s2">"X-authorization"</span> <span class="p">:</span> <span class="s2">"&lt;token&gt;"</span>
 <span class="p">};</span>
 
-
 <span class="kr">const</span> <span class="nx">params</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">URLSearchParams</span><span class="p">();</span>
 <span class="nx">params</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'uri'</span><span class="p">,</span> <span class="s1">'&lt;uri&gt;'</span><span class="p">);</span>
 <span class="nx">params</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'value'</span><span class="p">,</span> <span class="s1">'&lt;value&gt;'</span><span class="p">);</span>
 
-
 <span class="nx">fetch</span><span class="p">(</span><span class="nx">url</span><span class="p">,</span> <span class="p">{</span> <span class="na">method</span><span class="p">:</span> <span class="s1">'POST'</span><span class="p">,</span> <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span><span class="p">,</span> <span class="na">body</span><span class="p">:</span><span class="nx">params</span><span class="p">})</span>
     <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">res</span> <span class="o">=&gt;</span> <span class="nx">res</span><span class="p">.</span><span class="nx">buffer</span><span class="p">()).</span><span class="nx">then</span><span class="p">(</span><span class="nx">buf</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">buf</span><span class="p">.</span><span class="nx">toString</span><span class="p">()))</span>
     <span class="p">.</span><span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="o">=&gt;</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">error</span><span class="p">))</span>
-
-
 </code></pre>
 <table><thead>
 <tr>
@@ -2316,8 +2322,7 @@ This endpoint returns JSON metadata of the form:
 
 <p>Edit the citations of an object specified by the URI.</p>
 <pre class="highlight plaintext tab-plaintext"><code>curl -X POST -H "Accept: text/plain" -H "X-authorization:&lt;token&gt;" -d "uri=&lt;uri&gt;&amp;value=&lt;value&gt;" &lt;SynBioHub URL&gt;/updateCitations
-</code></pre><pre class="highlight python tab-python"><code>
-<span class="kn">import</span> <span class="nn">requests</span>
+</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 
 <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span>
     <span class="s">'&lt;SynBioHub URL&gt;/updateCitations'</span><span class="p">,</span>
@@ -2333,9 +2338,7 @@ This endpoint returns JSON metadata of the form:
 
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
-
-</code></pre><pre class="highlight javascript tab-javascript"><code>
-<span class="kr">const</span> <span class="nx">fetch</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"node-fetch"</span><span class="p">);</span>
+</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">fetch</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"node-fetch"</span><span class="p">);</span>
 <span class="kr">const</span> <span class="p">{</span> <span class="nx">URLSearchParams</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'url'</span><span class="p">);</span>
 <span class="kr">const</span> <span class="nx">url</span> <span class="o">=</span> <span class="s1">'&lt;SynBioHub URL&gt;/updateCitations'</span>
 <span class="kd">var</span> <span class="nx">headers</span><span class="o">=</span><span class="p">{</span>
@@ -2343,17 +2346,13 @@ This endpoint returns JSON metadata of the form:
     <span class="s2">"X-authorization"</span> <span class="p">:</span> <span class="s2">"&lt;token&gt;"</span>
 <span class="p">};</span>
 
-
 <span class="kr">const</span> <span class="nx">params</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">URLSearchParams</span><span class="p">();</span>
 <span class="nx">params</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'uri'</span><span class="p">,</span> <span class="s1">'&lt;uri&gt;'</span><span class="p">);</span>
 <span class="nx">params</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'value'</span><span class="p">,</span> <span class="s1">'&lt;value&gt;'</span><span class="p">);</span>
 
-
 <span class="nx">fetch</span><span class="p">(</span><span class="nx">url</span><span class="p">,</span> <span class="p">{</span> <span class="na">method</span><span class="p">:</span> <span class="s1">'POST'</span><span class="p">,</span> <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span><span class="p">,</span> <span class="na">body</span><span class="p">:</span><span class="nx">params</span><span class="p">})</span>
     <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">res</span> <span class="o">=&gt;</span> <span class="nx">res</span><span class="p">.</span><span class="nx">buffer</span><span class="p">()).</span><span class="nx">then</span><span class="p">(</span><span class="nx">buf</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">buf</span><span class="p">.</span><span class="nx">toString</span><span class="p">()))</span>
     <span class="p">.</span><span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="o">=&gt;</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">error</span><span class="p">))</span>
-
-
 </code></pre>
 <table><thead>
 <tr>
@@ -2549,7 +2548,6 @@ This endpoint returns JSON metadata of the form:
 
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
-
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">fetch</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"node-fetch"</span><span class="p">);</span>
 <span class="kr">const</span> <span class="p">{</span> <span class="nx">URLSearchParams</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'url'</span><span class="p">);</span>
 <span class="kr">const</span> <span class="nx">url</span> <span class="o">=</span> <span class="s1">'&lt;URI&gt;/addToCollection'</span>
@@ -2596,7 +2594,6 @@ This endpoint returns JSON metadata of the form:
 
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
-
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">fetch</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"node-fetch"</span><span class="p">);</span>
 <span class="kr">const</span> <span class="p">{</span> <span class="nx">URLSearchParams</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'url'</span><span class="p">);</span>
 <span class="kr">const</span> <span class="nx">url</span> <span class="o">=</span> <span class="s1">'&lt;URI&gt;/removeMembership'</span>
@@ -2611,7 +2608,6 @@ This endpoint returns JSON metadata of the form:
 <span class="nx">fetch</span><span class="p">(</span><span class="nx">url</span><span class="p">,</span> <span class="p">{</span> <span class="na">method</span><span class="p">:</span> <span class="s1">'POST'</span><span class="p">,</span> <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span><span class="p">,</span> <span class="na">body</span><span class="p">:</span><span class="nx">params</span><span class="p">})</span>
     <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">res</span> <span class="o">=&gt;</span> <span class="nx">res</span><span class="p">.</span><span class="nx">buffer</span><span class="p">()).</span><span class="nx">then</span><span class="p">(</span><span class="nx">buf</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">buf</span><span class="p">.</span><span class="nx">toString</span><span class="p">()))</span>
     <span class="p">.</span><span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="o">=&gt;</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">error</span><span class="p">))</span>
-
 </code></pre>
 <table><thead>
 <tr>
@@ -2649,7 +2645,6 @@ This endpoint returns JSON metadata of the form:
 
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
-
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">fetch</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"node-fetch"</span><span class="p">);</span>
 <span class="kr">const</span> <span class="nx">FormData</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'form-data'</span><span class="p">);</span>
 <span class="kr">const</span> <span class="p">{</span> <span class="nx">createReadStream</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'fs'</span><span class="p">);</span>
@@ -2662,7 +2657,6 @@ This endpoint returns JSON metadata of the form:
 
 <span class="kr">const</span> <span class="nx">form</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">FormData</span><span class="p">();</span>
 <span class="nx">form</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'file'</span><span class="p">,</span> <span class="nx">stream</span><span class="p">);</span>
-
 
 <span class="nx">fetch</span><span class="p">(</span><span class="nx">url</span><span class="p">,</span> <span class="p">{</span> <span class="na">method</span><span class="p">:</span> <span class="s1">'POST'</span><span class="p">,</span> <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span><span class="p">,</span> <span class="na">body</span><span class="p">:</span><span class="nx">form</span><span class="p">})</span>
     <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">res</span> <span class="o">=&gt;</span> <span class="nx">res</span><span class="p">.</span><span class="nx">buffer</span><span class="p">()).</span><span class="nx">then</span><span class="p">(</span><span class="nx">buf</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">buf</span><span class="p">.</span><span class="nx">toString</span><span class="p">()))</span>
@@ -2701,7 +2695,6 @@ This endpoint returns JSON metadata of the form:
 
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
-
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">fetch</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"node-fetch"</span><span class="p">);</span>
 <span class="kr">const</span> <span class="p">{</span> <span class="nx">URLSearchParams</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'url'</span><span class="p">);</span>
 <span class="kr">const</span> <span class="nx">url</span> <span class="o">=</span> <span class="s1">'&lt;URI&gt;/attachURL'</span>
@@ -2714,7 +2707,6 @@ This endpoint returns JSON metadata of the form:
 <span class="nx">params</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'url'</span><span class="p">,</span> <span class="s1">'&lt;url&gt;'</span><span class="p">);</span>
 <span class="nx">params</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'name'</span><span class="p">,</span> <span class="s1">'&lt;name&gt;'</span><span class="p">);</span>
 <span class="nx">params</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'type'</span><span class="p">,</span> <span class="s1">'&lt;type&gt;'</span><span class="p">);</span>
-
 
 <span class="nx">fetch</span><span class="p">(</span><span class="nx">url</span><span class="p">,</span> <span class="p">{</span> <span class="na">method</span><span class="p">:</span> <span class="s1">'POST'</span><span class="p">,</span> <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span><span class="p">,</span> <span class="na">body</span><span class="p">:</span><span class="nx">params</span><span class="p">})</span>
     <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">res</span> <span class="o">=&gt;</span> <span class="nx">res</span><span class="p">.</span><span class="nx">buffer</span><span class="p">()).</span><span class="nx">then</span><span class="p">(</span><span class="nx">buf</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">buf</span><span class="p">.</span><span class="nx">toString</span><span class="p">()))</span>
@@ -2765,8 +2757,6 @@ This endpoint returns JSON metadata of the form:
 
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
-
-
 </code></pre><h1 id='administration-endpoints'>Administration Endpoints</h1>
 <p>The following endpoints are for users with administration privileges.</p>
 
@@ -2817,7 +2807,6 @@ This endpoint returns JSON metadata of the form:
 
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
-
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">fetch</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"node-fetch"</span><span class="p">);</span>
 <span class="kr">const</span> <span class="nx">url</span> <span class="o">=</span> <span class="s1">'&lt;SynBioHub URL&gt;/admin'</span>
 <span class="kr">const</span> <span class="nx">headers</span><span class="o">=</span><span class="p">{</span>
@@ -2844,8 +2833,15 @@ This endpoint returns JSON metadata of the form:
 
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
-</code></pre><pre class="highlight javascript tab-javascript"><code>
-
+</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">fetch</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"node-fetch"</span><span class="p">);</span>
+<span class="kr">const</span> <span class="nx">url</span> <span class="o">=</span> <span class="s1">'&lt;SynBioHub URL&gt;/admin/virtuoso'</span>
+<span class="kr">const</span> <span class="nx">headers</span><span class="o">=</span><span class="p">{</span>
+        <span class="s2">"Accept"</span> <span class="p">:</span> <span class="s2">"text/plain; charset=UTF-8"</span><span class="p">,</span>
+    <span class="s2">"X-authorization"</span> <span class="p">:</span> <span class="s2">"&lt;token&gt;"</span>
+<span class="p">};</span>
+<span class="nx">fetch</span><span class="p">(</span><span class="nx">url</span><span class="p">,</span> <span class="p">{</span> <span class="na">method</span><span class="p">:</span> <span class="s1">'GET'</span><span class="p">,</span> <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span><span class="p">})</span>
+    <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">res</span> <span class="o">=&gt;</span> <span class="nx">res</span><span class="p">.</span><span class="nx">buffer</span><span class="p">()).</span><span class="nx">then</span><span class="p">(</span><span class="nx">buf</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">buf</span><span class="p">.</span><span class="nx">toString</span><span class="p">()))</span>
+    <span class="p">.</span><span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="o">=&gt;</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">error</span><span class="p">))</span>
 </code></pre><h2 id='view-graphs'>View Graphs</h2>
 <p><code>GET &lt;SynBioHub URL&gt;/admin/graphs</code></p>
 
@@ -2863,7 +2859,6 @@ This endpoint returns JSON metadata of the form:
 
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
-
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">fetch</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"node-fetch"</span><span class="p">);</span>
 <span class="kr">const</span> <span class="nx">url</span> <span class="o">=</span> <span class="s1">'&lt;SynBioHub URL&gt;/admin/graphs'</span>
 <span class="kr">const</span> <span class="nx">headers</span><span class="o">=</span><span class="p">{</span>
@@ -2890,7 +2885,6 @@ This endpoint returns JSON metadata of the form:
 
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
-
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">fetch</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"node-fetch"</span><span class="p">);</span>
 <span class="kr">const</span> <span class="nx">url</span> <span class="o">=</span> <span class="s1">'&lt;SynBioHub URL&gt;/admin/log'</span>
 <span class="kr">const</span> <span class="nx">headers</span><span class="o">=</span><span class="p">{</span>
@@ -2917,7 +2911,6 @@ This endpoint returns JSON metadata of the form:
 
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
-
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">fetch</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"node-fetch"</span><span class="p">);</span>
 <span class="kr">const</span> <span class="nx">url</span> <span class="o">=</span> <span class="s1">'&lt;SynBioHub URL&gt;/admin/mail'</span>
 <span class="kr">const</span> <span class="nx">headers</span><span class="o">=</span><span class="p">{</span>
@@ -2948,7 +2941,6 @@ This endpoint returns JSON metadata of the form:
 
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
-
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">fetch</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"node-fetch"</span><span class="p">);</span>
 <span class="kr">const</span> <span class="p">{</span> <span class="nx">URLSearchParams</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'url'</span><span class="p">);</span>
 <span class="kr">const</span> <span class="nx">url</span> <span class="o">=</span> <span class="s1">'&lt;SynBioHub URL&gt;/admin/mail'</span>
@@ -2965,7 +2957,6 @@ This endpoint returns JSON metadata of the form:
 <span class="nx">fetch</span><span class="p">(</span><span class="nx">url</span><span class="p">,</span> <span class="p">{</span> <span class="na">method</span><span class="p">:</span> <span class="s1">'POST'</span><span class="p">,</span> <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span><span class="p">,</span> <span class="na">body</span><span class="p">:</span><span class="nx">params</span><span class="p">})</span>
     <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">res</span> <span class="o">=&gt;</span> <span class="nx">res</span><span class="p">.</span><span class="nx">buffer</span><span class="p">()).</span><span class="nx">then</span><span class="p">(</span><span class="nx">buf</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">buf</span><span class="p">.</span><span class="nx">toString</span><span class="p">()))</span>
     <span class="p">.</span><span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="o">=&gt;</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">error</span><span class="p">))</span>
-
 </code></pre>
 <table><thead>
 <tr>
@@ -2999,7 +2990,6 @@ This endpoint returns JSON metadata of the form:
 
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
-
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">fetch</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"node-fetch"</span><span class="p">);</span>
 <span class="kr">const</span> <span class="nx">url</span> <span class="o">=</span> <span class="s1">'&lt;SynBioHub URL&gt;/admin/plugins'</span>
 <span class="kr">const</span> <span class="nx">headers</span><span class="o">=</span><span class="p">{</span>
@@ -3032,7 +3022,6 @@ This endpoint returns JSON metadata of the form:
 
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
-
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">fetch</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"node-fetch"</span><span class="p">);</span>
 <span class="kr">const</span> <span class="p">{</span> <span class="nx">URLSearchParams</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'url'</span><span class="p">);</span>
 <span class="kr">const</span> <span class="nx">url</span> <span class="o">=</span> <span class="s1">'&lt;SynBioHub URL&gt;/admin/savePlugin'</span>
@@ -3050,7 +3039,6 @@ This endpoint returns JSON metadata of the form:
 <span class="nx">fetch</span><span class="p">(</span><span class="nx">url</span><span class="p">,</span> <span class="p">{</span> <span class="na">method</span><span class="p">:</span> <span class="s1">'POST'</span><span class="p">,</span> <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span><span class="p">,</span> <span class="na">body</span><span class="p">:</span><span class="nx">params</span><span class="p">})</span>
     <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">res</span> <span class="o">=&gt;</span> <span class="nx">res</span><span class="p">.</span><span class="nx">buffer</span><span class="p">()).</span><span class="nx">then</span><span class="p">(</span><span class="nx">buf</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">buf</span><span class="p">.</span><span class="nx">toString</span><span class="p">()))</span>
     <span class="p">.</span><span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="o">=&gt;</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">error</span><span class="p">))</span>
-
 </code></pre>
 <table><thead>
 <tr>
@@ -3096,7 +3084,6 @@ This endpoint returns JSON metadata of the form:
 
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
-
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">fetch</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"node-fetch"</span><span class="p">);</span>
 <span class="kr">const</span> <span class="p">{</span> <span class="nx">URLSearchParams</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'url'</span><span class="p">);</span>
 <span class="kr">const</span> <span class="nx">url</span> <span class="o">=</span> <span class="s1">'&lt;SynBioHub URL&gt;/admin/deletePlugin'</span>
@@ -3108,7 +3095,6 @@ This endpoint returns JSON metadata of the form:
 <span class="kr">const</span> <span class="nx">params</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">URLSearchParams</span><span class="p">();</span>
 <span class="nx">params</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'id'</span><span class="p">,</span> <span class="s1">'&lt;id&gt;'</span><span class="p">);</span>
 <span class="nx">params</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'category'</span><span class="p">,</span> <span class="s1">'&lt;category&gt;'</span><span class="p">);</span>
-
 
 <span class="nx">fetch</span><span class="p">(</span><span class="nx">url</span><span class="p">,</span> <span class="p">{</span> <span class="na">method</span><span class="p">:</span> <span class="s1">'POST'</span><span class="p">,</span> <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span><span class="p">,</span> <span class="na">body</span><span class="p">:</span><span class="nx">params</span><span class="p">})</span>
     <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">res</span> <span class="o">=&gt;</span> <span class="nx">res</span><span class="p">.</span><span class="nx">buffer</span><span class="p">()).</span><span class="nx">then</span><span class="p">(</span><span class="nx">buf</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">buf</span><span class="p">.</span><span class="nx">toString</span><span class="p">()))</span>
@@ -3178,7 +3164,6 @@ This endpoint returns JSON metadata of the form:
 
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
-
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">fetch</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"node-fetch"</span><span class="p">);</span>
 <span class="kr">const</span> <span class="p">{</span> <span class="nx">URLSearchParams</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'url'</span><span class="p">);</span>
 <span class="kr">const</span> <span class="nx">url</span> <span class="o">=</span> <span class="s1">'&lt;SynBioHub URL&gt;/admin/saveRegistry'</span>
@@ -3194,7 +3179,6 @@ This endpoint returns JSON metadata of the form:
 <span class="nx">fetch</span><span class="p">(</span><span class="nx">url</span><span class="p">,</span> <span class="p">{</span> <span class="na">method</span><span class="p">:</span> <span class="s1">'POST'</span><span class="p">,</span> <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span><span class="p">,</span> <span class="na">body</span><span class="p">:</span><span class="nx">params</span><span class="p">})</span>
     <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">res</span> <span class="o">=&gt;</span> <span class="nx">res</span><span class="p">.</span><span class="nx">buffer</span><span class="p">()).</span><span class="nx">then</span><span class="p">(</span><span class="nx">buf</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">buf</span><span class="p">.</span><span class="nx">toString</span><span class="p">()))</span>
     <span class="p">.</span><span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="o">=&gt;</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">error</span><span class="p">))</span>
-
 </code></pre>
 <table><thead>
 <tr>
@@ -3232,7 +3216,6 @@ This endpoint returns JSON metadata of the form:
 
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
-
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">fetch</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"node-fetch"</span><span class="p">);</span>
 <span class="kr">const</span> <span class="p">{</span> <span class="nx">URLSearchParams</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'url'</span><span class="p">);</span>
 <span class="kr">const</span> <span class="nx">url</span> <span class="o">=</span> <span class="s1">'&lt;SynBioHub URL&gt;/admin/deleteRegistry'</span>
@@ -3247,7 +3230,6 @@ This endpoint returns JSON metadata of the form:
 <span class="nx">fetch</span><span class="p">(</span><span class="nx">url</span><span class="p">,</span> <span class="p">{</span> <span class="na">method</span><span class="p">:</span> <span class="s1">'POST'</span><span class="p">,</span> <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span><span class="p">,</span> <span class="na">body</span><span class="p">:</span><span class="nx">params</span><span class="p">})</span>
     <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">res</span> <span class="o">=&gt;</span> <span class="nx">res</span><span class="p">.</span><span class="nx">buffer</span><span class="p">()).</span><span class="nx">then</span><span class="p">(</span><span class="nx">buf</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">buf</span><span class="p">.</span><span class="nx">toString</span><span class="p">()))</span>
     <span class="p">.</span><span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="o">=&gt;</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">error</span><span class="p">))</span>
-
 </code></pre>
 <table><thead>
 <tr>
@@ -3281,7 +3263,6 @@ This endpoint returns JSON metadata of the form:
 
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
-
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">fetch</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"node-fetch"</span><span class="p">);</span>
 <span class="kr">const</span> <span class="p">{</span> <span class="nx">URLSearchParams</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'url'</span><span class="p">);</span>
 <span class="kr">const</span> <span class="nx">url</span> <span class="o">=</span> <span class="s1">'&lt;SynBioHub URL&gt;/admin/setAdministratorEmail'</span>
@@ -3296,7 +3277,6 @@ This endpoint returns JSON metadata of the form:
 <span class="nx">fetch</span><span class="p">(</span><span class="nx">url</span><span class="p">,</span> <span class="p">{</span> <span class="na">method</span><span class="p">:</span> <span class="s1">'POST'</span><span class="p">,</span> <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span><span class="p">,</span> <span class="na">body</span><span class="p">:</span><span class="nx">params</span><span class="p">})</span>
     <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">res</span> <span class="o">=&gt;</span> <span class="nx">res</span><span class="p">.</span><span class="nx">buffer</span><span class="p">()).</span><span class="nx">then</span><span class="p">(</span><span class="nx">buf</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">buf</span><span class="p">.</span><span class="nx">toString</span><span class="p">()))</span>
     <span class="p">.</span><span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="o">=&gt;</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">error</span><span class="p">))</span>
-
 </code></pre>
 <table><thead>
 <tr>
@@ -3326,7 +3306,6 @@ This endpoint returns JSON metadata of the form:
 
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
-
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">fetch</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"node-fetch"</span><span class="p">);</span>
 <span class="kr">const</span> <span class="p">{</span> <span class="nx">URLSearchParams</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'url'</span><span class="p">);</span>
 <span class="kr">const</span> <span class="nx">url</span> <span class="o">=</span> <span class="s1">'&lt;SynBioHub URL&gt;/admin/retrieveFromWebOfRegistries'</span>
@@ -3361,7 +3340,6 @@ This endpoint returns JSON metadata of the form:
 
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
-
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">fetch</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"node-fetch"</span><span class="p">);</span>
 <span class="kr">const</span> <span class="p">{</span> <span class="nx">URLSearchParams</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'url'</span><span class="p">);</span>
 <span class="kr">const</span> <span class="nx">url</span> <span class="o">=</span> <span class="s1">'&lt;SynBioHub URL&gt;/admin/federate'</span>
@@ -3410,7 +3388,6 @@ This endpoint returns JSON metadata of the form:
 
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
-
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">fetch</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"node-fetch"</span><span class="p">);</span>
 <span class="kr">const</span> <span class="nx">url</span> <span class="o">=</span> <span class="s1">'&lt;SynBioHub URL&gt;/admin/remotes'</span>
 <span class="kr">const</span> <span class="nx">headers</span><span class="o">=</span><span class="p">{</span>
@@ -3450,7 +3427,6 @@ type=benchling&amp;id=&lt;id&gt;&amp;benchlingApiToken=&lt;BenchlingApitoken&gt;
 
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
-
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">fetch</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"node-fetch"</span><span class="p">);</span>
 <span class="kr">const</span> <span class="p">{</span> <span class="nx">URLSearchParams</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'url'</span><span class="p">);</span>
 <span class="kr">const</span> <span class="nx">url</span> <span class="o">=</span> <span class="s1">'&lt;SynBioHub URL&gt;/admin/saveRemote'</span>
@@ -3462,7 +3438,7 @@ type=benchling&amp;id=&lt;id&gt;&amp;benchlingApiToken=&lt;BenchlingApitoken&gt;
 <span class="kr">const</span> <span class="nx">params</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">URLSearchParams</span><span class="p">();</span>
 <span class="nx">params</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'type'</span><span class="p">,</span> <span class="s1">'benchling'</span><span class="p">);</span>
 <span class="nx">params</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'id'</span><span class="p">,</span> <span class="s1">'&lt;id&gt;'</span><span class="p">);</span>
-<span class="nx">params</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'benchlingApiToken'</span><span class="p">,</span> <span class="s1">'benchlingApiToken'</span><span class="p">);</span>
+<span class="nx">params</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'benchlingApiToken'</span><span class="p">,</span> <span class="s1">'&lt;benchlingApiToken&gt;'</span><span class="p">);</span>
 <span class="nx">params</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'rejectUnauthorized'</span><span class="p">,</span> <span class="s1">'&lt;rejectUnauthorized&gt;'</span><span class="p">);</span>
 <span class="nx">params</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'folderprefix'</span><span class="p">,</span> <span class="s1">'&lt;folderprefix&gt;'</span><span class="p">);</span>
 <span class="nx">params</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'defaultFolderId'</span><span class="p">,</span> <span class="s1">'&lt;defaultFolderId'</span><span class="p">);</span>
@@ -3470,7 +3446,6 @@ type=benchling&amp;id=&lt;id&gt;&amp;benchlingApiToken=&lt;BenchlingApitoken&gt;
 <span class="nx">params</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'rootCollectionsDisplayId'</span><span class="p">,</span> <span class="s1">'&lt;rootColelctionsDisplayId&gt;'</span><span class="p">);</span>
 <span class="nx">params</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'rootCollectionName'</span><span class="p">,</span> <span class="s1">'&lt;rootCollectionName&gt;'</span><span class="p">);</span>
 <span class="nx">params</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'rootCollectionDescription'</span><span class="p">,</span> <span class="s1">'&lt;rootCollectionDescription&gt;'</span><span class="p">);</span>
-
 
 <span class="nx">fetch</span><span class="p">(</span><span class="nx">url</span><span class="p">,</span> <span class="p">{</span> <span class="na">method</span><span class="p">:</span> <span class="s1">'POST'</span><span class="p">,</span> <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span><span class="p">,</span> <span class="na">body</span><span class="p">:</span><span class="nx">params</span><span class="p">})</span>
     <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">res</span> <span class="o">=&gt;</span> <span class="nx">res</span><span class="p">.</span><span class="nx">buffer</span><span class="p">()).</span><span class="nx">then</span><span class="p">(</span><span class="nx">buf</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">buf</span><span class="p">.</span><span class="nx">toString</span><span class="p">()))</span>
@@ -3568,7 +3543,6 @@ type=benchling&amp;id=&lt;id&gt;&amp;benchlingApiToken=&lt;BenchlingApitoken&gt;
 
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
-
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">fetch</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"node-fetch"</span><span class="p">);</span>
 <span class="kr">const</span> <span class="p">{</span> <span class="nx">URLSearchParams</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'url'</span><span class="p">);</span>
 <span class="kr">const</span> <span class="nx">url</span> <span class="o">=</span> <span class="s1">'&lt;SynBioHub URL&gt;/admin/saveRemote'</span>
@@ -3703,7 +3677,6 @@ type=benchling&amp;id=&lt;id&gt;&amp;benchlingApiToken=&lt;BenchlingApitoken&gt;
 
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
-
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">fetch</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"node-fetch"</span><span class="p">);</span>
 <span class="kr">const</span> <span class="p">{</span> <span class="nx">URLSearchParams</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'url'</span><span class="p">);</span>
 <span class="kr">const</span> <span class="nx">url</span> <span class="o">=</span> <span class="s1">'&lt;SynBioHub&gt;/admin/deleteRemote'</span>
@@ -3714,7 +3687,6 @@ type=benchling&amp;id=&lt;id&gt;&amp;benchlingApiToken=&lt;BenchlingApitoken&gt;
 
 <span class="kr">const</span> <span class="nx">params</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">URLSearchParams</span><span class="p">();</span>
 <span class="nx">params</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'id'</span><span class="p">,</span> <span class="s1">'&lt;id&gt;'</span><span class="p">);</span>
-
 
 <span class="nx">fetch</span><span class="p">(</span><span class="nx">url</span><span class="p">,</span> <span class="p">{</span> <span class="na">method</span><span class="p">:</span> <span class="s1">'POST'</span><span class="p">,</span> <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span><span class="p">,</span> <span class="na">body</span><span class="p">:</span><span class="nx">params</span><span class="p">})</span>
     <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">res</span> <span class="o">=&gt;</span> <span class="nx">res</span><span class="p">.</span><span class="nx">buffer</span><span class="p">()).</span><span class="nx">then</span><span class="p">(</span><span class="nx">buf</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">buf</span><span class="p">.</span><span class="nx">toString</span><span class="p">()))</span>
@@ -3748,7 +3720,6 @@ type=benchling&amp;id=&lt;id&gt;&amp;benchlingApiToken=&lt;BenchlingApitoken&gt;
 
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
-
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">fetch</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"node-fetch"</span><span class="p">);</span>
 <span class="kr">const</span> <span class="nx">url</span> <span class="o">=</span> <span class="s1">'&lt;SynBioHub URL&gt;/admin/explorer'</span>
 <span class="kr">const</span> <span class="nx">headers</span><span class="o">=</span><span class="p">{</span>
@@ -3775,7 +3746,6 @@ type=benchling&amp;id=&lt;id&gt;&amp;benchlingApiToken=&lt;BenchlingApitoken&gt;
 
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
-
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">fetch</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"node-fetch"</span><span class="p">);</span>
 <span class="kr">const</span> <span class="nx">url</span> <span class="o">=</span> <span class="s1">'&lt;SynBioHub URL&gt;/admin/explorerlog'</span>
 <span class="kr">const</span> <span class="nx">headers</span><span class="o">=</span><span class="p">{</span>
@@ -3810,7 +3780,6 @@ type=benchling&amp;id=&lt;id&gt;&amp;benchlingApiToken=&lt;BenchlingApitoken&gt;
 
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
-
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">fetch</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"node-fetch"</span><span class="p">);</span>
 <span class="kr">const</span> <span class="p">{</span> <span class="nx">URLSearchParams</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'url'</span><span class="p">);</span>
 <span class="kr">const</span> <span class="nx">url</span> <span class="o">=</span> <span class="s1">'&lt;URI&gt;/makePublic'</span>
@@ -3838,32 +3807,40 @@ type=benchling&amp;id=&lt;id&gt;&amp;benchlingApiToken=&lt;BenchlingApitoken&gt;
 </tr>
 </thead><tbody>
 <tr>
-<td>id</td>
-<td>The id for the new collection.</td>
+<td>useSBOLExplorer</td>
+<td>Boolean indicating whether SBOLExplorer is to be used or not</td>
 </tr>
 <tr>
-<td>version</td>
-<td>The version for the new collection.</td>
+<td>SBOLExplorerEndpoint</td>
+<td>The endpoint where SBOLExplorer can be found</td>
 </tr>
 <tr>
-<td>name</td>
-<td>The name for the new collection (optional: default is existing name).</td>
+<td>useDistributedSearch</td>
+<td>Boolean indicating whether distributed search should be used</td>
 </tr>
 <tr>
-<td>description</td>
-<td>The description for the new collection (optional: default is existing description).</td>
+<td>pagerankTolerance</td>
+<td>The Pagerank tolerance factor</td>
 </tr>
 <tr>
-<td>citations</td>
-<td>The comma-separated listed of PubMed ids (optional: default is existing citations).</td>
+<td>uclustIdentity</td>
+<td>The UClust clustering identity</td>
 </tr>
 <tr>
-<td>tabState</td>
-<td>Use &quot;new&quot; for moving to a new public collection, and &quot;existing&quot; if moving into an existing public collection.</td>
+<td>synbiohubPublicGraph</td>
+<td>The SynBioHub public graph for this instance</td>
 </tr>
 <tr>
-<td>collections</td>
-<td>If moving into an existing collection, collections is the URI of the collection</td>
+<td>elasticsearchEndpoint</td>
+<td>The endpoint where Elasticsearch can be found</td>
+</tr>
+<tr>
+<td>elasticsearchIndexName</td>
+<td>The Elasticsearch index name</td>
+</tr>
+<tr>
+<td>sparqlEndpoint</td>
+<td>The Virtuoso SPARQL endpoint</td>
 </tr>
 </tbody></table>
 <h2 id='update-sbolexplorer-index'>Update SBOLExplorer Index</h2>
@@ -3885,7 +3862,6 @@ type=benchling&amp;id=&lt;id&gt;&amp;benchlingApiToken=&lt;BenchlingApitoken&gt;
 
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
-
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">fetch</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"node-fetch"</span><span class="p">);</span>
 <span class="kr">const</span> <span class="p">{</span> <span class="nx">URLSearchParams</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'url'</span><span class="p">);</span>
 <span class="kr">const</span> <span class="nx">url</span> <span class="o">=</span> <span class="s1">'&lt;SynBioHub URL&gt;/admin/explorerUpdateIndex'</span>
@@ -3899,7 +3875,6 @@ type=benchling&amp;id=&lt;id&gt;&amp;benchlingApiToken=&lt;BenchlingApitoken&gt;
 <span class="nx">fetch</span><span class="p">(</span><span class="nx">url</span><span class="p">,</span> <span class="p">{</span> <span class="na">method</span><span class="p">:</span> <span class="s1">'POST'</span><span class="p">,</span> <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span><span class="p">,</span> <span class="na">body</span><span class="p">:</span><span class="nx">params</span><span class="p">})</span>
     <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">res</span> <span class="o">=&gt;</span> <span class="nx">res</span><span class="p">.</span><span class="nx">buffer</span><span class="p">()).</span><span class="nx">then</span><span class="p">(</span><span class="nx">buf</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">buf</span><span class="p">.</span><span class="nx">toString</span><span class="p">()))</span>
     <span class="p">.</span><span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="o">=&gt;</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">error</span><span class="p">))</span>
-
 </code></pre><h2 id='view-theme'>View Theme</h2>
 <p><code>GET &lt;SynBioHub URL&gt;/admin/theme</code></p>
 
@@ -3917,7 +3892,6 @@ type=benchling&amp;id=&lt;id&gt;&amp;benchlingApiToken=&lt;BenchlingApitoken&gt;
 
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
-
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">fetch</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"node-fetch"</span><span class="p">);</span>
 <span class="kr">const</span> <span class="nx">url</span> <span class="o">=</span> <span class="s1">'&lt;SynBioHub URL&gt;/admin/theme'</span>
 <span class="kr">const</span> <span class="nx">headers</span><span class="o">=</span><span class="p">{</span>
@@ -3951,14 +3925,11 @@ type=benchling&amp;id=&lt;id&gt;&amp;benchlingApiToken=&lt;BenchlingApitoken&gt;
    <span class="p">},</span>
     <span class="n">files</span><span class="o">=</span><span class="p">{</span>
         <span class="s">'logo'</span> <span class="p">:</span> <span class="p">(</span><span class="n">image_filename</span><span class="p">,</span> <span class="nb">open</span><span class="p">(</span><span class="s">'&lt;path&gt;'</span><span class="p">,</span> <span class="s">'rb'</span><span class="p">)),</span>
-
 <span class="p">}</span>
-
 <span class="p">)</span>
 
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
-
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">fetch</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"node-fetch"</span><span class="p">);</span>
 <span class="kr">const</span> <span class="p">{</span> <span class="nx">createReadStream</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'fs'</span><span class="p">);</span>
 <span class="kr">const</span> <span class="nx">FormData</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'form-data'</span><span class="p">);</span>
@@ -3979,7 +3950,6 @@ type=benchling&amp;id=&lt;id&gt;&amp;benchlingApiToken=&lt;BenchlingApitoken&gt;
 <span class="nx">fetch</span><span class="p">(</span><span class="nx">url</span><span class="p">,</span> <span class="p">{</span> <span class="na">method</span><span class="p">:</span> <span class="s1">'POST'</span><span class="p">,</span> <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span><span class="p">,</span> <span class="na">body</span><span class="p">:</span><span class="nx">params</span><span class="p">})</span>
     <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">res</span> <span class="o">=&gt;</span> <span class="nx">res</span><span class="p">.</span><span class="nx">buffer</span><span class="p">()).</span><span class="nx">then</span><span class="p">(</span><span class="nx">buf</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">buf</span><span class="p">.</span><span class="nx">toString</span><span class="p">()))</span>
     <span class="p">.</span><span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="o">=&gt;</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">error</span><span class="p">))</span>
-
 </code></pre>
 <table><thead>
 <tr>
@@ -4023,7 +3993,6 @@ type=benchling&amp;id=&lt;id&gt;&amp;benchlingApiToken=&lt;BenchlingApitoken&gt;
 
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
-
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">fetch</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"node-fetch"</span><span class="p">);</span>
 <span class="kr">const</span> <span class="nx">url</span> <span class="o">=</span> <span class="s1">'&lt;SynBioHub URL&gt;/admin/users'</span>
 <span class="kr">const</span> <span class="nx">headers</span><span class="o">=</span><span class="p">{</span>
@@ -4053,7 +4022,6 @@ type=benchling&amp;id=&lt;id&gt;&amp;benchlingApiToken=&lt;BenchlingApitoken&gt;
 
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
-
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">fetch</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"node-fetch"</span><span class="p">);</span>
 <span class="kr">const</span> <span class="p">{</span> <span class="nx">URLSearchParams</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'url'</span><span class="p">);</span>
 <span class="kr">const</span> <span class="nx">url</span> <span class="o">=</span> <span class="s1">'&lt;SynBioHub URL&gt;/admin/users'</span>
@@ -4065,11 +4033,9 @@ type=benchling&amp;id=&lt;id&gt;&amp;benchlingApiToken=&lt;BenchlingApitoken&gt;
 <span class="kr">const</span> <span class="nx">params</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">URLSearchParams</span><span class="p">();</span>
 <span class="nx">params</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'allowPublicSignup'</span><span class="p">,</span> <span class="s1">'true'</span><span class="p">);</span>
 
-
 <span class="nx">fetch</span><span class="p">(</span><span class="nx">url</span><span class="p">,</span> <span class="p">{</span> <span class="na">method</span><span class="p">:</span> <span class="s1">'POST'</span><span class="p">,</span> <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span><span class="p">,</span> <span class="na">body</span><span class="p">:</span><span class="nx">params</span><span class="p">})</span>
     <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">res</span> <span class="o">=&gt;</span> <span class="nx">res</span><span class="p">.</span><span class="nx">buffer</span><span class="p">()).</span><span class="nx">then</span><span class="p">(</span><span class="nx">buf</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">buf</span><span class="p">.</span><span class="nx">toString</span><span class="p">()))</span>
     <span class="p">.</span><span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="o">=&gt;</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">error</span><span class="p">))</span>
-
 </code></pre>
 <table><thead>
 <tr>
@@ -4110,7 +4076,6 @@ type=benchling&amp;id=&lt;id&gt;&amp;benchlingApiToken=&lt;BenchlingApitoken&gt;
 
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
-
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">fetch</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"node-fetch"</span><span class="p">);</span>
 <span class="kr">const</span> <span class="p">{</span> <span class="nx">URLSearchParams</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'url'</span><span class="p">);</span>
 <span class="kr">const</span> <span class="nx">url</span> <span class="o">=</span> <span class="s1">'&lt;SynBioHub URL&gt;/admin/newUser'</span>
@@ -4131,7 +4096,6 @@ type=benchling&amp;id=&lt;id&gt;&amp;benchlingApiToken=&lt;BenchlingApitoken&gt;
 <span class="nx">fetch</span><span class="p">(</span><span class="nx">url</span><span class="p">,</span> <span class="p">{</span> <span class="na">method</span><span class="p">:</span> <span class="s1">'POST'</span><span class="p">,</span> <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span><span class="p">,</span> <span class="na">body</span><span class="p">:</span><span class="nx">params</span><span class="p">})</span>
     <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">res</span> <span class="o">=&gt;</span> <span class="nx">res</span><span class="p">.</span><span class="nx">buffer</span><span class="p">()).</span><span class="nx">then</span><span class="p">(</span><span class="nx">buf</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">buf</span><span class="p">.</span><span class="nx">toString</span><span class="p">()))</span>
     <span class="p">.</span><span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="o">=&gt;</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">error</span><span class="p">))</span>
-
 </code></pre>
 <table><thead>
 <tr>
@@ -4199,7 +4163,6 @@ type=benchling&amp;id=&lt;id&gt;&amp;benchlingApiToken=&lt;BenchlingApitoken&gt;
 
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
-
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">fetch</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"node-fetch"</span><span class="p">);</span>
 <span class="kr">const</span> <span class="p">{</span> <span class="nx">URLSearchParams</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'url'</span><span class="p">);</span>
 <span class="kr">const</span> <span class="nx">url</span> <span class="o">=</span> <span class="s1">'&lt;SynBioHub URL&gt;/admin/updateUser'</span>
@@ -4221,7 +4184,6 @@ type=benchling&amp;id=&lt;id&gt;&amp;benchlingApiToken=&lt;BenchlingApitoken&gt;
 <span class="nx">fetch</span><span class="p">(</span><span class="nx">url</span><span class="p">,</span> <span class="p">{</span> <span class="na">method</span><span class="p">:</span> <span class="s1">'POST'</span><span class="p">,</span> <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span><span class="p">,</span> <span class="na">body</span><span class="p">:</span><span class="nx">params</span><span class="p">})</span>
     <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">res</span> <span class="o">=&gt;</span> <span class="nx">res</span><span class="p">.</span><span class="nx">buffer</span><span class="p">()).</span><span class="nx">then</span><span class="p">(</span><span class="nx">buf</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">buf</span><span class="p">.</span><span class="nx">toString</span><span class="p">()))</span>
     <span class="p">.</span><span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="o">=&gt;</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">error</span><span class="p">))</span>
-
 </code></pre>
 <table><thead>
 <tr>
@@ -4284,7 +4246,6 @@ type=benchling&amp;id=&lt;id&gt;&amp;benchlingApiToken=&lt;BenchlingApitoken&gt;
 
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
-
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">fetch</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"node-fetch"</span><span class="p">);</span>
 <span class="kr">const</span> <span class="p">{</span> <span class="nx">URLSearchParams</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'url'</span><span class="p">);</span>
 <span class="kr">const</span> <span class="nx">url</span> <span class="o">=</span> <span class="s1">'&lt;SynBioHub URL&gt;/admin/deleteUser'</span>
@@ -4296,12 +4257,9 @@ type=benchling&amp;id=&lt;id&gt;&amp;benchlingApiToken=&lt;BenchlingApitoken&gt;
 <span class="kr">const</span> <span class="nx">params</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">URLSearchParams</span><span class="p">();</span>
 <span class="nx">params</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'id'</span><span class="p">,</span> <span class="s1">'&lt;id&gt;'</span><span class="p">);</span>
 
-
-
 <span class="nx">fetch</span><span class="p">(</span><span class="nx">url</span><span class="p">,</span> <span class="p">{</span> <span class="na">method</span><span class="p">:</span> <span class="s1">'POST'</span><span class="p">,</span> <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span><span class="p">,</span> <span class="na">body</span><span class="p">:</span><span class="nx">params</span><span class="p">})</span>
     <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">res</span> <span class="o">=&gt;</span> <span class="nx">res</span><span class="p">.</span><span class="nx">buffer</span><span class="p">()).</span><span class="nx">then</span><span class="p">(</span><span class="nx">buf</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">buf</span><span class="p">.</span><span class="nx">toString</span><span class="p">()))</span>
     <span class="p">.</span><span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="o">=&gt;</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">error</span><span class="p">))</span>
-
 </code></pre>
 <table><thead>
 <tr>
