@@ -3458,44 +3458,6 @@ Parameter | Description
 --------- | ------- | -----------
 id | Id of the remote configuration to remove.
 
-
-
-## View SBOLExplorer Config 
-
-`GET <SynBioHub URL>/admin/explorer`
-
-View the current SBOLExplorer config.
-
-```plaintext
-curl -X GET -H "Accept: text/plain" -H "X-authorization: <token>" <SynBioHub URL>/admin/explorer
-```
-
-```python
-import requests
-
-response = requests.get(
-    '<SynBioHub URL>/admin/explorer',
-    headers={
-        'Accept': 'text/plain',
-        'X-authorization': '<token>'
-        },
-)
-
-print(response.status_code)
-print(response.content)
-```
-
-```javascript
-const fetch = require("node-fetch");
-const url = '<SynBioHub URL>/admin/explorer'
-const headers={
-        "Accept" : "text/plain; charset=UTF-8",
-	"X-authorization" : "<token>"
-};
-fetch(url, { method: 'GET', headers: headers})
-    .then(res => res.buffer()).then(buf => console.log(buf.toString()))
-    .catch (error=>console.log(error))
-```
 ## View SBOLExplorer Log 
 
 `GET <SynBioHub URL>/admin/explorerlog`
@@ -3524,6 +3486,42 @@ print(response.content)
 ```javascript
 const fetch = require("node-fetch");
 const url = '<SynBioHub URL>/admin/explorerlog'
+const headers={
+        "Accept" : "text/plain; charset=UTF-8",
+	"X-authorization" : "<token>"
+};
+fetch(url, { method: 'GET', headers: headers})
+    .then(res => res.buffer()).then(buf => console.log(buf.toString()))
+    .catch (error=>console.log(error))
+```
+## View SBOLExplorer Config 
+
+`GET <SynBioHub URL>/admin/explorer`
+
+View the current SBOLExplorer config.
+
+```plaintext
+curl -X GET -H "Accept: text/plain" -H "X-authorization: <token>" <SynBioHub URL>/admin/explorer
+```
+
+```python
+import requests
+
+response = requests.get(
+    '<SynBioHub URL>/admin/explorer',
+    headers={
+        'Accept': 'text/plain',
+        'X-authorization': '<token>'
+        },
+)
+
+print(response.status_code)
+print(response.content)
+```
+
+```javascript
+const fetch = require("node-fetch");
+const url = '<SynBioHub URL>/admin/explorer'
 const headers={
         "Accept" : "text/plain; charset=UTF-8",
 	"X-authorization" : "<token>"
