@@ -634,10 +634,10 @@ Returns the metadata for the object from the specified search query. The search 
 Key/value pair | Description
 --------- | -----------
 objectType=value | The type of object to search for ( objectType=ComponentDefinition)
-sbolTag=value |  A tag in the SBOL namespace to search for ( role=<http://identifiers.org/so/SO:0000316>)
-collection=value | Matches objects that are members of the specified collection (collection=<http://synbiohub.org/public/igem/igem_collection>)
+sbolTag=value |  A tag in the SBOL namespace to search for ( role=<<http://identifiers.org/so/SO:0000316>>)
+collection=value | Matches objects that are members of the specified collection (collection=<<http://synbiohub.org/public/igem/igem_collection>>)
 dcterms:tag=value | A tag in the dcterms namespace to search for ( dcterms:title='pLac'&) - note this requires an exact match
-namespace/tag=value | A full namespace with tag separated by appropriate delimiter ( <http://sbols.org/v2#role>=<http://identifiers.org/so/SO:0000316>)
+namespace/tag=value | A full namespace with tag separated by appropriate delimiter ( <<http://sbols.org/v2#role>>=<<http://identifiers.org/so/SO:0000316>>)
 
 After the key/value pairs, an optional search string can be provided that will be used to search for partial matches in the displayId, name, or description fields.
 
