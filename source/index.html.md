@@ -88,7 +88,7 @@ Then, start SynBioHub with:
 
 ```sysctl -w vm.max_map_count=262144```
 
-```docker-compose --file ./synbiohub-docker/docker-compose.yml --file ./synbiohub-docker/docker-compose.explorer.yml up``
+``docker-compose --file ./synbiohub-docker/docker-compose.yml --file ./synbiohub-docker/docker-compose.explorer.yml up``
 
 ### Configuring
 
