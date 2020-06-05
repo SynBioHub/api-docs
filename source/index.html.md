@@ -3,9 +3,7 @@ title: SynBioHub API
 
 language_tabs: # must be one of https://git.io/vQNgJ
   - plaintext: shell
-  - python
-  - javascript
-
+  - python - javascript 
 
 toc_footers:
   - <a href='https://github.com/SynBioHub/synbiohub'>SynBioHub Github</a>
@@ -209,7 +207,6 @@ Endpoints that control user related functions
 `POST <SynBioHub URL>/login` 
 
 This POST request requires email/password and returns a user token that should be passed in the X-authorization header to view private objects and submit new objects, etc. 
-
 
 ```plaintext
 curl -X POST -H "Accept: text/plain" -d "email=<email>&password=<password>" <SynBioHub URL>/login
@@ -3912,7 +3909,7 @@ Note that this endpoint also requires SendGrid to be setup.
 Update a user's settings.
 
 ```plaintext
-curl -X POST -H "Accept: text/plain" -H "X-authorization:<token>" -d "id=<id>&username=<username>&name=<name>&email=<email>&affiliation=<affiliation>&isMember=1&isCurator=1&isAdmin=1" <SynBioHub URL>/admin/updateUser
+curl -X POST -H "Accept: text/plain" -H "X-authorization:<token>" -d "id=<id>&name=<name>&email=<email>&affiliation=<affiliation>&isMember=1&isCurator=1&isAdmin=1" <SynBioHub URL>/admin/updateUser
 ```
 
 ```python
@@ -3926,7 +3923,6 @@ response = requests.post(
     },
     data={
         'id': '<id>',
-        'username' : '<username>',
         'name' : '<name>',
         'email' : '<email>',
         'affiliation' : '<affilition>',
@@ -3951,7 +3947,6 @@ var headers={
 
 const params = new URLSearchParams();
 params.append('id', '<id>');
-params.append('username', '<username>');
 params.append('name', '<name>');
 params.append('email', '<email>');
 params.append('affiliation', '<affiliation>');
@@ -3967,7 +3962,6 @@ fetch(url, { method: 'POST', headers: headers, body:params})
 Parameter | Description
 --------- | ------- | -----------
 id | The ID of the user to update.
-username | The username of the user to update to.
 name | The name of the user to update to.
 email | The email of the user to update to.
 affiliation | The affiliation of the user to update to.
