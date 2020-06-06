@@ -1129,6 +1129,56 @@ fetch(Url,otherPram)
 ```
 
 
+## Sequence Search
+
+`GET <SynBioHub URL>/search/<key>=<value>&...`
+
+```javascript
+const fetch = require("node-fetch");
+const Url = '<SynBioHub URL>/search/<key>=<value>&...'
+const otherPram={
+    headers:{
+        "content-type" : "text/plain; charset=UTF-8"
+    },
+    method:"GET"
+};
+fetch(Url,otherPram)
+    .then(res => res.buffer()).then(buf => console.log(buf.toString()))
+    .catch (error=>console.log(error))
+```
+
+```python
+import requests
+
+response = requests.get(
+    '<SynBioHub URL>/search/<key>=<value>&',
+    headers={
+        'Accept': 'text/plain',
+        'X-authorization': '<token>'
+        },
+)
+
+print(response.status_code)
+print(response.content)
+```
+
+```plaintext
+curl -X GET -H "Accept: text/plain" -H "X-authorization: <token>" '<SynBioHub URL>/search/<key>=<value>&...'
+```
+
+Returns the result of a sequence search in JSON format. The first key/value pair must be the sequence. Various options that can be adjusted are described below:
+
+Key/value pair | Description
+--------- | -----------
+globalsequence=value | Sequence to globally search. Must be the first key/value pair. Corresponds to the --usearch_global option in VSEARCH. (globalsequence=cctagatcgctag)
+sequence=value |  Search only for exact matches of the sequence. Must be the first key/value pair.Corresponds to the --search_exact option in VSEARCH. (sequence=cctagatcgctag)
+file_search=value | Specify a file path for sequence searching. Must be URL encoded, and must be the first key/value pair. Default search method is global. (file_search=%2Fpath%2Fto%2Ffile)
+maxaccepts=value | Maximum number of hits to accept before stopping the search. Note that the higher the value, the longer the runtime. Corresponds to the --maxaccepts flag in VSEARCH. (maxaccepts=100)
+maxrejects=value | Maximum number of non-matching target sequences to consider before stopping the search. Corresponds to the --maxrejects flag in VSEARCH. (maxrejects=100)
+id=value | Reject the sequence match if the pairwise identity is lower than the number specified. Value between 0 and 1. Corresponds to the --id flag in VSEARCH (id=0.8)
+iddef=value | Changes the pairwise identity definition used by the id option. Values accepted are: 0. CD-HIT definition: (matching columns) / (shortest sequence length). 1. edit distance: (matching columns) / (alignment length). 2. edit distance excluding terminal gaps (default definition for --id). 3. Marine Biological Lab definition counting each gap opening (internal or terminal) as a single mismatch, whether or not the gap was extended: 1.0 - [(mismatches + gap openings)/(longest sequence length)] 4. BLAST definition, equivalent to --iddef 1 for global pairwise alignments. Corresponds to the --iddef option in VSEARCH. (iddef=2)
+
+
 # Download Endpoints
 
 The following endpoints are for downloading content from SynBioHub in various formats.
