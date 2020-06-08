@@ -3,7 +3,9 @@ title: SynBioHub API
 
 language_tabs: # must be one of https://git.io/vQNgJ
   - plaintext: shell
-  - python - javascript 
+  - python 
+  - javascript 
+
 
 toc_footers:
   - <a href='https://github.com/SynBioHub/synbiohub'>SynBioHub Github</a>
@@ -1133,21 +1135,13 @@ fetch(Url,otherPram)
 
 `GET <SynBioHub URL>/search/<key>=<value>&...`
 
-```javascript
-const fetch = require("node-fetch");
-const Url = '<SynBioHub URL>/search/<key>=<value>&...'
-const otherPram={
-    headers:{
-        "content-type" : "text/plain; charset=UTF-8"
-    },
-    method:"GET"
-};
-fetch(Url,otherPram)
-    .then(res => res.buffer()).then(buf => console.log(buf.toString()))
-    .catch (error=>console.log(error))
+Returns the result of a sequence search in JSON format. The first key/value pair must be the sequence. Various options that can be adjusted are described below:
+
+```plaintext
+curl -X GET -H "Accept: text/plain" -H "X-authorization: <token>" '<SynBioHub URL>/search/<key>=<value>&...'
 ```
 
-```python
+````python
 import requests
 
 response = requests.get(
@@ -1162,11 +1156,19 @@ print(response.status_code)
 print(response.content)
 ```
 
-```plaintext
-curl -X GET -H "Accept: text/plain" -H "X-authorization: <token>" '<SynBioHub URL>/search/<key>=<value>&...'
+```javascript
+const fetch = require("node-fetch");
+const Url = '<SynBioHub URL>/search/<key>=<value>&...'
+const otherPram={
+    headers:{
+        "content-type" : "text/plain; charset=UTF-8"
+    },
+    method:"GET"
+};
+fetch(Url,otherPram)
+    .then(res => res.buffer()).then(buf => console.log(buf.toString()))
+    .catch (error=>console.log(error))
 ```
-
-Returns the result of a sequence search in JSON format. The first key/value pair must be the sequence. Various options that can be adjusted are described below:
 
 Key/value pair | Description
 --------- | -----------
