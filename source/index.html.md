@@ -2112,7 +2112,7 @@ value | The new value for the citation.
 Edit field of an object.
 
 ```plaintext
-curl -X POST -H "Accept: text/plain" -H "X-authorization: <token>" -d "previous=<previous>&object=<test>"  <URI>/edit/<field>
+curl -X POST -H "Accept: text/plain" -H "X-authorization: <token>" -d "previous=<previous>&object=<test>&predicate=<predicate>"  <URI>/edit/<field>
 ```
 
 ```python
@@ -2127,6 +2127,7 @@ response = requests.post(
     data={
         'previous': '<previous>',
         'object' : '<object>',
+        'predicate' : '<predicate>',
         },
 )
 
@@ -2146,6 +2147,7 @@ var headers={
 const params = new URLSearchParams();
 params.append('previous', '<previous>');
 params.append('object', '<object>');
+params.append('predicate', '<predicate>');
 
 fetch(url, { method: 'POST', headers: headers, body:params})
     .then(res => res.buffer()).then(buf => console.log(buf.toString()))
@@ -2156,6 +2158,7 @@ Parameter | Description
 --------- | -----------
 previous | The previous value of the field.
 object | The new value of the field.
+predicate | A predicate at an annotation (only valid for your annotation)
 
 Possible fields to edit:
 `title`
@@ -2171,7 +2174,7 @@ Possible fields to edit:
 Add field to an object.
 
 ```plaintext
-curl -X POST -H "Accept: text/plain" -H "X-authorization:<token>" -d "object=<object>"  <URI>/add/<field>
+curl -X POST -H "Accept: text/plain" -H "X-authorization:<token>" -d "object=<object>&predicate=<predicate>"  <URI>/add/<field>
 ```
 
 ```python
@@ -2185,6 +2188,7 @@ response = requests.post(
     },
     data={
         'object' : '<object>',
+        'predicate' : '<predicate>',
         },
 )
 
@@ -2203,6 +2207,7 @@ var headers={
 
 const params = new URLSearchParams();
 params.append('object', '<object>');
+params.append('predicate', '<predicate>');
 
 fetch(url, { method: 'POST', headers: headers, body:params})
     .then(res => res.buffer()).then(buf => console.log(buf.toString()))
@@ -2211,6 +2216,7 @@ fetch(url, { method: 'POST', headers: headers, body:params})
 Parameter | Description
 --------- | -----------
 object | The new value of the field.
+predicate | A predicate at an annotation (only valid for your annotation)
 
 Possible fields to add:
 `role`
@@ -2223,7 +2229,7 @@ Possible fields to add:
 Remove field from an object.
 
 ```plaintext
-curl -X POST -H "Accept: text/plain" -H "X-authorization:<token>" -d "object=<object>"  <URI>/remove/<field>
+curl -X POST -H "Accept: text/plain" -H "X-authorization:<token>" -d "object=<object>&predicate=<predicate>"  <URI>/remove/<field>
 ```
 
 ```python
@@ -2237,6 +2243,7 @@ response = requests.post(
     },
     data={
         'object' : '<object>',
+        'predicate' : '<predicate>',
         },
 )
 
@@ -2255,6 +2262,7 @@ var headers={
 
 const params = new URLSearchParams();
 params.append('object', '<object>');
+params.append('predicate', '<predicate>');
 
 fetch(url, { method: 'POST', headers: headers, body:params})
     .then(res => res.buffer()).then(buf => console.log(buf.toString()))
@@ -2263,6 +2271,7 @@ fetch(url, { method: 'POST', headers: headers, body:params})
 Parameter | Description
 --------- | -----------
 object | The value of the field to remove.
+predicate | A predicate at an annotation (only valid for your annotation)
 
 Possible fields to remove:
 `role`
@@ -3961,7 +3970,7 @@ isAdmin | Is the new user an admin?
 
 *Note that isMember, isCurator, and isAdmin are set to true by defeault. If the new user isn't one of these, please remove the parameter completely from the request.
 
-Note that this endpoint also requires SendGrid to be setup.
+*Note that this endpoint also requires SendGrid to be setup.
 
 ## Update User
 
