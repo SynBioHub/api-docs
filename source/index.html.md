@@ -2112,7 +2112,7 @@ value | The new value for the citation.
 Edit field of an object.
 
 ```plaintext
-curl -X POST -H "Accept: text/plain" -H "X-authorization: <token>" -d "previous=<previous>&object=<test>&predicate=<predicate>"  <URI>/edit/<field>
+curl -X POST -H "Accept: text/plain" -H "X-authorization: <token>" -d "previous=<previous>&object=<test>&pred=<pred>"  <URI>/edit/<field>
 ```
 
 ```python
@@ -2127,7 +2127,7 @@ response = requests.post(
     data={
         'previous': '<previous>',
         'object' : '<object>',
-        'predicate' : '<predicate>',
+        'pred' : '<pred>',
         },
 )
 
@@ -2147,7 +2147,7 @@ var headers={
 const params = new URLSearchParams();
 params.append('previous', '<previous>');
 params.append('object', '<object>');
-params.append('predicate', '<predicate>');
+params.append('pred', '<pred>');
 
 fetch(url, { method: 'POST', headers: headers, body:params})
     .then(res => res.buffer()).then(buf => console.log(buf.toString()))
@@ -2158,7 +2158,7 @@ Parameter | Description
 --------- | -----------
 previous | The previous value of the field.
 object | The new value of the field.
-predicate | A predicate at an annotation (only valid for your annotation)
+pred | A predicate at an annotation (only valid for your annotation)
 
 Possible fields to edit:
 `title`
@@ -2166,6 +2166,7 @@ Possible fields to edit:
 `role`
 `wasDerivedFrom`
 `type`
+`annotation`
 
 ## Add Field
 
@@ -2174,7 +2175,7 @@ Possible fields to edit:
 Add field to an object.
 
 ```plaintext
-curl -X POST -H "Accept: text/plain" -H "X-authorization:<token>" -d "object=<object>&predicate=<predicate>"  <URI>/add/<field>
+curl -X POST -H "Accept: text/plain" -H "X-authorization:<token>" -d "object=<object>&pred=<pred>"  <URI>/add/<field>
 ```
 
 ```python
@@ -2188,7 +2189,7 @@ response = requests.post(
     },
     data={
         'object' : '<object>',
-        'predicate' : '<predicate>',
+        'pred' : '<pred>',
         },
 )
 
@@ -2207,7 +2208,7 @@ var headers={
 
 const params = new URLSearchParams();
 params.append('object', '<object>');
-params.append('predicate', '<predicate>');
+params.append('pred', '<pred>');
 
 fetch(url, { method: 'POST', headers: headers, body:params})
     .then(res => res.buffer()).then(buf => console.log(buf.toString()))
@@ -2216,11 +2217,13 @@ fetch(url, { method: 'POST', headers: headers, body:params})
 Parameter | Description
 --------- | -----------
 object | The new value of the field.
-predicate | A predicate at an annotation (only valid for your annotation)
+pred | A predicate at an annotation (only valid for your annotation)
 
 Possible fields to add:
 `role`
 `type`
+`wasDerivedFrom`
+`annotation`
 
 ## Remove Field
 
@@ -2229,7 +2232,7 @@ Possible fields to add:
 Remove field from an object.
 
 ```plaintext
-curl -X POST -H "Accept: text/plain" -H "X-authorization:<token>" -d "object=<object>&predicate=<predicate>"  <URI>/remove/<field>
+curl -X POST -H "Accept: text/plain" -H "X-authorization:<token>" -d "object=<object>&pred=<pred>"  <URI>/remove/<field>
 ```
 
 ```python
@@ -2243,7 +2246,7 @@ response = requests.post(
     },
     data={
         'object' : '<object>',
-        'predicate' : '<predicate>',
+        'pred' : '<pred>',
         },
 )
 
@@ -2262,7 +2265,7 @@ var headers={
 
 const params = new URLSearchParams();
 params.append('object', '<object>');
-params.append('predicate', '<predicate>');
+params.append('pred', '<pred>');
 
 fetch(url, { method: 'POST', headers: headers, body:params})
     .then(res => res.buffer()).then(buf => console.log(buf.toString()))
@@ -2271,11 +2274,15 @@ fetch(url, { method: 'POST', headers: headers, body:params})
 Parameter | Description
 --------- | -----------
 object | The value of the field to remove.
-predicate | A predicate at an annotation (only valid for your annotation)
+pred | A predicate at an annotation (only valid for your annotation)
 
 Possible fields to remove:
 `role`
 `type`
+`title`
+`description`
+` wasDerivedFrom`
+`annotation`
 
 ## Add to Collection
 
