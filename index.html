@@ -2440,7 +2440,7 @@ This endpoint returns JSON metadata of the form:
 <p><code>POST &lt;URI&gt;/edit/&lt;field&gt;</code></p>
 
 <p>Edit field of an object.</p>
-<pre class="highlight plaintext tab-plaintext"><code>curl -X POST -H "Accept: text/plain" -H "X-authorization: &lt;token&gt;" -d "previous=&lt;previous&gt;&amp;object=&lt;test&gt;&amp;predicate=&lt;predicate&gt;"  &lt;URI&gt;/edit/&lt;field&gt;
+<pre class="highlight plaintext tab-plaintext"><code>curl -X POST -H "Accept: text/plain" -H "X-authorization: &lt;token&gt;" -d "previous=&lt;previous&gt;&amp;object=&lt;test&gt;&amp;pred=&lt;pred&gt;"  &lt;URI&gt;/edit/&lt;field&gt;
 </code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 
 <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span>
@@ -2452,7 +2452,7 @@ This endpoint returns JSON metadata of the form:
     <span class="n">data</span><span class="o">=</span><span class="p">{</span>
         <span class="s">'previous'</span><span class="p">:</span> <span class="s">'&lt;previous&gt;'</span><span class="p">,</span>
         <span class="s">'object'</span> <span class="p">:</span> <span class="s">'&lt;object&gt;'</span><span class="p">,</span>
-        <span class="s">'predicate'</span> <span class="p">:</span> <span class="s">'&lt;predicate&gt;'</span><span class="p">,</span>
+        <span class="s">'pred'</span> <span class="p">:</span> <span class="s">'&lt;pred&gt;'</span><span class="p">,</span>
         <span class="p">},</span>
 <span class="p">)</span>
 
@@ -2469,7 +2469,7 @@ This endpoint returns JSON metadata of the form:
 <span class="kr">const</span> <span class="nx">params</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">URLSearchParams</span><span class="p">();</span>
 <span class="nx">params</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'previous'</span><span class="p">,</span> <span class="s1">'&lt;previous&gt;'</span><span class="p">);</span>
 <span class="nx">params</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'object'</span><span class="p">,</span> <span class="s1">'&lt;object&gt;'</span><span class="p">);</span>
-<span class="nx">params</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'predicate'</span><span class="p">,</span> <span class="s1">'&lt;predicate&gt;'</span><span class="p">);</span>
+<span class="nx">params</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'pred'</span><span class="p">,</span> <span class="s1">'&lt;pred&gt;'</span><span class="p">);</span>
 
 <span class="nx">fetch</span><span class="p">(</span><span class="nx">url</span><span class="p">,</span> <span class="p">{</span> <span class="na">method</span><span class="p">:</span> <span class="s1">'POST'</span><span class="p">,</span> <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span><span class="p">,</span> <span class="na">body</span><span class="p">:</span><span class="nx">params</span><span class="p">})</span>
     <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">res</span> <span class="o">=&gt;</span> <span class="nx">res</span><span class="p">.</span><span class="nx">buffer</span><span class="p">()).</span><span class="nx">then</span><span class="p">(</span><span class="nx">buf</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">buf</span><span class="p">.</span><span class="nx">toString</span><span class="p">()))</span>
@@ -2490,7 +2490,7 @@ This endpoint returns JSON metadata of the form:
 <td>The new value of the field.</td>
 </tr>
 <tr>
-<td>predicate</td>
+<td>pred</td>
 <td>A predicate at an annotation (only valid for your annotation)</td>
 </tr>
 </tbody></table>
@@ -2500,12 +2500,13 @@ This endpoint returns JSON metadata of the form:
 <code>description</code>
 <code>role</code>
 <code>wasDerivedFrom</code>
-<code>type</code></p>
+<code>type</code>
+<code>annotation</code></p>
 <h2 id='add-field'>Add Field</h2>
 <p><code>POST &lt;URI&gt;/add/&lt;field&gt;</code></p>
 
 <p>Add field to an object.</p>
-<pre class="highlight plaintext tab-plaintext"><code>curl -X POST -H "Accept: text/plain" -H "X-authorization:&lt;token&gt;" -d "object=&lt;object&gt;&amp;predicate=&lt;predicate&gt;"  &lt;URI&gt;/add/&lt;field&gt;
+<pre class="highlight plaintext tab-plaintext"><code>curl -X POST -H "Accept: text/plain" -H "X-authorization:&lt;token&gt;" -d "object=&lt;object&gt;&amp;pred=&lt;pred&gt;"  &lt;URI&gt;/add/&lt;field&gt;
 </code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 
 <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span>
@@ -2516,7 +2517,7 @@ This endpoint returns JSON metadata of the form:
     <span class="p">},</span>
     <span class="n">data</span><span class="o">=</span><span class="p">{</span>
         <span class="s">'object'</span> <span class="p">:</span> <span class="s">'&lt;object&gt;'</span><span class="p">,</span>
-        <span class="s">'predicate'</span> <span class="p">:</span> <span class="s">'&lt;predicate&gt;'</span><span class="p">,</span>
+        <span class="s">'pred'</span> <span class="p">:</span> <span class="s">'&lt;pred&gt;'</span><span class="p">,</span>
         <span class="p">},</span>
 <span class="p">)</span>
 
@@ -2532,7 +2533,7 @@ This endpoint returns JSON metadata of the form:
 
 <span class="kr">const</span> <span class="nx">params</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">URLSearchParams</span><span class="p">();</span>
 <span class="nx">params</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'object'</span><span class="p">,</span> <span class="s1">'&lt;object&gt;'</span><span class="p">);</span>
-<span class="nx">params</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'predicate'</span><span class="p">,</span> <span class="s1">'&lt;predicate&gt;'</span><span class="p">);</span>
+<span class="nx">params</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'pred'</span><span class="p">,</span> <span class="s1">'&lt;pred&gt;'</span><span class="p">);</span>
 
 <span class="nx">fetch</span><span class="p">(</span><span class="nx">url</span><span class="p">,</span> <span class="p">{</span> <span class="na">method</span><span class="p">:</span> <span class="s1">'POST'</span><span class="p">,</span> <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span><span class="p">,</span> <span class="na">body</span><span class="p">:</span><span class="nx">params</span><span class="p">})</span>
     <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">res</span> <span class="o">=&gt;</span> <span class="nx">res</span><span class="p">.</span><span class="nx">buffer</span><span class="p">()).</span><span class="nx">then</span><span class="p">(</span><span class="nx">buf</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">buf</span><span class="p">.</span><span class="nx">toString</span><span class="p">()))</span>
@@ -2549,19 +2550,21 @@ This endpoint returns JSON metadata of the form:
 <td>The new value of the field.</td>
 </tr>
 <tr>
-<td>predicate</td>
+<td>pred</td>
 <td>A predicate at an annotation (only valid for your annotation)</td>
 </tr>
 </tbody></table>
 
 <p>Possible fields to add:
 <code>role</code>
-<code>type</code></p>
+<code>type</code>
+<code>wasDerivedFrom</code>
+<code>annotation</code></p>
 <h2 id='remove-field'>Remove Field</h2>
 <p><code>POST &lt;URI&gt;/remove/&lt;field&gt;</code></p>
 
 <p>Remove field from an object.</p>
-<pre class="highlight plaintext tab-plaintext"><code>curl -X POST -H "Accept: text/plain" -H "X-authorization:&lt;token&gt;" -d "object=&lt;object&gt;&amp;predicate=&lt;predicate&gt;"  &lt;URI&gt;/remove/&lt;field&gt;
+<pre class="highlight plaintext tab-plaintext"><code>curl -X POST -H "Accept: text/plain" -H "X-authorization:&lt;token&gt;" -d "object=&lt;object&gt;&amp;pred=&lt;pred&gt;"  &lt;URI&gt;/remove/&lt;field&gt;
 </code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 
 <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span>
@@ -2572,7 +2575,7 @@ This endpoint returns JSON metadata of the form:
     <span class="p">},</span>
     <span class="n">data</span><span class="o">=</span><span class="p">{</span>
         <span class="s">'object'</span> <span class="p">:</span> <span class="s">'&lt;object&gt;'</span><span class="p">,</span>
-        <span class="s">'predicate'</span> <span class="p">:</span> <span class="s">'&lt;predicate&gt;'</span><span class="p">,</span>
+        <span class="s">'pred'</span> <span class="p">:</span> <span class="s">'&lt;pred&gt;'</span><span class="p">,</span>
         <span class="p">},</span>
 <span class="p">)</span>
 
@@ -2588,7 +2591,7 @@ This endpoint returns JSON metadata of the form:
 
 <span class="kr">const</span> <span class="nx">params</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">URLSearchParams</span><span class="p">();</span>
 <span class="nx">params</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'object'</span><span class="p">,</span> <span class="s1">'&lt;object&gt;'</span><span class="p">);</span>
-<span class="nx">params</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'predicate'</span><span class="p">,</span> <span class="s1">'&lt;predicate&gt;'</span><span class="p">);</span>
+<span class="nx">params</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'pred'</span><span class="p">,</span> <span class="s1">'&lt;pred&gt;'</span><span class="p">);</span>
 
 <span class="nx">fetch</span><span class="p">(</span><span class="nx">url</span><span class="p">,</span> <span class="p">{</span> <span class="na">method</span><span class="p">:</span> <span class="s1">'POST'</span><span class="p">,</span> <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span><span class="p">,</span> <span class="na">body</span><span class="p">:</span><span class="nx">params</span><span class="p">})</span>
     <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">res</span> <span class="o">=&gt;</span> <span class="nx">res</span><span class="p">.</span><span class="nx">buffer</span><span class="p">()).</span><span class="nx">then</span><span class="p">(</span><span class="nx">buf</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">buf</span><span class="p">.</span><span class="nx">toString</span><span class="p">()))</span>
@@ -2605,14 +2608,18 @@ This endpoint returns JSON metadata of the form:
 <td>The value of the field to remove.</td>
 </tr>
 <tr>
-<td>predicate</td>
+<td>pred</td>
 <td>A predicate at an annotation (only valid for your annotation)</td>
 </tr>
 </tbody></table>
 
 <p>Possible fields to remove:
 <code>role</code>
-<code>type</code></p>
+<code>type</code>
+<code>title</code>
+<code>description</code>
+<code>wasDerivedFrom</code>
+<code>annotation</code></p>
 <h2 id='add-to-collection'>Add to Collection</h2>
 <p><code>POST &lt;URI&gt;/addToCollection</code></p>
 
