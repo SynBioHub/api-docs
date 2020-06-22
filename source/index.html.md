@@ -2158,7 +2158,7 @@ Parameter | Description
 --------- | -----------
 previous | The previous value of the field.
 object | The new value of the field.
-pred | A predicate at an annotation (only valid for your annotation)
+pred | A predicate for an annotation.
 
 Possible fields to edit:
 `title`
@@ -2217,7 +2217,7 @@ fetch(url, { method: 'POST', headers: headers, body:params})
 Parameter | Description
 --------- | -----------
 object | The new value of the field.
-pred | A predicate at an annotation (only valid for your annotation)
+pred | A predicate for an annotation. 
 
 Possible fields to add:
 `role`
@@ -2274,7 +2274,7 @@ fetch(url, { method: 'POST', headers: headers, body:params})
 Parameter | Description
 --------- | -----------
 object | The value of the field to remove.
-pred | A predicate at an annotation (only valid for your annotation)
+pred | A predicate for an annotation. 
 
 Possible fields to remove:
 `role`
