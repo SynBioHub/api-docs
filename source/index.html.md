@@ -1178,6 +1178,19 @@ maxrejects=value | Maximum number of non-matching target sequences to consider b
 id=value | Reject the sequence match if the pairwise identity is lower than the number specified. Value between 0 and 1. Corresponds to the --id flag in VSEARCH (id=0.8)
 iddef=value | Changes the pairwise identity definition used by the id option. Values accepted are: 0. CD-HIT definition: (matching columns) / (shortest sequence length). 1. edit distance: (matching columns) / (alignment length). 2. edit distance excluding terminal gaps (default definition for --id). 3. Marine Biological Lab definition counting each gap opening (internal or terminal) as a single mismatch, whether or not the gap was extended: 1.0 - [(mismatches + gap openings)/(longest sequence length)] 4. BLAST definition, equivalent to --iddef 1 for global pairwise alignments. Corresponds to the --iddef option in VSEARCH. (iddef=2)
 
+Returns the sequence search data in a JSON-readable format with the specified key/value pairs:
+
+Key/value pair | Description
+--------- | -----------
+"type": "[value]" | Component Definition Type
+"uri": "[value]" | URI of part on SynBioHub
+"name": "[value]" | Name of part on SynBioHub
+"Description": "[value]" | Description of part on SynBioHub
+"displayID: "[value]" | Display ID of part
+"version": "[value]" | Version of part
+"percentMatch": "[value]"| Percentage match to query part
+"strandAlignment": "[value]" | Target strand orientation
+"CIGAR": "[value]" | Short for "Compact Idiosyncratic Gapped Alignment Report". Learn more [here](https://jef.works/blog/2017/03/28/CIGAR-strings-for-dummies/).
 
 # Download Endpoints
 
