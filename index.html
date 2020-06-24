@@ -1609,6 +1609,52 @@ This endpoint returns JSON metadata of the form:
 <td>Changes the pairwise identity definition used by the id option. Values accepted are: 0. CD-HIT definition: (matching columns) / (shortest sequence length). 1. edit distance: (matching columns) / (alignment length). 2. edit distance excluding terminal gaps (default definition for --id). 3. Marine Biological Lab definition counting each gap opening (internal or terminal) as a single mismatch, whether or not the gap was extended: 1.0 - [(mismatches + gap openings)/(longest sequence length)] 4. BLAST definition, equivalent to --iddef 1 for global pairwise alignments. Corresponds to the --iddef option in VSEARCH. (iddef=2)</td>
 </tr>
 </tbody></table>
+
+<p>Returns the sequence search data in a JSON-readable format with the specified key/value pairs:</p>
+
+<table><thead>
+<tr>
+<th>Key/value pair</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>&quot;type&quot;: &quot;[value]&quot;</td>
+<td>Component Definition Type</td>
+</tr>
+<tr>
+<td>&quot;uri&quot;: &quot;[value]&quot;</td>
+<td>URI of part on SynBioHub</td>
+</tr>
+<tr>
+<td>&quot;name&quot;: &quot;[value]&quot;</td>
+<td>Name of part on SynBioHub</td>
+</tr>
+<tr>
+<td>&quot;Description&quot;: &quot;[value]&quot;</td>
+<td>Description of part on SynBioHub</td>
+</tr>
+<tr>
+<td>&quot;displayID: &quot;[value]&quot;</td>
+<td>Display ID of part</td>
+</tr>
+<tr>
+<td>&quot;version&quot;: &quot;[value]&quot;</td>
+<td>Version of part</td>
+</tr>
+<tr>
+<td>&quot;percentMatch&quot;: &quot;[value]&quot;</td>
+<td>Percentage match to query part</td>
+</tr>
+<tr>
+<td>&quot;strandAlignment&quot;: &quot;[value]&quot;</td>
+<td>Target strand orientation</td>
+</tr>
+<tr>
+<td>&quot;CIGAR&quot;: &quot;[value]&quot;</td>
+<td>Short for &quot;Compact Idiosyncratic Gapped Alignment Report&quot;. Learn more <a href="https://jef.works/blog/2017/03/28/CIGAR-strings-for-dummies/">here</a>.</td>
+</tr>
+</tbody></table>
 <h1 id='download-endpoints'>Download Endpoints</h1>
 <p>The following endpoints are for downloading content from SynBioHub in various formats.</p>
 
@@ -1906,6 +1952,11 @@ This endpoint returns JSON metadata of the form:
 </tbody></table>
 
 <p>If creating a collection, provide the id, version, name, description, citations, and optionally a file. In this case, overwrite_merge should be 0 or 1. If submitting the contents into an existing collection, otherwise, only provide a URI for the rootCollections that you are submitting into and the file that you are submitting.</p>
+
+<p>Please note that the filename parameter must be present in the Content-Disposition header of the file part of the submit request. Many request-handling libraries (curl, Python’s requests) add this automatically if passed a file object, but if filename is omitted, the SBOL content will not be accepted.</p>
+
+<p>Example acceptable header:
+Content-Disposition: form-data; name=&quot;file&quot;; filename=&quot;foo&quot;</p>
 <h2 id='make-public-collection'>Make Public Collection</h2>
 <p><code>POST &lt;URI&gt;/makePublic</code></p>
 
@@ -2440,7 +2491,7 @@ This endpoint returns JSON metadata of the form:
 <p><code>POST &lt;URI&gt;/edit/&lt;field&gt;</code></p>
 
 <p>Edit field of an object.</p>
-<pre class="highlight plaintext tab-plaintext"><code>curl -X POST -H "Accept: text/plain" -H "X-authorization: &lt;token&gt;" -d "previous=&lt;previous&gt;&amp;object=&lt;test&gt;&amp;pred=&lt;pred&gt;"  &lt;URI&gt;/edit/&lt;field&gt;
+<pre class="highlight plaintext tab-plaintext"><code>curl -X POST -H "Accept: text/plain" -H "X-authorization: &lt;token&gt;" -d "previous=&lt;previous&gt;&amp;object=&lt;test&gt;"  &lt;URI&gt;/edit/&lt;field&gt;
 </code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 
 <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span>
@@ -2452,7 +2503,6 @@ This endpoint returns JSON metadata of the form:
     <span class="n">data</span><span class="o">=</span><span class="p">{</span>
         <span class="s">'previous'</span><span class="p">:</span> <span class="s">'&lt;previous&gt;'</span><span class="p">,</span>
         <span class="s">'object'</span> <span class="p">:</span> <span class="s">'&lt;object&gt;'</span><span class="p">,</span>
-        <span class="s">'pred'</span> <span class="p">:</span> <span class="s">'&lt;pred&gt;'</span><span class="p">,</span>
         <span class="p">},</span>
 <span class="p">)</span>
 
@@ -2469,7 +2519,6 @@ This endpoint returns JSON metadata of the form:
 <span class="kr">const</span> <span class="nx">params</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">URLSearchParams</span><span class="p">();</span>
 <span class="nx">params</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'previous'</span><span class="p">,</span> <span class="s1">'&lt;previous&gt;'</span><span class="p">);</span>
 <span class="nx">params</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'object'</span><span class="p">,</span> <span class="s1">'&lt;object&gt;'</span><span class="p">);</span>
-<span class="nx">params</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'pred'</span><span class="p">,</span> <span class="s1">'&lt;pred&gt;'</span><span class="p">);</span>
 
 <span class="nx">fetch</span><span class="p">(</span><span class="nx">url</span><span class="p">,</span> <span class="p">{</span> <span class="na">method</span><span class="p">:</span> <span class="s1">'POST'</span><span class="p">,</span> <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span><span class="p">,</span> <span class="na">body</span><span class="p">:</span><span class="nx">params</span><span class="p">})</span>
     <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">res</span> <span class="o">=&gt;</span> <span class="nx">res</span><span class="p">.</span><span class="nx">buffer</span><span class="p">()).</span><span class="nx">then</span><span class="p">(</span><span class="nx">buf</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">buf</span><span class="p">.</span><span class="nx">toString</span><span class="p">()))</span>
@@ -2489,10 +2538,6 @@ This endpoint returns JSON metadata of the form:
 <td>object</td>
 <td>The new value of the field.</td>
 </tr>
-<tr>
-<td>pred</td>
-<td>A predicate for an annotation.</td>
-</tr>
 </tbody></table>
 
 <p>Possible fields to edit:
@@ -2500,13 +2545,12 @@ This endpoint returns JSON metadata of the form:
 <code>description</code>
 <code>role</code>
 <code>wasDerivedFrom</code>
-<code>type</code>
-<code>annotation</code></p>
+<code>type</code></p>
 <h2 id='add-field'>Add Field</h2>
 <p><code>POST &lt;URI&gt;/add/&lt;field&gt;</code></p>
 
 <p>Add field to an object.</p>
-<pre class="highlight plaintext tab-plaintext"><code>curl -X POST -H "Accept: text/plain" -H "X-authorization:&lt;token&gt;" -d "object=&lt;object&gt;&amp;pred=&lt;pred&gt;"  &lt;URI&gt;/add/&lt;field&gt;
+<pre class="highlight plaintext tab-plaintext"><code>curl -X POST -H "Accept: text/plain" -H "X-authorization:&lt;token&gt;" -d "object=&lt;object&gt;"  &lt;URI&gt;/add/&lt;field&gt;
 </code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 
 <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span>
@@ -2517,7 +2561,6 @@ This endpoint returns JSON metadata of the form:
     <span class="p">},</span>
     <span class="n">data</span><span class="o">=</span><span class="p">{</span>
         <span class="s">'object'</span> <span class="p">:</span> <span class="s">'&lt;object&gt;'</span><span class="p">,</span>
-        <span class="s">'pred'</span> <span class="p">:</span> <span class="s">'&lt;pred&gt;'</span><span class="p">,</span>
         <span class="p">},</span>
 <span class="p">)</span>
 
@@ -2533,7 +2576,6 @@ This endpoint returns JSON metadata of the form:
 
 <span class="kr">const</span> <span class="nx">params</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">URLSearchParams</span><span class="p">();</span>
 <span class="nx">params</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'object'</span><span class="p">,</span> <span class="s1">'&lt;object&gt;'</span><span class="p">);</span>
-<span class="nx">params</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'pred'</span><span class="p">,</span> <span class="s1">'&lt;pred&gt;'</span><span class="p">);</span>
 
 <span class="nx">fetch</span><span class="p">(</span><span class="nx">url</span><span class="p">,</span> <span class="p">{</span> <span class="na">method</span><span class="p">:</span> <span class="s1">'POST'</span><span class="p">,</span> <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span><span class="p">,</span> <span class="na">body</span><span class="p">:</span><span class="nx">params</span><span class="p">})</span>
     <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">res</span> <span class="o">=&gt;</span> <span class="nx">res</span><span class="p">.</span><span class="nx">buffer</span><span class="p">()).</span><span class="nx">then</span><span class="p">(</span><span class="nx">buf</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">buf</span><span class="p">.</span><span class="nx">toString</span><span class="p">()))</span>
@@ -2549,22 +2591,16 @@ This endpoint returns JSON metadata of the form:
 <td>object</td>
 <td>The new value of the field.</td>
 </tr>
-<tr>
-<td>pred</td>
-<td>A predicate for an annotation.</td>
-</tr>
 </tbody></table>
 
 <p>Possible fields to add:
 <code>role</code>
-<code>type</code>
-<code>wasDerivedFrom</code>
-<code>annotation</code></p>
+<code>type</code></p>
 <h2 id='remove-field'>Remove Field</h2>
 <p><code>POST &lt;URI&gt;/remove/&lt;field&gt;</code></p>
 
 <p>Remove field from an object.</p>
-<pre class="highlight plaintext tab-plaintext"><code>curl -X POST -H "Accept: text/plain" -H "X-authorization:&lt;token&gt;" -d "object=&lt;object&gt;&amp;pred=&lt;pred&gt;"  &lt;URI&gt;/remove/&lt;field&gt;
+<pre class="highlight plaintext tab-plaintext"><code>curl -X POST -H "Accept: text/plain" -H "X-authorization:&lt;token&gt;" -d "object=&lt;object&gt;"  &lt;URI&gt;/remove/&lt;field&gt;
 </code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 
 <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span>
@@ -2575,7 +2611,6 @@ This endpoint returns JSON metadata of the form:
     <span class="p">},</span>
     <span class="n">data</span><span class="o">=</span><span class="p">{</span>
         <span class="s">'object'</span> <span class="p">:</span> <span class="s">'&lt;object&gt;'</span><span class="p">,</span>
-        <span class="s">'pred'</span> <span class="p">:</span> <span class="s">'&lt;pred&gt;'</span><span class="p">,</span>
         <span class="p">},</span>
 <span class="p">)</span>
 
@@ -2591,7 +2626,6 @@ This endpoint returns JSON metadata of the form:
 
 <span class="kr">const</span> <span class="nx">params</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">URLSearchParams</span><span class="p">();</span>
 <span class="nx">params</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'object'</span><span class="p">,</span> <span class="s1">'&lt;object&gt;'</span><span class="p">);</span>
-<span class="nx">params</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'pred'</span><span class="p">,</span> <span class="s1">'&lt;pred&gt;'</span><span class="p">);</span>
 
 <span class="nx">fetch</span><span class="p">(</span><span class="nx">url</span><span class="p">,</span> <span class="p">{</span> <span class="na">method</span><span class="p">:</span> <span class="s1">'POST'</span><span class="p">,</span> <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span><span class="p">,</span> <span class="na">body</span><span class="p">:</span><span class="nx">params</span><span class="p">})</span>
     <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">res</span> <span class="o">=&gt;</span> <span class="nx">res</span><span class="p">.</span><span class="nx">buffer</span><span class="p">()).</span><span class="nx">then</span><span class="p">(</span><span class="nx">buf</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">buf</span><span class="p">.</span><span class="nx">toString</span><span class="p">()))</span>
@@ -2607,19 +2641,11 @@ This endpoint returns JSON metadata of the form:
 <td>object</td>
 <td>The value of the field to remove.</td>
 </tr>
-<tr>
-<td>pred</td>
-<td>A predicate for an annotation.</td>
-</tr>
 </tbody></table>
 
 <p>Possible fields to remove:
 <code>role</code>
-<code>type</code>
-<code>title</code>
-<code>description</code>
-<code>wasDerivedFrom</code>
-<code>annotation</code></p>
+<code>type</code></p>
 <h2 id='add-to-collection'>Add to Collection</h2>
 <p><code>POST &lt;URI&gt;/addToCollection</code></p>
 
@@ -3851,27 +3877,22 @@ type=benchling&amp;id=&lt;id&gt;&amp;benchlingApiToken=&lt;BenchlingApitoken&gt;
 <p><code>POST &lt;SynBioHub URL&gt;/admin/explorer</code></p>
 
 <p>Update the SBOLExplorer config.</p>
-<pre class="highlight plaintext tab-plaintext"><code>curl -X POST -H "Accept: text/plain" -H "X-authorization:&lt;token&gt;" -d "id=&lt;id&gt;&amp;useSBOLExplorer=&lt;useSBOLExplorer&gt;&amp;SBOLExplorerEndpoint=&lt;SBOLExplorerEndpoint&gt;&amp;useDistributedSearch=&lt;useDistributedSearch&gt;&amp;pagerankTolerance=&lt;pagerangeTolerance&gt;&amp;uclustIdentity=&lt;uclustIdentity&gt;&amp;synbiohubPublicGraph=&lt;synbiohubPublicGraph&gt;&amp;elasticsearchEndpont=&lt;elasticsearchEndpoint&gt;&amp;elasticsearchIndexName=&lt;elasticSearchIndexName&gt;&amp;spraqlEndpoint=&lt;sparqlEndpoint&gt; &lt;SynBioHub URL&gt;/admin/explorer
-
+<pre class="highlight plaintext tab-plaintext"><code>curl -X POST -H "Accept: text/plain" -H "X-authorization:&lt;token&gt;" -d "id=&lt;id&gt;&amp;version=&lt;version&gt;&amp;name=&lt;name&gt;&amp;description=&lt;description&gt;&amp;citations=&lt;citations&gt;&amp;tabState=&lt;tabState&gt;" URI/makePublic
 </code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 
 <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span>
-    <span class="s">'&lt;SynBioHub URL&gt;/admin/explorer'</span><span class="p">,</span>
+    <span class="s">'&lt;URI&gt;/makePublic'</span><span class="p">,</span>
     <span class="n">headers</span><span class="o">=</span><span class="p">{</span>
         <span class="s">'X-authorization'</span><span class="p">:</span> <span class="s">'&lt;token&gt;'</span><span class="p">,</span>
         <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'text/plain'</span>
     <span class="p">},</span>
     <span class="n">data</span><span class="o">=</span><span class="p">{</span>
         <span class="s">'id'</span><span class="p">:</span> <span class="s">'&lt;id&gt;'</span><span class="p">,</span>
-    <span class="s">'useSBOLExplorer'</span><span class="p">:</span> <span class="s">'&lt;useSBOLExplorer&gt;'</span><span class="p">,</span>
-    <span class="s">'SBOLExplorerEndpoint'</span><span class="p">:</span> <span class="s">'&lt;SBOLExplorerEndpoint&gt;'</span><span class="p">,</span>
-    <span class="s">'useDistributedSearch'</span><span class="p">:</span> <span class="s">'&lt;useDistributedSearch&gt;'</span>
-    <span class="s">'pagerankTolerance'</span><span class="p">:</span> <span class="s">'&lt;pagerangeTolerance&gt;'</span><span class="p">,</span>
-    <span class="s">'uclustIdentity'</span><span class="p">:</span> <span class="s">'&lt;uclustIdentity&gt;'</span><span class="p">,</span>
-    <span class="s">'synbiohubPublicGraph'</span><span class="p">:</span> <span class="s">'&lt;synbiohubPublicGraph&gt;'</span><span class="p">,</span>
-    <span class="s">'elasticsearchEndpont'</span><span class="p">:</span><span class="s">'&lt;elasticsearchEndpoint&gt;'</span><span class="p">,</span>
-    <span class="s">'elasticsearchIndexName'</span><span class="p">:</span><span class="s">'&lt;elasticSearchIndexName&gt;'</span><span class="p">,</span>
-    <span class="s">'spraqlEndpoint'</span><span class="p">:</span><span class="s">'&lt;sparqlEndpoint&gt;'</span><span class="p">,</span>
+        <span class="s">'version'</span> <span class="p">:</span> <span class="s">'&lt;version&gt;'</span><span class="p">,</span>
+        <span class="s">'name'</span> <span class="p">:</span> <span class="s">'&lt;name&gt;'</span><span class="p">,</span>
+        <span class="s">'description'</span> <span class="p">:</span> <span class="s">'&lt;description&gt;'</span><span class="p">,</span>
+        <span class="s">'citations'</span> <span class="p">:</span> <span class="s">'&lt;citations&gt;'</span><span class="p">,</span>
+        <span class="s">'tabState'</span> <span class="p">:</span> <span class="s">'&lt;tabState&gt;'</span>
         <span class="p">},</span>
 <span class="p">)</span>
 
@@ -3879,27 +3900,23 @@ type=benchling&amp;id=&lt;id&gt;&amp;benchlingApiToken=&lt;BenchlingApitoken&gt;
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">fetch</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"node-fetch"</span><span class="p">);</span>
 <span class="kr">const</span> <span class="p">{</span> <span class="nx">URLSearchParams</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'url'</span><span class="p">);</span>
-<span class="kr">const</span> <span class="nx">url</span> <span class="o">=</span> <span class="s1">'&lt;SynBioHub URL&gt;/admin/explorer'</span>
+<span class="kr">const</span> <span class="nx">url</span> <span class="o">=</span> <span class="s1">'&lt;URI&gt;/makePublic'</span>
 <span class="kd">var</span> <span class="nx">headers</span><span class="o">=</span><span class="p">{</span>
     <span class="s2">"Accept"</span> <span class="p">:</span> <span class="s2">"text/plain; charset=UTF-8"</span><span class="p">,</span>
     <span class="s2">"X-authorization"</span> <span class="p">:</span> <span class="s2">"&lt;token&gt;"</span>
 <span class="p">};</span>
 
 <span class="kr">const</span> <span class="nx">params</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">URLSearchParams</span><span class="p">();</span>
-<span class="nx">params</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'useSBOLExplorer'</span><span class="p">,</span> <span class="s1">'&lt;useSBOLExplorer&gt;'</span><span class="p">);</span>
-<span class="nx">params</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'SBOLExplorerEndpoint'</span><span class="p">,</span> <span class="s1">'&lt;SBOLExplorerEndpoint&gt;'</span><span class="p">);</span>
-<span class="nx">params</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'useDistributedSearch'</span><span class="p">,</span> <span class="s1">'&lt;useDistributedSearch&gt;'</span><span class="p">);</span>
-<span class="nx">params</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'pagerankTolerance'</span><span class="p">,</span> <span class="s1">'&lt;pagerangeTolerance&gt;'</span><span class="p">);</span>
-<span class="nx">params</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'uclustIdentity'</span><span class="p">,</span> <span class="s1">'&lt;uclustIdentity&gt;'</span><span class="p">);</span>
-<span class="nx">params</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'synbiohubPublicGraph'</span><span class="p">,</span> <span class="s1">'&lt;synbiohubPublicGraph&gt;'</span><span class="p">);</span>
-<span class="nx">params</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'elasticsearchEndpont'</span><span class="p">,</span><span class="s1">'&lt;elasticsearchEndpoint&gt;'</span><span class="p">);</span>
-<span class="nx">params</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'elasticsearchIndexName'</span><span class="p">,</span><span class="s1">'&lt;elasticSearchIndexName&gt;'</span><span class="p">);</span>
-<span class="nx">params</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'spraqlEndpoint'</span><span class="p">,</span><span class="s1">'&lt;sparqlEndpoint&gt;'</span><span class="p">);</span>
+<span class="nx">params</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'id'</span><span class="p">,</span> <span class="s1">'&lt;id&gt;'</span><span class="p">);</span>
+<span class="nx">params</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'version'</span><span class="p">,</span> <span class="s1">'&lt;version&gt;'</span><span class="p">);</span>
+<span class="nx">params</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'name'</span><span class="p">,</span> <span class="s1">'&lt;name&gt;'</span><span class="p">);</span>
+<span class="nx">params</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'description'</span><span class="p">,</span> <span class="s1">'&lt;description&gt;'</span><span class="p">);</span>
+<span class="nx">params</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'citations'</span><span class="p">,</span> <span class="s1">'&lt;citations&gt;'</span><span class="p">);</span>
+<span class="nx">params</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'tabState'</span><span class="p">,</span> <span class="s1">'&lt;tabState&gt;'</span><span class="p">);</span>
 
 <span class="nx">fetch</span><span class="p">(</span><span class="nx">url</span><span class="p">,</span> <span class="p">{</span> <span class="na">method</span><span class="p">:</span> <span class="s1">'POST'</span><span class="p">,</span> <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span><span class="p">,</span> <span class="na">body</span><span class="p">:</span><span class="nx">params</span><span class="p">})</span>
     <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">res</span> <span class="o">=&gt;</span> <span class="nx">res</span><span class="p">.</span><span class="nx">buffer</span><span class="p">()).</span><span class="nx">then</span><span class="p">(</span><span class="nx">buf</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">buf</span><span class="p">.</span><span class="nx">toString</span><span class="p">()))</span>
     <span class="p">.</span><span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="o">=&gt;</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">error</span><span class="p">))</span>
-
 </code></pre>
 <table><thead>
 <tr>
@@ -4236,7 +4253,7 @@ type=benchling&amp;id=&lt;id&gt;&amp;benchlingApiToken=&lt;BenchlingApitoken&gt;
 
 <p>*Note that isMember, isCurator, and isAdmin are set to true by defeault. If the new user isn&#39;t one of these, please remove the parameter completely from the request.</p>
 
-<p>*Note that this endpoint also requires SendGrid to be setup.</p>
+<p>Note that this endpoint also requires SendGrid to be setup.</p>
 <h2 id='update-user'>Update User</h2>
 <p><code>POST &lt;SynBioHub URL&gt;/admin/updateUser</code></p>
 
