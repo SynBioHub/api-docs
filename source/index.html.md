@@ -1555,6 +1555,10 @@ rootCollections | the URI of the collection to be submitted into
 
 If creating a collection, provide the id, version, name, description, citations, and optionally a file. In this case, overwrite_merge should be 0 or 1. If submitting the contents into an existing collection, otherwise, only provide a URI for the rootCollections that you are submitting into and the file that you are submitting.
 
+Please note that the filename parameter must be present in the Content-Disposition header of the file part of the submit request. Many request-handling libraries (curl, Python’s requests) add this automatically if passed a file object, but if filename is omitted, the SBOL content will not be accepted.
+
+Example acceptable header:
+Content-Disposition: form-data; name="file"; filename="foo"
 ## Make Public Collection
 
 `POST <URI>/makePublic`
