@@ -2122,6 +2122,58 @@ Parameter | Description
 uri | The identity of the object to update.
 value | The new value for the citation.
 
+## Add Field
+
+`POST <URI>/add/<field>`
+
+Add field to an object.
+
+```plaintext
+curl -X POST -H "Accept: text/plain" -H "X-authorization:<token>" -d "object=<object>"  <URI>/add/<field>
+```
+
+```python
+import requests
+
+response = requests.post(
+    '<URI>/add/<field>',
+    headers={
+        'X-authorization': '<token>',
+        'Accept': 'text/plain'
+    },
+    data={
+        'object' : '<object>',
+        },
+)
+
+print(response.status_code)
+print(response.content)
+```
+
+```javascript
+const fetch = require("node-fetch");
+const { URLSearchParams } = require('url');
+const url = '<SynBioHub URL>/add/<field>'
+var headers={
+    "Accept" : "text/plain; charset=UTF-8",
+    "X-authorization" : "<token>"
+};
+
+const params = new URLSearchParams();
+params.append('object', '<object>');
+
+fetch(url, { method: 'POST', headers: headers, body:params})
+    .then(res => res.buffer()).then(buf => console.log(buf.toString()))
+    .catch (error=>console.log(error))
+```
+Parameter | Description
+--------- | -----------
+object | The new value of the field.
+
+Possible fields to add:
+`role`
+`type`
+
 ## Edit Field
 
 `POST <URI>/edit/<field>`
@@ -2179,58 +2231,6 @@ Possible fields to edit:
 `description`
 `role`
 `wasDerivedFrom`
-`type`
-
-## Add Field
-
-`POST <URI>/add/<field>`
-
-Add field to an object.
-
-```plaintext
-curl -X POST -H "Accept: text/plain" -H "X-authorization:<token>" -d "object=<object>"  <URI>/add/<field>
-```
-
-```python
-import requests
-
-response = requests.post(
-    '<URI>/add/<field>',
-    headers={
-        'X-authorization': '<token>',
-        'Accept': 'text/plain'
-    },
-    data={
-        'object' : '<object>',
-        },
-)
-
-print(response.status_code)
-print(response.content)
-```
-
-```javascript
-const fetch = require("node-fetch");
-const { URLSearchParams } = require('url');
-const url = '<SynBioHub URL>/add/<field>'
-var headers={
-    "Accept" : "text/plain; charset=UTF-8",
-    "X-authorization" : "<token>"
-};
-
-const params = new URLSearchParams();
-params.append('object', '<object>');
-
-fetch(url, { method: 'POST', headers: headers, body:params})
-    .then(res => res.buffer()).then(buf => console.log(buf.toString()))
-    .catch (error=>console.log(error))
-```
-Parameter | Description
---------- | -----------
-object | The new value of the field.
-
-Possible fields to add:
-`role`
 `type`
 
 ## Remove Field
