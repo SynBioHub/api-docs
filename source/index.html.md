@@ -2174,6 +2174,8 @@ Possible fields to add:
 `role`
 `type`
 
+Please note that this endpoint only works for private parts.
+
 ## Edit Field
 
 `POST <URI>/edit/<field>`
@@ -2233,6 +2235,8 @@ Possible fields to edit:
 `wasDerivedFrom`
 `type`
 
+Please note that this endpoint only works for private parts.
+
 ## Remove Field
 
 `POST <URI>/remove/<field>`
@@ -2284,6 +2288,8 @@ object | The value of the field to remove.
 Possible fields to remove:
 `role`
 `type`
+
+Please note that this endpoint only works for private parts
 
 ## Add to Collection
 
