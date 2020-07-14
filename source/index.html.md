@@ -3610,25 +3610,28 @@ fetch(url, { method: 'GET', headers: headers})
 Update the SBOLExplorer config.
 
 ```plaintext
-curl -X POST -H "Accept: text/plain" -H "X-authorization:<token>" -d "id=<id>&version=<version>&name=<name>&description=<description>&citations=<citations>&tabState=<tabState>" URI/makePublic
+curl -X POST -H "Accept: text/plain" -H "X-authorization:<token>" -d "useSBOLExplorer=useSBOLExplorer&SBOLExplorerEndpoint=<SBOLExplorerEndpoint>&useDistributedSearch=<useDistributedSearch>&pagerankTolerance=<pagerankTolerance>&uclustIdentity=<uclustIdentity>&synbiohubPublicGraph=<synbiohubPublicGraph>&elasticsearchEndpoint=<elasticsearchEndpoint>&elasticsearchIndexName=<elasticsearchIndexName>&sparqlEndpoint=<sparqlEndpoint>" <SynBioHub URL>/admin/explorer
 ```
 
 ```python
 import requests
 
 response = requests.post(
-    '<URI>/makePublic',
+    '<SynBioHub URL>/admin/explorer',
     headers={
         'X-authorization': '<token>',
         'Accept': 'text/plain'
     },
     data={
-        'id': '<id>',
-        'version' : '<version>',
-        'name' : '<name>',
-        'description' : '<description>',
-        'citations' : '<citations>',
-        'tabState' : '<tabState>'
+        'useSBOLExplorer': '<useSBOLExplorer>',
+        'SBOLExplorerEndpoint' : '<SBOLExplorerEndpoint>',
+        'useDistributedSearch' : '<useDistributedSearch>',
+        'pagerankTolerance' : '<pagerankTolerance>',
+        'uclustIdentity' : '<uclustIdentity>',
+        'synbiohubPublicGraph' : '<synbiohubPublicGraph>',
+        'elasticsearchEndpoint' : '<elasticsearchEndpoint>',
+        'elasticsearchIndexName' : '<elasticsearchIndexName>',
+        'sparqlEndpoint' : '<sparqlEndpoint>'
         },
 )
 
@@ -3639,19 +3642,23 @@ print(response.content)
 ```javascript
 const fetch = require("node-fetch");
 const { URLSearchParams } = require('url');
-const url = '<URI>/makePublic'
+const url = '<SynBioHub URL>/admin/explorer'
 var headers={
     "Accept" : "text/plain; charset=UTF-8",
     "X-authorization" : "<token>"
 };
 
 const params = new URLSearchParams();
-params.append('id', '<id>');
-params.append('version', '<version>');
-params.append('name', '<name>');
-params.append('description', '<description>');
-params.append('citations', '<citations>');
-params.append('tabState', '<tabState>');
+params.append('useSBOLExplorer', '<useSBOLExplorer>');
+params.append('SBOLExplorerEndpoint', '<SBOLExplorerEnpoint>');
+params.append('useDistributedSearch', '<useDistributedSearch>');
+params.append('pagerankTolerance', '<pagerankTolerance>');
+params.append('uclustIdentity', '<uclustIdentity>');
+params.append('synbiohubPublicGraph', '<synbiohubPublicGraph>');
+params.append('elasticsearchEndpoint', '<elasticsearchEndpoint>');
+params.append('elasticsearchIndexName', '<elasticsearchIndexName>');
+params.append('sparqlEndpoint', '<sparqlEndpoint>');
+
 
 fetch(url, { method: 'POST', headers: headers, body:params})
     .then(res => res.buffer()).then(buf => console.log(buf.toString()))
