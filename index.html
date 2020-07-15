@@ -1151,14 +1151,14 @@ This endpoint returns JSON metadata of the form
 
 <p>Finally, the URL can end with an offset (where you want to start) and limit parameter (how many results you want to get).</p>
 <h2 id='count-search-results'>Count Search Results</h2>
-<p><code>GET &lt;SynBioHub URL&gt;/searchCount/&lt;key&gt;=&lt;value&gt;&amp;...&amp;&lt;search string&gt;/?offset=#&amp;limit=#</code></p>
+<p><code>GET &lt;SynBioHub URL&gt;/searchCount/&lt;key&gt;=&lt;value&gt;&amp;...&amp;&lt;search string&gt;/</code></p>
 
 <p>Returns the number of items matching the search result.</p>
-<pre class="highlight plaintext tab-plaintext"><code>curl -X GET -H "Accept: text/plain" -H "X-authorization: &lt;token&gt;" '&lt;SynBioHub URL&gt;/searchCount/&lt;key&gt;=&lt;value&gt;&amp;...&amp;&lt;search string&gt;/?offset=#&amp;limit=#'
+<pre class="highlight plaintext tab-plaintext"><code>curl -X GET -H "Accept: text/plain" -H "X-authorization: &lt;token&gt;" '&lt;SynBioHub URL&gt;/searchCount/&lt;key&gt;=&lt;value&gt;&amp;...&amp;&lt;search string&gt;/'
 </code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 
 <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
-    <span class="s">'&lt;SynBioHub URL&gt;/searchCount/&lt;key&gt;=&lt;value&gt;&amp;...&amp;&lt;search string&gt;/?offset=#&amp;limit=#'</span><span class="p">,</span>
+    <span class="s">'&lt;SynBioHub URL&gt;/searchCount/&lt;key&gt;=&lt;value&gt;&amp;...&amp;&lt;search string&gt;/'</span><span class="p">,</span>
     <span class="n">headers</span><span class="o">=</span><span class="p">{</span>
         <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'text/plain'</span><span class="p">,</span>
         <span class="s">'X-authorization'</span><span class="p">:</span> <span class="s">'&lt;token&gt;'</span>
@@ -1168,7 +1168,7 @@ This endpoint returns JSON metadata of the form
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">fetch</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"node-fetch"</span><span class="p">);</span>
-<span class="kr">const</span> <span class="nx">Url</span> <span class="o">=</span> <span class="s1">'&lt;SynBioHub URL&gt;/searchCount/&lt;key&gt;=&lt;value&gt;&amp;...&amp;&lt;search string&gt;/?offset=#&amp;limit=#'</span>
+<span class="kr">const</span> <span class="nx">Url</span> <span class="o">=</span> <span class="s1">'&lt;SynBioHub URL&gt;/searchCount/&lt;key&gt;=&lt;value&gt;&amp;...&amp;&lt;search string&gt;/'</span>
 <span class="kr">const</span> <span class="nx">otherPram</span><span class="o">=</span><span class="p">{</span>
     <span class="na">headers</span><span class="p">:{</span>
         <span class="s2">"content-type"</span> <span class="p">:</span> <span class="s2">"text/plain; charset=UTF-8"</span>
