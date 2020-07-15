@@ -644,19 +644,19 @@ Finally, the URL can end with an offset (where you want to start) and limit para
 
 ## Count Search Results
 
-`GET <SynBioHub URL>/searchCount/<key>=<value>&...&<search string>/?offset=#&limit=# `
+`GET <SynBioHub URL>/searchCount/<key>=<value>&...&<search string>/`
 
 Returns the number of items matching the search result.
 
 ```plaintext
-curl -X GET -H "Accept: text/plain" -H "X-authorization: <token>" '<SynBioHub URL>/searchCount/<key>=<value>&...&<search string>/?offset=#&limit=#'
+curl -X GET -H "Accept: text/plain" -H "X-authorization: <token>" '<SynBioHub URL>/searchCount/<key>=<value>&...&<search string>/'
 ```
 
 ```python
 import requests
 
 response = requests.get(
-    '<SynBioHub URL>/searchCount/<key>=<value>&...&<search string>/?offset=#&limit=#',
+    '<SynBioHub URL>/searchCount/<key>=<value>&...&<search string>/',
     headers={
         'Accept': 'text/plain',
         'X-authorization': '<token>'
@@ -669,7 +669,7 @@ print(response.content)
 
 ```javascript
 const fetch = require("node-fetch");
-const Url = '<SynBioHub URL>/searchCount/<key>=<value>&...&<search string>/?offset=#&limit=#'
+const Url = '<SynBioHub URL>/searchCount/<key>=<value>&...&<search string>/'
 const otherPram={
     headers:{
         "content-type" : "text/plain; charset=UTF-8"
