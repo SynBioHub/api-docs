@@ -395,10 +395,10 @@
                     <a href="#edit-citations" class="toc-h2 toc-link" data-title="Edit Citations">Edit Citations</a>
                   </li>
                   <li>
-                    <a href="#add-field" class="toc-h2 toc-link" data-title="Add Field">Add Field</a>
+                    <a href="#edit-field" class="toc-h2 toc-link" data-title="Edit Field">Edit Field</a>
                   </li>
                   <li>
-                    <a href="#edit-field" class="toc-h2 toc-link" data-title="Edit Field">Edit Field</a>
+                    <a href="#add-field" class="toc-h2 toc-link" data-title="Add Field">Add Field</a>
                   </li>
                   <li>
                     <a href="#remove-field" class="toc-h2 toc-link" data-title="Remove Field">Remove Field</a>
@@ -1952,11 +1952,6 @@ This endpoint returns JSON metadata of the form:
 </tbody></table>
 
 <p>If creating a collection, provide the id, version, name, description, citations, and optionally a file. In this case, overwrite_merge should be 0 or 1. If submitting the contents into an existing collection, otherwise, only provide a URI for the rootCollections that you are submitting into and the file that you are submitting.</p>
-
-<p>Please note that the filename parameter must be present in the Content-Disposition header of the file part of the submit request. Many request-handling libraries (curl, Python’s requests) add this automatically if passed a file object, but if filename is omitted, the SBOL content will not be accepted.</p>
-
-<p>Example acceptable header:
-Content-Disposition: form-data; name=&quot;file&quot;; filename=&quot;foo&quot;</p>
 <h2 id='make-public-collection'>Make Public Collection</h2>
 <p><code>POST &lt;URI&gt;/makePublic</code></p>
 
@@ -2487,63 +2482,11 @@ Content-Disposition: form-data; name=&quot;file&quot;; filename=&quot;foo&quot;<
 <td>The new value for the citation.</td>
 </tr>
 </tbody></table>
-<h2 id='add-field'>Add Field</h2>
-<p><code>POST &lt;URI&gt;/add/&lt;field&gt;</code></p>
-
-<p>Add field to an object.</p>
-<pre class="highlight plaintext tab-plaintext"><code>curl -X POST -H "Accept: text/plain" -H "X-authorization:&lt;token&gt;" -d "object=&lt;object&gt;"  &lt;URI&gt;/add/&lt;field&gt;
-</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
-
-<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span>
-    <span class="s">'&lt;URI&gt;/add/&lt;field&gt;'</span><span class="p">,</span>
-    <span class="n">headers</span><span class="o">=</span><span class="p">{</span>
-        <span class="s">'X-authorization'</span><span class="p">:</span> <span class="s">'&lt;token&gt;'</span><span class="p">,</span>
-        <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'text/plain'</span>
-    <span class="p">},</span>
-    <span class="n">data</span><span class="o">=</span><span class="p">{</span>
-        <span class="s">'object'</span> <span class="p">:</span> <span class="s">'&lt;object&gt;'</span><span class="p">,</span>
-        <span class="p">},</span>
-<span class="p">)</span>
-
-<span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
-</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">fetch</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"node-fetch"</span><span class="p">);</span>
-<span class="kr">const</span> <span class="p">{</span> <span class="nx">URLSearchParams</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'url'</span><span class="p">);</span>
-<span class="kr">const</span> <span class="nx">url</span> <span class="o">=</span> <span class="s1">'&lt;SynBioHub URL&gt;/add/&lt;field&gt;'</span>
-<span class="kd">var</span> <span class="nx">headers</span><span class="o">=</span><span class="p">{</span>
-    <span class="s2">"Accept"</span> <span class="p">:</span> <span class="s2">"text/plain; charset=UTF-8"</span><span class="p">,</span>
-    <span class="s2">"X-authorization"</span> <span class="p">:</span> <span class="s2">"&lt;token&gt;"</span>
-<span class="p">};</span>
-
-<span class="kr">const</span> <span class="nx">params</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">URLSearchParams</span><span class="p">();</span>
-<span class="nx">params</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'object'</span><span class="p">,</span> <span class="s1">'&lt;object&gt;'</span><span class="p">);</span>
-
-<span class="nx">fetch</span><span class="p">(</span><span class="nx">url</span><span class="p">,</span> <span class="p">{</span> <span class="na">method</span><span class="p">:</span> <span class="s1">'POST'</span><span class="p">,</span> <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span><span class="p">,</span> <span class="na">body</span><span class="p">:</span><span class="nx">params</span><span class="p">})</span>
-    <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">res</span> <span class="o">=&gt;</span> <span class="nx">res</span><span class="p">.</span><span class="nx">buffer</span><span class="p">()).</span><span class="nx">then</span><span class="p">(</span><span class="nx">buf</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">buf</span><span class="p">.</span><span class="nx">toString</span><span class="p">()))</span>
-    <span class="p">.</span><span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="o">=&gt;</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">error</span><span class="p">))</span>
-</code></pre>
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>object</td>
-<td>The new value of the field.</td>
-</tr>
-</tbody></table>
-
-<p>Possible fields to add:
-<code>role</code>
-<code>type</code></p>
-
-<p>Please note that this endpoint only works for private parts.</p>
 <h2 id='edit-field'>Edit Field</h2>
 <p><code>POST &lt;URI&gt;/edit/&lt;field&gt;</code></p>
 
 <p>Edit field of an object.</p>
-<pre class="highlight plaintext tab-plaintext"><code>curl -X POST -H "Accept: text/plain" -H "X-authorization: &lt;token&gt;" -d "previous=&lt;previous&gt;&amp;object=&lt;test&gt;"  &lt;URI&gt;/edit/&lt;field&gt;
+<pre class="highlight plaintext tab-plaintext"><code>curl -X POST -H "Accept: text/plain" -H "X-authorization: &lt;token&gt;" -d "previous=&lt;previous&gt;&amp;object=&lt;test&gt;&amp;pred=&lt;pred&gt;"  &lt;URI&gt;/edit/&lt;field&gt;
 </code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 
 <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span>
@@ -2555,6 +2498,7 @@ Content-Disposition: form-data; name=&quot;file&quot;; filename=&quot;foo&quot;<
     <span class="n">data</span><span class="o">=</span><span class="p">{</span>
         <span class="s">'previous'</span><span class="p">:</span> <span class="s">'&lt;previous&gt;'</span><span class="p">,</span>
         <span class="s">'object'</span> <span class="p">:</span> <span class="s">'&lt;object&gt;'</span><span class="p">,</span>
+        <span class="s">'pred'</span> <span class="p">:</span> <span class="s">'&lt;pred&gt;'</span><span class="p">,</span>
         <span class="p">},</span>
 <span class="p">)</span>
 
@@ -2571,6 +2515,7 @@ Content-Disposition: form-data; name=&quot;file&quot;; filename=&quot;foo&quot;<
 <span class="kr">const</span> <span class="nx">params</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">URLSearchParams</span><span class="p">();</span>
 <span class="nx">params</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'previous'</span><span class="p">,</span> <span class="s1">'&lt;previous&gt;'</span><span class="p">);</span>
 <span class="nx">params</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'object'</span><span class="p">,</span> <span class="s1">'&lt;object&gt;'</span><span class="p">);</span>
+<span class="nx">params</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'pred'</span><span class="p">,</span> <span class="s1">'&lt;pred&gt;'</span><span class="p">);</span>
 
 <span class="nx">fetch</span><span class="p">(</span><span class="nx">url</span><span class="p">,</span> <span class="p">{</span> <span class="na">method</span><span class="p">:</span> <span class="s1">'POST'</span><span class="p">,</span> <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span><span class="p">,</span> <span class="na">body</span><span class="p">:</span><span class="nx">params</span><span class="p">})</span>
     <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">res</span> <span class="o">=&gt;</span> <span class="nx">res</span><span class="p">.</span><span class="nx">buffer</span><span class="p">()).</span><span class="nx">then</span><span class="p">(</span><span class="nx">buf</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">buf</span><span class="p">.</span><span class="nx">toString</span><span class="p">()))</span>
@@ -2590,6 +2535,10 @@ Content-Disposition: form-data; name=&quot;file&quot;; filename=&quot;foo&quot;<
 <td>object</td>
 <td>The new value of the field.</td>
 </tr>
+<tr>
+<td>pred</td>
+<td>A predicate for an annotation.</td>
+</tr>
 </tbody></table>
 
 <p>Possible fields to edit:
@@ -2597,14 +2546,71 @@ Content-Disposition: form-data; name=&quot;file&quot;; filename=&quot;foo&quot;<
 <code>description</code>
 <code>role</code>
 <code>wasDerivedFrom</code>
-<code>type</code></p>
+<code>type</code>
+<code>annotation</code></p>
+<h2 id='add-field'>Add Field</h2>
+<p><code>POST &lt;URI&gt;/add/&lt;field&gt;</code></p>
 
-<p>Please note that this endpoint only works for private parts.</p>
+<p>Add field to an object.</p>
+<pre class="highlight plaintext tab-plaintext"><code>curl -X POST -H "Accept: text/plain" -H "X-authorization:&lt;token&gt;" -d "object=&lt;object&gt;&amp;pred=&lt;pred&gt;"  &lt;URI&gt;/add/&lt;field&gt;
+</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span>
+    <span class="s">'&lt;URI&gt;/add/&lt;field&gt;'</span><span class="p">,</span>
+    <span class="n">headers</span><span class="o">=</span><span class="p">{</span>
+        <span class="s">'X-authorization'</span><span class="p">:</span> <span class="s">'&lt;token&gt;'</span><span class="p">,</span>
+        <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'text/plain'</span>
+    <span class="p">},</span>
+    <span class="n">data</span><span class="o">=</span><span class="p">{</span>
+        <span class="s">'object'</span> <span class="p">:</span> <span class="s">'&lt;object&gt;'</span><span class="p">,</span>
+        <span class="s">'pred'</span> <span class="p">:</span> <span class="s">'&lt;pred&gt;'</span><span class="p">,</span>
+        <span class="p">},</span>
+<span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
+</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">fetch</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"node-fetch"</span><span class="p">);</span>
+<span class="kr">const</span> <span class="p">{</span> <span class="nx">URLSearchParams</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'url'</span><span class="p">);</span>
+<span class="kr">const</span> <span class="nx">url</span> <span class="o">=</span> <span class="s1">'&lt;SynBioHub URL&gt;/add/&lt;field&gt;'</span>
+<span class="kd">var</span> <span class="nx">headers</span><span class="o">=</span><span class="p">{</span>
+    <span class="s2">"Accept"</span> <span class="p">:</span> <span class="s2">"text/plain; charset=UTF-8"</span><span class="p">,</span>
+    <span class="s2">"X-authorization"</span> <span class="p">:</span> <span class="s2">"&lt;token&gt;"</span>
+<span class="p">};</span>
+
+<span class="kr">const</span> <span class="nx">params</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">URLSearchParams</span><span class="p">();</span>
+<span class="nx">params</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'object'</span><span class="p">,</span> <span class="s1">'&lt;object&gt;'</span><span class="p">);</span>
+<span class="nx">params</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'pred'</span><span class="p">,</span> <span class="s1">'&lt;pred&gt;'</span><span class="p">);</span>
+
+<span class="nx">fetch</span><span class="p">(</span><span class="nx">url</span><span class="p">,</span> <span class="p">{</span> <span class="na">method</span><span class="p">:</span> <span class="s1">'POST'</span><span class="p">,</span> <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span><span class="p">,</span> <span class="na">body</span><span class="p">:</span><span class="nx">params</span><span class="p">})</span>
+    <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">res</span> <span class="o">=&gt;</span> <span class="nx">res</span><span class="p">.</span><span class="nx">buffer</span><span class="p">()).</span><span class="nx">then</span><span class="p">(</span><span class="nx">buf</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">buf</span><span class="p">.</span><span class="nx">toString</span><span class="p">()))</span>
+    <span class="p">.</span><span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="o">=&gt;</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">error</span><span class="p">))</span>
+</code></pre>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>object</td>
+<td>The new value of the field.</td>
+</tr>
+<tr>
+<td>pred</td>
+<td>A predicate for an annotation.</td>
+</tr>
+</tbody></table>
+
+<p>Possible fields to add:
+<code>role</code>
+<code>type</code>
+<code>wasDerivedFrom</code>
+<code>annotation</code></p>
 <h2 id='remove-field'>Remove Field</h2>
 <p><code>POST &lt;URI&gt;/remove/&lt;field&gt;</code></p>
 
 <p>Remove field from an object.</p>
-<pre class="highlight plaintext tab-plaintext"><code>curl -X POST -H "Accept: text/plain" -H "X-authorization:&lt;token&gt;" -d "object=&lt;object&gt;"  &lt;URI&gt;/remove/&lt;field&gt;
+<pre class="highlight plaintext tab-plaintext"><code>curl -X POST -H "Accept: text/plain" -H "X-authorization:&lt;token&gt;" -d "object=&lt;object&gt;&amp;pred=&lt;pred&gt;"  &lt;URI&gt;/remove/&lt;field&gt;
 </code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 
 <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span>
@@ -2615,6 +2621,7 @@ Content-Disposition: form-data; name=&quot;file&quot;; filename=&quot;foo&quot;<
     <span class="p">},</span>
     <span class="n">data</span><span class="o">=</span><span class="p">{</span>
         <span class="s">'object'</span> <span class="p">:</span> <span class="s">'&lt;object&gt;'</span><span class="p">,</span>
+        <span class="s">'pred'</span> <span class="p">:</span> <span class="s">'&lt;pred&gt;'</span><span class="p">,</span>
         <span class="p">},</span>
 <span class="p">)</span>
 
@@ -2630,6 +2637,7 @@ Content-Disposition: form-data; name=&quot;file&quot;; filename=&quot;foo&quot;<
 
 <span class="kr">const</span> <span class="nx">params</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">URLSearchParams</span><span class="p">();</span>
 <span class="nx">params</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'object'</span><span class="p">,</span> <span class="s1">'&lt;object&gt;'</span><span class="p">);</span>
+<span class="nx">params</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'pred'</span><span class="p">,</span> <span class="s1">'&lt;pred&gt;'</span><span class="p">);</span>
 
 <span class="nx">fetch</span><span class="p">(</span><span class="nx">url</span><span class="p">,</span> <span class="p">{</span> <span class="na">method</span><span class="p">:</span> <span class="s1">'POST'</span><span class="p">,</span> <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span><span class="p">,</span> <span class="na">body</span><span class="p">:</span><span class="nx">params</span><span class="p">})</span>
     <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">res</span> <span class="o">=&gt;</span> <span class="nx">res</span><span class="p">.</span><span class="nx">buffer</span><span class="p">()).</span><span class="nx">then</span><span class="p">(</span><span class="nx">buf</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">buf</span><span class="p">.</span><span class="nx">toString</span><span class="p">()))</span>
@@ -2645,13 +2653,19 @@ Content-Disposition: form-data; name=&quot;file&quot;; filename=&quot;foo&quot;<
 <td>object</td>
 <td>The value of the field to remove.</td>
 </tr>
+<tr>
+<td>pred</td>
+<td>A predicate for an annotation.</td>
+</tr>
 </tbody></table>
 
 <p>Possible fields to remove:
 <code>role</code>
-<code>type</code></p>
-
-<p>Please note that this endpoint only works for private parts</p>
+<code>type</code>
+<code>title</code>
+<code>description</code>
+<code>wasDerivedFrom</code>
+<code>annotation</code></p>
 <h2 id='add-to-collection'>Add to Collection</h2>
 <p><code>POST &lt;URI&gt;/addToCollection</code></p>
 
@@ -3883,7 +3897,8 @@ type=benchling&amp;id=&lt;id&gt;&amp;benchlingApiToken=&lt;BenchlingApitoken&gt;
 <p><code>POST &lt;SynBioHub URL&gt;/admin/explorer</code></p>
 
 <p>Update the SBOLExplorer config.</p>
-<pre class="highlight plaintext tab-plaintext"><code>curl -X POST -H "Accept: text/plain" -H "X-authorization:&lt;token&gt;" -d "useSBOLExplorer=useSBOLExplorer&amp;SBOLExplorerEndpoint=&lt;SBOLExplorerEndpoint&gt;&amp;useDistributedSearch=&lt;useDistributedSearch&gt;&amp;pagerankTolerance=&lt;pagerankTolerance&gt;&amp;uclustIdentity=&lt;uclustIdentity&gt;&amp;synbiohubPublicGraph=&lt;synbiohubPublicGraph&gt;&amp;elasticsearchEndpoint=&lt;elasticsearchEndpoint&gt;&amp;elasticsearchIndexName=&lt;elasticsearchIndexName&gt;&amp;sparqlEndpoint=&lt;sparqlEndpoint&gt;" &lt;SynBioHub URL&gt;/admin/explorer
+<pre class="highlight plaintext tab-plaintext"><code>curl -X POST -H "Accept: text/plain" -H "X-authorization:&lt;token&gt;" -d "id=&lt;id&gt;&amp;useSBOLExplorer=&lt;useSBOLExplorer&gt;&amp;SBOLExplorerEndpoint=&lt;SBOLExplorerEndpoint&gt;&amp;useDistributedSearch=&lt;useDistributedSearch&gt;&amp;pagerankTolerance=&lt;pagerangeTolerance&gt;&amp;uclustIdentity=&lt;uclustIdentity&gt;&amp;synbiohubPublicGraph=&lt;synbiohubPublicGraph&gt;&amp;elasticsearchEndpont=&lt;elasticsearchEndpoint&gt;&amp;elasticsearchIndexName=&lt;elasticSearchIndexName&gt;&amp;spraqlEndpoint=&lt;sparqlEndpoint&gt; &lt;SynBioHub URL&gt;/admin/explorer
+
 </code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 
 <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span>
@@ -3893,15 +3908,16 @@ type=benchling&amp;id=&lt;id&gt;&amp;benchlingApiToken=&lt;BenchlingApitoken&gt;
         <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'text/plain'</span>
     <span class="p">},</span>
     <span class="n">data</span><span class="o">=</span><span class="p">{</span>
-        <span class="s">'useSBOLExplorer'</span><span class="p">:</span> <span class="s">'&lt;useSBOLExplorer&gt;'</span><span class="p">,</span>
-        <span class="s">'SBOLExplorerEndpoint'</span> <span class="p">:</span> <span class="s">'&lt;SBOLExplorerEndpoint&gt;'</span><span class="p">,</span>
-        <span class="s">'useDistributedSearch'</span> <span class="p">:</span> <span class="s">'&lt;useDistributedSearch&gt;'</span><span class="p">,</span>
-        <span class="s">'pagerankTolerance'</span> <span class="p">:</span> <span class="s">'&lt;pagerankTolerance&gt;'</span><span class="p">,</span>
-        <span class="s">'uclustIdentity'</span> <span class="p">:</span> <span class="s">'&lt;uclustIdentity&gt;'</span><span class="p">,</span>
-        <span class="s">'synbiohubPublicGraph'</span> <span class="p">:</span> <span class="s">'&lt;synbiohubPublicGraph&gt;'</span><span class="p">,</span>
-        <span class="s">'elasticsearchEndpoint'</span> <span class="p">:</span> <span class="s">'&lt;elasticsearchEndpoint&gt;'</span><span class="p">,</span>
-        <span class="s">'elasticsearchIndexName'</span> <span class="p">:</span> <span class="s">'&lt;elasticsearchIndexName&gt;'</span><span class="p">,</span>
-        <span class="s">'sparqlEndpoint'</span> <span class="p">:</span> <span class="s">'&lt;sparqlEndpoint&gt;'</span>
+        <span class="s">'id'</span><span class="p">:</span> <span class="s">'&lt;id&gt;'</span><span class="p">,</span>
+    <span class="s">'useSBOLExplorer'</span><span class="p">:</span> <span class="s">'&lt;useSBOLExplorer&gt;'</span><span class="p">,</span>
+    <span class="s">'SBOLExplorerEndpoint'</span><span class="p">:</span> <span class="s">'&lt;SBOLExplorerEndpoint&gt;'</span><span class="p">,</span>
+    <span class="s">'useDistributedSearch'</span><span class="p">:</span> <span class="s">'&lt;useDistributedSearch&gt;'</span>
+    <span class="s">'pagerankTolerance'</span><span class="p">:</span> <span class="s">'&lt;pagerangeTolerance&gt;'</span><span class="p">,</span>
+    <span class="s">'uclustIdentity'</span><span class="p">:</span> <span class="s">'&lt;uclustIdentity&gt;'</span><span class="p">,</span>
+    <span class="s">'synbiohubPublicGraph'</span><span class="p">:</span> <span class="s">'&lt;synbiohubPublicGraph&gt;'</span><span class="p">,</span>
+    <span class="s">'elasticsearchEndpont'</span><span class="p">:</span><span class="s">'&lt;elasticsearchEndpoint&gt;'</span><span class="p">,</span>
+    <span class="s">'elasticsearchIndexName'</span><span class="p">:</span><span class="s">'&lt;elasticSearchIndexName&gt;'</span><span class="p">,</span>
+    <span class="s">'spraqlEndpoint'</span><span class="p">:</span><span class="s">'&lt;sparqlEndpoint&gt;'</span><span class="p">,</span>
         <span class="p">},</span>
 <span class="p">)</span>
 
@@ -3917,19 +3933,19 @@ type=benchling&amp;id=&lt;id&gt;&amp;benchlingApiToken=&lt;BenchlingApitoken&gt;
 
 <span class="kr">const</span> <span class="nx">params</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">URLSearchParams</span><span class="p">();</span>
 <span class="nx">params</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'useSBOLExplorer'</span><span class="p">,</span> <span class="s1">'&lt;useSBOLExplorer&gt;'</span><span class="p">);</span>
-<span class="nx">params</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'SBOLExplorerEndpoint'</span><span class="p">,</span> <span class="s1">'&lt;SBOLExplorerEnpoint&gt;'</span><span class="p">);</span>
+<span class="nx">params</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'SBOLExplorerEndpoint'</span><span class="p">,</span> <span class="s1">'&lt;SBOLExplorerEndpoint&gt;'</span><span class="p">);</span>
 <span class="nx">params</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'useDistributedSearch'</span><span class="p">,</span> <span class="s1">'&lt;useDistributedSearch&gt;'</span><span class="p">);</span>
-<span class="nx">params</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'pagerankTolerance'</span><span class="p">,</span> <span class="s1">'&lt;pagerankTolerance&gt;'</span><span class="p">);</span>
+<span class="nx">params</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'pagerankTolerance'</span><span class="p">,</span> <span class="s1">'&lt;pagerangeTolerance&gt;'</span><span class="p">);</span>
 <span class="nx">params</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'uclustIdentity'</span><span class="p">,</span> <span class="s1">'&lt;uclustIdentity&gt;'</span><span class="p">);</span>
 <span class="nx">params</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'synbiohubPublicGraph'</span><span class="p">,</span> <span class="s1">'&lt;synbiohubPublicGraph&gt;'</span><span class="p">);</span>
-<span class="nx">params</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'elasticsearchEndpoint'</span><span class="p">,</span> <span class="s1">'&lt;elasticsearchEndpoint&gt;'</span><span class="p">);</span>
-<span class="nx">params</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'elasticsearchIndexName'</span><span class="p">,</span> <span class="s1">'&lt;elasticsearchIndexName&gt;'</span><span class="p">);</span>
-<span class="nx">params</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'sparqlEndpoint'</span><span class="p">,</span> <span class="s1">'&lt;sparqlEndpoint&gt;'</span><span class="p">);</span>
-
+<span class="nx">params</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'elasticsearchEndpont'</span><span class="p">,</span><span class="s1">'&lt;elasticsearchEndpoint&gt;'</span><span class="p">);</span>
+<span class="nx">params</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'elasticsearchIndexName'</span><span class="p">,</span><span class="s1">'&lt;elasticSearchIndexName&gt;'</span><span class="p">);</span>
+<span class="nx">params</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'spraqlEndpoint'</span><span class="p">,</span><span class="s1">'&lt;sparqlEndpoint&gt;'</span><span class="p">);</span>
 
 <span class="nx">fetch</span><span class="p">(</span><span class="nx">url</span><span class="p">,</span> <span class="p">{</span> <span class="na">method</span><span class="p">:</span> <span class="s1">'POST'</span><span class="p">,</span> <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span><span class="p">,</span> <span class="na">body</span><span class="p">:</span><span class="nx">params</span><span class="p">})</span>
     <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">res</span> <span class="o">=&gt;</span> <span class="nx">res</span><span class="p">.</span><span class="nx">buffer</span><span class="p">()).</span><span class="nx">then</span><span class="p">(</span><span class="nx">buf</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">buf</span><span class="p">.</span><span class="nx">toString</span><span class="p">()))</span>
     <span class="p">.</span><span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="o">=&gt;</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">error</span><span class="p">))</span>
+
 </code></pre>
 <table><thead>
 <tr>
@@ -4266,7 +4282,7 @@ type=benchling&amp;id=&lt;id&gt;&amp;benchlingApiToken=&lt;BenchlingApitoken&gt;
 
 <p>*Note that isMember, isCurator, and isAdmin are set to true by defeault. If the new user isn&#39;t one of these, please remove the parameter completely from the request.</p>
 
-<p>Note that this endpoint also requires SendGrid to be setup.</p>
+<p>*Note that this endpoint also requires SendGrid to be setup.</p>
 <h2 id='update-user'>Update User</h2>
 <p><code>POST &lt;SynBioHub URL&gt;/admin/updateUser</code></p>
 
