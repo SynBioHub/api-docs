@@ -2786,14 +2786,14 @@ fetch(url, { method: 'GET', headers: headers})
 Update the mail configuration.
 
 ```plaintext
-curl -X POST -H "Accept: text/plain" -H "X-authorization:<token>" -d "key=<key>&fromEmail=<fromEmail>" <SynBioHub URL>/admin/mali
+curl -X POST -H "Accept: text/plain" -H "X-authorization:<token>" -d "key=<key>&fromEmail=<fromEmail>" <SynBioHub URL>/admin/mail
 ```
 
 ```python
 import requests
 
 response = requests.post(
-    '<SynBioHub URL>/admin/email',
+    '<SynBioHub URL>/admin/mail',
     headers={
         'X-authorization': '<token>',
         'Accept': 'text/plain'
