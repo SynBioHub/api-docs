@@ -3062,11 +3062,11 @@ This endpoint returns JSON metadata of the form:
 <p><code>POST &lt;SynBioHub URL&gt;/admin/mail</code></p>
 
 <p>Update the mail configuration.</p>
-<pre class="highlight plaintext tab-plaintext"><code>curl -X POST -H "Accept: text/plain" -H "X-authorization:&lt;token&gt;" -d "key=&lt;key&gt;&amp;fromEmail=&lt;fromEmail&gt;" &lt;SynBioHub URL&gt;/admin/mali
+<pre class="highlight plaintext tab-plaintext"><code>curl -X POST -H "Accept: text/plain" -H "X-authorization:&lt;token&gt;" -d "key=&lt;key&gt;&amp;fromEmail=&lt;fromEmail&gt;" &lt;SynBioHub URL&gt;/admin/mail
 </code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 
 <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span>
-    <span class="s">'&lt;SynBioHub URL&gt;/admin/email'</span><span class="p">,</span>
+    <span class="s">'&lt;SynBioHub URL&gt;/admin/mail'</span><span class="p">,</span>
     <span class="n">headers</span><span class="o">=</span><span class="p">{</span>
         <span class="s">'X-authorization'</span><span class="p">:</span> <span class="s">'&lt;token&gt;'</span><span class="p">,</span>
         <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'text/plain'</span>
