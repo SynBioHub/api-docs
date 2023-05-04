@@ -1106,7 +1106,7 @@ import requests
 response = requests.get(
     '<SynBioHub URL>/sparql?query=<SPARQL query>',
     headers={
-        'Accept': 'text/plain',
+        'Accept': 'application/json',
         'X-authorization': '<token>'
         },
 )
@@ -1121,7 +1121,7 @@ const fetch = require("node-fetch");
 const Url = '<SynBioHub URL>/sparql?query=<SPARQL query>'
 const otherPram={
     headers:{
-        "content-type" : "text/plain; charset=UTF-8"
+        "content-type" : "application/json; charset=UTF-8"
     },
     method:"GET"
 };
@@ -2569,7 +2569,7 @@ import requests
 response = requests.get(
     '<SynBioHub URL>/admin/sparql?query=<SPARQL query>',
     headers={
-        'Accept': 'text/plain',
+        'Accept': 'application/json',
         'X-authorization': '<token>'
         },
 )
