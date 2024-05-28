@@ -3659,7 +3659,7 @@ var headers={
 const params = {
     'useSBOLExplorer': '<useSBOLExplorer>'
     'SBOLExplorerEndpoint': '<SBOLExplorerEndpoint>', 
-    "SBOLExplorerConfig": {
+    'SBOLExplorerConfig': {
         'useDistributedSearch': '<useDistributedSearch>',
         'pagerankTolerance': '<pagerangeTolerance>',
         'uclustIdentity': '<uclustIdentity>',
