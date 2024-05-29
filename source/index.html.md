@@ -3572,6 +3572,42 @@ fetch(url, { method: 'GET', headers: headers})
     .then(res => res.buffer()).then(buf => console.log(buf.toString()))
     .catch (error=>console.log(error))
 ```
+## View SBOLExplorer Indexing Log
+
+`GET <SynBioHub URL>/admin/explorerIndexingLog`
+
+View the SBOLExplorer index log.
+
+```plaintext
+curl -X GET -H "Accept: text/plain" -H "X-authorization: <token>" <SynBioHub URL>/admin/explorerIndexingLog
+```
+
+```python
+import requests
+
+response = requests.get(
+    '<SynBioHub URL>/admin/explorerIndexingLog',
+    headers={
+        'Accept': 'text/plain',
+        'X-authorization': '<token>'
+        },
+)
+
+print(response.status_code)
+print(response.content)
+```
+
+```javascript
+const fetch = require("node-fetch");
+const url = '<SynBioHub URL>/admin/explorerIndexingLog'
+const headers={
+        "Accept" : "text/plain; charset=UTF-8",
+	"X-authorization" : "<token>"
+};
+fetch(url, { method: 'GET', headers: headers})
+    .then(res => res.buffer()).then(buf => console.log(buf.toString()))
+    .catch (error=>console.log(error))
+```
 ## View SBOLExplorer Config 
 
 `GET <SynBioHub URL>/admin/explorer`
@@ -3636,10 +3672,12 @@ response = requests.post(
 	'useDistributedSearch': '<useDistributedSearch>'
 	'pagerankTolerance': '<pagerangeTolerance>',
 	'uclustIdentity': '<uclustIdentity>',
-	'synbiohubPublicGraph': '<synbiohubPublicGraph>',
 	'elasticsearchEndpont':'<elasticsearchEndpoint>',
 	'elasticsearchIndexName':'<elasticSearchIndexName>',
 	'spraqlEndpoint':'<sparqlEndpoint>',
+    'useCron': '<autoUpdateIndex>',
+    'cronDay': '<days>',
+    'whichSearch': '<USchecked>' ? 'usearch' : 'vsearch'
         },
 )
 
@@ -3659,17 +3697,15 @@ var headers={
 const params = {
     'useSBOLExplorer': '<useSBOLExplorer>'
     'SBOLExplorerEndpoint': '<SBOLExplorerEndpoint>', 
-    'SBOLExplorerConfig': {
-        'useDistributedSearch': '<useDistributedSearch>',
-        'pagerankTolerance': '<pagerangeTolerance>',
-        'uclustIdentity': '<uclustIdentity>',
-        'elasticsearchEndpont': '<elasticsearchEndpoint>',
-        'elasticsearchIndexName': '<elasticSearchIndexName>',
-        'spraqlEndpoint': '<sparqlEndpoint>',
-        'useCron': '<autoUpdateIndex>',
-        'cronDay': '<days>',
-        'whichSearch': '<USchecked>' ? 'usearch' : 'vsearch'
-    }   
+    'useDistributedSearch': '<useDistributedSearch>',
+    'pagerankTolerance': '<pagerangeTolerance>',
+    'uclustIdentity': '<uclustIdentity>',
+    'elasticsearchEndpont': '<elasticsearchEndpoint>',
+    'elasticsearchIndexName': '<elasticSearchIndexName>',
+    'spraqlEndpoint': '<sparqlEndpoint>',
+    'useCron': '<autoUpdateIndex>',
+    'cronDay': '<days>',
+    'whichSearch': '<USchecked>' ? 'usearch' : 'vsearch'
 }
 
 fetch(url, { method: 'POST', headers: headers, body:params})
