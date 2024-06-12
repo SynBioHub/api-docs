@@ -3572,6 +3572,42 @@ fetch(url, { method: 'GET', headers: headers})
     .then(res => res.buffer()).then(buf => console.log(buf.toString()))
     .catch (error=>console.log(error))
 ```
+## View SBOLExplorer Indexing Log
+
+`GET <SynBioHub URL>/admin/explorerIndexingLog`
+
+View the SBOLExplorer index log.
+
+```plaintext
+curl -X GET -H "Accept: text/plain" -H "X-authorization: <token>" <SynBioHub URL>/admin/explorerIndexingLog
+```
+
+```python
+import requests
+
+response = requests.get(
+    '<SynBioHub URL>/admin/explorerIndexingLog',
+    headers={
+        'Accept': 'text/plain',
+        'X-authorization': '<token>'
+        },
+)
+
+print(response.status_code)
+print(response.content)
+```
+
+```javascript
+const fetch = require("node-fetch");
+const url = '<SynBioHub URL>/admin/explorerIndexingLog'
+const headers={
+        "Accept" : "text/plain; charset=UTF-8",
+	"X-authorization" : "<token>"
+};
+fetch(url, { method: 'GET', headers: headers})
+    .then(res => res.buffer()).then(buf => console.log(buf.toString()))
+    .catch (error=>console.log(error))
+```
 ## View SBOLExplorer Config 
 
 `GET <SynBioHub URL>/admin/explorer`
@@ -3636,10 +3672,12 @@ response = requests.post(
 	'useDistributedSearch': '<useDistributedSearch>'
 	'pagerankTolerance': '<pagerangeTolerance>',
 	'uclustIdentity': '<uclustIdentity>',
-	'synbiohubPublicGraph': '<synbiohubPublicGraph>',
 	'elasticsearchEndpont':'<elasticsearchEndpoint>',
 	'elasticsearchIndexName':'<elasticSearchIndexName>',
 	'spraqlEndpoint':'<sparqlEndpoint>',
+    'useCron': '<autoUpdateIndex>',
+    'cronDay': '<days>',
+    'whichSearch': '<USchecked>' ? 'usearch' : 'vsearch'
         },
 )
 
@@ -3656,16 +3694,19 @@ var headers={
     "X-authorization" : "<token>"
 };
 
-const params = new URLSearchParams();
-params.append('useSBOLExplorer', '<useSBOLExplorer>');
-params.append('SBOLExplorerEndpoint', '<SBOLExplorerEndpoint>');
-params.append('useDistributedSearch', '<useDistributedSearch>');
-params.append('pagerankTolerance', '<pagerangeTolerance>');
-params.append('uclustIdentity', '<uclustIdentity>');
-params.append('synbiohubPublicGraph', '<synbiohubPublicGraph>');
-params.append('elasticsearchEndpont','<elasticsearchEndpoint>');
-params.append('elasticsearchIndexName','<elasticSearchIndexName>');
-params.append('spraqlEndpoint','<sparqlEndpoint>');
+const params = {
+    'useSBOLExplorer': '<useSBOLExplorer>'
+    'SBOLExplorerEndpoint': '<SBOLExplorerEndpoint>', 
+    'useDistributedSearch': '<useDistributedSearch>',
+    'pagerankTolerance': '<pagerangeTolerance>',
+    'uclustIdentity': '<uclustIdentity>',
+    'elasticsearchEndpont': '<elasticsearchEndpoint>',
+    'elasticsearchIndexName': '<elasticSearchIndexName>',
+    'spraqlEndpoint': '<sparqlEndpoint>',
+    'useCron': '<autoUpdateIndex>',
+    'cronDay': '<days>',
+    'whichSearch': '<USchecked>' ? 'usearch' : 'vsearch'
+}
 
 fetch(url, { method: 'POST', headers: headers, body:params})
     .then(res => res.buffer()).then(buf => console.log(buf.toString()))
@@ -3680,10 +3721,12 @@ SBOLExplorerEndpoint | The endpoint where SBOLExplorer can be found
 useDistributedSearch | Boolean indicating whether distributed search should be used
 pagerankTolerance | The Pagerank tolerance factor
 uclustIdentity | The UClust clustering identity 
-synbiohubPublicGraph | The SynBioHub public graph for this instance
 elasticsearchEndpoint | The endpoint where Elasticsearch can be found
 elasticsearchIndexName | The Elasticsearch index name
 sparqlEndpoint | The Virtuoso SPARQL endpoint
+useCron | Update the index automatically
+cronDay | How often the index is automatically updated
+whichSearch | Which algorithms to use, 'usearch' or 'vsearch'
 
 ## Update SBOLExplorer Index 
 
