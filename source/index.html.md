@@ -1897,7 +1897,7 @@ fetch(url, { method: 'POST', headers: headers, body:params})
 
 Parameter | Description
 --------- | ------- | -----------
-userUri | The user id of the user being removed.
+userUri | The user URI of the user being removed.
 
 # Edit Endpoints
 
