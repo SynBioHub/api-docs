@@ -208,7 +208,7 @@ Endpoints that control user related functions
 
 `POST <SynBioHub URL>/login` 
 
-This POST request requires email/password and returns a user token that should be passed in the X-authorization header to view private objects and submit new objects, etc. 
+This POST request requires email (or username)/password and returns a user token that should be passed in the X-authorization header to view private objects and submit new objects, etc. 
 
 ```plaintext
 curl -X POST -H "Accept: text/plain" -d "email=<email>&password=<password>" <SynBioHub URL>/login
@@ -252,7 +252,7 @@ fetch(url, { method: 'POST', headers: headers, body: params})
 
 Parameter | Description
 --------- | ------- | -----------
-email | The e-mail address of the user to login with.
+email | The e-mail address (or username) of the user to login with.
 password | The password of the user.
 
 ## Logout
