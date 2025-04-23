@@ -21,7 +21,6 @@ search: true
 # About SynBioHub
 ### What is SynBioHub?
 
-Hello world.
 SynBioHub includes two projects:
 
 * An [open source software project](https://github.com/SynBioHub/synbiohub) providing a web interface for the storing and publishing of synthetic biology designs.
