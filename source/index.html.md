@@ -21,6 +21,7 @@ search: true
 # About SynBioHub
 ### What is SynBioHub?
 
+Hello world.
 SynBioHub includes two projects:
 
 * An [open source software project](https://github.com/SynBioHub/synbiohub) providing a web interface for the storing and publishing of synthetic biology designs.
@@ -1141,7 +1142,7 @@ Returns the result of a sequence search in JSON format. The first key/value pair
 curl -X GET -H "Accept: text/plain" -H "X-authorization: <token>" '<SynBioHub URL>/search/<key>=<value>&...'
 ```
 
-````python
+```python
 import requests
 
 response = requests.get(
