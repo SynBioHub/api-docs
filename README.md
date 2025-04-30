@@ -4,20 +4,14 @@ This API documentation is live at https://synbiohub.github.io/api-docs/
 
 This project is a customized API documentation site based on Slate.
 
-📄 Forked from: [slatedocs/slate](https://github.com/slatedocs/slate)
+- Forked from: [slatedocs/slate](https://github.com/slatedocs/slate)
 
-🐳 Built using Docker: Follows instructions from [Using Slate in Docker](https://github.com/slatedocs/slate/wiki/Using-Slate-in-Docker)
+- Built using Docker: Follows instructions from [Using Slate in Docker](https://github.com/slatedocs/slate/wiki/Using-Slate-in-Docker)
 
-⚙️ Automated Build: GitHub Actions workflow adapted from [Slate Documentation Builder](https://github.com/marketplace/actions/slate-documentation-builder)
+- Automated Build: GitHub Actions workflow adapted from [Slate Documentation Builder](https://github.com/marketplace/actions/slate-documentation-builder)
 
-✏️ Key Differences from the Original Slate Repo:
+- Key Differences from the Original Slate Repo:
 Customized `index.html.md` with project-specific API details
-
-Updated logo for branding
-
-This `README.md` for clear project guidance
-
-
 
 ### Run a local instance:
 
@@ -44,4 +38,4 @@ and you will be able to access your site at http://localhost:4567 until you stop
 
 ```git push```
 
-```./deploy.sh```
+GitHub Actions automatically build and deploy your site to GitHub Pages
